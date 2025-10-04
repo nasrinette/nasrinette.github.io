@@ -172,9 +172,6 @@
         font-size: 10rem;
         font-weight: 900;
         opacity: 0.1;
-        /* position: absolute;
-            top: -4rem;
-            left: 0; */
         line-height: 1;
         pointer-events: none;
       }
@@ -277,6 +274,11 @@
         filter: grayscale(100%) contrast(1.1);
         opacity: 0.9;
         background: var(--brown);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--cream);
+        font-size: 3rem;
       }
 
       .hero__image img {
@@ -334,14 +336,13 @@
       /* ===== PROJECTS ===== */
       .projects {
         background: var(--cream);
-        padding: 2rem 2rem;
+        padding: 4rem 2rem;
       }
 
       .projects__grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
         gap: 2rem;
-        /* max-width: 1400px; */
         margin: 0 auto;
       }
 
@@ -475,7 +476,6 @@
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 4rem;
-
         position: relative;
       }
 
@@ -569,7 +569,6 @@
       }
 
       .skills__container {
-        /* max-width: 1200px; */
         margin: 0 auto;
         display: grid;
         grid-template-columns: repeat(2, 1fr);
@@ -964,6 +963,28 @@
               <span class="tag">D3.js</span>
               <span class="tag">Data Viz</span>
               <span class="tag">Python</span>
+            </div>
+          </div>
+        </article>
+        <article class="project reveal">
+          <div class="project__image-container">
+            <video class="project__video" autoplay muted loop playsinline>
+              <source src="/extension.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+            <div class="project__number">04</div>
+          </div>
+          <div class="project__content">
+            <h3 class="project__title">Polygraf E-commerce Engine</h3>
+            <p class="project__description">
+              Developed a comprehensive e-commerce engine with intuitive UI/UX
+              design, streamlining online shopping experiences and product
+              management workflows.
+            </p>
+            <div class="project__tags">
+              <span class="tag">JavaScript</span>
+              <span class="tag">Figma</span>
+              <span class="tag">Design</span>
             </div>
           </div>
         </article>
