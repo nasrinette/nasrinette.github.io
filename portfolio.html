@@ -659,6 +659,27 @@
         letter-spacing: 1px;
       }
 
+      .language__progress {
+        width: 100%;
+        height: 6px;
+        background: rgba(245, 245, 240, 0.2);
+        border-radius: 3px;
+        margin-top: 1rem;
+        overflow: hidden;
+      }
+
+      .language__progress-bar {
+        height: 100%;
+        background: var(--cream);
+        border-radius: 3px;
+        width: 0;
+        transition: width 1s ease-out;
+      }
+
+      .language__progress-bar.active {
+        width: var(--progress-width);
+      }
+
       /* ===== CONTACT ===== */
       .contact {
         background: var(--burgundy);
@@ -1139,18 +1160,42 @@
           <article class="language">
             <div class="language__name">English</div>
             <div class="language__level">C1 - IELTS 8.0</div>
+            <div class="language__progress">
+              <div
+                class="language__progress-bar"
+                style="--progress-width: 85%"
+              ></div>
+            </div>
           </article>
           <article class="language">
             <div class="language__name">French</div>
             <div class="language__level">B1 - Intermediate</div>
+            <div class="language__progress">
+              <div
+                class="language__progress-bar"
+                style="--progress-width: 50%"
+              ></div>
+            </div>
           </article>
           <article class="language">
             <div class="language__name">Turkish</div>
             <div class="language__level">Native Speaker</div>
+            <div class="language__progress">
+              <div
+                class="language__progress-bar"
+                style="--progress-width: 100%"
+              ></div>
+            </div>
           </article>
           <article class="language">
             <div class="language__name">Azerbaijani</div>
             <div class="language__level">Native Speaker</div>
+            <div class="language__progress">
+              <div
+                class="language__progress-bar"
+                style="--progress-width: 100%"
+              ></div>
+            </div>
           </article>
         </div>
       </div>
@@ -1215,6 +1260,7 @@
           navLinkItems: document.querySelectorAll(".nav__link"),
           reveals: document.querySelectorAll(".reveal"),
           interactiveElements: document.querySelectorAll("a, button, .project"),
+          progressBars: document.querySelectorAll(".language__progress-bar"),
         },
 
         // ===== CURSOR MODULE =====
@@ -1289,6 +1335,14 @@
               const elementTop = el.getBoundingClientRect().top;
               if (elementTop < windowHeight - App.config.revealThreshold) {
                 el.classList.add("active");
+              }
+            });
+
+            // Animate progress bars when languages section is in view
+            App.elements.progressBars.forEach((bar) => {
+              const elementTop = bar.getBoundingClientRect().top;
+              if (elementTop < windowHeight - App.config.revealThreshold) {
+                bar.classList.add("active");
               }
             });
           },
