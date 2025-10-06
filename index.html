@@ -697,7 +697,7 @@
       .skills__container {
         margin: 0 auto;
         display: grid;
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(4, 1fr);
         gap: 0;
       }
 
@@ -966,10 +966,11 @@
         .timeline__item:nth-child(odd) .timeline__content,
         .timeline__item:nth-child(even) .timeline__content {
           grid-column: 1;
+          margin: 1rem 0;
         }
 
         .skills__container {
-          grid-template-columns: 1fr;
+          grid-template-columns: repeat(2, 1fr);
         }
 
         .languages {
@@ -986,6 +987,21 @@
       }
 
       @media (max-width: 480px) {
+       .contact__message {
+        padding-bottom: 1.4rem;
+       }
+        .skills__container {
+          grid-template-columns: 1fr;
+        }
+        .skill {
+          padding: 2rem;
+        }
+        .languages {
+          padding: 2rem;
+        }
+        .contact__message{
+          margin-top: 1.5rem;
+        }
         .hero__title {
           font-size: 2.5rem;
         }
@@ -1532,7 +1548,7 @@
             <li>Data Visualization (D3.js)</li>
             <li>Python & Pandas</li>
             <li>Unity & C#</li>
-            <li>Git/GitHub Version Control</li>
+            <li>Git/GitHub</li>
           </ul>
         </article>
         <article class="skill reveal">
@@ -1570,48 +1586,48 @@
             <li>Jira & Trello</li>
           </ul>
         </article>
-        <div class="languages reveal">
-          <article class="language">
-            <div class="language__name">English</div>
-            <div class="language__level">C1 - IELTS 8.0</div>
-            <div class="language__progress">
-              <div
-                class="language__progress-bar"
-                style="--progress-width: 85%"
-              ></div>
-            </div>
-          </article>
-          <article class="language">
-            <div class="language__name">French</div>
-            <div class="language__level">B1 - Intermediate</div>
-            <div class="language__progress">
-              <div
-                class="language__progress-bar"
-                style="--progress-width: 50%"
-              ></div>
-            </div>
-          </article>
-          <article class="language">
-            <div class="language__name">Turkish</div>
-            <div class="language__level">Native Speaker</div>
-            <div class="language__progress">
-              <div
-                class="language__progress-bar"
-                style="--progress-width: 100%"
-              ></div>
-            </div>
-          </article>
-          <article class="language">
-            <div class="language__name">Azerbaijani</div>
-            <div class="language__level">Native Speaker</div>
-            <div class="language__progress">
-              <div
-                class="language__progress-bar"
-                style="--progress-width: 100%"
-              ></div>
-            </div>
-          </article>
-        </div>
+      </div>
+      <div class="languages reveal">
+        <article class="language">
+          <div class="language__name">English</div>
+          <div class="language__level">C1 - IELTS 8.0</div>
+          <div class="language__progress">
+            <div
+              class="language__progress-bar"
+              style="--progress-width: 85%"
+            ></div>
+          </div>
+        </article>
+        <article class="language">
+          <div class="language__name">French</div>
+          <div class="language__level">B1 - Intermediate</div>
+          <div class="language__progress">
+            <div
+              class="language__progress-bar"
+              style="--progress-width: 50%"
+            ></div>
+          </div>
+        </article>
+        <article class="language">
+          <div class="language__name">Turkish</div>
+          <div class="language__level">Native Speaker</div>
+          <div class="language__progress">
+            <div
+              class="language__progress-bar"
+              style="--progress-width: 100%"
+            ></div>
+          </div>
+        </article>
+        <article class="language">
+          <div class="language__name">Azerbaijani</div>
+          <div class="language__level">Native Speaker</div>
+          <div class="language__progress">
+            <div
+              class="language__progress-bar"
+              style="--progress-width: 100%"
+            ></div>
+          </div>
+        </article>
       </div>
     </section>
 
