@@ -13,7 +13,6 @@
       href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap"
       rel="stylesheet"
     />
- 
   </head>
   <!-- Google tag (gtag.js) -->
   <script
@@ -87,7 +86,7 @@
           <h2 class="section__title">Featured Projects</h2>
         </div>
         <div class="projects__grid">
-          <article class="project reveal">
+          <article onclick="openCaseStudy()" class="project reveal">
             <div class="project__image-container">
               <img
                 src="/menu-cover.png"
@@ -98,41 +97,21 @@
             </div>
             <div class="project__content">
               <div class="project__header">
-                <a
-                  href="https://interactive-menu-app.netlify.app/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="project__title"
-                  >Interactive Menu App</a
-                >
-                <a
-                  href="https://interactive-menu-app.netlify.app/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="project__link-icon"
-                  aria-label="View project"
-                >
+                <span class="project__title">Interactive Menu App</span>
+                <span class="project__link-icon" aria-label="View project">
                   <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path
                       d="M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3M19,19H5V5H12V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19Z"
                     />
                   </svg>
-                </a>
+                </span>
               </div>
               <p class="project__description">
-                Designed and tested a digital restaurant menu with 20+
-                participants. 85% rated it accessible and easy to use.
+              Redesigning the digital restaurant ordering experience to eliminate waiter dependency, provide complete ingredient transparency, and simplify group payments for all user
               </p>
-              <div class="project__tags">
-                <span class="tag">UX Design</span>
-                <span class="tag">Testing</span>
-                <span class="tag">Accessibility</span>
-              </div>
-              <button class="view-case-study-btn" onclick="openCaseStudy()">
-                View Case Study
-              </button>
             </div>
           </article>
+          
         </div>
       </section>
 
@@ -397,119 +376,111 @@
             />
           </svg>
         </button>
-
-        <div class="case-study__header">
-          <div class="header-decoration"></div>
-          <h2 class="case-study__title">Interactive Restaurant Menu</h2>
-          <p class="case-study__subtitle">
-            Redesigning the digital restaurant ordering experience to make it
-            accessible, intuitive, and efficient for all users
-          </p>
-          <div class="case-study__meta">
-            <div class="meta-item">
-              <svg
-                class="meta-icon"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
-                />
-              </svg>
-              <div>
-                <span class="meta-label">Role</span>
+        <div class="gif-class">
+          <div class="case-study__header">
+            <h2 class="case-study__title">Interactive Restaurant Menu</h2>
+            <p class="case-study__subtitle">
+              Redesigning the digital restaurant ordering experience to
+              eliminate waiter dependency, provide complete ingredient
+              transparency, and simplify group payments for all users
+            </p>
+            <div class="case-study__meta">
+              <div class="meta-item">
+                <div>
+                  <svg
+                    class="meta-icon"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
+                    />
+                  </svg>
+                  <span class="meta-label">Role</span>
+                </div>
                 <span class="meta-value"
                   >Lead UX Designer & Frontend Developer</span
                 >
               </div>
-            </div>
-            <div class="meta-item">
-              <svg
-                class="meta-icon"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11z"
-                />
-              </svg>
-              <div>
-                <span class="meta-label">Timeline</span>
+              <div class="meta-item">
+                <div>
+                  <svg
+                    class="meta-icon"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11z"
+                    />
+                  </svg>
+                  <span class="meta-label">Timeline</span>
+                </div>
                 <span class="meta-value">2 months</span>
               </div>
-            </div>
-            <div class="meta-item">
-              <svg
-                class="meta-icon"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"
-                />
-              </svg>
-              <div>
-                <span class="meta-label">Team</span>
+              <div class="meta-item">
+                <div>
+                  <svg
+                    class="meta-icon"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"
+                    />
+                  </svg>
+                  <span class="meta-label">Team</span>
+                </div>
                 <span class="meta-value">4 members</span>
               </div>
-            </div>
-            <div class="meta-item">
-              <svg
-                class="meta-icon"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"
-                />
-              </svg>
-              <div>
-                <span class="meta-label">Institution</span>
+              <div class="meta-item">
+                <div>
+                  <svg
+                    class="meta-icon"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"
+                    />
+                  </svg>
+                  <span class="meta-label">Institution</span>
+                </div>
                 <span class="meta-value">Télécom Paris</span>
               </div>
             </div>
+            <div class="case-study__links">
+              <a
+                href="https://interactive-menu-app.netlify.app/"
+                target="_blank"
+                class="case-study__link case-study__link--primary"
+              >
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"
+                  />
+                </svg>
+                Live Demo
+              </a>
+              <a
+                href="https://github.com/DimahBA/HCI_Project"
+                target="_blank"
+                class="case-study__link case-study__link--secondary"
+              >
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
+                  />
+                </svg>
+                GitHub
+              </a>
+            </div>
           </div>
-          <div class="case-study__links">
-            <a
-              href="https://interactive-menu-app.netlify.app/"
-              target="_blank"
-              class="case-study__link case-study__link--primary"
-            >
-              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"
-                />
-              </svg>
-              Live Demo
-            </a>
-            <a
-              href="https://github.com/DimahBA/HCI_Project"
-              target="_blank"
-              class="case-study__link case-study__link--secondary"
-            >
-              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
-                />
-              </svg>
-              GitHub
-            </a>
-          </div>
-        </div>
-
-        <!-- Video Prototype -->
-        <div class="case-study__video-section">
-          <div class="video-container">
-            <video class="case-study__video" controls preload="metadata">
-              <source src="/menu-app.mp4" type="video/mp4" />
-              <p>
-                Your browser doesn't support HTML5 video. Here is a
-                <a href="/menu-app.mp4">link to the video</a> instead.
-              </p>
-            </video>
-            <!-- <p class="video-caption">
-              Interactive Menu App - Full Walkthrough Demo
-            </p> -->
+          <div class="gif-wrapper">
+            <img
+              style="width: 100%"
+              src="/menu-gif.gif"
+              alt="Interactive Menu App Demo"
+            />
           </div>
         </div>
 
@@ -517,16 +488,19 @@
         <div class="case-study__section highlight-section">
           <h3 class="case-study__section-title">Overview</h3>
           <p class="case-study__text">
-            Redesigned the restaurant’s digital ordering system, earning an
+            Redesigned the restaurant's digital ordering system, earning an
             <strong>88% user satisfaction</strong> score (8.8/10 likelihood to
-            use). Converted paper menu users into digital advocates by
-            addressing real issues uncovered through user research
+            use). Our QR code-based solution eliminates the frustration of
+            waiting for waiters, provides complete ingredient transparency with
+            customization options, and streamlines group payments, converting
+            paper menu advocates into digital enthusiasts.
           </p>
           <p class="case-study__text">
-            <strong>Key Achievement:</strong> Introduced a bill splitting
-            feature that users had identified as a major pain point in
-            interviews. It received strong feedback as “the feature restaurants
-            have been missing.
+            <strong>The Solution:</strong> Every table has a unique QR code.
+            Customers scan it, instantly access the digital menu, browse with
+            full ingredient information and customization options, order exactly
+            what they want, handle payment individually (even in groups), and
+            rate their experience, all without flagging down a waiter.
           </p>
 
           <div class="process-summary">
@@ -603,11 +577,15 @@
             <h3 class="case-study__section-title">Problem & Research</h3>
           </div>
           <p class="case-study__text">
-            Digital restaurant menus have become common post-pandemic, but
-            existing solutions create more frustration than value. We conducted
-            a questionnaire study with <strong>16 participants</strong> across
-            different age groups to understand the gap between current digital
-            menus and user needs.
+            The fundamental issue isn't that digital menus exist, it's that
+            <strong
+              >there's no widely adopted, well-designed digital alternative to
+              paper menus</strong
+            >
+            despite paper menus having significant limitations. We conducted a
+            questionnaire study with <strong>16 participants</strong> across
+            different age groups to understand both the problems with
+            traditional paper menus and why existing digital solutions fail.
           </p>
 
           <div class="stats-container">
@@ -617,56 +595,79 @@
               <div class="stat-note">vs. 4.3/5 for paper menus</div>
             </div>
             <div class="stat-box">
-              <div class="stat-number">11/16</div>
-              <div class="stat-label">Found Menus Cluttered</div>
-              <div class="stat-note">Causing decision fatigue</div>
-            </div>
-            <div class="stat-box">
               <div class="stat-number">13/16</div>
               <div class="stat-label">Want Customization</div>
-              <div class="stat-note">Top requested feature</div>
+              <div class="stat-note">Ingredient transparency & options</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-number">9/16</div>
+              <div class="stat-label">Frustrated by Waiting</div>
+              <div class="stat-note">For waiter attention to order/pay</div>
             </div>
           </div>
 
           <h4 class="case-study__subsection-title">Core Issues Identified</h4>
           <div class="case-study__grid">
             <div class="case-study__card">
-              <div class="case-study__card-title">For Customers</div>
+              <div class="case-study__card-title">
+                Problems with Paper Menus
+              </div>
               <ul class="case-study__list">
-                <li>Complex interfaces causing decision fatigue</li>
-                <li>No dietary filtering or allergen information</li>
-                <li>Accessibility barriers for elderly users</li>
                 <li>
-                  <strong>Awkward bill splitting in group dining</strong> (6/16
-                  participants)
+                  <strong>Waiting for waiter attention to order</strong> -
+                  awkward and time-consuming
+                </li>
+                <li>
+                  <strong>Waiting for waiter to bring the bill</strong> -
+                  extends dining time unnecessarily
+                </li>
+                <li>
+                  Incomplete ingredient information and customization options
+                </li>
+                <li>
+                  <strong>Group payment chaos:</strong> waiting turns to pay by
+                  card, or one person pays and others owe money indefinitely
+                </li>
+                <li>
+                  No clear visibility of what's in each dish or how to modify it
                 </li>
               </ul>
             </div>
             <div class="case-study__card">
-              <div class="case-study__card-title">For Restaurants</div>
+              <div class="case-study__card-title">
+                Why Current Digital Menus Fail
+              </div>
               <ul class="case-study__list">
+                <li>
+                  Cluttered interfaces causing decision fatigue (11/16
+                  participants)
+                </li>
                 <li>Static PDFs with no interactivity</li>
-                <li>Customer frustration → abandoned orders</li>
                 <li>Third-party apps requiring downloads</li>
-                <li>No tools for dietary accommodations</li>
+                <li>Accessibility barriers for elderly users</li>
+                <li>Still lack clear ingredient details and customization</li>
               </ul>
             </div>
           </div>
 
           <div class="quote-block">
             <p>
-              "Users wanted transparency and speed above all else. The digital
-              menu needed to feel like a conversation, not an interrogation."
+              "I hate trying to get the waiter's attention just to pay. And when
+              we're in a group, someone always ends up paying for everyone and
+              we all owe them money for weeks."
             </p>
+            <cite>— Participant, age 29</cite>
           </div>
 
           <p class="case-study__text">
-            <strong>Critical Insight:</strong> Bill splitting emerged as an
-            unexpected pain point during interviews. While not initially on our
-            radar, 6 out of 16 participants mentioned the awkwardness of
-            splitting bills in group dining situations, particularly when orders
-            were different sizes or when splitting by specific items rather than
-            equally.
+            <strong>Critical Insight:</strong> The problem isn't technology
+            adoptionit's that existing digital solutions don't solve the real
+            pain points of traditional dining. Users tolerate paper menus not
+            because they prefer them, but because current digital alternatives
+            are worse. Our research revealed three major friction points:
+            service dependency (waiting for waiters), information opacity
+            (incomplete ingredient details and customization options), and
+            payment complexity (especially in groups).
           </p>
         </div>
 
@@ -701,8 +702,8 @@
               </p>
               <p class="persona-goal">
                 <em
-                  >"I just want to enjoy my dinner without feeling stressed by
-                  technology."</em
+                  >"I just want to order my meal without flagging down the
+                  waiter or feeling stressed by technology."</em
                 >
               </p>
             </div>
@@ -710,16 +711,17 @@
             <div class="persona-card">
               <div class="persona-header">
                 <div class="persona-name">Emma, 26</div>
-                <div class="persona-role">Tech-Savvy Regular</div>
+                <div class="persona-role">Efficiency-Focused Diner</div>
               </div>
               <p class="persona-need">
                 <strong>Needs:</strong> Fast ordering, detailed customization,
-                advanced filtering
+                complete ingredient transparency
               </p>
               <p class="persona-goal">
                 <em
-                  >"I want complete control with zero friction and maximum
-                  efficiency."</em
+                  >"I want to see every ingredient, customize my order exactly
+                  how I like it without explaining to a waiter, and split the
+                  bill instantly with my friends."</em
                 >
               </p>
             </div>
@@ -734,7 +736,10 @@
                 layouts
               </p>
               <p class="persona-goal">
-                <em>"I want to maintain my independence while dining out."</em>
+                <em
+                  >"I want to maintain my independence while dining out without
+                  straining to read small print."</em
+                >
               </p>
             </div>
           </div>
@@ -761,12 +766,7 @@
           </p>
 
           <h4 class="case-study__subsection-title">Initial Exploration</h4>
-          <p class="case-study__text">
-            Each team member explored different approaches focusing on
-            filtering, navigation, personalization, and bill splitting.
-          </p>
 
-          <!-- Initial Sketches Placeholder -->
           <!-- Image Slider for Sketches -->
           <div class="image-slider">
             <div class="slider-container">
@@ -820,14 +820,14 @@
             <div class="slider-dots"></div>
           </div>
 
-          <h4 class="case-study__subsection-title">Low-Fidelity Prototypes</h4>
+          <h4 class="case-study__subsection-title">
+            Final Low-Fidelity Prototype
+          </h4>
           <p class="case-study__text">
-            Four different low-fi prototypes explored various approaches to menu
-            navigation, filtering, and bill splitting. The final design merged
-            the strongest elements from each.
+            The final low-fidelity design merged the strongest elements from each of the 4
+            sketches.
           </p>
 
-          <!-- Low-Fi Prototype Placeholder -->
           <figure class="case-study__figure">
             <img
               src="/low-fi-prototypes.png"
@@ -836,32 +836,50 @@
             />
           </figure>
 
-          <h4 class="case-study__subsection-title">Key Design Decisions</h4>
+ 
 
-          <div class="decision-container">
+        
+          <!-- Solution: Key Features -->
+          <div class="case-study__section">
+            <div class="case-study__section-title-wrapper">
+              <svg
+                class="section-icon"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+                />
+              </svg>
+              <h3 class="case-study__section-title">Solution: Key Features</h3>
+            </div>
+             <div class="decision-container">
             <div class="decision-item">
-              <div class="decision-title">Mobile-First, QR Code Entry</div>
+              <div class="decision-title">QR Code Entry Point</div>
               <p class="decision-text">
-                67% of restaurant traffic is mobile. Users scan table QR code
-                and start ordering immediately.
+                Each table has a unique QR code. Customers scan it with their
+                phone and instantly access the menu, no app download, no waiting
+                for a waiter to take their order.
               </p>
             </div>
 
             <div class="decision-item">
               <div class="decision-title">
-                Visual-First Information Architecture
+                Complete Ingredient Transparency & Customization
               </div>
               <p class="decision-text">
-                Large dish photos with detailed ingredients helped users decide
-                faster and more confidently.
+                Every dish displays full ingredient lists with clear allergen
+                warnings and customization options, information that paper menus
+                rarely provide comprehensively.
               </p>
             </div>
 
             <div class="decision-item">
-              <div class="decision-title">Flexible Bill Splitting</div>
+              <div class="decision-title">Individual Payment Handling</div>
               <p class="decision-text">
-                Split by specific items OR custom amounts, solving a pain point
-                users didn't know could be fixed digitally.
+                Each person at the table can pay for their own items through the
+                app. No more waiting for turns at the card machine or tracking
+                who owes whom money.
               </p>
             </div>
 
@@ -874,82 +892,34 @@
                 hunting through menus.
               </p>
             </div>
+
+            <div class="decision-item">
+              <div class="decision-title">Built-in Feedback System</div>
+              <p class="decision-text">
+                After payment, customers can rate their experience and specific
+                dishes, providing valuable feedback to the restaurant without
+                awkward face-to-face interactions.
+              </p>
+            </div>
           </div>
 
           <h4 class="case-study__subsection-title">High-Fidelity Design</h4>
           <p class="case-study__text">
-            The final design featured a clean, intuitive interface with
-            prominent dietary filters, real-time cart updates, and accessible
-            controls.
+            The final design had a simple, easy-to-use layout inspired by the
+            elegance of French restaurants, clean, balanced, and welcoming. It
+            let diners see every ingredient and allergen clearly, customize
+            their meals, pay separately without hassle, adjust accessibility
+            settings anytime, and share feedback easily after eating.
           </p>
 
-          <!-- High-Fi Prototype Placeholder -->
           <figure class="case-study__figure">
             <img
               src="/hi-fi-menu.png"
-              alt="Four low-fidelity prototypes showing different approaches"
+              alt="High-fidelity design showing final interface"
               class="case-study__image"
             />
           </figure>
         </div>
-
-        <!-- Solution: Key Features -->
-        <div class="case-study__section">
-          <div class="case-study__section-title-wrapper">
-            <svg
-              class="section-icon"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
-              />
-            </svg>
-            <h3 class="case-study__section-title">Solution: Key Features</h3>
-          </div>
-          <div class="case-study__grid">
-            <div class="case-study__card">
-              <div class="case-study__card-title">Dietary Filtering</div>
-              <p class="case-study__text">
-                Clear filters for dietary needs with detailed ingredient
-                transparency
-              </p>
-            </div>
-            <div class="case-study__card">
-              <div class="case-study__card-title">Visual Menu Design</div>
-              <p class="case-study__text">
-                High-quality images with descriptions for confident
-                decision-making
-              </p>
-            </div>
-            <div class="case-study__card">
-              <div class="case-study__card-title">Flexible Bill Splitting</div>
-              <p class="case-study__text">
-                Split by specific items or custom amounts, universally praised
-              </p>
-            </div>
-            <div class="case-study__card">
-              <div class="case-study__card-title">Accessibility Options</div>
-              <p class="case-study__text">
-                Font resizing, high contrast, and dark mode for inclusive design
-              </p>
-            </div>
-            <div class="case-study__card">
-              <div class="case-study__card-title">Order Customization</div>
-              <p class="case-study__text">
-                Add extras, remove ingredients, leave notes with visual
-                confirmation
-              </p>
-            </div>
-            <div class="case-study__card">
-              <div class="case-study__card-title">Real-time Cart</div>
-              <p class="case-study__text">
-                Live feedback showing order summary with easy editing
-              </p>
-            </div>
-          </div>
-
-       
 
         <!-- Results & Learnings Combined -->
         <div class="case-study__section">
@@ -993,49 +963,56 @@
           <h4 class="case-study__subsection-title">Standout Insights</h4>
           <div class="quote-block">
             <p>
-              "I liked the fact that we can split the bill with friends because
-              normally this part can be confusing in restaurants. I don't know
-              why there's no proper solution for this yet."
+              "Finally! I don't have to awkwardly wave at the waiter when I'm
+              ready to pay. And the fact that we can each pay for our own items
+              separately is genius, I don't know why this hasn't been done
+              before."
             </p>
-            <cite>— Participant, age 23</cite>
+            <cite>— Participant, age 28</cite>
           </div>
 
           <div class="learning-container">
             <div class="learning-item success">
-              <div class="learning-title">User Research Drove Key Features</div>
+              <div class="learning-title">
+                Service Independence Highly Valued
+              </div>
               <p class="learning-text">
-                The bill splitting feature, our most praised element, emerged
-                directly from user interview insights identifying group dining
-                pain points. This validated the importance of thorough research
-                before design.
+                Users emphasized relief at not having to wait for waiter
+                attention. The ability to order and pay on their own schedule
+                was the most praised aspect, addressing a pain point users
+                didn't realize could be solved.
               </p>
             </div>
 
             <div class="learning-item success">
               <div class="learning-title">
-                Collaborative Design Amplified Solutions
+                Ingredient Transparency Builds Trust
               </div>
               <p class="learning-text">
-                Each team member created independent prototypes. Synthesizing
-                the best elements from all four designs resulted in a stronger
-                final product than any single vision could have achieved.
+                Having complete ingredient information visible upfront reduced
+                ordering anxiety, especially for users with dietary restrictions
+                or preferences who usually have to ask multiple questions or
+                make uncertain choices.
               </p>
             </div>
 
             <div class="learning-item success">
-              <div class="learning-title">Visual Design Reduces Anxiety</div>
+              <div class="learning-title">
+                Individual Payments Eliminate Social Friction
+              </div>
               <p class="learning-text">
-                Users felt more confident seeing exactly what they were ordering
-                through high-quality images.
+                The ability for each person to pay for their own order was
+                universally praised by groups. It eliminated both the card queue
+                problem and the "who owes whom" tracking issue.
               </p>
             </div>
 
             <div class="learning-item success">
-              <div class="learning-title">Accessibility Benefits Everyone</div>
+              <div class="learning-title">QR Code Entry Removes Friction</div>
               <p class="learning-text">
-                Features designed for Martha (visual challenges) improved
-                experience for all users. The clean, modern UI appealed across
-                all age groups and technical abilities.
+                The simple scan-to-start flow meant even first-time users could
+                begin ordering within seconds. No app download requirement was
+                crucial for adoption.
               </p>
             </div>
 
@@ -1057,15 +1034,8 @@
               </p>
             </div>
 
-            <div class="learning-item improvement">
-              <div class="learning-title">Navigation Needed More Attention</div>
-              <p class="learning-text">
-                Future priority: Fixed buttons, clearer breadcrumbs, more
-                obvious pathways back to menu.
-              </p>
-            </div>
+       
           </div>
-
         </div>
 
         <!-- Reflection -->
@@ -1084,27 +1054,33 @@
           </div>
           <p class="case-study__text">
             This project reinforced that great UX design isn't about
-            implementing the latest technology, it's about deeply understanding
-            user needs and solving real problems. The shift from "I prefer paper
-            menus" to 8.8/10 likelihood to use validated our user-centered
-            approach.
+            implementing the latest technology, it's about identifying why
+            existing solutions fail and addressing root causes. The real problem
+            wasn't that digital menus don't exist; it's that current
+            implementations don't solve the actual pain points of traditional
+            dining: waiting for service, lack of transparency, and payment
+            complications.
           </p>
           <p class="case-study__text">
-            Most importantly:
-            <strong
-              >inclusive design isn't about checking accessibility boxes, it's
-              about recognizing that constraints inspire better solutions for
-              everyone.</strong
-            >
+            The shift from "I prefer paper menus" to 8.8/10 likelihood to use
+            validated our approach of identifying real problems first, then
+            designing digital solutions that specifically address them. Users
+            didn't reject digital menus, they rejected poorly designed ones that
+            added friction instead of removing it.
+          </p>
+          <p class="case-study__text">
+            <strong>Most importantly:</strong> inclusive design isn't about
+            checking accessibility boxes, it's about recognizing that
+            constraints inspire better solutions for everyone. Features designed
+            for Martha (large text, high contrast) improved the experience for
+            all users.
           </p>
           <p class="case-study__text">
             Looking forward, I recognize that a complete digital dining solution
             requires thinking beyond the customer interface. The next phase
             should include the restaurant management side, order processing,
             table management, and kitchen integration, to create a true
-            ecosystem that benefits both diners and restaurant operations. User
-            research revealed that staff efficiency directly impacts customer
-            experience, making this a critical next step.
+            ecosystem that benefits both diners and restaurant operations.
           </p>
 
           <h4 class="case-study__subsection-title">Future Enhancements</h4>
@@ -1126,8 +1102,12 @@
                 </li>
                 <li>Set menu flow with progressive step indicators</li>
                 <li>Fixed navigation buttons for mobile accessibility</li>
-                <li>Expanded allergen filters (nuts, dairy, shellfish)</li>
+                <li>
+                  More detailed nutritional information and expanded allergen
+                  filters
+                </li>
                 <li>Voice control and multi-language support</li>
+                <li>Table-level order coordination for group dining</li>
               </ul>
             </div>
 
@@ -1142,12 +1122,13 @@
                 <li>Live menu editing (prices, availability, dishes)</li>
                 <li>
                   Analytics dashboard (popular items, peak hours, dietary
-                  trends)
+                  trends, average wait times)
                 </li>
+                <li>Customer feedback aggregation and response system</li>
               </ul>
             </div>
           </div>
-
+        </div>
 
         <!-- Tech Stack -->
         <div class="case-study__section">
