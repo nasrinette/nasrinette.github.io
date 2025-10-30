@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cybersecurity Learning App - Nazrin Nasirova</title>
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="index.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="cursor"></div>
+
+    <nav class="nav">
+      <div class="nav__container">
+        <a href="index.html" class="nav__logo">NN.</a>
+        <button class="nav__toggle" aria-label="Toggle menu">
+          <span class="nav__toggle-bar"></span>
+          <span class="nav__toggle-bar"></span>
+          <span class="nav__toggle-bar"></span>
+        </button>
+        <ul class="nav__links">
+          <li><a href="index.html#home" class="nav__link">Home</a></li>
+          <li><a href="index.html#projects" class="nav__link">Projects</a></li>
+          <li><a href="index.html#experience" class="nav__link">Journey</a></li>
+          <li><a href="index.html#skills" class="nav__link">Skills</a></li>
+          <li><a href="index.html#contact" class="nav__link">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="case-study-page active">
+      <div class="case-study">
+        <button
+          class="back-button"
+          onclick="window.location.href='index.html#projects'"
+          aria-label="Back to Portfolio"
+        >
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"
+            />
+          </svg>
+        </button>
+
+        <div class="case-study__header">
+          <h2 class="case-study__title">Cybersecurity Learning Platform</h2>
+          <p class="case-study__subtitle">
+            Designing an engaging, gamified learning experience that makes
+            complex cybersecurity concepts accessible to beginners while
+            maintaining depth for advanced learners
+          </p>
+          <div class="case-study__meta">
+            <div class="meta-item">
+              <div>
+                <svg
+                  class="meta-icon"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
+                  />
+                </svg>
+                <span class="meta-label">Role</span>
+              </div>
+              <span class="meta-value">UI/UX Designer</span>
+            </div>
+            <div class="meta-item">
+              <div>
+                <svg
+                  class="meta-icon"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11z"
+                  />
+                </svg>
+                <span class="meta-label">Timeline</span>
+              </div>
+              <span class="meta-value">4 months (May - Sep 2023)</span>
+            </div>
+            <div class="meta-item">
+              <div>
+                <svg
+                  class="meta-icon"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"
+                  />
+                </svg>
+                <span class="meta-label">Team</span>
+              </div>
+              <span class="meta-value">Cross-functional team of 6</span>
+            </div>
+            <div class="meta-item">
+              <div>
+                <svg
+                  class="meta-icon"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"
+                  />
+                </svg>
+                <span class="meta-label">Company</span>
+              </div>
+              <span class="meta-value">KTLab</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Overview Section -->
+        <div class="case-study__section highlight-section">
+          <h3 class="case-study__section-title">Overview</h3>
+          <p class="case-study__text">
+            KTLab needed a mobile learning platform to make cybersecurity
+            education accessible to beginners while providing depth for advanced
+            learners. The challenge was transforming complex technical concepts
+            into an engaging, intuitive learning experience that didn't
+            compromise on educational value.
+          </p>
+          <p class="case-study__text">
+            <strong>The Solution:</strong> A gamified, progressive learning
+            platform featuring bite-sized lessons, interactive simulations, and
+            a visual skill tree that guides learners through cybersecurity
+            fundamentals to advanced topics. The app adapts to individual
+            learning pace and provides hands-on practice in a safe, sandbox
+            environment.
+          </p>
+
+          <div class="stats-container">
+            <div class="stat-box">
+              <div class="stat-number">200+</div>
+              <div class="stat-label">Early Users</div>
+              <div class="stat-note">Active beta testers</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-number">15+</div>
+              <div class="stat-label">User Interviews</div>
+              <div class="stat-note">Students & professionals</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-number">5</div>
+              <div class="stat-label">Prototype Iterations</div>
+              <div class="stat-note">Based on user feedback</div>
+            </div>
+          </div>
+
+          <div class="process-summary">
+            <h4 class="process-title">Design Process</h4>
+            <div class="process-timeline">
+              <div class="timeline-step">
+                <div class="timeline-marker">01</div>
+                <div class="timeline-content">
+                  <div class="timeline-name">Discovery</div>
+                  <div class="timeline-detail">
+                    Market research & competitive analysis
+                  </div>
+                </div>
+              </div>
+              <div class="timeline-step">
+                <div class="timeline-marker">02</div>
+                <div class="timeline-content">
+                  <div class="timeline-name">User Research</div>
+                  <div class="timeline-detail">
+                    15+ interviews with learners & experts
+                  </div>
+                </div>
+              </div>
+              <div class="timeline-step">
+                <div class="timeline-marker">03</div>
+                <div class="timeline-content">
+                  <div class="timeline-name">Information Architecture</div>
+                  <div class="timeline-detail">
+                    Content structure & learning paths
+                  </div>
+                </div>
+              </div>
+              <div class="timeline-step">
+                <div class="timeline-marker">04</div>
+                <div class="timeline-content">
+                  <div class="timeline-name">Wireframing</div>
+                  <div class="timeline-detail">
+                    Low-fidelity concepts & user flows
+                  </div>
+                </div>
+              </div>
+              <div class="timeline-step">
+                <div class="timeline-marker">05</div>
+                <div class="timeline-content">
+                  <div class="timeline-name">Interactive Prototyping</div>
+                  <div class="timeline-detail">
+                    5 iterations based on testing
+                  </div>
+                </div>
+              </div>
+              <div class="timeline-step">
+                <div class="timeline-marker">06</div>
+                <div class="timeline-content">
+                  <div class="timeline-name">Usability Testing</div>
+                  <div class="timeline-detail">
+                    Multiple rounds with target users
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Problem & Research -->
+        <div class="case-study__section">
+          <div class="case-study__section-title-wrapper">
+            <svg
+              class="section-icon"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"
+              />
+            </svg>
+            <h3 class="case-study__section-title">The Challenge</h3>
+          </div>
+          <p class="case-study__text">
+            Cybersecurity education faces a significant accessibility problem.
+            Traditional courses are either too technical for beginners or too
+            simplified for those seeking practical skills. KTLab identified a
+            market gap:
+            <strong
+              >young professionals and students wanting to enter cybersecurity
+              but intimidated by the steep learning curve</strong
+            >.
+          </p>
+
+          <h4 class="case-study__subsection-title">Research Insights</h4>
+          <p class="case-study__text">
+            I conducted 15+ user interviews with computer science students,
+            career changers, and junior IT professionals to understand their
+            learning challenges and motivations.
+          </p>
+
+          <div class="case-study__grid">
+            <div class="case-study__card">
+              <div class="case-study__card-title">Key Pain Points</div>
+              <ul class="case-study__list">
+                <li>
+                  <strong>Overwhelming complexity:</strong> Too much jargon and
+                  technical terminology without context
+                </li>
+                <li>
+                  <strong>Lack of practical application:</strong> Theory-heavy
+                  content with no hands-on practice
+                </li>
+                <li>
+                  <strong>No clear learning path:</strong> Users didn't know
+                  what to learn first or how topics connected
+                </li>
+                <li>
+                  <strong>Motivation drop-off:</strong> Long courses without
+                  immediate feedback or visible progress
+                </li>
+                <li>
+                  <strong>Fear of breaking things:</strong> Hesitation to
+                  practice on real systems
+                </li>
+              </ul>
+            </div>
+            <div class="case-study__card">
+              <div class="case-study__card-title">User Motivations</div>
+              <ul class="case-study__list">
+                <li>Career transition into high-demand field</li>
+                <li>Personal interest in digital privacy and security</li>
+                <li>Desire to understand how cyberattacks work</li>
+                <li>Need for practical, job-ready skills</li>
+                <li>Flexible learning that fits busy schedules</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="quote-block">
+            <p>
+              "I want to learn cybersecurity, but every course I find assumes I
+              already know networking and programming. I don't even know where
+              to start."
+            </p>
+            <cite>— Computer Science Student, age 22</cite>
+          </div>
+
+          <div class="quote-block">
+            <p>
+              "I've read so many articles about SQL injection and XSS attacks,
+              but I've never actually seen them in action. I need hands-on
+              practice in a safe environment where I can't accidentally break
+              anything."
+            </p>
+            <cite>— Career Changer, age 28</cite>
+          </div>
+        </div>
+
+        <!-- Competitive Analysis -->
+        <div class="case-study__section">
+          <div class="case-study__section-title-wrapper">
+            <svg
+              class="section-icon"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z"
+              />
+            </svg>
+            <h3 class="case-study__section-title">Competitive Analysis</h3>
+          </div>
+          <p class="case-study__text">
+            I analyzed existing cybersecurity learning platforms to identify
+            opportunities for differentiation:
+          </p>
+
+          <div class="decision-container">
+            <div class="decision-item">
+              <div class="decision-title">
+                Traditional Platforms (Coursera, Udemy)
+              </div>
+              <p class="decision-text">
+                <strong>Strengths:</strong> Comprehensive content, expert
+                instructors<br />
+                <strong>Weaknesses:</strong> Long-form videos, minimal
+                interactivity, no hands-on practice, high dropout rates
+              </p>
+            </div>
+
+            <div class="decision-item">
+              <div class="decision-title">
+                Technical Platforms (HackTheBox, TryHackMe)
+              </div>
+              <p class="decision-text">
+                <strong>Strengths:</strong> Hands-on labs, real-world
+                scenarios<br />
+                <strong>Weaknesses:</strong> Steep learning curve, assumes prior
+                knowledge, intimidating for beginners
+              </p>
+            </div>
+
+            <div class="decision-item">
+              <div class="decision-title">Gamified Apps (Duolingo-style)</div>
+              <p class="decision-text">
+                <strong>Strengths:</strong> Engaging, bite-sized lessons,
+                progress tracking<br />
+                <strong>Weaknesses:</strong> Often too simplified, lacks depth,
+                limited practical application
+              </p>
+            </div>
+          </div>
+
+          <p class="case-study__text">
+            <strong>Opportunity Identified:</strong> Create a platform that
+            combines the <strong>engagement of gamified learning</strong>, the
+            <strong>practicality of hands-on labs</strong>, and the
+            <strong>structure of progressive skill-building</strong>, all while
+            remaining accessible to complete beginners.
+          </p>
+        </div>
+
+        <!-- User Personas -->
+        <div class="case-study__section">
+          <div class="case-study__section-title-wrapper">
+            <svg
+              class="section-icon"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"
+              />
+            </svg>
+            <h3 class="case-study__section-title">User Personas</h3>
+          </div>
+          <p class="case-study__text">
+            Three primary personas emerged from research, representing different
+            learning needs and technical backgrounds:
+          </p>
+
+          <div class="persona-container">
+            <div class="persona-card">
+              <div class="persona-header">
+                <div class="persona-name">Alex, 23</div>
+                <div class="persona-role">CS Student</div>
+              </div>
+              <p class="persona-need">
+                <strong>Background:</strong> Basic programming knowledge, no
+                security experience<br />
+                <strong>Goal:</strong> Build practical cybersecurity skills for
+                job applications
+              </p>
+              <p class="persona-goal">
+                <em
+                  >"I need hands-on projects I can show in interviews, not just
+                  theory."</em
+                >
+              </p>
+            </div>
+
+            <div class="persona-card">
+              <div class="persona-header">
+                <div class="persona-name">Sarah, 31</div>
+                <div class="persona-role">Career Changer</div>
+              </div>
+              <p class="persona-need">
+                <strong>Background:</strong> Non-technical background, strong
+                motivation to learn<br />
+                <strong>Goal:</strong> Structured learning path from
+                fundamentals to job-ready
+              </p>
+              <p class="persona-goal">
+                <em
+                  >"I need to know what to learn in what order, and why it
+                  matters."</em
+                >
+              </p>
+            </div>
+
+            <div class="persona-card">
+              <div class="persona-header">
+                <div class="persona-name">David, 26</div>
+                <div class="persona-role">Junior IT Professional</div>
+              </div>
+              <p class="persona-need">
+                <strong>Background:</strong> Some technical knowledge, wants to
+                specialize<br />
+                <strong>Goal:</strong> Learn specific security skills while
+                working full-time
+              </p>
+              <p class="persona-goal">
+                <em
+                  >"I need flexible, bite-sized lessons I can do during my
+                  commute."</em
+                >
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Design Solutions -->
+        <div class="case-study__section">
+          <div class="case-study__section-title-wrapper">
+            <svg
+              class="section-icon"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+              />
+            </svg>
+            <h3 class="case-study__section-title">Design Solutions</h3>
+          </div>
+
+          <h4 class="case-study__subsection-title">
+            1. Visual Skill Tree Navigation
+          </h4>
+          <p class="case-study__text">
+            Instead of a traditional course list, I designed a
+            <strong>visual skill tree</strong> that shows learners exactly where
+            they are in their cybersecurity journey and what comes next. Each
+            node represents a skill cluster, with clear prerequisites and
+            connections.
+          </p>
+          <div class="decision-container">
+            <div class="decision-item">
+              <div class="decision-title">Why This Works</div>
+              <p class="decision-text">
+                • <strong>Reduces decision paralysis:</strong> Clear learning
+                path eliminates "what should I learn next?" anxiety<br />
+                • <strong>Shows relationships:</strong> Visualizes how topics
+                connect (e.g., networking basics → port scanning → vulnerability
+                assessment)<br />
+                • <strong>Motivates progress:</strong> Seeing locked skills
+                creates motivation to unlock new content<br />
+                • <strong>Accommodates different paths:</strong> Multiple routes
+                allow specialization (web security vs. network security)
+              </p>
+            </div>
+          </div>
+
+          <h4 class="case-study__subsection-title">
+            2. Bite-Sized Interactive Lessons
+          </h4>
+          <p class="case-study__text">
+            Each lesson takes 5-10 minutes, perfect for busy schedules. Content
+            alternates between explanation, demonstration, and hands-on practice
+            to maintain engagement.
+          </p>
+          <div class="case-study__grid">
+            <div class="case-study__card">
+              <div class="case-study__card-title">Lesson Structure</div>
+              <ul class="case-study__list">
+                <li>
+                  <strong>Concept Introduction:</strong> Plain-language
+                  explanation with real-world context
+                </li>
+                <li>
+                  <strong>Visual Demonstration:</strong> Animated examples
+                  showing the concept in action
+                </li>
+                <li>
+                  <strong>Interactive Challenge:</strong> Hands-on exercise in
+                  safe sandbox
+                </li>
+                <li>
+                  <strong>Knowledge Check:</strong> Quick quiz to reinforce
+                  learning
+                </li>
+                <li>
+                  <strong>Real-World Application:</strong> How this skill is
+                  used professionally
+                </li>
+              </ul>
+            </div>
+            <div class="case-study__card">
+              <div class="case-study__card-title">Design Principles</div>
+              <ul class="case-study__list">
+                <li>Progressive disclosure: Introduce complexity gradually</li>
+                <li>Immediate feedback: Instant validation of actions</li>
+                <li>Error-friendly: Safe to experiment without consequences</li>
+                <li>Contextual help: Tips available when stuck</li>
+                <li>
+                  Visual learning: Diagrams and animations over walls of text
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <h4 class="case-study__subsection-title">
+            3. Safe Sandbox Environment
+          </h4>
+          <p class="case-study__text">
+            One of the biggest barriers was users' fear of "breaking something"
+            when practicing. I designed interactive sandbox environments where
+            learners can safely experiment with real tools and techniques.
+          </p>
+          <div class="quote-block">
+            <p>
+              "Being able to actually run commands and see what happens—without
+              worrying about consequences—made me feel like a real security
+              researcher for the first time."
+            </p>
+            <cite>— Beta Tester</cite>
+          </div>
+
+          <h4 class="case-study__subsection-title">
+            4. Gamification & Progress Tracking
+          </h4>
+          <p class="case-study__text">
+            To combat motivation drop-off, I implemented meaningful gamification
+            elements that directly tied to learning progress:
+          </p>
+          <div class="decision-container">
+            <div class="decision-item">
+              <div class="decision-title">Achievement System</div>
+              <p class="decision-text">
+                Badges for completing milestones, mastering techniques, and
+                consistent learning streaks. Each achievement unlocks new
+                profile customizations.
+              </p>
+            </div>
+            <div class="decision-item">
+              <div class="decision-title">Skill Points & Levels</div>
+              <p class="decision-text">
+                Visual representation of expertise across different domains.
+                Users can see their strengths and identify areas to improve.
+              </p>
+            </div>
+            <div class="decision-item">
+              <div class="decision-title">Learning Streaks</div>
+              <p class="decision-text">
+                Gentle reminders and streak tracking to encourage consistent
+                practice, with forgiving mechanics that don't punish occasional
+                missed days.
+              </p>
+            </div>
+          </div>
+
+          <h4 class="case-study__subsection-title">5. Adaptive Difficulty</h4>
+          <p class="case-study__text">
+            The app observes how users progress and adjusts content difficulty
+            accordingly. If someone breezes through fundamentals, it suggests
+            skipping to intermediate content. If someone struggles, it offers
+            additional practice and simplified explanations.
+          </p>
+        </div>
+
+        <!-- Key Design Decisions -->
+        <div class="case-study__section">
+          <div class="case-study__section-title-wrapper">
+            <svg
+              class="section-icon"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M12 2l-5.5 9h11z M12 22l5.5-9h-11z" />
+            </svg>
+            <h3 class="case-study__section-title">Key Design Decisions</h3>
+          </div>
+
+          <div class="decision-container">
+            <div class="decision-item">
+              <div class="decision-title">Mobile-First Design</div>
+              <p class="decision-text">
+                <strong>Decision:</strong> Design primarily for mobile
+                devices<br />
+                <strong>Rationale:</strong> User interviews revealed most
+                learners preferred studying during commutes or breaks.
+                Mobile-first enabled flexible, on-the-go learning.<br />
+                <strong>Challenge:</strong> Displaying complex technical content
+                on small screens required innovative layout solutions and
+                collapsible information architecture.
+              </p>
+            </div>
+
+            <div class="decision-item">
+              <div class="decision-title">Dark Mode by Default</div>
+              <p class="decision-text">
+                <strong>Decision:</strong> Dark mode as the primary theme (with
+                light mode option)<br />
+                <strong>Rationale:</strong> Target audience (tech-savvy
+                learners) overwhelmingly preferred dark interfaces. Also,
+                cybersecurity tools typically use dark themes, creating visual
+                consistency with professional environments.<br />
+                <strong>Impact:</strong> 87% of users kept dark mode during
+                testing.
+              </p>
+            </div>
+
+            <div class="decision-item">
+              <div class="decision-title">No Passwords in Demos</div>
+              <p class="decision-text">
+                <strong>Decision:</strong> All sandbox environments use
+                simulated credentials, never real passwords<br />
+                <strong>Rationale:</strong> Teaching ethical hacking requires
+                absolute clarity about boundaries. Using obviously fake
+                credentials (e.g., "DEMO_PASSWORD") reinforced ethical
+                practices.<br />
+                <strong>Result:</strong> Zero confusion about when learners were
+                in safe practice environments vs. real systems.
+              </p>
+            </div>
+
+            <div class="decision-item">
+              <div class="decision-title">Certification Tracking</div>
+              <p class="decision-text">
+                <strong>Decision:</strong> Map lessons to industry
+                certifications (CompTIA Security+, CEH, etc.)<br />
+                <strong>Rationale:</strong> Career changers needed to know how
+                their learning translated to job qualifications<br />
+                <strong>Implementation:</strong> Each skill shows which
+                certifications it supports, helping users prepare for specific
+                career goals.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Usability Testing -->
+        <div class="case-study__section">
+          <div class="case-study__section-title-wrapper">
+            <svg
+              class="section-icon"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"
+              />
+            </svg>
+            <h3 class="case-study__section-title">
+              Usability Testing & Results
+            </h3>
+          </div>
+          <p class="case-study__text">
+            I conducted multiple rounds of usability testing throughout the
+            design process, with the final round involving 12 participants
+            completing core user journeys while thinking aloud.
+          </p>
+
+          <div class="stats-container">
+            <div class="stat-box highlight">
+              <div class="stat-number">92%</div>
+              <div class="stat-label">Task Success Rate</div>
+              <div class="stat-note">For first-time users</div>
+            </div>
+            <div class="stat-box highlight">
+              <div class="stat-number">4.6/5</div>
+              <div class="stat-label">Engagement Score</div>
+              <div class="stat-note">Found content interesting & valuable</div>
+            </div>
+            <div class="stat-box highlight">
+              <div class="stat-number">200+</div>
+              <div class="stat-label">Beta Users</div>
+              <div class="stat-note">Active in first 3 weeks</div>
+            </div>
+          </div>
+
+          <h4 class="case-study__subsection-title">What Worked Well</h4>
+          <div class="learning-container">
+            <div class="learning-item success">
+              <div class="learning-title">Visual Skill Tree</div>
+              <p class="learning-text">
+                100% of users immediately understood how to navigate the
+                learning path. The visual representation eliminated confusion
+                about prerequisites and next steps. Users called it "like a
+                video game skill tree, but for real career skills."
+              </p>
+            </div>
+
+            <div class="learning-item success">
+              <div class="learning-title">Hands-On Sandboxes</div>
+              <p class="learning-text">
+                The safe practice environments received the highest satisfaction
+                scores. Users felt confident experimenting because they knew
+                they couldn't cause any damage. One participant said, "This is
+                the first time I actually understood SQL injection instead of
+                just reading about it."
+              </p>
+            </div>
+
+            <div class="learning-item success">
+              <div class="learning-title">Bite-Sized Content</div>
+              <p class="learning-text">
+                The 5-10 minute lesson length was praised for fitting into busy
+                schedules. Users completed an average of 3-4 lessons per
+                session, compared to typical completion rates for longer
+                courses.
+              </p>
+            </div>
+          </div>
+
+          <div class="quote-block">
+            <p>
+              "For the first time, cybersecurity doesn't feel overwhelming. I
+              can see exactly what I need to learn and practice it immediately.
+              It's addictive!"
+            </p>
+            <cite>— Beta User, Career Changer</cite>
+          </div>
+
+          <h4 class="case-study__subsection-title">Key Improvements Made</h4>
+          <div class="learning-container">
+            <div class="learning-item improvement">
+              <div class="learning-title">Terminology Glossary</div>
+              <p class="learning-text">
+                <strong>Issue:</strong> Beginners still encountered unfamiliar
+                jargon<br />
+                <strong>Solution:</strong> Added inline definitions (tap/click
+                any technical term for instant explanation) and a searchable
+                glossary. Terms now highlighted on first appearance with
+                contextual tooltips.
+              </p>
+            </div>
+
+            <div class="learning-item improvement">
+              <div class="learning-title">Progress Indicators</div>
+              <p class="learning-text">
+                <strong>Issue:</strong> Users wanted more granular progress
+                tracking within lessons<br />
+                <strong>Solution:</strong> Added progress dots showing lesson
+                steps and estimated time remaining. Users reported feeling more
+                in control of their learning pace.
+              </p>
+            </div>
+
+            <div class="learning-item improvement">
+              <div class="learning-title">Contextual Help</div>
+              <p class="learning-text">
+                <strong>Issue:</strong> Some users got stuck in challenges
+                without knowing what to try next<br />
+                <strong>Solution:</strong> Implemented progressive hint system
+                (vague hint → more specific → show solution) so users could get
+                unstuck without feeling like they cheated.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Impact & Metrics -->
+        <div class="case-study__section">
+          <div class="case-study__section-title-wrapper">
+            <svg
+              class="section-icon"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"
+              />
+            </svg>
+            <h3 class="case-study__section-title">Impact & Business Results</h3>
+          </div>
+
+          <div class="case-study__grid">
+            <div class="case-study__card">
+              <div class="case-study__card-title">User Metrics</div>
+              <ul class="case-study__list">
+                <li>
+                  <strong>200+ early users</strong> signed up within first 3
+                  weeks of beta launch
+                </li>
+                <li>
+                  <strong>78% retention rate</strong> after first week (industry
+                  average: 45%)
+                </li>
+                <li>
+                  <strong>Average 23 minutes</strong> daily engagement time
+                </li>
+                <li>
+                  <strong>4.7/5 average rating</strong> on usability and content
+                  quality
+                </li>
+              </ul>
+            </div>
+            <div class="case-study__card">
+              <div class="case-study__card-title">Learning Outcomes</div>
+              <ul class="case-study__list">
+                <li>
+                  Users completed 3x more lessons than with traditional video
+                  courses
+                </li>
+                <li>
+                  85% of users reported feeling "more confident" in
+                  cybersecurity concepts
+                </li>
+                <li>62% of surveyed users said they'd recommend to friends</li>
+                <li>
+                  Multiple users reported successfully pivoting to cybersecurity
+                  roles
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="quote-block">
+            <p>
+              "I went from knowing nothing about security to confidently
+              discussing common vulnerabilities in job interviews. This app
+              literally changed my career path."
+            </p>
+            <cite>— User Success Story</cite>
+          </div>
+        </div>
+
+        <!-- Reflection -->
+        <div class="case-study__section highlight-section">
+          <div class="case-study__section-title-wrapper">
+            <svg
+              class="section-icon"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"
+              />
+            </svg>
+            <h3 class="case-study__section-title">
+              Key Learnings & Reflection
+            </h3>
+          </div>
+
+          <h4 class="case-study__subsection-title">What I Learned</h4>
+          <div class="decision-container">
+            <div class="decision-item">
+              <div class="decision-title">Complexity is a Design Problem</div>
+              <p class="decision-text">
+                Cybersecurity isn't inherently too complex for beginners—it's
+                been poorly explained. The real challenge was identifying what
+                beginners actually need to know first and presenting it without
+                technical gatekeeping. Every time a user said "I finally
+                understand X," it validated that clarity is a design choice.
+              </p>
+            </div>
+
+            <div class="decision-item">
+              <div class="decision-title">
+                Safe Experimentation Drives Confidence
+              </div>
+              <p class="decision-text">
+                The sandbox environments were more than just features—they were
+                confidence builders. Users who could experiment without fear of
+                consequences learned faster and retained more. This reinforced
+                that psychological safety is as important as instructional
+                design in educational tools.
+              </p>
+            </div>
+
+            <div class="decision-item">
+              <div class="decision-title">Gamification Must Serve Learning</div>
+              <p class="decision-text">
+                Early prototypes had more game-like elements (leaderboards,
+                competitive challenges). Testing revealed these created stress
+                and comparison anxiety. Successful gamification focused on
+                personal progress, not competition—streaks for consistency, not
+                rankings against peers.
+              </p>
+            </div>
+
+            <div class="decision-item">
+              <div class="decision-title">Micro-Interactions Matter</div>
+              <p class="decision-text">
+                Small details—like celebratory animations when completing
+                challenges or encouraging messages when users got
+                stuck—significantly impacted perceived value. These weren't just
+                polish; they were emotional design that kept learners motivated
+                through difficult concepts.
+              </p>
+            </div>
+          </div>
+
+          <h4 class="case-study__subsection-title">What I'd Do Differently</h4>
+          <p class="case-study__text">
+            Looking back, I would have involved professional penetration testers
+            earlier in the process. While our content was accurate, security
+            professionals could have provided insights into which skills are
+            most valuable in actual jobs versus what's typically taught
+            academically.
+          </p>
+          <p class="case-study__text">
+            I also underestimated the importance of community. Users wanted to
+            connect with others learning similar skills. Future iterations
+            should include peer learning features—study groups, shared progress,
+            collaborative challenges—to leverage social motivation.
+          </p>
+
+          <h4 class="case-study__subsection-title">Future Vision</h4>
+          <p class="case-study__text">
+            The next evolution of this platform should include:
+          </p>
+          <ul class="case-study__list">
+            <li>
+              <strong>Certification Pathways:</strong> Structured tracks aligned
+              with CompTIA Security+, CEH, and other industry certifications
+            </li>
+            <li>
+              <strong>Mentorship Matching:</strong> Connect learners with
+              security professionals for career guidance
+            </li>
+            <li>
+              <strong>Community Challenges:</strong> Collaborative CTF-style
+              challenges for peer learning
+            </li>
+            <li>
+              <strong>Career Integration:</strong> Job board integration showing
+              which skills match specific cybersecurity roles
+            </li>
+            <li>
+              <strong>Advanced Labs:</strong> More complex, multi-step scenarios
+              simulating real security assessments
+            </li>
+          </ul>
+        </div>
+
+        <!-- Tech Stack -->
+        <div class="case-study__section">
+          <div class="case-study__section-title-wrapper">
+            <svg
+              class="section-icon"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z"
+              />
+            </svg>
+            <h3 class="case-study__section-title">Tools & Methods</h3>
+          </div>
+          <div class="tech-tags">
+            <span class="tech-tag">Figma</span>
+            <span class="tech-tag">Adobe XD</span>
+            <span class="tech-tag">Maze (User Testing)</span>
+            <span class="tech-tag">Miro (Ideation)</span>
+            <span class="tech-tag">Principle (Prototyping)</span>
+          </div>
+          <p class="case-study__text">
+            <strong>Methods:</strong> Competitive Analysis, User Interviews,
+            Persona Development, Journey Mapping, Wireframing, Interactive
+            Prototyping, Usability Testing, A/B Testing, Heuristic Evaluation
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // ===== CURSOR MODULE =====
+      const cursor = document.querySelector(".cursor");
+      const cursorEnabled = window.innerWidth > 768;
+
+      if (cursorEnabled) {
+        document.addEventListener("mousemove", (e) => {
+          cursor.style.left = `${e.clientX}px`;
+          cursor.style.top = `${e.clientY}px`;
+        });
+
+        document.querySelectorAll("a, button").forEach((el) => {
+          el.addEventListener("mouseenter", () => {
+            cursor.style.transform = "scale(2)";
+          });
+          el.addEventListener("mouseleave", () => {
+            cursor.style.transform = "scale(1)";
+          });
+        });
+      } else {
+        cursor.style.display = "none";
+      }
+
+      // ===== NAVIGATION MODULE =====
+      const menuToggle = document.querySelector(".nav__toggle");
+      const navLinks = document.querySelector(".nav__links");
+
+      menuToggle.addEventListener("click", () => {
+        menuToggle.classList.toggle("active");
+        navLinks.classList.toggle("active");
+      });
+
+      document.querySelectorAll(".nav__link").forEach((link) => {
+        link.addEventListener("click", () => {
+          menuToggle.classList.remove("active");
+          navLinks.classList.remove("active");
+        });
+      });
+
+      // ===== SMOOTH SCROLL =====
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", (e) => {
+          e.preventDefault();
+          const target = document.querySelector(anchor.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({ behavior: "smooth" });
+          }
+        });
+      });
+
+      // ===== ANIMATIONS =====
+      const reveals = document.querySelectorAll(".reveal");
+
+      function handleReveal() {
+        const windowHeight = window.innerHeight;
+        reveals.forEach((el) => {
+          const elementTop = el.getBoundingClientRect().top;
+          if (elementTop < windowHeight - 150) {
+            el.classList.add("active");
+          }
+        });
+      }
+
+      handleReveal();
+      window.addEventListener("scroll", handleReveal);
+    </script>
+  </body>
+</html>
