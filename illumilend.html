@@ -1,0 +1,1213 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IllumiLend , Augmented Storage Room (Team Yellow)</title>
+    <link rel="icon" type="image/png" href="/assets/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="index.css" />
+  </head>
+
+  <body>
+    <div class="cursor"></div>
+
+    <!-- NAV -->
+    <nav class="nav">
+      <div class="nav__container">
+        <a href="index.html" class="nav__logo">NN.</a>
+        <button class="nav__toggle" aria-label="Toggle menu">
+          <span class="nav__toggle-bar"></span>
+          <span class="nav__toggle-bar"></span>
+          <span class="nav__toggle-bar"></span>
+        </button>
+        <ul class="nav__links">
+          <li><a href="index.html#home" class="nav__link">Home</a></li>
+          <li><a href="index.html#projects" class="nav__link">Projects</a></li>
+          <li><a href="index.html#experience" class="nav__link">Journey</a></li>
+          <li><a href="index.html#skills" class="nav__link">Skills</a></li>
+          <li><a href="index.html#contact" class="nav__link">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- CASE STUDY -->
+    <div class="case-study-page active">
+      <div class="case-study">
+        <button
+          class="back-button"
+          onclick="window.location.href='index.html#projects'"
+          aria-label="Back to Portfolio"
+        >
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"
+            />
+          </svg>
+        </button>
+
+        <!-- ========== HERO SECTION (UNCHANGED) ========== -->
+        <div class="hero-image">
+          <div class="case-study__header">
+            <h2 class="case-study__title">
+              IllumiLend , Augmented Storage Room
+            </h2>
+            <p class="case-study__subtitle">
+              Designed a color-guided system that helps students quickly find,
+              collect, and return reserved equipment in university storage rooms
+              using floor arrows, shelf lighting, and simple confirmations.
+            </p>
+
+            <div class="case-study__meta">
+              <div class="meta-item">
+                <div>
+                  <svg class="meta-icon" viewBox="0 0 24 24">
+                    <path
+                      d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
+                    />
+                  </svg>
+                  <span class="meta-label">Role</span>
+                </div>
+                <span class="meta-value">UX Design & Usability Testing</span>
+              </div>
+              <div class="meta-item">
+                <div>
+                  <svg class="meta-icon" viewBox="0 0 24 24">
+                    <path
+                      d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11z"
+                    />
+                  </svg>
+                  <span class="meta-label">Timeline</span>
+                </div>
+                <span class="meta-value">1 Week Design Sprint</span>
+              </div>
+              <div class="meta-item">
+                <div>
+                  <svg class="meta-icon" viewBox="0 0 24 24">
+                    <path
+                      d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"
+                    />
+                  </svg>
+                  <span class="meta-label">Team</span>
+                </div>
+                <span class="meta-value">4 members</span>
+              </div>
+              <div class="meta-item">
+                <div>
+                  <svg class="meta-icon" viewBox="0 0 24 24">
+                    <path
+                      d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"
+                    />
+                  </svg>
+                  <span class="meta-label">Institution</span>
+                </div>
+                <span class="meta-value">Télécom Paris</span>
+              </div>
+            </div>
+            <!-- Tech Stack -->
+            <div style="display: flex; gap: 1rem">
+              <div style="display: flex; flex-direction: column">
+                <strong style="color: #3a1c1e">
+                  <!-- icon -->
+                  <svg
+                    style="width: 15px; fill: #3a1c1e"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z"
+                    />
+                  </svg>
+                  Tech Stack:</strong
+                >
+                <span style="font-weight: 300; color: #333">
+                  Figma, LED shelf, PowerPoint, Projector
+                </span>
+              </div>
+              <div style="display: flex; flex-direction: column">
+                <strong style="color: #3a1c1e">
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M12 2C10.1435 2 8.36301 2.7375 7.05025 4.05025C5.7375 5.36301 5 7.14348 5 9C5 11.38 6.19 13.47 8 14.74V17C8 17.2652 8.10536 17.5196 8.29289 17.7071C8.48043 17.8946 8.73478 18 9 18H15C15.2652 18 15.5196 17.8946 15.7071 17.7071C15.8946 17.5196 16 17.2652 16 17V14.74C17.81 13.47 19 11.38 19 9C19 7.14348 18.2625 5.36301 16.9497 4.05025C15.637 2.7375 13.8565 2 12 2ZM9 21C9 21.2652 9.10536 21.5196 9.29289 21.7071C9.48043 21.8946 9.73478 22 10 22H14C14.2652 22 14.5196 21.8946 14.7071 21.7071C14.8946 21.5196 15 21.2652 15 21V20H9V21Z"
+                      fill="#3A1C1E"
+                    />
+                  </svg>
+                  Methods:</strong
+                >
+                <span style="font-weight: 300; color: #333"
+                  >Low/Hi-Fi prototyping, Task-based in-room study (n=10),
+                  Think-aloud, Thematic Coding</span
+                >
+              </div>
+            </div>
+
+            <div class="case-study__links">
+              <a
+                href="https://www.figma.com/proto/wOZYuPmU3fsbzqpPIKWBUE/reserve?node-id=2013-425&t=B4GfEWrhlV6EvaMJ-0&scaling=min-zoom&content-scaling=fixed&page-id=2031%3A2918&starting-point-node-id=2013%3A425"
+                target="_blank"
+                class="case-study__link case-study__link--primary"
+              >
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"
+                  />
+                </svg>
+                Figma Prototype
+              </a>
+            </div>
+          </div>
+
+          <div class="gif-wrapper">
+            <img
+              style="width: 100%; border-radius: 63px; padding: 1.5rem"
+              src="assets/reserve/illumilend-hero.gif"
+              alt="Room setup with colored arrows and shelf lights"
+            />
+          </div>
+        </div>
+
+        <!-- ========== 1. PROJECT OVERVIEW ========== -->
+        <div class="case-study__section highlight-section">
+          <h3 style="margin-bottom: 0.5rem" class="case-study__section-title">
+            Overview
+          </h3>
+
+          <p class="case-study__text">
+            IllumiLend is a simple way to fix the chaos in university equipment
+            rooms, where people often waste time looking for gear and aren’t
+            sure if the system knows what they took. With IllumiLend, students
+            swipe their ID, follow a colored arrow on the floor, and grab the
+            item from a cubby that lights up in the same color. The guidance
+            also appears on nearby screens and phones. In tests with 10 users, 8
+            said the color paths helped them find things faster, and 6 said
+            they’d start using the system right away. But most people still
+            paused before taking an item, showing the system needs clearer
+            feedback to confirm the pickup.
+          </p>
+
+          <h4 class="process-title">The IllumiLend Flow</h4>
+          <div class="process-timeline">
+            <div class="timeline-step">
+              <div class="timeline-marker">01</div>
+              <div class="timeline-content">
+                <div class="timeline-name">Badge Entry</div>
+                <div class="timeline-detail">
+                  Door scanner authenticates user and loads their reservation
+                </div>
+              </div>
+            </div>
+            <div class="timeline-step">
+              <div class="timeline-marker">02</div>
+              <div class="timeline-content">
+                <div class="timeline-name">Color Assignment</div>
+                <div class="timeline-detail">
+                  System assigns unique color to user's items across all
+                  touchpoints
+                </div>
+              </div>
+            </div>
+            <div class="timeline-step">
+              <div class="timeline-marker">03</div>
+              <div class="timeline-content">
+                <div class="timeline-name">Floor Navigation</div>
+                <div class="timeline-detail">
+                  Projected arrow in assigned color guides to target shelf
+                </div>
+              </div>
+            </div>
+            <div class="timeline-step">
+              <div class="timeline-marker">04</div>
+              <div class="timeline-content">
+                <div class="timeline-name">Shelf Lighting</div>
+                <div class="timeline-detail">
+                  Specific cubby illuminates in matching color
+                </div>
+              </div>
+            </div>
+            <div class="timeline-step">
+              <div class="timeline-marker">05</div>
+              <div class="timeline-content">
+                <div class="timeline-name">Screen Mirrors</div>
+                <div class="timeline-detail">
+                  Phone and wall display show items, colors, due times
+                </div>
+              </div>
+            </div>
+            <div class="timeline-step">
+              <div class="timeline-marker">06</div>
+              <div class="timeline-content">
+                <div class="timeline-name">Confirmation</div>
+                <div class="timeline-detail">
+                  Future: Light change + progress indicator verify action
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ========== 2. PROBLEM SPACE ========== -->
+        <div class="case-study__section">
+          <div class="case-study__section-title-wrapper">
+            <svg class="section-icon" viewBox="0 0 24 24">
+              <path
+                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"
+              />
+            </svg>
+            <h3 class="case-study__section-title">The Problem</h3>
+          </div>
+
+          <p class="case-study__text">
+            Universities and libraries worldwide manage shared equipment pools,
+            cameras, laptops, lab tools. While digital reservation systems
+            handle booking efficiently, they abandon users at the storage room
+            door.
+          </p>
+
+          <div class="pain-points-grid">
+            <div class="pain-point-card">
+              <div class="pain-point-number">01</div>
+              <h5 class="pain-point-title">No Physical Wayfinding</h5>
+              <p class="pain-point-description">
+                Digital systems show what you reserved but not where it lives.
+                Users hunt through shelves, translating codes like "B-07" to
+                physical locations.
+              </p>
+              <div class="pain-point-quote">
+                "I looked at my phone photo just to be sure it's the right
+                powerbank."
+              </div>
+            </div>
+
+            <div class="pain-point-card">
+              <div class="pain-point-number">02</div>
+              <h5 class="pain-point-title">Missing Confirmation Loop</h5>
+              <p class="pain-point-description">
+                After picking up or returning items, there's no system
+                acknowledgment. Users leave uncertain whether actions
+                registered.
+              </p>
+              <div class="pain-point-quote">
+                "I felt unsure leaving the room with the items."
+              </div>
+            </div>
+
+            <div class="pain-point-card">
+              <div class="pain-point-number">03</div>
+              <h5 class="pain-point-title">No Automated Verification</h5>
+              <p class="pain-point-description">
+                Misplacements and damage surface late. Staff manually reconcile
+                inventory, and disputes arise without evidence trails.
+              </p>
+              <div class="pain-point-quote">
+                "It should verify condition, not only location."
+              </div>
+            </div>
+          </div>
+
+          <div class="insight-box">
+            <h4>Design Challenge</h4>
+            <p>
+              <strong
+                >How might we make the storage environment itself guide and
+                confirm user actions?</strong
+              >
+              The gap isn't in reservation technology, it's in the physical
+              experience once users enter the room.
+            </p>
+          </div>
+        </div>
+
+        <!-- ========== 3. EXPLORATION & DISCOVERY ========== -->
+        <div class="case-study__section">
+          <div class="case-study__section-title-wrapper">
+            <svg class="section-icon" viewBox="0 0 24 24">
+              <path
+                d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"
+              />
+            </svg>
+            <h3 class="case-study__section-title">User Research</h3>
+          </div>
+
+          <h4 class="case-study__subsection-title">
+            Understanding Current Workflows
+          </h4>
+          <p class="case-study__text">
+            We began by observing the existing equipment room at Télécom Paris.
+            Key observations:
+          </p>
+
+          <ul class="case-study__list">
+            <li>
+              <strong>Digital-first reservation:</strong> Students book online
+              but receive minimal location details
+            </li>
+            <li>
+              <strong>Manual search:</strong> Upon arrival, users scan labels to
+              match reservation codes with physical items
+            </li>
+            <li>
+              <strong>No verification loop:</strong> Taking or returning items
+              lacks system acknowledgment
+            </li>
+            <li>
+              <strong>Staff burden:</strong> Lab managers manually check
+              returned items and investigate discrepancies
+            </li>
+          </ul>
+
+          <h4 class="case-study__subsection-title">Competitive Analysis</h4>
+          <p class="case-study__text">
+            We examined similar systems across domains:
+          </p>
+
+          <div class="comparison-table">
+            <div class="comparison-row">
+              <div class="comparison-item">
+                <strong>Library Systems</strong><br />
+                Use RFID for checkout but offer no wayfinding to shelves.
+                Assumes users know Dewey Decimal or accepts search time.
+              </div>
+              <div class="comparison-item">
+                <strong>Warehouse Picking</strong><br />
+                Amazon-style systems use handheld scanners with route
+                optimization. Professional context, not self-service.
+              </div>
+            </div>
+            <div class="comparison-row">
+              <div class="comparison-item">
+                <strong>Smart Lockers</strong><br />
+                Automate retrieval but require significant infrastructure. Not
+                viable for diverse equipment shapes.
+              </div>
+              <div class="comparison-item">
+                <strong>AR Navigation Apps</strong><br />
+                Indoor navigation exists but requires phone-holding while
+                carrying items. Cognitive load issue.
+              </div>
+            </div>
+          </div>
+
+          <p class="case-study__text">
+            <strong>Key insight:</strong> No existing solution combined ambient
+            guidance (hands-free), personalized color mapping, and immediate
+            verification suitable for university equipment rooms.
+          </p>
+
+          <h4 class="case-study__subsection-title">
+            Initial Concept Development
+          </h4>
+          <p class="case-study__text">
+            Through whiteboard sessions and rapid sketching, we converged on
+            three core principles:
+          </p>
+
+          <div class="decision-container">
+            <div class="decision-item">
+              <div class="decision-title">
+                Make the Room Smart, Not Just the App
+              </div>
+              <p class="decision-text">
+                Rather than ask users to constantly check their phones, we
+                embedded guidance in the physical environment. Floor projections
+                and shelf lighting create an ambient interface.
+              </p>
+            </div>
+
+            <div class="decision-item">
+              <div class="decision-title">
+                Color as Primary Navigation Language
+              </div>
+              <p class="decision-text">
+                We chose color mapping over numbers/arrows alone because color
+                is processed pre-attentively. A user sees "their blue" instantly
+                across room, shelf, and screen without translation.
+              </p>
+            </div>
+
+            <div class="decision-item">
+              <div class="decision-title">Multi-Modal Redundancy</div>
+              <p class="decision-text">
+                Not everyone uses phones the same way. The wall screen mirrors
+                mobile content so users without phones, with dead batteries, or
+                who prefer larger displays have equal access.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ========== 4. DESIGN PROCESS ========== -->
+        <div class="case-study__section">
+          <div class="case-study__section-title-wrapper">
+            <svg
+              class="section-icon"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9c.83 0 1.5-.67 1.5-1.5 0-.39-.15-.74-.39-1.01-.23-.26-.38-.61-.38-.99 0-.83.67-1.5 1.5-1.5H16c2.76 0 5-2.24 5-5 0-4.42-4.03-8-9-8zm-5.5 9c-.83 0-1.5-.67-1.5-1.5S5.67 9 6.5 9 8 9.67 8 10.5 7.33 12 6.5 12zm3-4C8.67 8 8 7.33 8 6.5S8.67 5 9.5 5s1.5.67 1.5 1.5S10.33 8 9.5 8zm5 0c-.83 0-1.5-.67-1.5-1.5S13.67 5 14.5 5s1.5.67 1.5 1.5S15.33 8 14.5 8zm3 4c-.83 0-1.5-.67-1.5-1.5S16.67 9 17.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"
+              />
+            </svg>
+            <h3 class="case-study__section-title">Design Process</h3>
+          </div>
+
+          <p class="case-study__text">
+            <strong>Stage 1 - Initial sketches & wireframes:</strong> Hand-drawn
+            room layouts with colored markers simulating light patterns.
+            Validated basic flow and color concept with 3 team members doing
+            walkthroughs.
+          </p>
+
+          <figure class="case-study__figure">
+            <img
+              src="assets/reserve/ill-skc.png"
+              class="case-study__image"
+              alt="Initial whiteboard sketches showing color-coded flow"
+            />
+          </figure>
+          <p class="case-study__text">
+            <strong>Stage 2 - Low fidelity wireframes:</strong> Digital
+            wireframes in Figma showing initial UI layouts.
+          </p>
+          <!-- Image Slider for Sketches -->
+          <div class="image-slider">
+            <div class="slider-container">
+              <div class="slider-track">
+                <div class="slider-slide">
+                  <img
+                    src="assets/reserve/wireframe1.png"
+                    alt="see reservation details"
+                    class="slider-image"
+                  />
+                </div>
+                <div class="slider-slide">
+                  <img
+                    src="assets/reserve/wireframe2.png"
+                    alt="make a reservation"
+                    class="slider-image"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <button
+              class="slider-btn slider-btn-prev"
+              aria-label="Previous image"
+            >
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
+              </svg>
+            </button>
+
+            <button class="slider-btn slider-btn-next" aria-label="Next image">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
+              </svg>
+            </button>
+
+            <div class="slider-dots"></div>
+          </div>
+
+          <!-- <h4 class="case-study__subsection-title">Key Design Decisions</h4>
+
+          <div class="feature-cards">
+            <article class="feature-card">
+              <header class="feature-card__header">
+                <svg class="feature-card__icon" viewBox="0 0 24 24">
+                  <path
+                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
+                  />
+                </svg>
+                <h5 class="feature-card__title">Color Mapping Strategy</h5>
+              </header>
+              <div class="feature-card__body">
+                <p class="feature-card__label">Decision</p>
+                <p class="feature-card__text">
+                  Assign each user (or reservation) a unique color that persists
+                  across floor arrow, shelf light, phone UI, and wall display.
+                  Use high-contrast palette: blue, green, purple, orange
+                  (avoiding red).
+                </p>
+                <p class="feature-card__label">Rationale</p>
+                <p class="feature-card__text">
+                  Color is universally understood and processed quickly.
+                  Consistency across touchpoints eliminates mental translation.
+                  Initial testing showed red was perceived as "error," so we
+                  excluded it from placement colors.
+                </p>
+              </div>
+            </article>
+
+            <article class="feature-card">
+              <header class="feature-card__header">
+                <svg class="feature-card__icon" viewBox="0 0 24 24">
+                  <path
+                    d="M12 2l-5.5 9h11L12 2zm0 3.84L13.93 9h-3.87L12 5.84zM17.5 13c-2.49 0-4.5 2.01-4.5 4.5s2.01 4.5 4.5 4.5 4.5-2.01 4.5-4.5-2.01-4.5-4.5-4.5zm0 7c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5zM3 21.5h8v-8H3v8zm2-6h4v4H5v-4z"
+                  />
+                </svg>
+                <h5 class="feature-card__title">
+                  Shelf Lighting Implementation
+                </h5>
+              </header>
+              <div class="feature-card__body">
+                <p class="feature-card__label">Decision</p>
+                <p class="feature-card__text">
+                  LED strips behind shelf edges, controlled via IoT. Light
+                  activates only for the specific cubby holding the reserved
+                  item, not the entire shelf.
+                </p>
+                <p class="feature-card__label">Rationale</p>
+                <p class="feature-card__text">
+                  Precision matters. Lighting just the cubby removes ambiguity
+                  on crowded shelves. Edge-mounting keeps lights visible from
+                  user approach angle without glare.
+                </p>
+              </div>
+            </article>
+
+            <article class="feature-card">
+              <header class="feature-card__header">
+                <svg class="feature-card__icon" viewBox="0 0 24 24">
+                  <path
+                    d="M17 1.01L7 1c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM17 19H7V5h10v14z"
+                  />
+                </svg>
+                <h5 class="feature-card__title">Mobile-First, Screen-Second</h5>
+              </header>
+              <div class="feature-card__body">
+                <p class="feature-card__label">Decision</p>
+                <p class="feature-card__text">
+                  Design phone interface as primary. Wall screen mirrors
+                  exactly, no separate interaction model, no divergent states.
+                </p>
+                <p class="feature-card__label">Rationale</p>
+                <p class="feature-card__text">
+                  Users already have phones. Creating a second interactive
+                  surface (wall screen with touch/gesture) adds complexity
+                  without meaningful benefit. Mirroring provides fallback
+                  without cognitive split.
+                </p>
+              </div>
+            </article>
+
+            <article class="feature-card">
+              <header class="feature-card__header">
+                <svg class="feature-card__icon" viewBox="0 0 24 24">
+                  <path
+                    d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"
+                  />
+                </svg>
+                <h5 class="feature-card__title">Badge Authentication Flow</h5>
+              </header>
+              <div class="feature-card__body">
+                <p class="feature-card__label">Decision</p>
+                <p class="feature-card__text">
+                  Scan student/staff badge at door to authenticate and load
+                  reservation before entering room.
+                </p>
+                <p class="feature-card__label">Rationale</p>
+                <p class="feature-card__text">
+                  Single authentication point simplifies security and associates
+                  physical presence with digital reservation. Users don't
+                  manually log in via phone inside a potentially dark room.
+                </p>
+              </div>
+            </article>
+          </div> -->
+        </div>
+
+        <!-- ========== 5. FINAL DESIGN ========== -->
+        <div class="case-study__section">
+          <div class="case-study__section-title-wrapper">
+            <svg class="section-icon" viewBox="0 0 24 24">
+              <path
+                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
+              />
+            </svg>
+            <h3 class="case-study__section-title">Final Design System</h3>
+          </div>
+
+          <p class="case-study__text">
+            After iterative refinement, here's what we did:
+          </p>
+
+          <h4 class="case-study__subsection-title">1. Badge Entry Point</h4>
+          <p class="case-study__text">
+            Door-mounted scanner reads student ID, pulls reservation from
+            "backend" (assumption), assigns color, and activates room elements.
+            Takes <2 seconds.
+          </p>
+
+          <h4 class="case-study__subsection-title">2. Floor Navigation</h4>
+          <p class="case-study__text">
+            Overhead projector casts directional arrow on floor in user's
+            assigned color. Arrow points from entry to target shelf. Simple
+            geometric shape, high contrast against floor surface.
+          </p>
+
+          <h4 class="case-study__subsection-title">3. Shelf Illumination</h4>
+          <p class="case-study__text">
+            LED strips embedded in shelf edges illuminate specific cubbies.
+            Light color matches user assignment. Remains static (no blinking to
+            avoid triggering photosensitivity or confusion).
+          </p>
+
+          <figure class="case-study__figure">
+            <img
+              style="width: 70%"
+              src="assets/reserve/room-study.png"
+              class="case-study__image"
+              alt="Shelf view showing LED lighting and numbered cubby positions"
+            />
+            <figcaption>
+              Shelf detail: LED lighting integrated with numbered cubby
+              positions and item silhouettes
+            </figcaption>
+          </figure>
+
+          <h4 class="case-study__subsection-title">4. Mobile Interface</h4>
+          <p class="case-study__text">
+            <strong>Stage 3 - Figma interactive prototype:</strong> Created
+            interactive UI mockups in Figma simulating Instructions, Reserved
+            items & their details like color, state, due time. UI for making a
+            new reservation and manage the old ones.
+          </p>
+          <!-- Multi-Frame Carousel for Mobile Mockups -->
+          <div class="frame-carousel">
+            <div class="carousel-wrapper">
+              <div class="carousel-strip">
+                <div class="frame-item">
+                  <img
+                    src="assets/reserve/f1.png"
+                    alt="Screen 1"
+                    class="phone-screen"
+                  />
+                </div>
+                <div class="frame-item">
+                  <img
+                    src="assets/reserve/f2.png"
+                    alt="Screen 2"
+                    class="phone-screen"
+                  />
+                </div>
+                <div class="frame-item">
+                  <img
+                    src="assets/reserve/f3.png"
+                    alt="Screen 3"
+                    class="phone-screen"
+                  />
+                </div>
+                <div class="frame-item">
+                  <img
+                    src="assets/reserve/f8.png"
+                    alt="Screen 4"
+                    class="phone-screen"
+                  />
+                </div>
+                <div class="frame-item">
+                  <img
+                    src="assets/reserve/f4.png"
+                    alt="Screen 5"
+                    class="phone-screen"
+                  />
+                </div>
+                <div class="frame-item">
+                  <img
+                    src="assets/reserve/f9.png"
+                    alt="Screen 6"
+                    class="phone-screen"
+                  />
+                </div>
+                <div class="frame-item">
+                  <img
+                    src="assets/reserve/f5.png"
+                    alt="Screen 7"
+                    class="phone-screen"
+                  />
+                </div>
+                <div class="frame-item">
+                  <img
+                    src="assets/reserve/f6.png"
+                    alt="Screen 8"
+                    class="phone-screen"
+                  />
+                </div>
+                <div class="frame-item">
+                  <img
+                    src="assets/reserve/f7.png"
+                    alt="Screen 9"
+                    class="phone-screen"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <button
+              class="carousel-nav carousel-nav-prev"
+              aria-label="Previous frames"
+            >
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
+              </svg>
+            </button>
+
+            <button
+              class="carousel-nav carousel-nav-next"
+              aria-label="Next frames"
+            >
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
+              </svg>
+            </button>
+
+            <div class="carousel-indicators"></div>
+          </div>
+
+          <h4 class="case-study__subsection-title">5. Wall Display</h4>
+
+          <p class="case-study__text">
+            Mounted large screen (40-50") visible from room center. Displays
+            identical content to mobile interface but in simpler version in
+            larger format. No touch interaction, pure mirror. Serves users who:
+          </p>
+          <ul class="case-study__list">
+            <li>Don't have phones or forgot them</li>
+            <li>Have dead phone batteries</li>
+            <li>Prefer larger displays for accessibility</li>
+            <li>Want to verify information at a glance</li>
+          </ul>
+          <figure class="case-study__figure">
+            <img
+              src="assets/reserve/big-screen.png"
+              class="case-study__image"
+              alt="Big wall screen displaying reservation info"
+            />
+          </figure>
+
+          <h4 class="case-study__subsection-title">
+            Design Constraints & Tradeoffs
+          </h4>
+          <p class="case-study__text">
+            <strong>No simultaneous multi-user in prototype:</strong> Our test
+            setup supported one user at a time due to single projector.
+            Production would require either user scheduling (5-minute windows)
+            or multiple projection zones.
+          </p>
+
+          <p class="case-study__text">
+            <strong>Confirmation feedback deferred:</strong> Ideal system
+            includes light state change (e.g., blue→green) and soft audio ping
+            when item correctly picked up. We validated concept but didn't
+            implement in prototype due to time constraints.
+          </p>
+
+          <p class="case-study__text">
+            <strong>Color palette limits:</strong> Practically, 4-6 distinct
+            colors work well for most users. Beyond that, discrimination becomes
+            difficult. This suggests maximum concurrent users in small rooms.
+          </p>
+        </div>
+
+        <!-- ========== 6. TESTING & EVALUATION ========== -->
+        <div class="case-study__section">
+          <div class="case-study__section-title-wrapper">
+            <svg class="section-icon" viewBox="0 0 24 24">
+              <path
+                d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"
+              />
+            </svg>
+            <h3 class="case-study__section-title">User Testing</h3>
+          </div>
+
+          <div class="testing-demographics">
+            <h5>Study Design</h5>
+            <div class="demographics-grid">
+              <div class="demo-stat">
+                <div class="demo-number">10</div>
+                <div class="demo-label">Participants</div>
+              </div>
+              <div class="demo-stat">
+                <div class="demo-number">5F / 5M</div>
+                <div class="demo-label">Gender Split</div>
+              </div>
+              <div class="demo-stat">
+                <div class="demo-number">33</div>
+                <div class="demo-label">Avg Age</div>
+              </div>
+              <div class="demo-stat">
+                <div class="demo-number">0-4+</div>
+                <div class="demo-label">Borrows/Year</div>
+              </div>
+            </div>
+
+            <p class="case-study__text" style="margin-top: 1.5rem">
+              <strong>Protocol:</strong> Brief intro + consent → Task 1 (pickup
+              2 items) → Task 2 (return items; one item location changed to
+              prevent memorization) → 5-minute semi-structured interview.
+            </p>
+
+            <p class="case-study__text">
+              <strong>Measures:</strong> Task completion time, hesitation
+              moments, badging behavior, screen usage, difficulty ratings (1-5
+              scale), and qualitative feedback through think-aloud and
+              interview.
+            </p>
+          </div>
+
+          <h4 class="case-study__subsection-title">Key Findings</h4>
+
+          <div class="results-grid">
+            <div class="result-card highlight">
+              <div class="result-metric">80%</div>
+              <div class="result-label">Color Mapping Helpful</div>
+              <div class="result-insight">
+                Participants explicitly stated color guidance sped navigation.
+                Concerns: red perceived as warning; many simultaneous users
+                might create confusion.
+              </div>
+            </div>
+
+            <div class="result-card">
+              <div class="result-metric">70%</div>
+              <div class="result-label">Hesitated at Pickup</div>
+              <div class="result-insight">
+                Brief pause after taking item, looking around for confirmation.
+                Root cause: no feedback loop indicating "system registered your
+                action."
+              </div>
+            </div>
+
+            <div class="result-card highlight">
+              <div class="result-metric">60%</div>
+              <div class="result-label">Would Use as-Is</div>
+              <div class="result-insight">
+                Comfortable using current version immediately for simple
+                borrowing. Remaining 40% want explicit confirmations first.
+              </div>
+            </div>
+
+            <div class="result-card">
+              <div class="result-metric">60%</div>
+              <div class="result-label">Skipped Badge Scan</div>
+              <div class="result-insight">
+                Prototype artifact, no physical door scanner. Users entered room
+                and looked for items. Expected to vanish with real hardware.
+              </div>
+            </div>
+
+            <div class="result-card">
+              <div class="result-metric">20%</div>
+              <div class="result-label">Room Too Dark</div>
+              <div class="result-insight">
+                Minority found ambient lighting insufficient. LEDs compensated
+                for most; suggests brighter baseline or alternative variant.
+              </div>
+            </div>
+
+            <div class="result-card">
+              <div class="result-metric">10%</div>
+              <div class="result-label">Checked Wall Screen</div>
+              <div class="result-insight">
+                Most relied on phones. 1 user glanced at wall screen out of
+                curiosity but didn't depend on it. Validates mirror-only
+                approach.
+              </div>
+            </div>
+          </div>
+
+          <h4 class="case-study__subsection-title">Qualitative Insights</h4>
+
+          <div class="quote-block">
+            <p>
+              "I wasn't sure if the system registered my action, some tiny
+              confirmation would remove the stress."
+            </p>
+            <cite>— Participant 7</cite>
+          </div>
+
+          <div class="quote-block">
+            <p>
+              "The color makes it super fast. I didn't even think about it, just
+              followed the blue light."
+            </p>
+            <cite>— Participant 3</cite>
+          </div>
+
+          <div class="quote-block">
+            <p>
+              "Red feels like something is wrong. Maybe use it for errors, not
+              for telling me where my item is."
+            </p>
+            <cite>— Participant 9</cite>
+          </div>
+
+          <h4 class="case-study__subsection-title">Behavioral Observations</h4>
+          <ul class="case-study__list">
+            <li>
+              <strong>Fast shelf location:</strong> All users reached correct
+              shelf within 5-10 seconds following floor arrow
+            </li>
+            <li>
+              <strong>Cubby identification:</strong> No user picked wrong cubby
+              when light was active
+            </li>
+            <li>
+              <strong>Phone checking:</strong> 8/10 glanced at phone upon
+              entering but then followed physical cues
+            </li>
+            <li>
+              <strong>Return flow smoother:</strong> Fewer hesitations on
+              returns than pickups, likely due to familiarity from Task 1
+            </li>
+          </ul>
+        </div>
+
+        <!-- ========== 7. IMPACT & LEARNINGS ========== -->
+        <div class="case-study__section highlight-section">
+          <div class="case-study__section-title-wrapper">
+            <svg class="section-icon" viewBox="0 0 24 24">
+              <path
+                d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"
+              />
+            </svg>
+            <h3 class="case-study__section-title">
+              Impact & Design Implications
+            </h3>
+          </div>
+
+          <p class="case-study__text">
+            Our testing validated the core concept while revealing specific
+            areas for refinement. Here's what we'd carry forward and what needs
+            evolution:
+          </p>
+
+          <div class="lesson-card">
+            <h4>✓ Keep: Color-Guided Navigation (with constraints)</h4>
+            <p>
+              <strong>What works:</strong> 80% of users relied heavily on color
+              mapping. It's fast, intuitive, and works across touchpoints
+              without explanation.
+            </p>
+            <p><strong>Refinements needed:</strong></p>
+            <ul class="case-study__list">
+              <li>Avoid red for item placement, reserve for errors/warnings</li>
+              <li>Cap simultaneous users at palette size (4-6 colors max)</li>
+              <li>
+                Always pair color with text labels and IDs for accessibility
+              </li>
+            </ul>
+          </div>
+
+          <div class="lesson-card">
+            <h4>✓ Add: Explicit Confirmation Feedback</h4>
+            <p>
+              <strong>The gap:</strong> 70% hesitation rate at pickup shows
+              users need closure. Current design leaves them uncertain whether
+              action registered.
+            </p>
+            <p><strong>Solution:</strong> After correct pickup/return:</p>
+            <ul class="case-study__list">
+              <li>Cubby light changes state (e.g., blue → green glow)</li>
+              <li>Soft audio ping (optional, user can disable)</li>
+              <li>Progress indicator updates on screens ("1/2 picked up")</li>
+              <li>No modal dialogs or extra taps, keep it ambient</li>
+            </ul>
+          </div>
+
+          <div class="lesson-card">
+            <h4>✓ Add: IDs + Silhouettes for Disambiguation</h4>
+            <p>
+              <strong>The edge case:</strong> When multiple identical items
+              (e.g., 3 MacBook Pros) share a shelf, color alone doesn't
+              distinguish which specific one.
+            </p>
+            <p>
+              <strong>Solution:</strong> Number each item position and mark
+              shelves with taped silhouettes. Users match color + ID + shape
+              outline.
+            </p>
+          </div>
+
+          <div class="lesson-card">
+            <h4>✓ Future: IoT + Computer Vision for Verification</h4>
+            <p>
+              <strong>The accountability problem:</strong> Current system guides
+              but doesn't verify. Misplacements or damage still discovered late.
+            </p>
+            <p><strong>Next phase:</strong></p>
+            <ul class="case-study__list">
+              <li>
+                RFID tags on items + cubby sensors detect pickup/return events
+              </li>
+              <li>
+                Overhead camera for exception review (e.g., item returned to
+                wrong location)
+              </li>
+              <li>
+                Automated condition logging (future: image analysis for visible
+                damage)
+              </li>
+              <li>Lights guide; sensors verify, best of both worlds</li>
+            </ul>
+          </div>
+
+          <h4 class="case-study__subsection-title">What I'd Do Differently</h4>
+
+          <div class="would-do-differently">
+            <div class="differently-item">
+              <strong>Test Concurrent Users Earlier</strong>
+              <p>
+                We focused on single-user scenarios. Multi-user testing would
+                have surfaced color collision issues sooner, informing
+                scheduling or zone-based solutions from the start.
+              </p>
+            </div>
+
+            <div class="differently-item">
+              <strong>Prototype Confirmation Feedback in Round 1</strong>
+              <p>
+                The hesitation finding was predictable in hindsight. Building
+                light state changes into initial prototype would have let us
+                test different feedback modalities (color change, sound,
+                vibration) comparatively.
+              </p>
+            </div>
+
+            <div class="differently-item">
+              <strong>Include Lab Staff in Discovery Phase</strong>
+              <p>
+                We focused on borrower pain points. Interviewing lab managers
+                earlier would have revealed operational concerns (damage
+                tracking, dispute resolution) that influenced final design
+                recommendations.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ========== 8. CONCLUSION ========== -->
+        <div class="case-study__section">
+          <h3 class="case-study__section-title">Conclusion</h3>
+
+          <p class="case-study__text">
+            IllumiLend demonstrates that
+            <strong>the room itself can communicate</strong>. By embedding
+            guidance in the physical environment, color-coded floor arrows,
+            shelf illumination, mirrored screens, we eliminated location
+            friction almost entirely. Users found items 80% faster according to
+            subjective reports, and no one picked the wrong item when lights
+            were active.
+          </p>
+
+          <p class="case-study__text">
+            The remaining challenge is <strong>confirmation feedback</strong>.
+            Our user testing showed that removing navigation uncertainty creates
+            space for a new concern: "Did that count?" Addressing this through
+            ambient state changes (light color, progress indicators, optional
+            audio) will complete the loop without adding cognitive load.
+          </p>
+
+          <p class="case-study__text">
+            For universities or organizations with shared equipment pools, this
+            approach offers:
+          </p>
+
+          <ul class="case-study__list">
+            <li>
+              <strong>Reduced staff burden:</strong> Less time resolving "where
+              is this?" questions and misplacement issues
+            </li>
+            <li>
+              <strong>Better user experience:</strong> First-time borrowers
+              navigate as confidently as frequent users
+            </li>
+            <li>
+              <strong>Scalable foundation:</strong> Adding IoT sensors and CV
+              verification extends system without changing user-facing design
+            </li>
+            <li>
+              <strong>Accessibility built in:</strong> Multi-modal cues (light,
+              color, text, optional sound) support diverse needs
+            </li>
+          </ul>
+
+          <p class="case-study__text">
+            <strong>Next steps:</strong> Deploy pilot system in one Télécom
+            Paris equipment room with concurrent-user scheduling, confirmation
+            feedback implemented, and 3-month usage data collection. Use
+            insights to refine color palette limits, optimize confirmation
+            timing, and design scaling strategy for multiple rooms.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Cursor
+      const cursor = document.querySelector(".cursor");
+      const cursorEnabled = window.innerWidth > 768;
+      if (cursorEnabled) {
+        document.addEventListener("mousemove", (e) => {
+          cursor.style.left = `${e.clientX}px`;
+          cursor.style.top = `${e.clientY}px`;
+        });
+        document.querySelectorAll("a, button").forEach((el) => {
+          el.addEventListener("mouseenter", () => {
+            cursor.style.transform = "scale(2)";
+          });
+          el.addEventListener("mouseleave", () => {
+            cursor.style.transform = "scale(1)";
+          });
+        });
+      } else {
+        cursor.style.display = "none";
+      }
+
+      // Nav
+      const menuToggle = document.querySelector(".nav__toggle");
+      const navLinks = document.querySelector(".nav__links");
+      menuToggle.addEventListener("click", () => {
+        menuToggle.classList.toggle("active");
+        navLinks.classList.toggle("active");
+      });
+      document.querySelectorAll(".nav__link").forEach((link) => {
+        link.addEventListener("click", () => {
+          menuToggle.classList.remove("active");
+          navLinks.classList.remove("active");
+        });
+      });
+
+      // Smooth scroll
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", (e) => {
+          e.preventDefault();
+          const target = document.querySelector(anchor.getAttribute("href"));
+          if (target) target.scrollIntoView({ behavior: "smooth" });
+        });
+      });
+
+      // Reveal
+      const reveals = document.querySelectorAll(".reveal");
+      function handleReveal() {
+        const windowHeight = window.innerHeight;
+        reveals.forEach((el) => {
+          const elementTop = el.getBoundingClientRect().top;
+          if (elementTop < windowHeight - 150) el.classList.add("active");
+        });
+      }
+      handleReveal();
+      window.addEventListener("scroll", handleReveal);
+    </script>
+    <script src="index.js"></script>
+  </body>
+</html>

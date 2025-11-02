@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Nazrin Nasirova - Portfolio</title>
-    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="icon" type="image/png" href="/assets/favicon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="index.css" />
@@ -42,7 +42,9 @@
         <ul class="nav__links">
           <li><a href="#home" class="nav__link">Home</a></li>
           <li><a href="#projects" class="nav__link">Projects</a></li>
-          <li><a href="#experience" class="nav__link">Journey</a></li>
+          <li>
+            <a href="#experience" class="nav__link">Background</a>
+          </li>
           <li><a href="#skills" class="nav__link">Skills</a></li>
           <li><a href="#contact" class="nav__link">Contact</a></li>
         </ul>
@@ -110,14 +112,78 @@
                 </span>
               </div>
               <p class="project__description">
-                Designing a digital restaurant ordering experience to eliminate
+                Designed a digital restaurant ordering experience to eliminate
                 waiter dependency, provide complete ingredient transparency, and
                 simplify group payments for all users.
               </p>
             </div>
           </article>
-
           <article
+            onclick="window.location.href='/goodreads.html'"
+            class="project reveal"
+          >
+            <div class="project__image-container">
+              <img
+                src="/assets/goodreads.png"
+                alt="UX Study of Goodreads Platform"
+                class="project__image"
+              />
+              <div class="project__number">03</div>
+            </div>
+            <div class="project__content">
+              <div class="project__header">
+                <span class="project__title"
+                  >UX Study of Goodreads Book Recommendation</span
+                >
+                <span class="project__link-icon" aria-label="View project">
+                  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3M19,19H5V5H12V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19Z"
+                    />
+                  </svg>
+                </span>
+              </div>
+              <p class="project__description">
+                Conducted a comprehensive UX analysis of the Goodreads platform,
+                identifying key usability issues and proposing actionable design
+                improvements to enhance user engagement and satisfaction.
+              </p>
+            </div>
+          </article>
+          <article
+            onclick="window.location.href='/illumilend.html'"
+            class="project reveal"
+          >
+            <div class="project__image-container">
+              <img
+                src="/assets/reserve/illumilend-hero.png"
+                alt="UX Study of Goodreads Platform"
+                class="project__image"
+              />
+              <div class="project__number">03</div>
+            </div>
+            <div class="project__content">
+              <div class="project__header">
+                <span class="project__title"
+                  >Augmented Storage Room — IllumiLend</span
+                >
+                <span class="project__link-icon" aria-label="View project">
+                  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3M19,19H5V5H12V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19Z"
+                    />
+                  </svg>
+                </span>
+              </div>
+              <p class="project__description">
+                Designed a color-guided system that helps students quickly find,
+                collect, and return reserved equipment in university storage
+                rooms using floor arrows, shelf lighting, and simple
+                confirmations.
+              </p>
+            </div>
+          </article>
+          <!-- <article
             onclick="window.location.href='/case-study-cybersecurity.html'"
             class="project reveal"
           >
@@ -148,14 +214,14 @@
                 maintaining depth for advanced learners
               </p>
             </div>
-          </article>
+          </article> -->
         </div>
       </section>
 
       <section id="experience" class="section timeline-section">
         <div class="section__header reveal">
           <div class="section__number">02</div>
-          <h2 class="section__title">Professional Journey</h2>
+          <h2 class="section__title">Professional Background</h2>
         </div>
         <div class="timeline">
           <article class="timeline__item reveal">

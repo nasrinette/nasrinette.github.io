@@ -142,10 +142,10 @@
   .case-study__header {
     width: 100% !important;
   }
-  .gif-class > div {
+  .hero-image > div {
     width: 80% !important;
   }
-  .gif-class {
+  .hero-image {
     justify-content: center;
   }
   .slider-container {
@@ -403,7 +403,8 @@ body {
   width: 200%;
   height: 200%;
   background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23754946" opacity="0.1"/><circle cx="50" cy="50" r="40" fill="none" stroke="%23F5F5F0" stroke-width="0.1" opacity="0.2"/></svg>');
-  animation: rotate 20s linear infinite;
+  /* animation: rotate 20s linear infinite; */
+  rotate: 2360deg;
 }
 
 @keyframes rotate {
@@ -469,7 +470,7 @@ body {
   border-radius: 50%;
   overflow: hidden;
   border: 4px solid var(--cream);
-  filter: grayscale(100%) contrast(1.1);
+  /* filter: grayscale(100%) contrast(1.1); */
   opacity: 0.9;
   background: var(--brown);
   display: flex;
@@ -490,12 +491,12 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 320px;
-  height: 320px;
+  width: 330px;
+  height: 330px;
   border: 2px solid var(--cream);
   border-radius: 50%;
   opacity: 0.2;
-  animation: pulse 3s ease-in-out infinite;
+  /* animation: pulse 3s ease-in-out infinite; */
 }
 
 @keyframes pulse {
@@ -524,6 +525,7 @@ body {
   text-align: center;
   color: var(--cream);
   border-color: var(--cream);
+  background-color: var(--burgundy);
 }
 
 .btn:hover {
@@ -534,14 +536,14 @@ body {
 /* ===== PROJECTS ===== */
 .projects {
   background: var(--cream);
-  padding: 4rem 2rem;
+  padding: 4rem 4rem;
 }
 
 .projects__grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   /* max-width: 800px; */
-  gap: 2rem;
+  gap: 3rem;
   margin: 0 auto;
 }
 
@@ -757,11 +759,13 @@ body {
   padding: 2rem 3rem 4rem;
 }
 
-.gif-class {
+.hero-image {
   display: flex;
   align-items: center;
   border-bottom: 2px solid var(--light-gray);
   flex-wrap: wrap;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
 }
 .gif-wrapper {
   width: 30%;
@@ -799,8 +803,8 @@ body {
   color: var(--dark-gray);
   font-size: 1.1rem;
   font-weight: 300;
-  max-width: 800px;
-  margin: 0 auto 2.5rem;
+  /* max-width: 800px; */
+  /* margin: 0 auto 2.5rem; */
   line-height: 1.6;
 }
 
@@ -813,7 +817,7 @@ body {
   font-size: 1.8rem;
   font-weight: 700;
   color: var(--burgundy);
-  margin-bottom: 1rem;
+  /* margin-bottom: 1rem; */
   letter-spacing: -0.5px;
 }
 
@@ -883,7 +887,7 @@ body {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 1rem;
-  margin: 2.5rem 0;
+  margin: 2rem 0;
   padding: 0;
   background: transparent;
   border: none;
@@ -1093,8 +1097,8 @@ body {
   display: block;
   /* padding: 2rem; */
   /* background: white; */
-  min-height: 400px;
-  object-fit: cover;
+  /* min-height: 400px;
+  object-fit: cover; */
 }
 
 .case-study__image.large {
@@ -1123,7 +1127,7 @@ body {
 }
 
 /* Fallback for broken images */
-.case-study__image::before {
+/* .case-study__image::before {
   content: "";
   display: block;
   position: absolute;
@@ -1136,9 +1140,9 @@ body {
     rgba(58, 28, 30, 0.05),
     rgba(117, 73, 70, 0.05)
   );
-}
+} */
 
-.case-study__image::after {
+/* .case-study__image::after {
   content: attr(alt);
   display: flex;
   align-items: center;
@@ -1153,7 +1157,7 @@ body {
   font-weight: 600;
   color: var(--burgundy);
   opacity: 0.7;
-}
+} */
 
 /* Grid for multiple images side by side */
 .case-study__image-grid {
@@ -1202,7 +1206,7 @@ body {
 
 /* ===== PROCESS SUMMARY ===== */
 .process-summary {
-  margin-top: 2.5rem;
+  margin-top: 1.5rem;
   padding-bottom: 2rem;
   border-bottom: 1px solid rgba(117, 73, 70, 0.2);
 }
@@ -1212,7 +1216,8 @@ body {
   font-size: 1.1rem;
   font-weight: 700;
   color: var(--burgundy);
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
+  margin-top: 2rem;
   /* text-align: center; */
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -1474,7 +1479,7 @@ body {
 .learning-item {
   background: rgba(117, 73, 70, 0.03);
   padding: 1.5rem;
-  border-radius: 8px;
+  /* border-radius: 8px; */
   border: 1px solid var(--light-gray);
   transition: all var(--transition-fast);
 }
@@ -1524,7 +1529,7 @@ body {
 .comparison-table {
   background: white;
   padding: 1.5rem;
-  border-radius: 8px;
+  /* border-radius: 8px; */
   border: 1px solid var(--light-gray);
   margin: 2rem 0;
 }
@@ -2806,7 +2811,7 @@ body {
 .feature-card {
   background: #fff;
   border: 1px solid #e7e3dc;
-  border-radius: 10px;
+  /* border-radius: 10px; */
   padding: 2rem;
 }
 .feature-card__header {
@@ -2881,5 +2886,329 @@ body {
   .feature-card__image {
     justify-content: center;
     margin-top: 1.5rem;
+  }
+}
+
+/* ===== FRAME CAROUSEL (Multi-view with Phone Mockups) ===== */
+.frame-carousel {
+  position: relative;
+  width: 100%;
+  max-width: 1400px;
+  margin: 3rem auto;
+  overflow: hidden;
+  padding: 60px 0;
+}
+
+.carousel-wrapper {
+  overflow: hidden;
+  padding: 0 80px;
+}
+
+.carousel-strip {
+  display: flex;
+  gap: 30px;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+  align-items: center;
+}
+
+.frame-item {
+  min-width: 280px;
+  max-width: 280px;
+  flex-shrink: 0;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+  /* opacity: 0.7 */
+}
+
+.frame-item:hover {
+  opacity: 1;
+  transform: scale(1.08) translateY(-10px);
+}
+
+/* Phone Mockup - Simplified since images have frames */
+.phone-mockup {
+  position: relative;
+  width: 100%;
+}
+
+.phone-frame {
+  position: relative;
+  width: 100%;
+}
+
+.phone-screen {
+  width: 100%;
+  height: auto;
+  display: block;
+  /* filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.25)); */
+}
+
+/* Navigation Buttons */
+.carousel-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--burgundy);
+  color: var(--cream);
+  border: none;
+  border-radius: 50%;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(58, 28, 30, 0.4);
+  z-index: 20;
+  transition: all var(--transition-fast);
+}
+
+.carousel-nav:hover {
+  background: var(--brown);
+  transform: translateY(-50%) scale(1.15);
+  box-shadow: 0 8px 30px rgba(58, 28, 30, 0.5);
+}
+
+.carousel-nav:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+.carousel-nav svg {
+  width: 28px;
+  height: 28px;
+  fill: var(--cream);
+}
+
+.carousel-nav-prev {
+  left: 10px;
+}
+
+.carousel-nav-next {
+  right: 10px;
+}
+
+/* Indicators */
+.carousel-indicators {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 40px;
+  padding: 0.5rem;
+}
+
+.carousel-indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(58, 28, 30, 0.2);
+  border: none;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  padding: 0;
+}
+
+.carousel-indicator:hover {
+  background: rgba(58, 28, 30, 0.5);
+  transform: scale(1.3);
+}
+
+.carousel-indicator.active {
+  background: var(--burgundy);
+  width: 40px;
+  border-radius: 6px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+  .frame-item {
+    min-width: 260px;
+    max-width: 260px;
+  }
+
+  .carousel-strip {
+    gap: 25px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .frame-item {
+    min-width: 240px;
+    max-width: 240px;
+  }
+
+  .carousel-wrapper {
+    padding: 0 70px;
+  }
+
+  .carousel-strip {
+    gap: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .frame-carousel {
+    padding: 40px 0;
+  }
+
+  .frame-item {
+    min-width: 220px;
+    max-width: 220px;
+  }
+
+  .carousel-wrapper {
+    padding: 0 60px;
+  }
+
+  .carousel-nav {
+    width: 48px;
+    height: 48px;
+  }
+
+  .carousel-nav svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .carousel-indicators {
+    gap: 8px;
+    margin-top: 30px;
+  }
+
+  .carousel-indicator {
+    width: 8px;
+    height: 8px;
+  }
+
+  .carousel-indicator.active {
+    width: 32px;
+  }
+}
+
+@media (max-width: 480px) {
+  .frame-carousel {
+    padding: 30px 0;
+  }
+
+  .frame-item {
+    min-width: 200px;
+    max-width: 200px;
+  }
+
+  .carousel-wrapper {
+    padding: 0 50px;
+  }
+
+  .carousel-nav {
+    width: 42px;
+    height: 42px;
+  }
+
+  .carousel-nav svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .carousel-nav-prev {
+    left: 5px;
+  }
+
+  .carousel-nav-next {
+    right: 5px;
+  }
+}
+/* --- Full-bleed carousel: spans the whole viewport width --- */
+.frame-carousel {
+  /* full width regardless of parent container */
+  width: 100vw;
+  max-width: none;
+  margin-inline: calc(50% - 50vw); /* pull it out of the page gutters */
+  padding-block: 60px; /* keep your vertical padding */
+  /* IMPORTANT: allow hover growth to overflow */
+  overflow: visible;
+  position: relative;
+}
+
+/* no horizontal padding here anymore; we’ll give the strip some internal space */
+.carousel-wrapper {
+  overflow: visible; /* was hidden -> caused clipping */
+  padding: 0;
+}
+
+/* give the strip side breathing room so arrows don't overlap content */
+.carousel-strip {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+  padding-inline: clamp(48px, 6vw, 80px); /* replaces wrapper padding */
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+
+/* keep item’s box size fixed; hover only scales the visual content */
+.frame-item {
+  min-width: 280px;
+  max-width: 280px;
+  flex-shrink: 0;
+  position: relative; /* enables z-index on hover */
+}
+
+.phone-screen {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+  transform-origin: center center;
+}
+
+/* scale the image, not the flex item; stack above neighbors */
+.frame-item:hover {
+  z-index: 5;
+}
+.frame-item:hover .phone-screen {
+  opacity: 1;
+  transform: scale(1.08) translateY(-10px);
+}
+
+/* nav buttons are outside content flow; ensure they sit above */
+.carousel-nav {
+  z-index: 20;
+}
+
+/* --- keep your existing responsive width tweaks; no overflow:hidden anywhere in ancestors --- */
+@media (max-width: 1200px) {
+  .frame-item {
+    min-width: 260px;
+    max-width: 260px;
+  }
+  .carousel-strip {
+    gap: 25px;
+  }
+}
+@media (max-width: 1024px) {
+  .frame-item {
+    min-width: 240px;
+    max-width: 240px;
+  }
+  .carousel-strip {
+    gap: 20px;
+  }
+}
+@media (max-width: 768px) {
+  .frame-carousel {
+    padding-block: 40px;
+  }
+  .frame-item {
+    min-width: 220px;
+    max-width: 220px;
+  }
+}
+@media (max-width: 480px) {
+  .frame-carousel {
+    padding-block: 30px;
+  }
+  .frame-item {
+    min-width: 200px;
+    max-width: 200px;
   }
 }
