@@ -16,7 +16,13 @@ document.addEventListener("DOMContentLoaded", function () {
     for (let i = 0; i < totalFrames; i++) {
       const indicator = document.createElement("button");
       indicator.classList.add("carousel-indicator");
-      if (i === 0) indicator.classList.add("active");
+      indicator.setAttribute("type", "button");
+      if (i === 0) {
+        indicator.classList.add("active");
+        indicator.setAttribute("aria-current", "true");
+      } else {
+        indicator.setAttribute("aria-current", "false");
+      }
       indicator.setAttribute("aria-label", `Go to frame ${i + 1}`);
       indicator.addEventListener("click", () => scrollToFrame(i));
       indicatorsContainer.appendChild(indicator);
@@ -43,7 +49,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // Update indicators
       indicators.forEach((indicator, index) => {
-        indicator.classList.toggle("active", index === currentPosition);
+        const isActive = index === currentPosition;
+        indicator.classList.toggle("active", isActive);
+        indicator.setAttribute("aria-current", isActive ? "true" : "false");
       });
     }
 
@@ -73,8 +81,14 @@ document.addEventListener("DOMContentLoaded", function () {
       updateCarousel();
     }
 
-    prevBtn.addEventListener("click", scrollPrev);
-    nextBtn.addEventListener("click", scrollNext);
+    if (prevBtn) {
+      prevBtn.setAttribute("type", "button");
+      prevBtn.addEventListener("click", scrollPrev);
+    }
+    if (nextBtn) {
+      nextBtn.setAttribute("type", "button");
+      nextBtn.addEventListener("click", scrollNext);
+    }
 
     // Handle window resize
     let resizeTimeout;
@@ -106,7 +120,13 @@ document.addEventListener("DOMContentLoaded", function () {
     for (let i = 0; i < totalSlides; i++) {
       const dot = document.createElement("button");
       dot.classList.add("slider-dot");
-      if (i === 0) dot.classList.add("active");
+      dot.setAttribute("type", "button");
+      if (i === 0) {
+        dot.classList.add("active");
+        dot.setAttribute("aria-current", "true");
+      } else {
+        dot.setAttribute("aria-current", "false");
+      }
       dot.setAttribute("aria-label", `Go to slide ${i + 1}`);
       dot.addEventListener("click", () => goToSlide(i));
       dotsContainer.appendChild(dot);
@@ -119,7 +139,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // Update dots
       dots.forEach((dot, index) => {
-        dot.classList.toggle("active", index === currentIndex);
+        const isActive = index === currentIndex;
+        dot.classList.toggle("active", isActive);
+        dot.setAttribute("aria-current", isActive ? "true" : "false");
       });
     }
 
@@ -138,8 +160,14 @@ document.addEventListener("DOMContentLoaded", function () {
       updateSlider();
     }
 
-    prevBtn.addEventListener("click", prevSlide);
-    nextBtn.addEventListener("click", nextSlide);
+    if (prevBtn) {
+      prevBtn.setAttribute("type", "button");
+      prevBtn.addEventListener("click", prevSlide);
+    }
+    if (nextBtn) {
+      nextBtn.setAttribute("type", "button");
+      nextBtn.addEventListener("click", nextSlide);
+    }
 
     // Initialize
     updateSlider();
