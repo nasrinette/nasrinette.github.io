@@ -114,3 +114,188 @@
     initReveal();
   }
 })();
+
+class CaseStudyNavigation {
+  constructor() {
+    this.sections = [];
+    this.nav = null;
+    this.navItems = [];
+    this.currentSection = null;
+    this.scrollTimeout = null;
+
+    this.init();
+  }
+
+  init() {
+    // Find all main sections in the case study
+    this.sections = Array.from(
+      document.querySelectorAll(".case-study__section")
+    );
+
+    if (this.sections.length === 0) {
+      console.warn("No case study sections found");
+      return;
+    }
+
+    this.createNavigation();
+    this.attachEventListeners();
+    this.updateActiveSection();
+  }
+
+  createNavigation() {
+    // Create navigation container
+    this.nav = document.createElement("nav");
+    this.nav.className = "case-study-nav";
+    this.nav.setAttribute("aria-label", "Case study sections");
+
+    // Create nav items for each section
+    this.sections.forEach((section, index) => {
+      const title = this.getSectionTitle(section);
+      if (!title) return;
+
+      const button = document.createElement("button");
+      button.className = "case-study-nav__item";
+      button.setAttribute("data-section-index", index);
+      button.setAttribute("aria-label", `Go to ${title} section`);
+
+      // Add text
+      const text = document.createElement("span");
+      text.textContent = title;
+
+      button.appendChild(text);
+
+      this.nav.appendChild(button);
+      this.navItems.push(button);
+    });
+
+    // Add to page
+    document.body.appendChild(this.nav);
+  }
+
+  getSectionTitle(section) {
+    // Try to find title in different possible locations
+    const titleElement =
+      section.querySelector(".case-study__section-title") ||
+      section.querySelector("h3") ||
+      section.querySelector("h2");
+
+    if (titleElement) {
+      return titleElement.textContent.trim();
+    }
+
+    return null;
+  }
+
+  attachEventListeners() {
+    // Click handlers for nav items
+    this.navItems.forEach((item, index) => {
+      item.addEventListener("click", () => {
+        this.scrollToSection(index);
+      });
+    });
+
+    // Scroll handler to update active section
+    let scrollTimeout;
+    window.addEventListener("scroll", () => {
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        this.updateActiveSection();
+      }, 100);
+    });
+
+    // Show/hide nav on scroll (optional)
+    let lastScroll = window.pageYOffset;
+    let hideTimeout;
+
+    window.addEventListener("scroll", () => {
+      const currentScroll = window.pageYOffset;
+
+      // Show nav when scrolling
+      this.nav.classList.remove("hidden");
+
+      // Optional: Hide after 3 seconds of no scrolling
+      clearTimeout(hideTimeout);
+      hideTimeout = setTimeout(() => {
+        // Uncomment to enable auto-hide:
+        // this.nav.classList.add('hidden');
+      }, 3000);
+
+      lastScroll = currentScroll;
+    });
+  }
+
+  scrollToSection(index) {
+    const section = this.sections[index];
+    if (!section) return;
+
+    // Calculate offset for fixed headers
+    const headerOffset = 100;
+    const elementPosition = section.getBoundingClientRect().top;
+    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: "smooth",
+    });
+
+    // Update active immediately for better UX
+    this.setActiveSection(index);
+  }
+
+  updateActiveSection() {
+    const scrollPosition = window.pageYOffset + window.innerHeight / 3;
+
+    let activeIndex = 0;
+
+    // Find which section is currently in view
+    this.sections.forEach((section, index) => {
+      const sectionTop = section.offsetTop;
+      const sectionBottom = sectionTop + section.offsetHeight;
+
+      if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+        activeIndex = index;
+      }
+    });
+
+    this.setActiveSection(activeIndex);
+  }
+
+  setActiveSection(index) {
+    if (this.currentSection === index) return;
+
+    this.currentSection = index;
+
+    // Update active class
+    this.navItems.forEach((item, i) => {
+      if (i === index) {
+        item.classList.add("active");
+        item.setAttribute("aria-current", "true");
+
+        // Scroll nav item into view if needed
+        item.scrollIntoView({
+          behavior: "smooth",
+          block: "nearest",
+          inline: "center",
+        });
+      } else {
+        item.classList.remove("active");
+        item.removeAttribute("aria-current");
+      }
+    });
+  }
+
+  destroy() {
+    if (this.nav && this.nav.parentNode) {
+      this.nav.parentNode.removeChild(this.nav);
+    }
+  }
+}
+
+// Initialize when DOM is ready
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", () => {
+    new CaseStudyNavigation();
+  });
+} else {
+  new CaseStudyNavigation();
+}

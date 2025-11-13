@@ -1015,8 +1015,8 @@ body {
   width: 100%;
   height: auto;
   display: block;
-  aspect-ratio: 16 / 9;
-  background: #000;
+  /* aspect-ratio: 16 / 9;
+  background: #000; */
 }
 
 .video-caption {
@@ -1441,7 +1441,7 @@ body {
 .decision-item {
   background: white;
   padding: 1.5rem;
-  border-radius: 8px;
+  /* border-radius: 8px; */
   border-left: 4px solid var(--burgundy);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }

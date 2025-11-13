@@ -12,6 +12,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="case-study-nav.css" />
     <style>
       /* Custom styles for insight card icons */
       .pain-point-icon {
@@ -87,7 +88,6 @@
         </button>
 
         <!-- ========== HERO SECTION ========== -->
-        <!-- <div class="hero-image"> -->
         <div
           style="width: 100%; border-bottom: 2px solid var(--light-gray)"
           class="case-study__header"
@@ -96,8 +96,7 @@
           <p class="case-study__subtitle">
             An interactive data visualization exploring global coffee
             production, trade networks, consumption patterns, and quality
-            metrics to reveal the economic and cultural dynamics of the world's
-            coffee industry.
+            metrics.
           </p>
 
           <div class="case-study__meta">
@@ -123,7 +122,7 @@
                 </svg>
                 <span class="meta-label">Timeline</span>
               </div>
-              <span class="meta-value">4 Weeks (Academic Project)</span>
+              <span class="meta-value">4 Weeks</span>
             </div>
             <div class="meta-item">
               <div>
@@ -164,29 +163,8 @@
                 </svg>
                 Tech Stack:</strong
               >
-              <span style="font-weight: 300; color: #333">
-                D3.js, HTML5, CSS3, JavaScript
-              </span>
-            </div>
-            <div style="display: flex; flex-direction: column">
-              <strong style="color: #3a1c1e">
-                <svg
-                  width="18"
-                  height="18"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M12 2C10.1435 2 8.36301 2.7375 7.05025 4.05025C5.7375 5.36301 5 7.14348 5 9C5 11.38 6.19 13.47 8 14.74V17C8 17.2652 8.10536 17.5196 8.29289 17.7071C8.48043 17.8946 8.73478 18 9 18H15C15.2652 18 15.5196 17.8946 15.7071 17.7071C15.8946 17.5196 16 17.2652 16 17V14.74C17.81 13.47 19 11.38 19 9C19 7.14348 18.2625 5.36301 16.9497 4.05025C15.637 2.7375 13.8565 2 12 2ZM9 21C9 21.2652 9.10536 21.5196 9.29289 21.7071C9.48043 21.8946 9.73478 22 10 22H14C14.2652 22 14.5196 21.8946 14.7071 21.7071C14.8946 21.5196 15 21.2652 15 21V20H9V21Z"
-                    fill="#3A1C1E"
-                  />
-                </svg>
-                Methods:</strong
-              >
               <span style="font-weight: 300; color: #333"
-                >Network Analysis, Geospatial Mapping, Temporal Visualization,
-                Exploratory Data Analysis</span
+                >D3.js, HTML5, CSS3, JavaScript</span
               >
             </div>
           </div>
@@ -218,7 +196,8 @@
             </a>
           </div>
         </div>
-        <!-- Multi-Frame Carousel for Mobile Mockups -->
+
+        <!-- Multi-Frame Carousel -->
         <div class="frame-carousel">
           <div class="carousel-wrapper">
             <div class="carousel-strip">
@@ -229,7 +208,6 @@
                   class="phone-screen"
                 />
               </div>
-
               <div class="frame-item desktop">
                 <img
                   src="assets/coffee/trade.png"
@@ -240,21 +218,21 @@
               <div class="frame-item desktop">
                 <img
                   src="assets/coffee/coffee-prod.png"
-                  alt="Screen 2"
+                  alt="Screen 3"
                   class="phone-screen"
                 />
               </div>
               <div class="frame-item desktop">
                 <img
                   src="assets/coffee/coffee-cons.png"
-                  alt="Screen 2"
+                  alt="Screen 4"
                   class="phone-screen"
                 />
               </div>
               <div class="frame-item desktop">
                 <img
                   src="assets/coffee/coffee-qual.png"
-                  alt="Screen 2"
+                  alt="Screen 5"
                   class="phone-screen"
                 />
               </div>
@@ -281,17 +259,8 @@
 
           <div class="carousel-indicators"></div>
         </div>
-        <!-- <div class="gif-wrapper" style="width: 40%">
-            <img
-              style="width: 100%; border-radius: 12px; padding: 1.5rem"
-              src="assets/coffee/coffee-main.png"
-              alt="Coffee visualization dashboard showing global trade networks"
-            />
-          </div> -->
-        <!-- </div> -->
 
-        <!-- ========== PROJECT OVERVIEW ========== -->
-
+        <!-- ========== OVERVIEW ========== -->
         <div class="case-study__section highlight-section">
           <h3 style="margin-bottom: 0.5rem" class="case-study__section-title">
             Overview
@@ -299,10 +268,10 @@
 
           <p class="case-study__text">
             An interactive web-based dashboard synthesizing five datasets
-            covering 94 countries and 60+ years of coffee history. Users can
-            explore global trade networks, track production trends, compare
-            consumption patterns, and analyze quality metrics through network
-            graphs, choropleth maps, temporal charts, and word clouds.
+            covering 94 countries and 60+ years of coffee history. Users explore
+            global trade networks, production trends, consumption patterns, and
+            quality metrics through network graphs, choropleth maps, temporal
+            charts, and word clouds.
           </p>
 
           <div class="stats-container">
@@ -310,17 +279,14 @@
               <div class="stat-number">94</div>
               <div class="stat-label">Countries Analyzed</div>
             </div>
-
             <div class="stat-box">
               <div class="stat-number">60+</div>
               <div class="stat-label">Years of Data</div>
             </div>
-
             <div class="stat-box highlight">
               <div class="stat-number">5</div>
               <div class="stat-label">Visualization Types</div>
             </div>
-
             <div class="stat-box">
               <div class="stat-number">4</div>
               <div class="stat-label">Major Sections</div>
@@ -328,7 +294,7 @@
           </div>
         </div>
 
-        <!-- ========== PROBLEM SPACE ========== -->
+        <!-- ========== PROBLEM ========== -->
         <div class="case-study__section">
           <div class="case-study__section-title-wrapper">
             <svg class="section-icon" viewBox="0 0 24 24">
@@ -336,42 +302,41 @@
                 d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"
               />
             </svg>
-            <h3 class="case-study__section-title">The Challenge</h3>
+            <h3 class="case-study__section-title">Problem</h3>
           </div>
 
           <p class="case-study__text">
             Coffee industry data exists in siloed datasets that are difficult to
             synthesize. Understanding trade flows, production trends, and
             quality patterns requires integrating disconnected sources and
-            making complex relationships accessible to diverse audiences.
+            making complex relationships accessible.
           </p>
 
           <div class="pain-points-grid">
             <div class="pain-point-card">
               <div class="pain-point-number">01</div>
-              <h5 class="pain-point-title">Data Fragmentation</h5>
+              <h5 class="pain-point-title">Fragmented Data</h5>
               <p class="pain-point-description">
-                Coffee data spans FAO statistics, production reports, consumer
-                surveys, and product reviews across different formats and
-                structures.
+                Data spans FAO statistics, production reports, consumer surveys,
+                and reviews across different formats.
               </p>
             </div>
 
             <div class="pain-point-card">
               <div class="pain-point-number">02</div>
-              <h5 class="pain-point-title">Complex Relationships</h5>
+              <h5 class="pain-point-title">Hidden Relationships</h5>
               <p class="pain-point-description">
-                Traditional tables and static charts fail to reveal network
-                structures and trade flow dynamics between nations.
+                Static charts fail to reveal network structures and trade flow
+                dynamics between nations.
               </p>
             </div>
 
             <div class="pain-point-card">
               <div class="pain-point-number">03</div>
-              <h5 class="pain-point-title">Temporal Patterns Hidden</h5>
+              <h5 class="pain-point-title">Temporal Complexity</h5>
               <p class="pain-point-description">
-                Coffee production evolves over decades. Static snapshots miss
-                historical context and long-term trends.
+                Production evolves over decades. Static snapshots miss
+                historical context and trends.
               </p>
             </div>
           </div>
@@ -382,59 +347,99 @@
               <strong
                 >How might we create an interactive system that reveals the
                 global coffee story across production, trade, consumption, and
-                quality while remaining accessible to diverse audiences?</strong
+                quality?</strong
               >
             </p>
           </div>
         </div>
 
-        <!-- ========== DATA & METHODOLOGY ========== -->
+        <!-- ========== DESIGN ========== -->
         <div class="case-study__section">
           <div class="case-study__section-title-wrapper">
             <svg class="section-icon" viewBox="0 0 24 24">
               <path
-                d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"
+                d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9c.83 0 1.5-.67 1.5-1.5 0-.39-.15-.74-.39-1.01-.23-.26-.38-.61-.38-.99 0-.83.67-1.5 1.5-1.5H16c2.76 0 5-2.24 5-5 0-4.42-4.03-8-9-8zm-5.5 9c-.83 0-1.5-.67-1.5-1.5S5.67 9 6.5 9 8 9.67 8 10.5 7.33 12 6.5 12zm3-4C8.67 8 8 7.33 8 6.5S8.67 5 9.5 5s1.5.67 1.5 1.5S10.33 8 9.5 8zm5 0c-.83 0-1.5-.67-1.5-1.5S13.67 5 14.5 5s1.5.67 1.5 1.5S15.33 8 14.5 8zm3 4c-.83 0-1.5-.67-1.5-1.5S16.67 9 17.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"
               />
             </svg>
-            <h3 class="case-study__section-title">Data Sources</h3>
+            <h3 class="case-study__section-title">Design Solution</h3>
           </div>
-
+          <div class="case-study__video-section">
+            <div class="video-container">
+              <video
+                class="case-study__video"
+                controls
+                preload="metadata"
+                poster="assets/coffee/coffee-hero.png"
+              >
+                <source src="assets/coffee/Coffe.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            <p class="video-caption">
+              Interactive demonstration of the visualization features
+            </p>
+          </div>
+          <h4 class="case-study__subsection-title">Data Integration</h4>
           <p class="case-study__text">
-            We integrated five complementary datasets to build a comprehensive
-            view of the global coffee industry:
+            We integrated five datasets: consumption & spending data (Cafely
+            Research), production & trade statistics for 94 countries (Kaggle),
+            temporal consumption trends 2000-2023, product reviews with ratings
+            and prices, and bilateral trade flows (FAO FAOSTAT).
           </p>
 
-          <div class="comparison-table">
-            <div class="comparison-row">
-              <div class="comparison-item">
-                <strong>Consumption & Spending</strong><br />
-                Daily/yearly consumption per capita, lifetime spending, price
-                per cup (Cafely Research)
-              </div>
-              <div class="comparison-item">
-                <strong>Production & Trade (1960-2023)</strong><br />
-                Production volumes, stocks for 94 countries (Kaggle)
-              </div>
+          <h4 class="case-study__subsection-title">Visualization Strategy</h4>
+          <p class="case-study__text">
+            Each section uses visualization types matched to data
+            characteristics:
+          </p>
+
+          <div class="decision-container">
+            <div class="decision-item">
+              <div class="decision-title">Trade Networks</div>
+              <p class="decision-text">
+                Force-directed graph shows trading relationships with draggable
+                nodes sized by volume. Toggle to map view for geographic
+                context. Color-coded by net importer/exporter status.
+              </p>
             </div>
-            <div class="comparison-row">
-              <div class="comparison-item">
-                <strong>Temporal Consumption</strong><br />
-                Time-series consumption data 2000-2023 (Kaggle)
-              </div>
-              <div class="comparison-item">
-                <strong>Product Reviews</strong><br />
-                Ratings, prices, roast types, text reviews (Kaggle)
-              </div>
+
+            <div class="decision-item">
+              <div class="decision-title">Production</div>
+              <p class="decision-text">
+                Interactive dashboard with choropleth map, bar charts with
+                boxplots showing historical distribution, and temporal line
+                charts. Year slider enables time-series exploration.
+              </p>
             </div>
-            <div class="comparison-row">
-              <div class="comparison-item">
-                <strong>Trade Flows</strong><br />
-                Bilateral trade data with source-destination pairs (FAO FAOSTAT)
-              </div>
+
+            <div class="decision-item">
+              <div class="decision-title">Consumption</div>
+              <p class="decision-text">
+                Radar chart for type preferences over time, pictorial unit
+                charts for intuitive price/volume comparisons, and lollipop
+                chart for lifetime spending rankings.
+              </p>
+            </div>
+
+            <div class="decision-item">
+              <div class="decision-title">Quality</div>
+              <p class="decision-text">
+                Bubble chart encoding price, rating, and review count. Word
+                cloud reveals flavor descriptors by roast type. Choropleth shows
+                regional preferences.
+              </p>
             </div>
           </div>
 
-          <div
+          <h4 class="case-study__subsection-title">Implementation</h4>
+          <p class="case-study__text">
+            Built with D3.js for custom interactions and flexibility. Modular
+            architecture ensures consistency. Responsive SVG scaling maintains
+            readability. Performance optimized through debouncing and
+            requestAnimationFrame for smooth animations with large datasets.
+          </p>
+
+          <!-- <div
             style="
               margin-top: 2rem;
               padding: 1.5rem;
@@ -442,690 +447,90 @@
               border-radius: 8px;
             "
           >
-            <h4 style="margin-bottom: 1rem; color: #3a1c1e">References</h4>
-            <ol style="line-height: 1.8; color: #333; padding-left: 1.5rem">
-              <li style="margin-bottom: 0.5rem">
-                Cafely, "A life of Coffee". Available at:
-                <a
-                  href="https://cafely.com/blogs/research/which-country-consumes-the-most-coffee"
-                  target="_blank"
-                  style="color: #8b4513; text-decoration: underline"
-                >
-                  https://cafely.com/blogs/research/which-country-consumes-the-most-coffee
-                </a>
+            <h4 style="margin-bottom: 1rem; color: #3a1c1e">Key Features</h4>
+            <ul style="line-height: 1.8; color: #333">
+              <li>Dual-view network visualization (abstract ↔ geographic)</li>
+              <li>
+                Synchronized multi-panel dashboards with temporal controls
               </li>
-              <li style="margin-bottom: 0.5rem">
-                P. Rupani, "Coffee Distribution Across 94 Counties", Kaggle.
-                Available at:
-                <a
-                  href="https://www.kaggle.com/datasets/parasrupani/coffee-distribution-across-94-counties"
-                  target="_blank"
-                  style="color: #8b4513; text-decoration: underline"
-                >
-                  https://www.kaggle.com/datasets/parasrupani/coffee-distribution-across-94-counties
-                </a>
-              </li>
-              <li style="margin-bottom: 0.5rem">
-                W. Ali, "Worldwide Coffee Habits Dataset". Available at:
-                <a
-                  href="https://www.kaggle.com/datasets/waqi786/worldwide-coffee-habits-dataset"
-                  target="_blank"
-                  style="color: #8b4513; text-decoration: underline"
-                >
-                  https://www.kaggle.com/datasets/waqi786/worldwide-coffee-habits-dataset
-                </a>
-              </li>
-              <li style="margin-bottom: 0.5rem">
-                Schmoyote, "Coffee Reviews Dataset". Available at:
-                <a
-                  href="https://www.kaggle.com/datasets/schmoyote/coffee-reviews-dataset"
-                  target="_blank"
-                  style="color: #8b4513; text-decoration: underline"
-                >
-                  https://www.kaggle.com/datasets/schmoyote/coffee-reviews-dataset
-                </a>
-              </li>
-            </ol>
-          </div>
+              <li>Interactive filtering and country-specific drill-downs</li>
+              <li>Smooth animated transitions between states</li>
+              <li>Hover tooltips with detailed statistics</li>
+            </ul>
+          </div> -->
         </div>
 
-        <!-- ========== DESIGN PROCESS ========== -->
-        <div class="case-study__section">
-          <div class="case-study__section-title-wrapper">
-            <svg
-              class="section-icon"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9c.83 0 1.5-.67 1.5-1.5 0-.39-.15-.74-.39-1.01-.23-.26-.38-.61-.38-.99 0-.83.67-1.5 1.5-1.5H16c2.76 0 5-2.24 5-5 0-4.42-4.03-8-9-8zm-5.5 9c-.83 0-1.5-.67-1.5-1.5S5.67 9 6.5 9 8 9.67 8 10.5 7.33 12 6.5 12zm3-4C8.67 8 8 7.33 8 6.5S8.67 5 9.5 5s1.5.67 1.5 1.5S10.33 8 9.5 8zm5 0c-.83 0-1.5-.67-1.5-1.5S13.67 5 14.5 5s1.5.67 1.5 1.5S15.33 8 14.5 8zm3 4c-.83 0-1.5-.67-1.5-1.5S16.67 9 17.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"
-              />
-            </svg>
-            <h3 class="case-study__section-title">Design Decisions</h3>
-          </div>
-
-          <p class="case-study__text">
-            Our approach matched visualization types to data characteristics,
-            ensuring each chart type revealed specific patterns effectively.
-          </p>
-
-          <div class="decision-container">
-            <div class="decision-item">
-              <div class="decision-title">
-                Trade Networks → Force-Directed Graph + Map
-              </div>
-              <p class="decision-text">
-                Node-link diagrams naturally represent trading relationships.
-                The dual view allows toggling between relationship-focused and
-                location-focused perspectives.
-              </p>
-            </div>
-
-            <div class="decision-item">
-              <div class="decision-title">
-                Production → Interactive Dashboard
-              </div>
-              <p class="decision-text">
-                Choropleth map + bar charts + line graphs enable spatial
-                comparison and temporal analysis through a year slider.
-              </p>
-            </div>
-
-            <div class="decision-item">
-              <div class="decision-title">Consumption → Multi-Chart Layout</div>
-              <p class="decision-text">
-                Radar chart for type preferences, pictorial charts for intuitive
-                comparisons, lollipop chart to reduce visual weight.
-              </p>
-            </div>
-
-            <div class="decision-item">
-              <div class="decision-title">
-                Quality → Bubble Chart + Word Cloud
-              </div>
-              <p class="decision-text">
-                Bubble charts show three variables (price, rating, reviews).
-                Word clouds reveal flavor descriptor frequency patterns.
-              </p>
-            </div>
-          </div>
-
-          <h4 class="case-study__subsection-title">Implementation</h4>
-          <p class="case-study__text">
-            Built with D3.js for flexibility and control over custom
-            interactions. Modular architecture ensures consistency across
-            sections. Responsive SVG scaling maintains readability across
-            devices. Performance optimized through debouncing and
-            requestAnimationFrame for smooth animations with large datasets.
-          </p>
-        </div>
-
-        <!-- ========== FINAL VISUALIZATIONS ========== -->
-        <div class="case-study__section">
-          <div class="case-study__section-title-wrapper">
-            <svg class="section-icon" viewBox="0 0 24 24">
-              <path
-                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
-              />
-            </svg>
-            <h3 class="case-study__section-title">
-              Final Visualization System
-            </h3>
-          </div>
-
-          <p class="case-study__text">
-            The completed system comprises four interconnected sections, each
-            revealing a different facet of the global coffee story. Users
-            navigate via a persistent top menu, maintaining context as they
-            explore.
-          </p>
-
-          <h4 class="case-study__subsection-title">
-            1. Global Coffee Trade Network
-          </h4>
-
-          <div class="feature-cards">
-            <article class="feature-card">
-              <header class="feature-card__header">
-                <svg class="feature-card__icon" viewBox="0 0 24 24">
-                  <path
-                    d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
-                  />
-                </svg>
-                <h5 class="feature-card__title">
-                  Dual-View Network Visualization
-                </h5>
-              </header>
-              <div class="feature-card__body">
-                <p class="feature-card__label">Implementation</p>
-                <p class="feature-card__text">
-                  An interactive force-directed graph displays countries as
-                  nodes (sized by trade volume) with edges representing
-                  bilateral coffee flows. Pressing "T" or toggling a switch
-                  transitions nodes to their geographic positions on a world
-                  map, preserving the network structure while adding spatial
-                  context.
-                </p>
-                <p class="feature-card__label">Key Features</p>
-                <p class="feature-card__text">
-                  • Draggable nodes with physics simulation<br />
-                  • Color coding: green for net importers, yellow for net
-                  exporters<br />
-                  • Hover tooltips show import/export volumes and trade
-                  percentages<br />
-                  • Smooth animated transitions between abstract and geographic
-                  layouts
-                </p>
-              </div>
-            </article>
-
-            <article class="feature-card">
-              <header class="feature-card__header">
-                <svg class="feature-card__icon" viewBox="0 0 24 24">
-                  <path
-                    d="M12 2l-5.5 9h11L12 2zm0 3.84L13.93 9h-3.87L12 5.84z"
-                  />
-                </svg>
-                <h5 class="feature-card__title">Insights Revealed</h5>
-              </header>
-              <div class="feature-card__body">
-                <p class="feature-card__text">
-                  Users immediately identify major hubs: Brazil as the dominant
-                  exporter, the US and EU as large importers. The network
-                  structure reveals regional trade patterns (e.g., African
-                  producers shipping to European markets) that tables would
-                  obscure.
-                </p>
-                <p class="feature-card__result">
-                  The dual view allows both relationship-focused analysis (Who
-                  trades with whom?) and geographic analysis (Where does coffee
-                  flow geographically?)
-                </p>
-              </div>
-            </article>
-          </div>
-
-          <!-- <figure class="case-study__figure">
-            <img
-              src="assets/coffee/trade-network.png"
-              class="case-study__image"
-              alt="Force-directed graph showing global coffee trade relationships"
-            />
-            <figcaption>
-              Force-directed network graph transitioning to geographic map view
-            </figcaption>
-          </figure> -->
-
-          <h4 class="case-study__subsection-title">
-            2. Coffee Production Dashboard
-          </h4>
-
-          <p class="case-study__text">
-            A three-panel dashboard synthesizes production data across time and
-            space. The interface allows users to select metrics (production,
-            beginning stocks, ending stocks) and years (1960-2023) via dropdown
-            and slider controls.
-          </p>
-
-          <div class="feature-cards">
-            <article class="feature-card">
-              <header class="feature-card__header">
-                <svg class="feature-card__icon" viewBox="0 0 24 24">
-                  <path
-                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
-                  />
-                </svg>
-                <h5 class="feature-card__title">Left Panel: Choropleth Map</h5>
-              </header>
-              <div class="feature-card__body">
-                <p class="feature-card__text">
-                  Countries are shaded by intensity (light to dark) based on
-                  selected metric values. Clicking a country zooms the map and
-                  displays detailed statistics (production, Arabica production,
-                  stocks) in a side panel. The color encoding uses a
-                  perceptually uniform scale to ensure accurate comparisons.
-                </p>
-              </div>
-            </article>
-
-            <article class="feature-card">
-              <header class="feature-card__header">
-                <svg class="feature-card__icon" viewBox="0 0 24 24">
-                  <path
-                    d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"
-                  />
-                </svg>
-                <h5 class="feature-card__title">
-                  Top Right: Bar Chart with Boxplots
-                </h5>
-              </header>
-              <div class="feature-card__body">
-                <p class="feature-card__text">
-                  Displays the top 10 countries for the selected metric and
-                  year. Each bar is overlaid with a boxplot showing the
-                  distribution of values across all years, revealing both
-                  current ranking and historical variability. Special
-                  annotations explain anomalies (e.g., Brazil's frost events in
-                  1976/1986).
-                </p>
-              </div>
-            </article>
-
-            <article class="feature-card">
-              <header class="feature-card__header">
-                <svg class="feature-card__icon" viewBox="0 0 24 24">
-                  <path
-                    d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"
-                  />
-                </svg>
-                <h5 class="feature-card__title">
-                  Bottom Right: Temporal Line Chart
-                </h5>
-              </header>
-              <div class="feature-card__body">
-                <p class="feature-card__text">
-                  Shows how the top 10 countries' values evolved over the full
-                  time range (1960-2023). Unlike the other panels, this chart
-                  remains static as users adjust the year slider, providing
-                  historical context for the current snapshot.
-                </p>
-              </div>
-            </article>
-          </div>
-
-          <!-- <figure class="case-study__figure">
-            <img
-              src="assets/coffee/production-dashboard.png"
-              class="case-study__image"
-              alt="Three-panel production dashboard with map, bar chart, and line chart"
-            />
-            <figcaption>
-              Production dashboard showing synchronized views of temporal and
-              spatial data
-            </figcaption>
-          </figure> -->
-
-          <h4 class="case-study__subsection-title">
-            3. Coffee Consumption Analysis
-          </h4>
-
-          <p class="case-study__text">
-            Four complementary visualizations examine consumption from different
-            angles: type preferences, pricing, volume, and spending patterns.
-          </p>
-
-          <div class="feature-cards">
-            <article class="feature-card">
-              <header class="feature-card__header">
-                <svg class="feature-card__icon" viewBox="0 0 24 24">
-                  <path
-                    d="M12 2l-5.5 9h11L12 2zm0 3.84L13.93 9h-3.87L12 5.84zM17.5 13c-2.49 0-4.5 2.01-4.5 4.5s2.01 4.5 4.5 4.5 4.5-2.01 4.5-4.5-2.01-4.5-4.5-4.5zm0 7c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
-                  />
-                </svg>
-                <h5 class="feature-card__title">
-                  Radar Chart: Coffee Type Preferences
-                </h5>
-              </header>
-              <div class="feature-card__body">
-                <p class="feature-card__text">
-                  A pentagon radar chart shows the relative consumption of five
-                  coffee types worldwide. Users scrub a year slider to see how
-                  preferences evolved (e.g., espresso growth, drip coffee
-                  decline). The circular format enables simultaneous comparison
-                  across all types.
-                </p>
-              </div>
-            </article>
-
-            <article class="feature-card">
-              <header class="feature-card__header">
-                <svg class="feature-card__icon" viewBox="0 0 24 24">
-                  <path
-                    d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"
-                  />
-                </svg>
-                <h5 class="feature-card__title">
-                  Pictorial Unit Charts: Price & Volume
-                </h5>
-              </header>
-              <div class="feature-card__body">
-                <p class="feature-card__text">
-                  Two pictorial unit charts use icons (dollar signs for price,
-                  coffee cups for volume) to represent quantities. Countries are
-                  ranked in descending order. The icon-based approach provides
-                  intuitive at-a-glance comparisons without requiring users to
-                  parse axis scales.
-                </p>
-              </div>
-            </article>
-
-            <article class="feature-card">
-              <header class="feature-card__header">
-                <svg class="feature-card__icon" viewBox="0 0 24 24">
-                  <path
-                    d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"
-                  />
-                </svg>
-                <h5 class="feature-card__title">
-                  Lollipop Chart: Lifetime Spending
-                </h5>
-              </header>
-              <div class="feature-card__body">
-                <p class="feature-card__text">
-                  Shows total lifetime coffee expenditure for the top 15
-                  countries. The lollipop design (dot + line) reduces visual
-                  clutter compared to bars, especially for large values. A
-                  toggle switches between ascending and descending order. Hover
-                  tooltips display exact spending amounts.
-                </p>
-              </div>
-            </article>
-          </div>
-
-          <!-- <figure class="case-study__figure">
-            <img
-              src="assets/coffee/consumption-charts.png"
-              class="case-study__image"
-              alt="Four-panel consumption section showing radar, pictorial, and lollipop charts"
-            />
-            <figcaption>
-              Consumption section using diverse chart types optimized for
-              different data stories
-            </figcaption>
-          </figure> -->
-
-          <h4 class="case-study__subsection-title">
-            4. Coffee Quality Analysis
-          </h4>
-
-          <p class="case-study__text">
-            The quality section synthesizes consumer reviews, ratings, and
-            product characteristics to reveal how coffee quality varies by
-            price, roast type, and origin.
-          </p>
-
-          <div class="feature-cards">
-            <article class="feature-card">
-              <header class="feature-card__header">
-                <svg class="feature-card__icon" viewBox="0 0 24 24">
-                  <path
-                    d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
-                  />
-                </svg>
-                <h5 class="feature-card__title">
-                  Bubble Chart: Rating vs. Price
-                </h5>
-              </header>
-              <div class="feature-card__body">
-                <p class="feature-card__text">
-                  Three-dimensional encoding: x-axis shows price (USD/100g),
-                  y-axis shows rating (0-100), bubble size indicates review
-                  count, and color represents roast type. Users filter by
-                  country to explore regional patterns. The chart reveals
-                  whether higher prices correlate with better ratings (they do,
-                  moderately).
-                </p>
-              </div>
-            </article>
-
-            <article class="feature-card">
-              <header class="feature-card__header">
-                <svg class="feature-card__icon" viewBox="0 0 24 24">
-                  <path
-                    d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 9H9V9h10v2zm-4 4H9v-2h6v2zm4-8H9V5h10v2z"
-                  />
-                </svg>
-                <h5 class="feature-card__title">
-                  Word Cloud: Flavor Descriptors
-                </h5>
-              </header>
-              <div class="feature-card__body">
-                <p class="feature-card__text">
-                  A dynamic word cloud visualizes the most common terms in
-                  consumer reviews (e.g., "smooth", "fruity", "chocolatey").
-                  Word size reflects frequency. Users filter by roast type or
-                  country to see how descriptors vary. Dark roasts emphasize
-                  "bold" and "bitter", light roasts highlight "bright" and
-                  "acidic".
-                </p>
-              </div>
-            </article>
-
-            <article class="feature-card">
-              <header class="feature-card__header">
-                <svg class="feature-card__icon" viewBox="0 0 24 24">
-                  <path
-                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
-                  />
-                </svg>
-                <h5 class="feature-card__title">
-                  Choropleth: Best Coffee by Country
-                </h5>
-              </header>
-              <div class="feature-card__body">
-                <p class="feature-card__text">
-                  A world map color-coded by dominant roast preference (light to
-                  dark shades). Clicking a country reveals its highest-rated
-                  coffee type and average quality metrics. This geographic view
-                  reveals cultural preferences: Scandinavians prefer light
-                  roasts, Southern Europeans favor dark roasts.
-                </p>
-              </div>
-            </article>
-          </div>
-          <!-- 
-          <figure class="case-study__figure">
-            <img
-              src="assets/coffee/quality-analysis.png"
-              class="case-study__image"
-              alt="Quality section with bubble chart, word cloud, and choropleth map"
-            />
-            <figcaption>
-              Quality analysis combining quantitative metrics with qualitative
-              text analysis
-            </figcaption>
-          </figure> -->
-        </div>
-
-        <!-- ========== TECHNICAL IMPLEMENTATION ========== -->
-        <div class="case-study__section">
-          <div class="case-study__section-title-wrapper">
-            <svg class="section-icon" viewBox="0 0 24 24">
-              <path
-                d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"
-              />
-            </svg>
-            <h3 class="case-study__section-title">Technical Highlights</h3>
-          </div>
-
-          <div class="comparison-table">
-            <div class="comparison-row">
-              <div class="comparison-item">
-                <strong>Force Layout Stability</strong><br />
-                Tuned D3's simulation parameters with velocity dampening and
-                bounded areas to prevent node jitter.
-              </div>
-              <div class="comparison-item">
-                <strong>Synchronized Animations</strong><br />
-                Coordinated transition timing for smooth network morphing
-                between abstract and geographic layouts.
-              </div>
-            </div>
-            <div class="comparison-row">
-              <div class="comparison-item">
-                <strong>Data Normalization</strong><br />
-                Built mapping dictionaries to resolve inconsistent country names
-                across datasets.
-              </div>
-              <div class="comparison-item">
-                <strong>Color Accessibility</strong><br />
-                Switched to perceptually uniform scales and added pattern fills
-                for colorblind users.
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- ========== INSIGHTS & IMPACT ========== -->
+        <!-- ========== CONCLUSION ========== -->
         <div class="case-study__section highlight-section">
           <div class="case-study__section-title-wrapper">
             <svg class="section-icon" viewBox="0 0 24 24">
               <path
-                d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"
+                d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"
+                fill="#3a1c1e"
               />
             </svg>
-            <h3 class="case-study__section-title">Key Insights Revealed</h3>
+            <h3 class="case-study__section-title">Impact & Insights</h3>
           </div>
 
           <p class="case-study__text">
-            The visualization surfaced several non-obvious patterns in the
-            global coffee industry:
+            The visualization revealed non-obvious patterns in the global coffee
+            industry:
           </p>
 
           <div class="pain-points-grid">
             <div class="pain-point-card">
-              <svg
-                class="pain-point-icon"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
+              <svg class="pain-point-icon" viewBox="0 0 24 24">
                 <path
                   d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
                 />
               </svg>
               <h5 class="pain-point-title">Brazil's Dominance</h5>
               <p class="pain-point-description">
-                Brazil produces ~35% of global coffee, more than the next three
-                countries combined. The temporal view reveals production
-                volatility due to frost events (1976, 1986) and drought cycles.
+                Produces ~35% of global coffee. Temporal view reveals volatility
+                from frost events and drought cycles.
               </p>
             </div>
 
             <div class="pain-point-card">
-              <svg
-                class="pain-point-icon"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
+              <svg class="pain-point-icon" viewBox="0 0 24 24">
                 <path
                   d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"
                 />
               </svg>
-              <h5 class="pain-point-title">Nordic Consumption Leadership</h5>
+              <h5 class="pain-point-title">Nordic Leadership</h5>
               <p class="pain-point-description">
-                Finland, Norway, and Iceland lead in per-capita consumption (12+
-                cups/day), despite producing zero coffee domestically. They're
-                pure importers with strong coffee culture.
+                Finland, Norway, Iceland lead in per-capita consumption (12+
+                cups/day) despite producing zero coffee.
               </p>
             </div>
 
             <div class="pain-point-card">
-              <svg
-                class="pain-point-icon"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"
-                />
-              </svg>
-              <h5 class="pain-point-title">Price-Quality Correlation</h5>
-              <p class="pain-point-description">
-                The bubble chart reveals a moderate positive correlation (r≈0.5)
-                between price and ratings, but many affordable coffees receive
-                high ratings, suggesting quality doesn't always require premium
-                pricing.
-              </p>
-            </div>
-
-            <div class="pain-point-card">
-              <svg
-                class="pain-point-icon"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1.41 17L4 12.41 5.41 11l5.18 5.17L19.59 7 21 8.41 10.59 19z"
-                />
-              </svg>
-              <h5 class="pain-point-title">Trade Network Clusters</h5>
-              <p class="pain-point-description">
-                The network visualization shows distinct regional clusters:
-                Latin American producers shipping to North America, African
-                producers to Europe, Asian producers to Pacific markets.
-              </p>
-            </div>
-
-            <div class="pain-point-card">
-              <svg
-                class="pain-point-icon"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
+              <svg class="pain-point-icon" viewBox="0 0 24 24">
                 <path
                   d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"
                 />
               </svg>
-              <h5 class="pain-point-title">Espresso's Rise</h5>
+              <h5 class="pain-point-title">Trade Clusters</h5>
               <p class="pain-point-description">
-                The radar chart temporal analysis shows espresso consumption
-                grew 40% from 2000-2023, while drip coffee declined 15%,
-                reflecting global taste shifts toward specialty coffee culture.
-              </p>
-            </div>
-
-            <div class="pain-point-card">
-              <svg
-                class="pain-point-icon"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
-                />
-              </svg>
-              <h5 class="pain-point-title">Roast Preferences by Region</h5>
-              <p class="pain-point-description">
-                The quality map reveals clear geographic patterns: light roasts
-                dominate Scandinavia and East Asia, medium roasts in North
-                America, dark roasts in Southern Europe and Latin America.
+                Network shows distinct regional patterns: Latin America → North
+                America, Africa → Europe, Asia → Pacific.
               </p>
             </div>
           </div>
 
-          <div class="quote-block">
-            <p>
-              "The trade network visualization makes it immediately obvious how
-              interconnected the coffee supply chain is. You can literally see
-              coffee flowing from the tropics to wealthy nations in the
-              temperate zones."
-            </p>
-            <cite>— Project Reviewer Feedback</cite>
-          </div>
-        </div>
-
-        <!-- ========== LEARNINGS & REFLECTIONS ========== -->
-        <div class="case-study__section">
-          <div class="case-study__section-title-wrapper">
-            <svg class="section-icon" viewBox="0 0 24 24">
-              <path
-                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"
-              />
-            </svg>
-            <h3 class="case-study__section-title">Learnings</h3>
-          </div>
+          <h4 class="case-study__subsection-title">Key Learnings</h4>
 
           <div class="lesson-card">
-            <h4>✓ Match Visualization to Data Story</h4>
+            <h4>✓ Visualization Diversity</h4>
             <p>
-              Different patterns require different charts. Diversifying from
-              maps-only to include networks, bars, and word clouds made each
-              section clearer.
+              Matching chart types to data characteristics (networks for
+              relationships, maps for geography, timelines for trends) made each
+              section clearer than a one-size-fits-all approach.
             </p>
           </div>
 
           <div class="lesson-card">
-            <h4>✓ Interactivity Enables Discovery</h4>
+            <h4>✓ Interactive Discovery</h4>
             <p>
               Sliders and filters transformed static analysis into active
               exploration, letting users discover patterns we didn't explicitly
@@ -1134,112 +539,13 @@
           </div>
 
           <div class="lesson-card">
-            <h4>⚠ D3.js Learning Curve</h4>
+            <h4>⚠ D3.js Trade-offs</h4>
             <p>
-              D3's flexibility comes with complexity. We spent significant time
-              debugging transitions. For simpler projects, higher-level
+              D3's flexibility enabled custom interactions but required
+              significant debugging time. For simpler projects, higher-level
               libraries might be more efficient.
             </p>
           </div>
-
-          <h4 class="case-study__subsection-title">What I'd Do Differently</h4>
-
-          <div class="would-do-differently">
-            <div class="differently-item">
-              <strong>Add User Testing Earlier</strong>
-              <p>
-                Built the entire system before user feedback. Early testing
-                would have caught the excessive node bouncing in the force graph
-                sooner.
-              </p>
-            </div>
-
-            <div class="differently-item">
-              <strong>Mobile-First Design</strong>
-              <p>
-                Designed for desktop first. Touch interactions (dragging,
-                tooltips) don't translate well. Mobile-first would have
-                influenced core decisions.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <!-- ========== FUTURE WORK ========== -->
-        <div class="case-study__section">
-          <div class="case-study__section-title-wrapper">
-            <svg class="section-icon" viewBox="0 0 24 24">
-              <path
-                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"
-              />
-            </svg>
-            <h3 class="case-study__section-title">Future Enhancements</h3>
-          </div>
-
-          <div class="future-work-grid">
-            <div class="future-category">
-              <h5>Additional Data</h5>
-              <ul>
-                <li>Climate impact metrics</li>
-                <li>Fair trade percentages</li>
-                <li>Sustainability indicators</li>
-              </ul>
-            </div>
-
-            <div class="future-category">
-              <h5>Enhanced Interactions</h5>
-              <ul>
-                <li>Animated timeline playback</li>
-                <li>Side-by-side comparison mode</li>
-                <li>Brushing & linking across charts</li>
-              </ul>
-            </div>
-
-            <div class="future-category">
-              <h5>Technical Improvements</h5>
-              <ul>
-                <li>WebGL for better performance</li>
-                <li>Full accessibility audit</li>
-                <li>Real-time API integration</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <!-- ========== CONCLUSION ========== -->
-        <div class="case-study__section">
-          <h3 class="case-study__section-title">Conclusion</h3>
-
-          <p class="case-study__text">
-            This project demonstrates how thoughtful visualization design
-            transforms sprawling datasets into coherent narratives. By matching
-            chart types to data characteristics, network graphs for
-            relationships, choropleth maps for geography, temporal charts for
-            trends, we created an engaging tool that reveals the global coffee
-            story.
-          </p>
-
-          <p class="case-study__text">
-            <strong>Key Takeaways:</strong>
-          </p>
-
-          <ul class="case-study__list">
-            <li>
-              <strong>Visualization diversity enhances understanding:</strong>
-              Combining networks, maps, bars, lines, and word clouds provides
-              complementary perspectives.
-            </li>
-            <li>
-              <strong>Interactivity empowers exploration:</strong> Sliders,
-              filters, and transitions let users discover patterns aligned with
-              their interests.
-            </li>
-            <li>
-              <strong>D3.js enables custom solutions:</strong> Despite its
-              learning curve, D3's flexibility supports interactions impossible
-              in pre-built libraries.
-            </li>
-          </ul>
         </div>
       </div>
     </div>
