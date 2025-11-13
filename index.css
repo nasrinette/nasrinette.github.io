@@ -276,13 +276,21 @@ body {
 }
 
 /* ===== NAVIGATION ===== */
+
 .nav {
   position: fixed;
   top: 0;
   width: 100%;
   z-index: 1000;
-  padding: 2rem 4rem;
-  mix-blend-mode: difference;
+  padding: 1.2rem 4rem;
+  background-color: transparent;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Scrolled state - cream background */
+.nav--scrolled {
+  background-color: var(--burgundy);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .nav__container {
@@ -299,12 +307,48 @@ body {
   text-decoration: none;
   letter-spacing: -1px;
   z-index: 1001;
+  transition: color 0.3s ease;
 }
 
 .nav__links {
   display: flex;
   list-style: none;
   gap: 3rem;
+  color: var(--cream);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: color 0.3s ease, opacity var(--transition-fast);
+}
+
+/* When scrolled - burgundy text */
+.nav--scrolled .nav__logo {
+  color: var(--cream);
+}
+
+.nav--scrolled .nav__link {
+  color: var(--cream);
+}
+
+.nav--scrolled .nav__link:hover {
+  opacity: 0.7;
+}
+
+/* Mobile toggle bars - update transitions */
+.nav__toggle-bar {
+  display: block;
+  width: 25px;
+  height: 2px;
+  background: var(--cream);
+  margin: 5px 0;
+  transition: all var(--transition-fast), background 0.3s ease;
+}
+
+/* When scrolled - burgundy toggle bars */
+.nav--scrolled .nav__toggle-bar {
+  background: var(--burgundy);
 }
 
 .nav__link {
@@ -2027,9 +2071,12 @@ body {
 @media (max-width: 968px) {
   .nav {
     padding: 1.5rem 2rem;
-    mix-blend-mode: normal;
     background: var(--burgundy);
   }
+
+  /* .nav--scrolled { */
+  /* background: var(--cream); */
+  /* } */
 
   .nav__toggle {
     display: block;

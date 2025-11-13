@@ -586,6 +586,26 @@
             });
             this.setupSmoothScroll();
             this.setupLogoClick();
+            this.handleScroll(); // ← ADD THIS LINE
+            window.addEventListener("scroll", () => this.handleScroll()); // ← ADD THIS LINE
+          },
+          handleScroll() {
+            const nav = document.querySelector(".nav");
+            const heroSection = document.getElementById("home");
+
+            if (!heroSection || !nav) return;
+
+            // Get the height of the hero section
+            const heroHeight = heroSection.offsetHeight;
+            const scrollPosition = window.scrollY;
+
+            // Add scrolled class when scrolled past hero section
+            if (scrollPosition > heroHeight - 100) {
+              // 100px buffer before end of hero
+              nav.classList.add("nav--scrolled");
+            } else {
+              nav.classList.remove("nav--scrolled");
+            }
           },
 
           setupLogoClick() {
