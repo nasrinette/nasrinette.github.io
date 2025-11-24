@@ -348,7 +348,7 @@ body {
 
 /* When scrolled - burgundy toggle bars */
 .nav--scrolled .nav__toggle-bar {
-  background: var(--burgundy);
+  background: var(--cream);
 }
 
 .nav__link {
