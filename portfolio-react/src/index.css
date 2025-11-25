@@ -1,0 +1,212 @@
+@import "tailwindcss";
+
+@theme {
+  --color-burgundy: #3a1c1e;
+  --color-brown: #754946;
+  --color-cream: #f5f5f0;
+  --color-gray: #999;
+  --color-dark-gray: #333;
+  --color-light-gray: #e8e8e8;
+  
+  --font-display: "Playfair Display", serif;
+  --font-body: "Inter", sans-serif;
+}
+
+/* Custom scrollbar */
+html {
+  scroll-behavior: smooth;
+  scrollbar-gutter: stable;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-cream);
+  color: var(--color-dark-gray);
+  overflow-x: hidden;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* Reveal animation */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 1s ease;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Custom cursor */
+.cursor {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--color-burgundy);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  transition: transform 0.1s ease;
+  z-index: 10000;
+  mix-blend-mode: difference;
+}
+
+/* Progress bar animation */
+.language-progress-bar {
+  height: 100%;
+  background: var(--color-cream);
+  border-radius: 3px;
+  width: 0;
+  transition: width 1s ease-out;
+}
+
+.language-progress-bar.active {
+  width: var(--progress-width);
+}
+
+/* Slider styles */
+.slider-container {
+  position: relative;
+  width: 100%;
+  height: 600px;
+  overflow: hidden;
+  background: transparent;
+}
+
+.slider-track {
+  display: flex;
+  height: 100%;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+
+.slider-slide {
+  min-width: 100%;
+  max-width: 100%;
+  height: 100%;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  overflow: hidden;
+}
+
+.slider-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+  padding: 0;
+}
+
+/* Frame carousel */
+.frame-carousel {
+  width: 100vw;
+  max-width: none;
+  margin-inline: calc(50% - 50vw);
+  padding-block: 60px;
+  overflow: visible;
+  position: relative;
+}
+
+.carousel-wrapper {
+  overflow: visible;
+  padding: 0;
+}
+
+.carousel-strip {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+  padding-inline: clamp(48px, 6vw, 80px);
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+
+.frame-item {
+  min-width: 280px;
+  max-width: 280px;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.frame-item:hover {
+  z-index: 5;
+}
+
+.frame-item:hover .phone-screen {
+  opacity: 1;
+  transform: scale(1.08) translateY(-10px);
+}
+
+.phone-screen {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+  transform-origin: center center;
+}
+
+/* Case study nav */
+.case-study-nav {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  background: rgba(58, 28, 30, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 50px;
+  z-index: 100;
+  max-width: 90vw;
+  overflow-x: auto;
+}
+
+.case-study-nav__item {
+  padding: 0.5rem 1rem;
+  background: transparent;
+  border: none;
+  color: var(--color-cream);
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 25px;
+  white-space: nowrap;
+  transition: all 0.3s ease;
+}
+
+.case-study-nav__item:hover {
+  background: rgba(245, 245, 240, 0.15);
+}
+
+.case-study-nav__item.active {
+  background: var(--color-cream);
+  color: var(--color-burgundy);
+}
+
+@media (max-width: 768px) {
+  .slider-container {
+    height: 400px;
+  }
+  
+  .frame-item {
+    min-width: 220px;
+    max-width: 220px;
+  }
+}
+
+@media (max-width: 480px) {
+  .slider-container {
+    height: 300px;
+  }
+  
+  .frame-item {
+    min-width: 200px;
+    max-width: 200px;
+  }
+}
