@@ -19,7 +19,7 @@ const navSections = [
   { id: 'problem', title: 'Problem' },
   { id: 'research', title: 'Research' },
   { id: 'design', title: 'Design' },
-  { id: 'results', title: 'Results' },
+  { id: 'testing', title: 'Testing' },
   { id: 'conclusion', title: 'Conclusion' },
 ];
 
@@ -314,7 +314,7 @@ export function InteractiveMenuCase() {
 
         {/* Testing & Results */}
         <Section
-          id="results"
+          id="testing"
           title="Testing & Results"
           icon={<path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z" />}
         >
