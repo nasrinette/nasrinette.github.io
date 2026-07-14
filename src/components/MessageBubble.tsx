@@ -1,4 +1,4 @@
-import type { ChatMessage, Project } from "../types";
+import type { ChatMessage, NavChip, Project } from "../types";
 import CatAvatar from "./CatAvatar";
 import RichText from "./RichText";
 import PromptChips from "./PromptChips";
@@ -10,6 +10,7 @@ interface MessageBubbleProps {
   onChipSelect: (label: string) => void;
   onRetry: (id: string) => void;
   onProjectLearnMore: (project: Project) => void;
+  onNavigate: (chip: NavChip) => void;
   inputDisabled: boolean;
 }
 
@@ -26,6 +27,7 @@ export default function MessageBubble({
   onChipSelect,
   onRetry,
   onProjectLearnMore,
+  onNavigate,
   inputDisabled,
 }: MessageBubbleProps) {
   const isUser = message.sender === "user";
@@ -80,6 +82,20 @@ export default function MessageBubble({
       {message.chips && message.chips.length > 0 && (
         <div className={isUser ? "mr-1" : "ml-10"}>
           <PromptChips chips={message.chips} onSelect={onChipSelect} disabled={inputDisabled} />
+        </div>
+      )}
+      {message.navChips && message.navChips.length > 0 && (
+        <div className={`flex flex-wrap gap-2 ${isUser ? "mr-1" : "ml-10"}`}>
+          {message.navChips.map((chip) => (
+            <button
+              key={chip.label}
+              type="button"
+              onClick={() => onNavigate(chip)}
+              className="rounded-full bg-[var(--color-gold-soft)]/60 px-3.5 py-1.5 text-xs font-semibold text-[var(--color-rose-dark)] shadow-sm transition hover:bg-[var(--color-gold-soft)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-rose-dark)]"
+            >
+              {chip.label}
+            </button>
+          ))}
         </div>
       )}
     </div>

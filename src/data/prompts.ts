@@ -14,6 +14,12 @@ export const starterPrompts: PromptDef[] = [
     keywords: ["project", "projects", "work", "portfolio", "case study", "case studies"],
   },
   {
+    id: "design-system",
+    label: "Show me your design system",
+    emoji: "🧩",
+    keywords: ["design system", "tokens", "components", "colors", "typography", "palette"],
+  },
+  {
     id: "process",
     label: "What's your design process?",
     emoji: "🧭",
@@ -42,8 +48,9 @@ export const starterPrompts: PromptDef[] = [
 export const followUpChips: Record<string, string[]> = {
   about: ["Show me your projects", "What's your design process?", "How can I reach you?"],
   projects: ["What's your design process?", "What tools do you use?", "How can I reach you?"],
+  "design-system": ["Show me your projects", "What tools do you use?"],
   process: ["Show me your projects", "What tools do you use?"],
-  skills: ["Show me your projects", "What's your design process?"],
+  skills: ["Show me your projects", "Show me your design system"],
   contact: ["Tell me about yourself", "Show me your projects"],
   fun: ["Tell me about yourself", "Show me your projects"],
   fallback: ["Tell me about yourself", "Show me your projects", "How can I reach you?"],

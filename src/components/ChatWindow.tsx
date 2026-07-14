@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import type { ChatMessage, Project } from "../types";
+import type { ChatMessage, NavChip, Project } from "../types";
 import MessageBubble from "./MessageBubble";
 import TypingIndicator from "./TypingIndicator";
 
@@ -9,6 +9,7 @@ interface ChatWindowProps {
   onChipSelect: (label: string) => void;
   onRetry: (id: string) => void;
   onProjectLearnMore: (project: Project) => void;
+  onNavigate: (chip: NavChip) => void;
   inputDisabled: boolean;
 }
 
@@ -20,6 +21,7 @@ export default function ChatWindow({
   onChipSelect,
   onRetry,
   onProjectLearnMore,
+  onNavigate,
   inputDisabled,
 }: ChatWindowProps) {
   const scrollRef = useRef<HTMLDivElement | null>(null);
@@ -85,6 +87,7 @@ export default function ChatWindow({
               onChipSelect={onChipSelect}
               onRetry={onRetry}
               onProjectLearnMore={onProjectLearnMore}
+              onNavigate={onNavigate}
               inputDisabled={inputDisabled}
             />
           ))}

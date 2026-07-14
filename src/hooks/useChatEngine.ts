@@ -4,6 +4,7 @@ import { matchIntent } from "../data/matchIntent";
 import {
   aboutResponse,
   contactResponse,
+  designSystemResponse,
   errorEasterEgg,
   fallbackResponse,
   funResponse,
@@ -83,6 +84,8 @@ function buildReply(userText: string, forceSuccess: boolean): { content: Respons
           return { content: processResponse(), failed: false };
         case "skills":
           return { content: skillsResponse(), failed: false };
+        case "design-system":
+          return { content: designSystemResponse(), failed: false };
         case "contact":
           return { content: contactResponse(), failed: false };
         case "fun":
@@ -139,6 +142,7 @@ export function useChatEngine() {
         status: failed ? "failed" : "sent",
         rich: content.rich,
         chips: content.chips,
+        navChips: content.navChips,
       };
       setMessages((prev) => [...prev, assistantMsg]);
       setIsTyping(false);
@@ -228,6 +232,7 @@ export function useChatEngine() {
             createdAt: Date.now(),
             status: "sent",
             chips: content.chips,
+            navChips: content.navChips,
           },
         ]);
         setIsTyping(false);

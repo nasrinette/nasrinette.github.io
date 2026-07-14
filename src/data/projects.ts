@@ -20,6 +20,37 @@ export const projects: Project[] = [
     gradient: ["#f6c9c9", "#f3b7a8"],
     emoji: "💌",
     link: "#case-study-nimbus-pay",
+    problem:
+      "New users abandoned setup before sending their first invoice. Exit surveys pointed at one thing: the product asked for tax details, bank info, and branding before ever showing the user something useful.",
+    goals: [
+      "Get a first-time user to a sendable invoice in under 3 minutes",
+      "Defer anything that isn't required for invoice #1",
+      "Make the invoice builder feel like a document, not a form",
+    ],
+    process: [
+      "Mapped the existing 14-step setup flow and tagged every field as required-now, required-eventually, or unnecessary",
+      "Ran 3 rounds of concept testing on a radically shorter flow with 8 freelancers",
+      "Prototyped a line-item builder that behaves like a spreadsheet but reads like an invoice",
+      "Paired with engineering weekly to validate what could actually ship incrementally",
+    ],
+    solution:
+      "We cut setup to 4 required fields and moved tax, banking, and branding into a 'finish your profile' prompt that appears after the first invoice is sent — when the user is motivated, not before. The invoice builder got autosave, smart line-item duplication, and inline math.",
+    results: [
+      { label: "Setup time", value: "9 min → 1m 40s" },
+      { label: "Onboarding drop-off", value: "38% → 11%" },
+      { label: "First-invoice completion", value: "+61%" },
+    ],
+    gallery: [
+      { caption: "Old 14-step setup wizard", gradient: ["#f3d9c4", "#f6c9c9"], emoji: "🧾" },
+      { caption: "New 4-field fast start", gradient: ["#f6c9c9", "#f3b7a8"], emoji: "⚡" },
+      { caption: "Invoice builder, line-item detail", gradient: ["#e6c9a0", "#f3d9c4"], emoji: "📐" },
+    ],
+    testimonial: {
+      quote:
+        "Elena turned our worst-performing screen into the reason people finish onboarding. She sat in on every usability session herself.",
+      author: "Priya Nathan",
+      role: "Head of Product, Nimbus Pay",
+    },
   },
   {
     id: "hearth-health",
@@ -40,6 +71,37 @@ export const projects: Project[] = [
     gradient: ["#e6c9a0", "#f3d9c4"],
     emoji: "🩺",
     link: "#case-study-hearth-health",
+    problem:
+      "Patients managing chronic conditions checked the portal weekly for three things — meds, appointments, care team messages — but the IA was organized by internal department, not by patient need. Support tickets for 'where do I find X' were the #1 contact reason.",
+    goals: [
+      "Reorganize IA around patient mental models, not org charts",
+      "Meet WCAG AA across the whole portal, not just new screens",
+      "Reduce 'where do I find X' support tickets by half",
+    ],
+    process: [
+      "Ran a 40-participant open card sort to find the patients' real mental model",
+      "Audited every existing screen for color contrast, tap target size, and screen-reader labeling",
+      "Built a new top-level IA around 'This week' instead of department silos",
+      "Validated with 12 moderated sessions across patients aged 24–71",
+    ],
+    solution:
+      "The portal now opens on a single 'This week' view — meds due, upcoming appointments, unread messages — with everything else one tap away. Every color pairing was rebuilt against a WCAG AA-checked token set, and the whole flow was tested with screen readers, not just automated scanners.",
+    results: [
+      { label: "Task success rate", value: "61% → 92%" },
+      { label: "Support tickets (navigation)", value: "−54%" },
+      { label: "Accessibility conformance", value: "WCAG AA" },
+    ],
+    gallery: [
+      { caption: "Old department-based navigation", gradient: ["#f3d9c4", "#e6c9a0"], emoji: "🗂️" },
+      { caption: "New 'This week' home view", gradient: ["#e6c9a0", "#f6c9c9"], emoji: "🏡" },
+      { caption: "Contrast-checked color tokens", gradient: ["#f6c9c9", "#e6c9a0"], emoji: "🎨" },
+    ],
+    testimonial: {
+      quote:
+        "She didn't just make it prettier — she made it legible to a 71-year-old on a bad day. That's the whole job, honestly.",
+      author: "Marcus Webb",
+      role: "VP Product, Hearth Health",
+    },
   },
   {
     id: "atlas-devkit",
@@ -60,6 +122,37 @@ export const projects: Project[] = [
     gradient: ["#f3c9c9", "#e6c9a0"],
     emoji: "🧩",
     link: "#case-study-atlas-devkit",
+    problem:
+      "Every product team had forked the shared component library because it didn't match their needs and nobody trusted it to stay stable. Design and code had drifted so far apart that engineers stopped opening Figma at all.",
+    goals: [
+      "Get design tokens and code tokens onto a single source of truth",
+      "Win back trust from teams that had already forked the library",
+      "Cut UI-related engineering tickets caused by inconsistent components",
+    ],
+    process: [
+      "Audited every forked variant across 6 product teams to find real, not assumed, requirements",
+      "Rebuilt the token architecture around Figma Variables mapped 1:1 to code tokens",
+      "Paired weekly with a rotating engineer from each team through the whole rebuild",
+      "Shipped incrementally, component by component, instead of a big-bang relaunch",
+    ],
+    solution:
+      "Atlas became a token-first system: every color, space, and radius lives as a variable, synced automatically from Figma into the codebase via a small pipeline. Components shipped with usage docs, code snippets, and a named engineering owner from day one — so trust was built into the rollout, not bolted on after.",
+    results: [
+      { label: "Team adoption", value: "20% → 85%" },
+      { label: "UI-related eng tickets", value: "−30%" },
+      { label: "Design-to-code drift", value: "Near zero" },
+    ],
+    gallery: [
+      { caption: "Token architecture map", gradient: ["#f3c9c9", "#e6c9a0"], emoji: "🗺️" },
+      { caption: "Figma → code sync pipeline", gradient: ["#e6c9a0", "#f3d9c4"], emoji: "🔄" },
+      { caption: "Component doc template", gradient: ["#f6c9c9", "#f3c9c9"], emoji: "📘" },
+    ],
+    testimonial: {
+      quote:
+        "First design system I've worked with where engineering was a co-author, not a downstream recipient. That's why it actually stuck.",
+      author: "Dana Ferreira",
+      role: "Staff Engineer, Platform Team",
+    },
   },
   {
     id: "porch-light",
@@ -80,5 +173,36 @@ export const projects: Project[] = [
     gradient: ["#fbe2df", "#c48a95"],
     emoji: "🏠",
     link: "#case-study-porch-light",
+    problem:
+      "Volunteer organizers were coordinating mutual aid through a Facebook group — posts got buried, there was no way to see what was already handled, and older neighbors without Facebook accounts were locked out entirely.",
+    goals: [
+      "Let anyone post or answer a help request with zero account required",
+      "Make it obvious at a glance what's still open vs. already handled",
+      "Design for low-bandwidth connections and older, low-spec phones",
+    ],
+    process: [
+      "Shadowed two organizers for a week to see how requests actually got matched",
+      "Sketched flows on paper with organizers before opening Figma, to stay implementation-agnostic",
+      "Built a low-fidelity Framer prototype and tested it with neighbors aged 19 to 84",
+      "Stripped every non-essential asset to keep the app usable on 3G",
+    ],
+    solution:
+      "Porch Light needs no account for a first-time help request — just a name and what's needed. Open requests are visually distinct from claimed ones, and the whole UI was budgeted to load under 200KB for neighbors on old Android phones and spotty connections.",
+    results: [
+      { label: "Neighborhoods onboarded", value: "6 in season 1" },
+      { label: "Account-free requests", value: "100% supported" },
+      { label: "Page weight", value: "< 200KB" },
+    ],
+    gallery: [
+      { caption: "Paper sketches with organizers", gradient: ["#fbe2df", "#f3c9c9"], emoji: "✏️" },
+      { caption: "Open vs. claimed request states", gradient: ["#f3c9c9", "#c48a95"], emoji: "🤝" },
+      { caption: "Low-bandwidth UI budget", gradient: ["#fbe2df", "#e6c9a0"], emoji: "📶" },
+    ],
+    testimonial: {
+      quote:
+        "Elena asked to shadow us before she opened a design tool. That one decision is why the app actually fits how we work.",
+      author: "Renée Okafor",
+      role: "Volunteer Organizer, Porch Light Network",
+    },
   },
 ];

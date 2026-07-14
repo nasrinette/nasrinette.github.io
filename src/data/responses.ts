@@ -1,12 +1,13 @@
 import { profile, catName } from "./profile";
 import { projects } from "./projects";
 import { followUpChips } from "./prompts";
-import type { RichContent } from "../types";
+import type { NavChip, RichContent } from "../types";
 
 export interface ResponseContent {
   text: string;
   rich?: RichContent;
   chips?: string[];
+  navChips?: NavChip[];
 }
 
 function bulletList(items: string[]): string {
@@ -17,10 +18,11 @@ export function aboutResponse(): ResponseContent {
   return {
     text: [
       `**${profile.name}** here — ${profile.role}, based in ${profile.location}.`,
-      profile.bio.join("\n\n"),
+      profile.bio.slice(0, 3).join("\n\n"),
       `**Focus areas:**\n\n${bulletList(profile.focusAreas)}`,
     ].join("\n\n"),
     chips: followUpChips.about,
+    navChips: [{ label: "View full profile →", view: "profile" }],
   };
 }
 
@@ -35,6 +37,7 @@ export function projectsResponse(): ResponseContent {
     text: `Here are a few things ${profile.name.split(" ")[0]} has shipped. Tap a card for the full story, or ask me about any of them by name.`,
     rich: { kind: "projects" },
     chips: followUpChips.projects,
+    navChips: [{ label: "Browse all case studies →", view: "projects" }],
   };
 }
 
@@ -55,6 +58,7 @@ export function projectDetailResponse(id: string): ResponseContent {
       `**Tools:** ${project.tools.join(", ")}`,
     ].join("\n\n"),
     chips: ["Show me your projects", "What's your design process?", "How can I reach you?"],
+    navChips: [{ label: "Open full case study →", view: "projects", projectId: project.id }],
   };
 }
 
@@ -75,6 +79,18 @@ export function skillsResponse(): ResponseContent {
       `${profile.yearsExperience} years in product design, mostly ${profile.focusAreas.slice(0, 2).join(" and ")}.`,
     ].join("\n\n"),
     chips: followUpChips.skills,
+    navChips: [{ label: "View full profile →", view: "profile" }],
+  };
+}
+
+export function designSystemResponse(): ResponseContent {
+  return {
+    text: [
+      `This whole chat is built on a small design system: warm rose-gold color tokens, a rounded type scale, and a handful of reusable components (bubbles, chips, cards).`,
+      `Open the full tab to see the color palette, type scale, spacing, and the design principles behind it.`,
+    ].join("\n\n"),
+    chips: followUpChips["design-system"],
+    navChips: [{ label: "Open design system →", view: "design-system" }],
   };
 }
 
