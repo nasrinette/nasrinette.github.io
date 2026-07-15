@@ -29,7 +29,7 @@ export function aboutResponse(): ResponseContent {
 export function projectsResponse(): ResponseContent {
   if (projects.length === 0) {
     return {
-      text: "Hmm, my project cabinet is empty right now 📭 — check back soon, or ask me something else!",
+      text: "My project cabinet is empty right now — check back soon, or ask me something else.",
       chips: followUpChips.fallback,
     };
   }
@@ -45,14 +45,14 @@ export function projectDetailResponse(id: string): ResponseContent {
   const project = projects.find((p) => p.id === id);
   if (!project) {
     return {
-      text: `I couldn't dig up a project called "${id}" 🐾 — here's everything I do have:`,
+      text: `I couldn't dig up a project called "${id}" — here's everything I do have:`,
       rich: { kind: "projects" },
       chips: followUpChips.projects,
     };
   }
   return {
     text: [
-      `${project.emoji} **${project.title}** — ${project.role}, ${project.year} (${project.duration})`,
+      `**${project.title}** — ${project.role}, ${project.year} (${project.duration})`,
       project.description,
       `**Highlights:**\n\n${bulletList(project.highlights)}`,
       `**Tools:** ${project.tools.join(", ")}`,
@@ -86,8 +86,8 @@ export function skillsResponse(): ResponseContent {
 export function designSystemResponse(): ResponseContent {
   return {
     text: [
-      `This whole chat is built on a small design system: warm rose-gold color tokens, a rounded type scale, and a handful of reusable components (bubbles, chips, cards).`,
-      `Open the full tab to see the color palette, type scale, spacing, and the design principles behind it.`,
+      `This whole interface is built on a small design system: a deep rose-gold color palette, a tight type scale, and a handful of reusable components — bubbles, chips, cards — each defined for both light and dark.`,
+      `Open the full tab to see the color tokens, type scale, spacing, and the principles behind them.`,
     ].join("\n\n"),
     chips: followUpChips["design-system"],
     navChips: [{ label: "Open design system →", view: "design-system" }],
@@ -96,7 +96,7 @@ export function designSystemResponse(): ResponseContent {
 
 export function contactResponse(): ResponseContent {
   return {
-    text: `${profile.availability}. Best way to reach ${profile.name.split(" ")[0]} is below 👇`,
+    text: `${profile.availability}. Best way to reach ${profile.name.split(" ")[0]} is below.`,
     rich: { kind: "contact" },
     chips: followUpChips.contact,
   };
@@ -105,21 +105,21 @@ export function contactResponse(): ResponseContent {
 export function funResponse(): ResponseContent {
   const fact = profile.funFacts[Math.floor(Math.random() * profile.funFacts.length)];
   return {
-    text: `🐾 ${fact}\n\n(also, I'm named ${catName} — nice to meet you.)`,
+    text: `${fact}\n\n(also, I'm named ${catName} — nice to meet you.)`,
     chips: followUpChips.fun,
   };
 }
 
 export function greetingResponse(): ResponseContent {
   return {
-    text: `Hello! I'm ${catName}, ${profile.name.split(" ")[0]}'s portfolio assistant 🐱 Ask me anything, or tap a suggestion below.`,
+    text: `Hello! I'm ${catName}, ${profile.name.split(" ")[0]}'s portfolio assistant. Ask me anything, or tap a suggestion below.`,
     chips: followUpChips.fallback,
   };
 }
 
 export function thanksResponse(): ResponseContent {
   return {
-    text: "You're welcome! *purrs* Anything else you'd like to know?",
+    text: "You're welcome. Anything else you'd like to know?",
     chips: followUpChips.fallback,
   };
 }
@@ -133,7 +133,7 @@ export function identityResponse(): ResponseContent {
 
 export function meowResponse(): ResponseContent {
   return {
-    text: "Meow! 🐾",
+    text: "Meow.",
     chips: followUpChips.fallback,
   };
 }
@@ -146,7 +146,7 @@ export function fallbackResponse(): ResponseContent {
   ];
   const opener = openers[Math.floor(Math.random() * openers.length)];
   return {
-    text: `${opener} 🐾 Try one of these instead:`,
+    text: `${opener} Try one of these instead:`,
     chips: followUpChips.fallback,
   };
 }

@@ -1,3 +1,20 @@
+import {
+  BookOpen,
+  FolderTree,
+  Handshake,
+  Home,
+  ListChecks,
+  Map,
+  Palette,
+  PenTool,
+  Puzzle,
+  Receipt,
+  RefreshCw,
+  Rows3,
+  Stethoscope,
+  Wifi,
+  Zap,
+} from "lucide-react";
 import type { Project } from "../types";
 
 export const projects: Project[] = [
@@ -17,8 +34,8 @@ export const projects: Project[] = [
       "Shipped a reusable invoice-line component now used in 4 other flows",
       "Ran 12 moderated usability sessions across 3 rounds",
     ],
-    gradient: ["#f6c9c9", "#f3b7a8"],
-    emoji: "💌",
+    gradient: ["#b98a9a", "#8f5d74"],
+    icon: Receipt,
     link: "#case-study-nimbus-pay",
     problem:
       "New users abandoned setup before sending their first invoice. Exit surveys pointed at one thing: the product asked for tax details, bank info, and branding before ever showing the user something useful.",
@@ -41,9 +58,9 @@ export const projects: Project[] = [
       { label: "First-invoice completion", value: "+61%" },
     ],
     gallery: [
-      { caption: "Old 14-step setup wizard", gradient: ["#f3d9c4", "#f6c9c9"], emoji: "🧾" },
-      { caption: "New 4-field fast start", gradient: ["#f6c9c9", "#f3b7a8"], emoji: "⚡" },
-      { caption: "Invoice builder, line-item detail", gradient: ["#e6c9a0", "#f3d9c4"], emoji: "📐" },
+      { caption: "Old 14-step setup wizard", gradient: ["#c9ab9a", "#b98a9a"], icon: ListChecks },
+      { caption: "New 4-field fast start", gradient: ["#b98a9a", "#8f5d74"], icon: Zap },
+      { caption: "Invoice builder, line-item detail", gradient: ["#a97d8f", "#8f5d74"], icon: Rows3 },
     ],
     testimonial: {
       quote:
@@ -68,8 +85,8 @@ export const projects: Project[] = [
       "Hit WCAG AA across the entire portal, including color contrast overhaul",
       "Patient-reported task success rose from 61% to 92%",
     ],
-    gradient: ["#e6c9a0", "#f3d9c4"],
-    emoji: "🩺",
+    gradient: ["#c9ab77", "#a9793f"],
+    icon: Stethoscope,
     link: "#case-study-hearth-health",
     problem:
       "Patients managing chronic conditions checked the portal weekly for three things — meds, appointments, care team messages — but the IA was organized by internal department, not by patient need. Support tickets for 'where do I find X' were the #1 contact reason.",
@@ -92,9 +109,9 @@ export const projects: Project[] = [
       { label: "Accessibility conformance", value: "WCAG AA" },
     ],
     gallery: [
-      { caption: "Old department-based navigation", gradient: ["#f3d9c4", "#e6c9a0"], emoji: "🗂️" },
-      { caption: "New 'This week' home view", gradient: ["#e6c9a0", "#f6c9c9"], emoji: "🏡" },
-      { caption: "Contrast-checked color tokens", gradient: ["#f6c9c9", "#e6c9a0"], emoji: "🎨" },
+      { caption: "Old department-based navigation", gradient: ["#d9c19a", "#c9ab77"], icon: FolderTree },
+      { caption: "New 'This week' home view", gradient: ["#c9ab77", "#a9793f"], icon: Home },
+      { caption: "Contrast-checked color tokens", gradient: ["#b8935b", "#a9793f"], icon: Palette },
     ],
     testimonial: {
       quote:
@@ -119,8 +136,8 @@ export const projects: Project[] = [
       "Reduced UI-related engineering tickets by ~30%",
       "Built a token pipeline syncing Figma variables to code",
     ],
-    gradient: ["#f3c9c9", "#e6c9a0"],
-    emoji: "🧩",
+    gradient: ["#a68f85", "#6f5a52"],
+    icon: Puzzle,
     link: "#case-study-atlas-devkit",
     problem:
       "Every product team had forked the shared component library because it didn't match their needs and nobody trusted it to stay stable. Design and code had drifted so far apart that engineers stopped opening Figma at all.",
@@ -143,9 +160,9 @@ export const projects: Project[] = [
       { label: "Design-to-code drift", value: "Near zero" },
     ],
     gallery: [
-      { caption: "Token architecture map", gradient: ["#f3c9c9", "#e6c9a0"], emoji: "🗺️" },
-      { caption: "Figma → code sync pipeline", gradient: ["#e6c9a0", "#f3d9c4"], emoji: "🔄" },
-      { caption: "Component doc template", gradient: ["#f6c9c9", "#f3c9c9"], emoji: "📘" },
+      { caption: "Token architecture map", gradient: ["#b8a89d", "#a68f85"], icon: Map },
+      { caption: "Figma → code sync pipeline", gradient: ["#a68f85", "#6f5a52"], icon: RefreshCw },
+      { caption: "Component doc template", gradient: ["#9c8a80", "#6f5a52"], icon: BookOpen },
     ],
     testimonial: {
       quote:
@@ -170,8 +187,8 @@ export const projects: Project[] = [
       "Designed entirely around low-bandwidth, older-device users",
       "No accounts required for first-time help requests",
     ],
-    gradient: ["#fbe2df", "#c48a95"],
-    emoji: "🏠",
+    gradient: ["#c17d63", "#a9636f"],
+    icon: Home,
     link: "#case-study-porch-light",
     problem:
       "Volunteer organizers were coordinating mutual aid through a Facebook group — posts got buried, there was no way to see what was already handled, and older neighbors without Facebook accounts were locked out entirely.",
@@ -194,9 +211,9 @@ export const projects: Project[] = [
       { label: "Page weight", value: "< 200KB" },
     ],
     gallery: [
-      { caption: "Paper sketches with organizers", gradient: ["#fbe2df", "#f3c9c9"], emoji: "✏️" },
-      { caption: "Open vs. claimed request states", gradient: ["#f3c9c9", "#c48a95"], emoji: "🤝" },
-      { caption: "Low-bandwidth UI budget", gradient: ["#fbe2df", "#e6c9a0"], emoji: "📶" },
+      { caption: "Paper sketches with organizers", gradient: ["#d19a85", "#c17d63"], icon: PenTool },
+      { caption: "Open vs. claimed request states", gradient: ["#c17d63", "#a9636f"], icon: Handshake },
+      { caption: "Low-bandwidth UI budget", gradient: ["#c98a7a", "#a9636f"], icon: Wifi },
     ],
     testimonial: {
       quote:

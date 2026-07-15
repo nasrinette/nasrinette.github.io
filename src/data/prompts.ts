@@ -4,43 +4,36 @@ export const starterPrompts: PromptDef[] = [
   {
     id: "about",
     label: "Tell me about yourself",
-    emoji: "👋",
     keywords: ["about", "who are you", "yourself", "intro", "background", "bio"],
   },
   {
     id: "projects",
     label: "Show me your projects",
-    emoji: "🎨",
     keywords: ["project", "projects", "work", "portfolio", "case study", "case studies"],
   },
   {
     id: "design-system",
     label: "Show me your design system",
-    emoji: "🧩",
     keywords: ["design system", "tokens", "components", "colors", "typography", "palette"],
   },
   {
     id: "process",
     label: "What's your design process?",
-    emoji: "🧭",
     keywords: ["process", "how do you work", "workflow", "methodology", "approach"],
   },
   {
     id: "skills",
     label: "What tools do you use?",
-    emoji: "🛠️",
     keywords: ["tools", "skills", "software", "stack", "figma"],
   },
   {
     id: "contact",
     label: "How can I reach you?",
-    emoji: "📩",
     keywords: ["contact", "reach", "email", "hire", "available", "availability", "resume", "cv"],
   },
   {
     id: "fun",
     label: "Tell me something fun about you",
-    emoji: "🐾",
     keywords: ["fun", "funny", "hobby", "hobbies", "cat", "latte", "random"],
   },
 ];

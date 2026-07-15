@@ -25,7 +25,7 @@ export default function ProfileView() {
 
       <section className="mb-10 grid grid-cols-2 gap-3 sm:grid-cols-4">
         {profile.stats.map((stat) => (
-          <div key={stat.label} className="rounded-xl border border-[var(--color-blush-deep)]/60 bg-white/80 p-4 text-center">
+          <div key={stat.label} className="rounded-lg border border-[var(--color-blush-deep)]/60 bg-[var(--color-cream-soft)] p-4 text-center">
             <p className="font-[var(--font-display)] text-lg font-bold text-[var(--color-rose-dark)]">{stat.value}</p>
             <p className="mt-1 text-[11px] leading-snug text-[var(--color-ink-soft)]">{stat.label}</p>
           </div>
@@ -44,12 +44,12 @@ export default function ProfileView() {
         <h2 className="mb-3 font-[var(--font-display)] text-lg font-bold text-[var(--color-ink)]">Experience</h2>
         <div className="space-y-4">
           {profile.experience.map((job) => (
-            <div key={`${job.company}-${job.period}`} className="rounded-xl border border-[var(--color-blush-deep)]/60 bg-white/80 p-4">
+            <div key={`${job.company}-${job.period}`} className="rounded-lg border border-[var(--color-blush-deep)]/60 bg-[var(--color-cream-soft)] p-4">
               <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
                 <p className="text-sm font-bold text-[var(--color-ink)]">
                   {job.role} <span className="font-normal text-[var(--color-ink-soft)]">· {job.company}</span>
                 </p>
-                <p className="text-xs text-[var(--color-ink-soft)]">{job.period}</p>
+                <p className="font-[var(--font-mono)] text-xs text-[var(--color-ink-soft)]">{job.period}</p>
               </div>
               <p className="mt-1 text-xs text-[var(--color-ink-soft)]">{job.summary}</p>
               <ul className="mt-2 list-disc space-y-1 pl-5 text-xs leading-relaxed text-[var(--color-ink-soft)] marker:text-[var(--color-rose)]">
@@ -67,9 +67,9 @@ export default function ProfileView() {
           <h2 className="mb-3 font-[var(--font-display)] text-lg font-bold text-[var(--color-ink)]">Education</h2>
           <div className="space-y-3">
             {profile.education.map((ed) => (
-              <div key={ed.school} className="rounded-xl border border-[var(--color-blush-deep)]/60 bg-white/80 p-4">
+              <div key={ed.school} className="rounded-lg border border-[var(--color-blush-deep)]/60 bg-[var(--color-cream-soft)] p-4">
                 <p className="text-sm font-bold text-[var(--color-ink)]">{ed.credential}</p>
-                <p className="text-xs text-[var(--color-ink-soft)]">
+                <p className="font-[var(--font-mono)] text-xs text-[var(--color-ink-soft)]">
                   {ed.school} · {ed.period}
                 </p>
               </div>
@@ -104,7 +104,7 @@ export default function ProfileView() {
         </h2>
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
           {profile.testimonials.map((t) => (
-            <div key={t.author} className="rounded-xl border border-[var(--color-blush-deep)]/60 bg-[var(--color-paw)]/50 p-4">
+            <div key={t.author} className="rounded-lg border border-[var(--color-blush-deep)]/60 bg-[var(--color-paw)]/50 p-4">
               <p className="text-xs italic leading-relaxed text-[var(--color-ink)]">"{t.quote}"</p>
               <p className="mt-2 text-xs font-semibold text-[var(--color-rose-dark)]">{t.author}</p>
               <p className="text-[11px] text-[var(--color-ink-soft)]">{t.role}</p>

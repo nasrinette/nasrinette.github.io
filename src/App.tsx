@@ -9,12 +9,14 @@ import CaseStudyView from "./components/CaseStudyView";
 import DesignSystemView from "./components/DesignSystemView";
 import ProfileView from "./components/ProfileView";
 import { useChatEngine } from "./hooks/useChatEngine";
+import { useTheme } from "./hooks/useTheme";
 import { projects } from "./data/projects";
 import type { AppView, NavChip, Project } from "./types";
 
 export default function App() {
   const { messages, isTyping, sendMessage, requestProjectDetail, retryMessage, clearChat } =
     useChatEngine();
+  const { mode: themeMode, setMode: setThemeMode } = useTheme();
 
   const [view, setView] = useState<AppView>("chat");
   const [caseStudyId, setCaseStudyId] = useState<string | null>(null);
@@ -78,6 +80,8 @@ export default function App() {
         onNavigate={handleSidebarNavigate}
         mobileOpen={mobileNavOpen}
         onCloseMobile={closeMobileNav}
+        themeMode={themeMode}
+        onThemeChange={setThemeMode}
       />
 
       <div className="flex min-w-0 flex-1 flex-col">

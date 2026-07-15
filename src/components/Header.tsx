@@ -1,3 +1,4 @@
+import { Menu, RotateCcw } from "lucide-react";
 import CatAvatar from "./CatAvatar";
 import { catName, profile } from "../data/profile";
 
@@ -8,24 +9,24 @@ interface HeaderProps {
 
 export default function Header({ onClear, onOpenMenu }: HeaderProps) {
   return (
-    <header className="flex items-center justify-between gap-3 border-b border-[var(--color-blush-deep)]/50 bg-white/50 px-3 py-3 backdrop-blur-sm sm:px-6">
+    <header className="flex items-center justify-between gap-3 border-b border-[var(--color-blush-deep)]/60 bg-[var(--color-cream-soft)]/70 px-3 py-3 backdrop-blur-sm sm:px-6">
       <div className="flex min-w-0 items-center gap-2">
         <button
           type="button"
           onClick={onOpenMenu}
           aria-label="Open menu"
-          className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-[var(--color-ink-soft)] hover:bg-[var(--color-blush)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-rose-dark)] md:hidden"
+          className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md text-[var(--color-ink-soft)] hover:bg-[var(--color-blush)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-rose-dark)] md:hidden"
         >
-          <span aria-hidden="true">☰</span>
+          <Menu size={18} strokeWidth={1.75} aria-hidden="true" />
         </button>
         <div className="flex min-w-0 items-center gap-3">
-          <CatAvatar size={38} />
+          <CatAvatar size={34} />
           <div className="min-w-0">
             <h1 className="truncate font-[var(--font-display)] text-sm font-bold text-[var(--color-ink)] sm:text-base">
-              {catName} · {profile.name}'s portfolio
+              {catName} <span className="text-[var(--color-ink-soft)]">· {profile.name}'s portfolio</span>
             </h1>
             <p className="flex items-center gap-1.5 truncate text-[11px] text-[var(--color-ink-soft)]">
-              <span className="inline-block h-1.5 w-1.5 rounded-full bg-emerald-400" aria-hidden="true" />
+              <span className="inline-block h-1.5 w-1.5 rounded-full bg-emerald-500" aria-hidden="true" />
               {profile.role}
             </p>
           </div>
@@ -34,10 +35,11 @@ export default function Header({ onClear, onOpenMenu }: HeaderProps) {
       <button
         type="button"
         onClick={onClear}
-        className="shrink-0 rounded-full border border-[var(--color-blush-deep)] px-3 py-1.5 text-xs font-medium text-[var(--color-ink-soft)] transition hover:bg-[var(--color-blush)] hover:text-[var(--color-rose-dark)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-rose-dark)]"
+        className="flex shrink-0 items-center gap-1.5 rounded-md border border-[var(--color-blush-deep)] px-3 py-1.5 text-xs font-medium text-[var(--color-ink-soft)] transition hover:border-[var(--color-rose)]/60 hover:bg-[var(--color-blush)] hover:text-[var(--color-rose-dark)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-rose-dark)]"
         aria-label="Clear conversation and start over"
       >
-        Restart chat
+        <RotateCcw size={13} strokeWidth={1.75} aria-hidden="true" />
+        <span className="hidden sm:inline">Restart chat</span>
       </button>
     </header>
   );

@@ -1,3 +1,5 @@
+import type { LucideIcon } from "lucide-react";
+
 export type Sender = "cat" | "user";
 
 export type MessageStatus = "sending" | "sent" | "failed";
@@ -38,7 +40,7 @@ export interface Metric {
 export interface GalleryBlock {
   caption: string;
   gradient: [string, string];
-  emoji: string;
+  icon: LucideIcon;
 }
 
 export interface Testimonial {
@@ -59,7 +61,7 @@ export interface Project {
   tools: string[];
   highlights: string[];
   gradient: [string, string];
-  emoji: string;
+  icon: LucideIcon;
   link?: string;
   problem: string;
   goals: string[];
@@ -73,7 +75,6 @@ export interface Project {
 export interface PromptDef {
   id: string;
   label: string;
-  emoji: string;
   keywords: string[];
 }
 

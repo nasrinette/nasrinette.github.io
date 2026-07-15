@@ -23,23 +23,25 @@ export default function ProjectsView({ onOpen }: { onOpen: (projectId: string) =
               key={project.id}
               type="button"
               onClick={() => onOpen(project.id)}
-              className="group flex flex-col overflow-hidden rounded-2xl border border-[var(--color-blush-deep)]/60 bg-white/80 text-left shadow-sm transition hover:-translate-y-0.5 hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-rose-dark)]"
+              className="group flex flex-col overflow-hidden rounded-lg border border-[var(--color-blush-deep)]/60 bg-[var(--color-cream-soft)] text-left transition hover:-translate-y-0.5 hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-rose-dark)]"
             >
               <div
-                className="flex h-32 items-center justify-center text-5xl"
+                className="flex h-32 items-center justify-center"
                 style={{
                   background: `linear-gradient(135deg, ${project.gradient[0]}, ${project.gradient[1]})`,
                 }}
                 aria-hidden="true"
               >
-                {project.emoji}
+                <project.icon size={36} strokeWidth={1.5} className="text-white/90" />
               </div>
               <div className="flex flex-1 flex-col gap-2 p-5">
                 <div className="flex items-start justify-between gap-2">
                   <h2 className="font-[var(--font-display)] text-base font-bold text-[var(--color-ink)]">
                     {project.title}
                   </h2>
-                  <span className="shrink-0 text-xs text-[var(--color-ink-soft)]">{project.year}</span>
+                  <span className="shrink-0 font-[var(--font-mono)] text-xs text-[var(--color-ink-soft)]">
+                    {project.year}
+                  </span>
                 </div>
                 <p className="text-sm leading-snug text-[var(--color-ink-soft)]">{project.summary}</p>
                 <div className="mt-auto flex flex-wrap gap-1.5 pt-2">

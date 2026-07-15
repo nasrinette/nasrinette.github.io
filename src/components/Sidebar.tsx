@@ -1,18 +1,20 @@
+import { Component, FolderKanban, MessageCircle, User, X } from "lucide-react";
 import CatAvatar from "./CatAvatar";
+import ThemeToggle from "./ThemeToggle";
 import { catName, profile } from "../data/profile";
+import type { ThemeMode } from "../hooks/useTheme";
 import type { AppView } from "../types";
 
 interface NavItem {
   id: AppView;
   label: string;
-  icon: string;
+  icon: typeof MessageCircle;
 }
 
 const NAV_ITEMS: NavItem[] = [
-  { id: "chat", label: "Chat", icon: "💬" },
-  { id: "projects", label: "Case Studies", icon: "🗂️" },
-  { id: "design-system", label: "Design System", icon: "🧩" },
-  { id: "profile", label: "Profile", icon: "🙋‍♀️" },
+  { id: "chat", label: "Chat", icon: MessageCircle },
+  { id: "projects", label: "Case Studies", icon: FolderKanban },
+  { id: "design-system", label: "Design System", icon: Component },
 ];
 
 interface SidebarProps {
@@ -20,13 +22,24 @@ interface SidebarProps {
   onNavigate: (view: AppView) => void;
   mobileOpen: boolean;
   onCloseMobile: () => void;
+  themeMode: ThemeMode;
+  onThemeChange: (mode: ThemeMode) => void;
 }
 
-function SidebarContent({ view, onNavigate }: { view: AppView; onNavigate: (v: AppView) => void }) {
+interface SidebarContentProps {
+  view: AppView;
+  onNavigate: (v: AppView) => void;
+  themeMode: ThemeMode;
+  onThemeChange: (mode: ThemeMode) => void;
+}
+
+function SidebarContent({ view, onNavigate, themeMode, onThemeChange }: SidebarContentProps) {
+  const profileActive = view === "profile";
+
   return (
     <>
       <div className="flex items-center gap-3 px-5 pb-5 pt-6">
-        <CatAvatar size={36} />
+        <CatAvatar size={30} />
         <div className="min-w-0">
           <p className="truncate font-[var(--font-display)] text-sm font-bold text-[var(--color-ink)]">
             {catName}
@@ -35,29 +48,52 @@ function SidebarContent({ view, onNavigate }: { view: AppView; onNavigate: (v: A
         </div>
       </div>
 
-      <nav className="flex-1 space-y-1 px-3" aria-label="Main">
+      <nav className="flex-1 space-y-0.5 px-3" aria-label="Main">
         {NAV_ITEMS.map((item) => {
           const active = view === item.id;
+          const Icon = item.icon;
           return (
             <button
               key={item.id}
               type="button"
               onClick={() => onNavigate(item.id)}
               aria-current={active ? "page" : undefined}
-              className={`flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm font-semibold transition ${
+              className={`flex w-full items-center gap-2.5 rounded-md px-3 py-2 text-left text-sm font-medium transition ${
                 active
-                  ? "bg-[var(--color-rose)] text-white shadow-sm"
+                  ? "bg-[var(--color-rose)] text-white"
                   : "text-[var(--color-ink-soft)] hover:bg-[var(--color-blush)] hover:text-[var(--color-rose-dark)]"
               }`}
             >
-              <span aria-hidden="true">{item.icon}</span>
+              <Icon size={16} strokeWidth={1.75} aria-hidden="true" />
               {item.label}
             </button>
           );
         })}
       </nav>
 
-      <div className="space-y-2 border-t border-[var(--color-blush-deep)]/50 px-5 py-4">
+      <div className="border-t border-[var(--color-blush-deep)]/60 px-3 pt-3">
+        <button
+          type="button"
+          onClick={() => onNavigate("profile")}
+          aria-current={profileActive ? "page" : undefined}
+          className={`flex w-full items-center gap-2.5 rounded-md px-3 py-2 text-left text-sm font-medium transition ${
+            profileActive
+              ? "bg-[var(--color-rose)] text-white"
+              : "text-[var(--color-ink-soft)] hover:bg-[var(--color-blush)] hover:text-[var(--color-rose-dark)]"
+          }`}
+        >
+          <User size={16} strokeWidth={1.75} aria-hidden="true" />
+          Profile
+        </button>
+      </div>
+
+      <div className="space-y-3 px-5 pb-4 pt-3">
+        <div className="flex items-center justify-between gap-2">
+          <span className="text-[11px] font-medium uppercase tracking-wide text-[var(--color-ink-soft)]">
+            Theme
+          </span>
+          <ThemeToggle mode={themeMode} onChange={onThemeChange} />
+        </div>
         <p className="text-[11px] leading-snug text-[var(--color-ink-soft)]">{profile.availability}</p>
         <a
           href={`mailto:${profile.contact.email}`}
@@ -70,11 +106,18 @@ function SidebarContent({ view, onNavigate }: { view: AppView; onNavigate: (v: A
   );
 }
 
-export default function Sidebar({ view, onNavigate, mobileOpen, onCloseMobile }: SidebarProps) {
+export default function Sidebar({
+  view,
+  onNavigate,
+  mobileOpen,
+  onCloseMobile,
+  themeMode,
+  onThemeChange,
+}: SidebarProps) {
   return (
     <>
-      <aside className="hidden w-64 shrink-0 flex-col border-r border-[var(--color-blush-deep)]/50 bg-white/50 backdrop-blur-sm md:flex">
-        <SidebarContent view={view} onNavigate={onNavigate} />
+      <aside className="hidden w-60 shrink-0 flex-col border-r border-[var(--color-blush-deep)]/60 bg-[var(--color-cream-soft)]/70 backdrop-blur-sm md:flex">
+        <SidebarContent view={view} onNavigate={onNavigate} themeMode={themeMode} onThemeChange={onThemeChange} />
       </aside>
 
       {mobileOpen && (
@@ -90,9 +133,9 @@ export default function Sidebar({ view, onNavigate, mobileOpen, onCloseMobile }:
               type="button"
               onClick={onCloseMobile}
               aria-label="Close menu"
-              className="absolute right-3 top-4 flex h-8 w-8 items-center justify-center rounded-full text-[var(--color-ink-soft)] hover:bg-[var(--color-blush)]"
+              className="absolute right-3 top-4 flex h-8 w-8 items-center justify-center rounded-md text-[var(--color-ink-soft)] hover:bg-[var(--color-blush)]"
             >
-              ✕
+              <X size={18} strokeWidth={1.75} aria-hidden="true" />
             </button>
             <SidebarContent
               view={view}
@@ -100,6 +143,8 @@ export default function Sidebar({ view, onNavigate, mobileOpen, onCloseMobile }:
                 onNavigate(v);
                 onCloseMobile();
               }}
+              themeMode={themeMode}
+              onThemeChange={onThemeChange}
             />
           </aside>
         </div>

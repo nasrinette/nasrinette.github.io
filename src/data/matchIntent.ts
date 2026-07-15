@@ -31,7 +31,6 @@ const IDENTITY = [
   "are you gpt",
   "what are you",
 ];
-
 export function matchIntent(rawInput: string): Intent {
   const input = normalize(rawInput);
   if (!input) return { type: "fallback" };

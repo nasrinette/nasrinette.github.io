@@ -1,4 +1,5 @@
 import { useRef, useState, type KeyboardEvent } from "react";
+import { ArrowUp } from "lucide-react";
 import { MAX_MESSAGE_LENGTH } from "../hooks/useChatEngine";
 
 interface ChatInputProps {
@@ -39,9 +40,9 @@ export default function ChatInput({ onSend, disabled }: ChatInputProps) {
   };
 
   return (
-    <div className="border-t border-[var(--color-blush-deep)]/50 bg-white/60 px-3 py-3 backdrop-blur-sm sm:px-5">
+    <div className="border-t border-[var(--color-blush-deep)]/60 bg-[var(--color-cream-soft)]/70 px-3 py-3 backdrop-blur-sm sm:px-5">
       <div className="mx-auto flex max-w-2xl items-end gap-2">
-        <div className="flex-1 rounded-2xl border border-[var(--color-blush-deep)] bg-white px-3.5 py-2.5 shadow-sm focus-within:border-[var(--color-rose)]">
+        <div className="flex-1 rounded-lg border border-[var(--color-blush-deep)] bg-[var(--color-cream-soft)] px-3.5 py-2.5 focus-within:border-[var(--color-rose)]">
           <textarea
             ref={textareaRef}
             value={value}
@@ -71,17 +72,9 @@ export default function ChatInput({ onSend, disabled }: ChatInputProps) {
           onClick={submit}
           disabled={disabled || isEmpty}
           aria-label="Send message"
-          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[var(--color-rose)] text-white shadow-sm transition hover:bg-[var(--color-rose-deep)] disabled:cursor-not-allowed disabled:bg-[var(--color-blush-deep)] disabled:text-white/70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-rose-dark)]"
+          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[var(--color-rose)] text-white transition hover:bg-[var(--color-rose-deep)] disabled:cursor-not-allowed disabled:bg-[var(--color-blush-deep)] disabled:text-white/70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-rose-dark)]"
         >
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path
-              d="M4 12L20 4L13 20L11 13L4 12Z"
-              fill="currentColor"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinejoin="round"
-            />
-          </svg>
+          <ArrowUp size={18} strokeWidth={2} aria-hidden="true" />
         </button>
       </div>
       <p className="mx-auto mt-2 max-w-2xl text-center text-[10px] text-[var(--color-ink-soft)]/60">
