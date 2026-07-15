@@ -76,7 +76,7 @@ export function skillsResponse(): ResponseContent {
   return {
     text: [
       `**Tools in daily rotation:**\n\n${bulletList(profile.tools)}`,
-      `${profile.yearsExperience} years in product design, mostly ${profile.focusAreas.slice(0, 2).join(" and ")}.`,
+      `Hands-on across the full design cycle — with a frontend background (React, Tailwind), so designs ship the way they were specced.`,
     ].join("\n\n"),
     chips: followUpChips.skills,
     navChips: [{ label: "View full profile →", view: "profile" }],

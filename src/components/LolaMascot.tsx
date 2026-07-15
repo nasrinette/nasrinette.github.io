@@ -8,7 +8,7 @@ interface LolaMascotProps {
 /**
  * Lola, drifting across her lily pond in the chat background.
  * The pond ignores pointer events, but Lola herself sits above the messages
- * so she can be petted — hover her and she stops to purr (Elena's cat, saying hi).
+ * so she can be petted — hover her and she stops to purr (Nazrin's cat, saying hi).
  */
 export default function LolaMascot({ className = "" }: LolaMascotProps) {
   const { start, stop } = useCatPurr();
@@ -38,7 +38,7 @@ export default function LolaMascot({ className = "" }: LolaMascotProps) {
             filter: "drop-shadow(0 6px 10px rgba(30, 45, 35, 0.18))",
             animationPlayState: petted ? "paused" : "running",
           }}
-          title="Pet me — I'm Lola, Elena's cat 🐾"
+          title="Pet me — I'm Lola, Nazrin's cat 🐾"
           onMouseEnter={onEnter}
           onMouseLeave={onLeave}
         >

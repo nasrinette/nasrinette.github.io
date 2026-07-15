@@ -1,5 +1,6 @@
 import { RotateCcw } from "lucide-react";
 import type { ChatMessage, NavChip, Project } from "../types";
+import BubbleCat, { PERCH_CLEARANCE, pickPerch } from "./BubbleCat";
 import CatAvatar from "./CatAvatar";
 import RichText from "./RichText";
 import PromptChips from "./PromptChips";
@@ -32,6 +33,8 @@ export default function MessageBubble({
   inputDisabled,
 }: MessageBubbleProps) {
   const isUser = message.sender === "user";
+  // Sometimes Lola climbs onto one of her own bubbles; stable per message.
+  const perch = !isUser && message.status !== "failed" ? pickPerch(message.id) : null;
 
   if (message.status === "failed") {
     return (
@@ -53,16 +56,21 @@ export default function MessageBubble({
   }
 
   return (
-    <div className={`flex animate-pop-in flex-col gap-1.5 ${isUser ? "items-end" : "items-start"}`}>
+    <div
+      className={`flex animate-pop-in flex-col gap-1.5 ${isUser ? "items-end" : "items-start"}`}
+      style={perch ? { marginTop: PERCH_CLEARANCE[perch] } : undefined}
+    >
       <div className={`flex min-w-0 max-w-[85%] items-end gap-2 sm:max-w-[75%] ${isUser ? "flex-row-reverse" : ""}`}>
-        {!isUser && <CatAvatar size={30} />}
+        {/* when Lola has climbed onto the bubble she leaves her avatar spot */}
+        {!isUser && (perch ? <div className="w-[30px] shrink-0" aria-hidden="true" /> : <CatAvatar size={30} />)}
         <div
           className={
             isUser
               ? "bubble-sunset min-w-0 px-4 py-2.5 text-sm"
-              : "min-w-0 rounded-[var(--radius-ui)] border border-[var(--color-blush-deep)]/60 bg-[var(--color-cream-soft)] px-4 py-2.5 text-sm text-[var(--color-ink)] shadow-sm"
+              : "relative min-w-0 rounded-[var(--radius-ui)] border border-[var(--color-blush-deep)]/60 bg-[var(--color-cream-soft)] px-4 py-2.5 text-sm text-[var(--color-ink)] shadow-sm"
           }
         >
+          {perch && <BubbleCat pose={perch} />}
           {message.text && <RichText text={message.text} />}
           {message.rich?.kind === "projects" && (
             <div className="mt-3">

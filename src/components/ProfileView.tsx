@@ -17,14 +17,12 @@ export default function ProfileView() {
         </div>
         <div>
           <p className="font-[var(--font-mono)] text-[11px] font-medium uppercase tracking-[0.2em] text-[var(--color-rose-dark)]">
-            Product designer
+            {profile.role}
           </p>
           <h1 className="mt-0.5 font-[var(--font-display)] text-2xl font-bold text-[var(--color-ink)] sm:text-3xl">
             {profile.name}
           </h1>
-          <p className="text-sm text-[var(--color-ink-soft)]">
-            {profile.role} · {profile.location}
-          </p>
+          <p className="text-sm text-[var(--color-ink-soft)]">{profile.location}</p>
           <p className="mt-1 text-sm italic text-[var(--color-rose-dark)]">{profile.tagline}</p>
         </div>
       </header>
@@ -104,20 +102,22 @@ export default function ProfileView() {
         </div>
       </section>
 
-      <section className="mb-10">
-        <h2 className="mb-3 font-[var(--font-display)] text-lg font-bold text-[var(--color-ink)]">
-          What people say
-        </h2>
-        <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
-          {profile.testimonials.map((t) => (
-            <div key={t.author} className="card-warm bg-[var(--color-paw)]/50 p-4">
-              <p className="text-xs italic leading-relaxed text-[var(--color-ink)]">"{t.quote}"</p>
-              <p className="mt-2 text-xs font-semibold text-[var(--color-rose-dark)]">{t.author}</p>
-              <p className="text-[11px] text-[var(--color-ink-soft)]">{t.role}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+      {profile.testimonials.length > 0 && (
+        <section className="mb-10">
+          <h2 className="mb-3 font-[var(--font-display)] text-lg font-bold text-[var(--color-ink)]">
+            What people say
+          </h2>
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+            {profile.testimonials.map((t) => (
+              <div key={t.author} className="card-warm bg-[var(--color-paw)]/50 p-4">
+                <p className="text-xs italic leading-relaxed text-[var(--color-ink)]">"{t.quote}"</p>
+                <p className="mt-2 text-xs font-semibold text-[var(--color-rose-dark)]">{t.author}</p>
+                <p className="text-[11px] text-[var(--color-ink-soft)]">{t.role}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
 
       <section className="mb-10">
         <h2 className="mb-3 font-[var(--font-display)] text-lg font-bold text-[var(--color-ink)]">

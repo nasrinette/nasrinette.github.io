@@ -453,3 +453,135 @@ body::before {
 .animate-lola-ripple {
   animation: lola-ripple 3.2s ease-out infinite;
 }
+
+/* Sitting Lola: tail metronome, slow when idle, quick when she's typing */
+@keyframes lola-tail-sway {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(-14deg);
+  }
+}
+.animate-lola-tail-sway {
+  animation: lola-tail-sway 3.4s ease-in-out infinite;
+}
+.animate-lola-tail-fast {
+  animation: lola-tail-sway 0.9s ease-in-out infinite;
+}
+
+/* an ear flicks now and then, like she heard something */
+@keyframes lola-ear-twitch {
+  0%,
+  88%,
+  100% {
+    transform: rotate(0deg);
+  }
+  91% {
+    transform: rotate(-9deg);
+  }
+  94% {
+    transform: rotate(4deg);
+  }
+}
+.animate-lola-ear-twitch {
+  animation: lola-ear-twitch 6.5s ease-in-out infinite;
+}
+
+/* barely-there breathing while she sits */
+@keyframes lola-breathe {
+  0%,
+  100% {
+    transform: scaleY(1);
+  }
+  50% {
+    transform: scaleY(1.025);
+  }
+}
+.animate-lola-breathe {
+  animation: lola-breathe 3.8s ease-in-out infinite;
+}
+
+/* eyes dart side to side while she's "typing" a reply */
+@keyframes lola-look {
+  0%,
+  18%,
+  100% {
+    transform: translateX(0);
+  }
+  32%,
+  52% {
+    transform: translateX(-1.6px);
+  }
+  68%,
+  88% {
+    transform: translateX(1.6px);
+  }
+}
+.animate-lola-look {
+  animation: lola-look 2.6s ease-in-out infinite;
+}
+
+/* hearts that drift up when Lola is petted */
+@keyframes lola-heart {
+  0% {
+    opacity: 0;
+    transform: translateY(2px) scale(0.6);
+  }
+  25% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-22px) scale(1.15) rotate(-10deg);
+  }
+}
+.animate-lola-heart {
+  animation: lola-heart 1s ease-out both;
+}
+
+/* Lola hops onto a bubble with a tiny overshoot */
+@keyframes lola-perch-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-lola-perch-in {
+  animation: lola-perch-in 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+/* peeking pose bobs up for a better look */
+@keyframes lola-peek {
+  0%,
+  70%,
+  100% {
+    transform: translateY(0);
+  }
+  80%,
+  90% {
+    transform: translateY(-2.5px);
+  }
+}
+.animate-lola-peek {
+  animation: lola-peek 5.2s ease-in-out infinite;
+}
+
+/* dangling paws swing softly over the bubble edge */
+@keyframes lola-dangle {
+  0%,
+  100% {
+    transform: rotate(-4deg);
+  }
+  50% {
+    transform: rotate(5deg);
+  }
+}
+.animate-lola-dangle {
+  animation: lola-dangle 2.4s ease-in-out infinite;
+}
