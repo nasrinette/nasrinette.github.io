@@ -3,10 +3,10 @@ import { profile } from "../data/profile";
 
 export default function ContactCard() {
   return (
-    <div className="w-full max-w-xs space-y-3 rounded-lg border border-[var(--color-blush-deep)]/60 bg-[var(--color-cream-soft)] p-4">
+    <div className="w-full max-w-xs space-y-3 rounded-[var(--radius-ui)] border border-[var(--color-blush-deep)]/60 bg-[var(--color-cream-soft)] p-4">
       <a
         href={`mailto:${profile.contact.email}`}
-        className="flex items-center justify-between gap-2 rounded-md bg-[var(--color-paw)] px-3 py-2 text-sm font-semibold text-[var(--color-rose-dark)] transition hover:bg-[var(--color-blush)]"
+        className="btn-pastel flex items-center justify-between gap-2 px-3 py-2 text-sm font-semibold"
       >
         <span className="flex min-w-0 items-center gap-2">
           <Mail size={14} strokeWidth={1.75} className="shrink-0" aria-hidden="true" />
@@ -19,7 +19,7 @@ export default function ContactCard() {
           <a
             key={link.label}
             href={link.url}
-            className="rounded-full border border-[var(--color-blush-deep)] px-3 py-1 text-xs font-medium text-[var(--color-ink)] transition hover:bg-[var(--color-blush)]"
+            className="btn-pastel px-3 py-1 text-xs font-medium"
           >
             {link.label}
           </a>

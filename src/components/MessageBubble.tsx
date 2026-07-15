@@ -37,12 +37,12 @@ export default function MessageBubble({
     return (
       <div className="flex animate-pop-in items-end gap-2">
         <CatAvatar size={30} />
-        <div className="max-w-[80%] space-y-2 rounded-lg rounded-bl-sm border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800 dark:border-red-900/60 dark:bg-red-950/40 dark:text-red-200">
+        <div className="max-w-[80%] space-y-2 rounded-[var(--radius-ui)] border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800 dark:border-red-900/60 dark:bg-red-950/40 dark:text-red-200">
           <p>{message.text}</p>
           <button
             type="button"
             onClick={() => onRetry(message.id)}
-            className="flex items-center gap-1.5 rounded-md bg-red-100 px-2.5 py-1 text-xs font-semibold text-red-700 transition hover:bg-red-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-400 dark:bg-red-900/50 dark:text-red-200 dark:hover:bg-red-900"
+            className="btn-pastel flex items-center gap-1.5 px-2.5 py-1 text-xs font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-400"
           >
             <RotateCcw size={12} strokeWidth={2} aria-hidden="true" />
             Retry
@@ -59,8 +59,8 @@ export default function MessageBubble({
         <div
           className={
             isUser
-              ? "min-w-0 rounded-lg rounded-br-sm bg-gradient-to-br from-[var(--color-rose)] to-[var(--color-rose-deep)] px-4 py-2.5 text-sm text-white shadow-sm"
-              : "min-w-0 rounded-lg rounded-bl-sm border border-[var(--color-blush-deep)]/60 bg-[var(--color-cream-soft)] px-4 py-2.5 text-sm text-[var(--color-ink)] shadow-sm"
+              ? "bubble-sunset min-w-0 px-4 py-2.5 text-sm shadow-sm"
+              : "min-w-0 rounded-[var(--radius-ui)] border border-[var(--color-blush-deep)]/60 bg-[var(--color-cream-soft)] px-4 py-2.5 text-sm text-[var(--color-ink)] shadow-sm"
           }
         >
           {message.text && <RichText text={message.text} />}
@@ -93,7 +93,7 @@ export default function MessageBubble({
               key={chip.label}
               type="button"
               onClick={() => onNavigate(chip)}
-              className="rounded-md border border-[var(--color-gold)]/40 bg-[var(--color-gold-soft)]/30 px-3 py-1.5 text-xs font-semibold text-[var(--color-rose-dark)] transition hover:bg-[var(--color-gold-soft)]/50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-rose-dark)]"
+              className="btn-pastel px-3 py-1.5 font-[var(--font-display)] text-xs font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-rose-dark)]"
             >
               {chip.label}
             </button>

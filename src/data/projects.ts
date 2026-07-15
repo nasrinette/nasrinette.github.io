@@ -34,7 +34,7 @@ export const projects: Project[] = [
       "Shipped a reusable invoice-line component now used in 4 other flows",
       "Ran 12 moderated usability sessions across 3 rounds",
     ],
-    gradient: ["#b98a9a", "#8f5d74"],
+    gradient: ["#f6b4a2", "#f19a86"],
     icon: Receipt,
     link: "#case-study-nimbus-pay",
     problem:
@@ -58,9 +58,9 @@ export const projects: Project[] = [
       { label: "First-invoice completion", value: "+61%" },
     ],
     gallery: [
-      { caption: "Old 14-step setup wizard", gradient: ["#c9ab9a", "#b98a9a"], icon: ListChecks },
-      { caption: "New 4-field fast start", gradient: ["#b98a9a", "#8f5d74"], icon: Zap },
-      { caption: "Invoice builder, line-item detail", gradient: ["#a97d8f", "#8f5d74"], icon: Rows3 },
+      { caption: "Old 14-step setup wizard", gradient: ["#f9cbbd", "#f6b4a2"], icon: ListChecks },
+      { caption: "New 4-field fast start", gradient: ["#f6b4a2", "#f19a86"], icon: Zap },
+      { caption: "Invoice builder, line-item detail", gradient: ["#f4a894", "#f19a86"], icon: Rows3 },
     ],
     testimonial: {
       quote:
@@ -85,7 +85,7 @@ export const projects: Project[] = [
       "Hit WCAG AA across the entire portal, including color contrast overhaul",
       "Patient-reported task success rose from 61% to 92%",
     ],
-    gradient: ["#c9ab77", "#a9793f"],
+    gradient: ["#f7d49a", "#f3c079"],
     icon: Stethoscope,
     link: "#case-study-hearth-health",
     problem:
@@ -109,9 +109,9 @@ export const projects: Project[] = [
       { label: "Accessibility conformance", value: "WCAG AA" },
     ],
     gallery: [
-      { caption: "Old department-based navigation", gradient: ["#d9c19a", "#c9ab77"], icon: FolderTree },
-      { caption: "New 'This week' home view", gradient: ["#c9ab77", "#a9793f"], icon: Home },
-      { caption: "Contrast-checked color tokens", gradient: ["#b8935b", "#a9793f"], icon: Palette },
+      { caption: "Old department-based navigation", gradient: ["#fbe4bb", "#f7d49a"], icon: FolderTree },
+      { caption: "New 'This week' home view", gradient: ["#f7d49a", "#f3c079"], icon: Home },
+      { caption: "Contrast-checked color tokens", gradient: ["#f5c88a", "#f3c079"], icon: Palette },
     ],
     testimonial: {
       quote:
@@ -136,7 +136,7 @@ export const projects: Project[] = [
       "Reduced UI-related engineering tickets by ~30%",
       "Built a token pipeline syncing Figma variables to code",
     ],
-    gradient: ["#a68f85", "#6f5a52"],
+    gradient: ["#dcb4cd", "#c79bb9"],
     icon: Puzzle,
     link: "#case-study-atlas-devkit",
     problem:
@@ -160,9 +160,9 @@ export const projects: Project[] = [
       { label: "Design-to-code drift", value: "Near zero" },
     ],
     gallery: [
-      { caption: "Token architecture map", gradient: ["#b8a89d", "#a68f85"], icon: Map },
-      { caption: "Figma → code sync pipeline", gradient: ["#a68f85", "#6f5a52"], icon: RefreshCw },
-      { caption: "Component doc template", gradient: ["#9c8a80", "#6f5a52"], icon: BookOpen },
+      { caption: "Token architecture map", gradient: ["#e8cadd", "#dcb4cd"], icon: Map },
+      { caption: "Figma → code sync pipeline", gradient: ["#dcb4cd", "#c79bb9"], icon: RefreshCw },
+      { caption: "Component doc template", gradient: ["#d2a6c4", "#c79bb9"], icon: BookOpen },
     ],
     testimonial: {
       quote:
@@ -187,7 +187,7 @@ export const projects: Project[] = [
       "Designed entirely around low-bandwidth, older-device users",
       "No accounts required for first-time help requests",
     ],
-    gradient: ["#c17d63", "#a9636f"],
+    gradient: ["#f8c3a0", "#f3a988"],
     icon: Home,
     link: "#case-study-porch-light",
     problem:
@@ -211,9 +211,9 @@ export const projects: Project[] = [
       { label: "Page weight", value: "< 200KB" },
     ],
     gallery: [
-      { caption: "Paper sketches with organizers", gradient: ["#d19a85", "#c17d63"], icon: PenTool },
-      { caption: "Open vs. claimed request states", gradient: ["#c17d63", "#a9636f"], icon: Handshake },
-      { caption: "Low-bandwidth UI budget", gradient: ["#c98a7a", "#a9636f"], icon: Wifi },
+      { caption: "Paper sketches with organizers", gradient: ["#fbd7bc", "#f8c3a0"], icon: PenTool },
+      { caption: "Open vs. claimed request states", gradient: ["#f8c3a0", "#f3a988"], icon: Handshake },
+      { caption: "Low-bandwidth UI budget", gradient: ["#f6b596", "#f3a988"], icon: Wifi },
     ],
     testimonial: {
       quote:

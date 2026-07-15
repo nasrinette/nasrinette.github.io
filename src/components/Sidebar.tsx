@@ -58,10 +58,10 @@ function SidebarContent({ view, onNavigate, themeMode, onThemeChange }: SidebarC
               type="button"
               onClick={() => onNavigate(item.id)}
               aria-current={active ? "page" : undefined}
-              className={`flex w-full items-center gap-2.5 rounded-md px-3 py-2 text-left text-sm font-medium transition ${
+              className={`flex w-full items-center gap-2.5 px-3 py-2 text-left font-[var(--font-display)] text-sm font-semibold transition ${
                 active
-                  ? "bg-[var(--color-rose)] text-white"
-                  : "text-[var(--color-ink-soft)] hover:bg-[var(--color-blush)] hover:text-[var(--color-rose-dark)]"
+                  ? "btn-pastel is-active text-[var(--color-ink)]"
+                  : "rounded-[var(--radius-md)] text-[var(--color-ink-soft)] hover:bg-[var(--color-blush)] hover:text-[var(--color-rose-dark)]"
               }`}
             >
               <Icon size={16} strokeWidth={1.75} aria-hidden="true" />
@@ -76,10 +76,10 @@ function SidebarContent({ view, onNavigate, themeMode, onThemeChange }: SidebarC
           type="button"
           onClick={() => onNavigate("profile")}
           aria-current={profileActive ? "page" : undefined}
-          className={`flex w-full items-center gap-2.5 rounded-md px-3 py-2 text-left text-sm font-medium transition ${
+          className={`flex w-full items-center gap-2.5 px-3 py-2 text-left font-[var(--font-display)] text-sm font-semibold transition ${
             profileActive
-              ? "bg-[var(--color-rose)] text-white"
-              : "text-[var(--color-ink-soft)] hover:bg-[var(--color-blush)] hover:text-[var(--color-rose-dark)]"
+              ? "btn-pastel is-active text-[var(--color-ink)]"
+              : "rounded-[var(--radius-md)] text-[var(--color-ink-soft)] hover:bg-[var(--color-blush)] hover:text-[var(--color-rose-dark)]"
           }`}
         >
           <User size={16} strokeWidth={1.75} aria-hidden="true" />

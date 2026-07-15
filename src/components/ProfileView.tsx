@@ -4,16 +4,22 @@ import ContactCard from "./ContactCard";
 
 export default function ProfileView() {
   return (
-    <div className="mx-auto max-w-3xl px-4 py-8 sm:px-8 sm:py-12">
+    <div className="mx-auto max-w-5xl px-4 py-8 sm:px-8 sm:py-12">
       <header className="mb-8 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
-        <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[var(--color-blush)] to-[var(--color-gold-soft)] text-3xl font-bold text-[var(--color-rose-dark)]">
+        <div
+          className="flex h-20 w-20 shrink-0 items-center justify-center rounded-full font-[var(--font-display)] text-3xl font-bold text-[var(--color-on-sunset)] shadow-[var(--shadow-glow)]"
+          style={{ background: "var(--gradient-sunset)" }}
+        >
           {profile.name
             .split(" ")
             .map((n) => n[0])
             .join("")}
         </div>
         <div>
-          <h1 className="font-[var(--font-display)] text-2xl font-bold text-[var(--color-ink)] sm:text-3xl">
+          <p className="font-[var(--font-mono)] text-[11px] font-medium uppercase tracking-[0.2em] text-[var(--color-rose-dark)]">
+            Product designer
+          </p>
+          <h1 className="mt-0.5 font-[var(--font-display)] text-2xl font-bold text-[var(--color-ink)] sm:text-3xl">
             {profile.name}
           </h1>
           <p className="text-sm text-[var(--color-ink-soft)]">
@@ -25,7 +31,7 @@ export default function ProfileView() {
 
       <section className="mb-10 grid grid-cols-2 gap-3 sm:grid-cols-4">
         {profile.stats.map((stat) => (
-          <div key={stat.label} className="rounded-lg border border-[var(--color-blush-deep)]/60 bg-[var(--color-cream-soft)] p-4 text-center">
+          <div key={stat.label} className="card-warm p-4 text-center">
             <p className="font-[var(--font-display)] text-lg font-bold text-[var(--color-rose-dark)]">{stat.value}</p>
             <p className="mt-1 text-[11px] leading-snug text-[var(--color-ink-soft)]">{stat.label}</p>
           </div>
@@ -44,7 +50,7 @@ export default function ProfileView() {
         <h2 className="mb-3 font-[var(--font-display)] text-lg font-bold text-[var(--color-ink)]">Experience</h2>
         <div className="space-y-4">
           {profile.experience.map((job) => (
-            <div key={`${job.company}-${job.period}`} className="rounded-lg border border-[var(--color-blush-deep)]/60 bg-[var(--color-cream-soft)] p-4">
+            <div key={`${job.company}-${job.period}`} className="card-warm p-4">
               <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
                 <p className="text-sm font-bold text-[var(--color-ink)]">
                   {job.role} <span className="font-normal text-[var(--color-ink-soft)]">· {job.company}</span>
@@ -67,7 +73,7 @@ export default function ProfileView() {
           <h2 className="mb-3 font-[var(--font-display)] text-lg font-bold text-[var(--color-ink)]">Education</h2>
           <div className="space-y-3">
             {profile.education.map((ed) => (
-              <div key={ed.school} className="rounded-lg border border-[var(--color-blush-deep)]/60 bg-[var(--color-cream-soft)] p-4">
+              <div key={ed.school} className="card-warm p-4">
                 <p className="text-sm font-bold text-[var(--color-ink)]">{ed.credential}</p>
                 <p className="font-[var(--font-mono)] text-xs text-[var(--color-ink-soft)]">
                   {ed.school} · {ed.period}
@@ -104,7 +110,7 @@ export default function ProfileView() {
         </h2>
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
           {profile.testimonials.map((t) => (
-            <div key={t.author} className="rounded-lg border border-[var(--color-blush-deep)]/60 bg-[var(--color-paw)]/50 p-4">
+            <div key={t.author} className="card-warm bg-[var(--color-paw)]/50 p-4">
               <p className="text-xs italic leading-relaxed text-[var(--color-ink)]">"{t.quote}"</p>
               <p className="mt-2 text-xs font-semibold text-[var(--color-rose-dark)]">{t.author}</p>
               <p className="text-[11px] text-[var(--color-ink-soft)]">{t.role}</p>

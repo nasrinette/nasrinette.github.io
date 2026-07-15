@@ -8,7 +8,7 @@ interface ProjectCardProps {
 export default function ProjectCard({ project, onLearnMore }: ProjectCardProps) {
   const Icon = project.icon;
   return (
-    <div className="w-64 shrink-0 snap-start overflow-hidden rounded-lg border border-[var(--color-blush-deep)]/60 bg-[var(--color-cream-soft)]">
+    <div className="card-warm card-lift w-64 shrink-0 snap-start overflow-hidden">
       <div
         className="flex h-24 items-center justify-center"
         style={{
@@ -16,7 +16,7 @@ export default function ProjectCard({ project, onLearnMore }: ProjectCardProps) 
         }}
         aria-hidden="true"
       >
-        <Icon size={30} strokeWidth={1.5} className="text-white/90" />
+        <Icon size={30} strokeWidth={1.75} style={{ color: "var(--color-on-sunset)" }} className="opacity-80" />
       </div>
       <div className="space-y-2 p-4">
         <div className="flex items-center justify-between gap-2">
@@ -32,7 +32,7 @@ export default function ProjectCard({ project, onLearnMore }: ProjectCardProps) 
           {project.tags.map((tag) => (
             <span
               key={tag}
-              className="rounded-full bg-[var(--color-paw)] px-2 py-0.5 text-[10px] font-medium text-[var(--color-rose-dark)]"
+              className="rounded-[var(--radius-ui)] bg-[var(--color-paw)] px-2 py-0.5 text-[10px] font-medium text-[var(--color-rose-dark)]"
             >
               {tag}
             </span>
@@ -41,7 +41,7 @@ export default function ProjectCard({ project, onLearnMore }: ProjectCardProps) 
         <button
           type="button"
           onClick={() => onLearnMore(project)}
-          className="mt-2 w-full rounded-md bg-[var(--color-rose)] px-3 py-1.5 text-xs font-semibold text-white transition hover:bg-[var(--color-rose-deep)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-rose-dark)]"
+          className="btn-pastel mt-2 w-full px-3 py-1.5 font-[var(--font-display)] text-xs font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-rose-dark)]"
         >
           Tell me more
         </button>

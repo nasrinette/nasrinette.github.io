@@ -17,7 +17,7 @@ export default function ThemeToggle({ mode, onChange }: ThemeToggleProps) {
     <div
       role="radiogroup"
       aria-label="Theme"
-      className="flex items-center gap-0.5 rounded-lg border border-[var(--color-blush-deep)] bg-[var(--color-cream)] p-0.5"
+      className="flex items-center gap-0.5 rounded-[var(--radius-md)] border border-[var(--color-blush-deep)] bg-[var(--color-cream)] p-0.5"
     >
       {OPTIONS.map(({ mode: optionMode, label, icon: Icon }) => {
         const active = mode === optionMode;
@@ -30,10 +30,10 @@ export default function ThemeToggle({ mode, onChange }: ThemeToggleProps) {
             aria-label={label}
             title={label}
             onClick={() => onChange(optionMode)}
-            className={`flex h-7 w-7 items-center justify-center rounded-md transition ${
+            className={`flex h-7 w-7 items-center justify-center transition ${
               active
-                ? "bg-[var(--color-rose)] text-white"
-                : "text-[var(--color-ink-soft)] hover:bg-[var(--color-blush)] hover:text-[var(--color-rose-dark)]"
+                ? "btn-pastel is-active text-[var(--color-ink)]"
+                : "rounded-[var(--radius-md)] text-[var(--color-ink-soft)] hover:bg-[var(--color-blush)] hover:text-[var(--color-rose-dark)]"
             }`}
           >
             <Icon size={14} strokeWidth={2} aria-hidden="true" />

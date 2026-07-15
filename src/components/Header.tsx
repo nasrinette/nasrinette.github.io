@@ -15,7 +15,7 @@ export default function Header({ onClear, onOpenMenu }: HeaderProps) {
           type="button"
           onClick={onOpenMenu}
           aria-label="Open menu"
-          className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md text-[var(--color-ink-soft)] hover:bg-[var(--color-blush)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-rose-dark)] md:hidden"
+          className="flex h-8 w-8 shrink-0 items-center justify-center rounded-[var(--radius-md)] text-[var(--color-ink-soft)] hover:bg-[var(--color-blush)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-rose-dark)] md:hidden"
         >
           <Menu size={18} strokeWidth={1.75} aria-hidden="true" />
         </button>
@@ -26,7 +26,7 @@ export default function Header({ onClear, onOpenMenu }: HeaderProps) {
               {catName} <span className="text-[var(--color-ink-soft)]">· {profile.name}'s portfolio</span>
             </h1>
             <p className="flex items-center gap-1.5 truncate text-[11px] text-[var(--color-ink-soft)]">
-              <span className="inline-block h-1.5 w-1.5 rounded-full bg-emerald-500" aria-hidden="true" />
+              <span className="inline-block h-1.5 w-1.5 rounded-full bg-[var(--color-gold)]" aria-hidden="true" />
               {profile.role}
             </p>
           </div>
@@ -35,7 +35,7 @@ export default function Header({ onClear, onOpenMenu }: HeaderProps) {
       <button
         type="button"
         onClick={onClear}
-        className="flex shrink-0 items-center gap-1.5 rounded-md border border-[var(--color-blush-deep)] px-3 py-1.5 text-xs font-medium text-[var(--color-ink-soft)] transition hover:border-[var(--color-rose)]/60 hover:bg-[var(--color-blush)] hover:text-[var(--color-rose-dark)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-rose-dark)]"
+        className="btn-pastel flex shrink-0 items-center gap-1.5 px-3 py-1.5 font-[var(--font-display)] text-xs font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-rose-dark)]"
         aria-label="Clear conversation and start over"
       >
         <RotateCcw size={13} strokeWidth={1.75} aria-hidden="true" />

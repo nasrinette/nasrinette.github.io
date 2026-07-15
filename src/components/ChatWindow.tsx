@@ -3,6 +3,7 @@ import { ArrowDown } from "lucide-react";
 import type { ChatMessage, NavChip, Project } from "../types";
 import MessageBubble from "./MessageBubble";
 import TypingIndicator from "./TypingIndicator";
+import LolaMascot from "./LolaMascot";
 
 interface ChatWindowProps {
   messages: ChatMessage[];
@@ -70,15 +71,16 @@ export default function ChatWindow({
 
   return (
     <div className="relative flex-1 min-h-0">
+      <LolaMascot />
       <div
         ref={scrollRef}
         onScroll={handleScroll}
-        className="scroll-warm h-full overflow-y-auto px-3 py-4 sm:px-6"
+        className="scroll-warm relative z-10 h-full overflow-y-auto px-3 py-4 sm:px-6"
       >
-        <div className="mx-auto flex max-w-2xl flex-col gap-4">
+        <div className="mx-auto flex max-w-4xl flex-col gap-4">
           {messages.length === 0 && !isTyping && (
             <div className="flex flex-1 flex-col items-center justify-center gap-2 py-16 text-center text-[var(--color-ink-soft)]">
-              <p className="text-sm">Waking Latte up…</p>
+              <p className="text-sm">Lola is paddling over…</p>
             </div>
           )}
           {messages.map((message) => (
@@ -98,7 +100,7 @@ export default function ChatWindow({
 
       <div className="sr-only" role="status" aria-live="polite">
         {isTyping
-          ? "Latte is typing"
+          ? "Lola is typing"
           : latestMessage?.sender === "cat"
             ? latestMessage.text
             : ""}
@@ -108,7 +110,7 @@ export default function ChatWindow({
         <button
           type="button"
           onClick={() => scrollToBottom()}
-          className="absolute bottom-3 left-1/2 flex -translate-x-1/2 items-center gap-1.5 rounded-full bg-[var(--color-rose)] px-4 py-1.5 text-xs font-semibold text-white shadow-md transition hover:bg-[var(--color-rose-deep)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-rose-dark)]"
+          className="btn-pastel absolute bottom-3 left-1/2 z-20 flex -translate-x-1/2 items-center gap-1.5 px-4 py-1.5 font-[var(--font-display)] text-xs font-semibold shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-rose-dark)]"
         >
           {unseenCount > 0 ? `${unseenCount} new message${unseenCount > 1 ? "s" : ""}` : "Jump to latest"}
           <ArrowDown size={13} strokeWidth={2} aria-hidden="true" />

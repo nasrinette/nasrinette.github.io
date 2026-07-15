@@ -1,24 +1,49 @@
+// Sunset design system — the documented source of truth for the tokens
+// defined in index.css. Keep these values in sync with that file.
+
+export const gradientTokens = [
+  {
+    name: "Sunset",
+    varName: "--gradient-sunset",
+    css: "soft coral → apricot → gold, 103°",
+    usage: "Primary actions, active states, the user's message",
+  },
+  {
+    name: "Sunset Soft",
+    varName: "--gradient-sunset-soft",
+    css: "pale peach → gold, 103°",
+    usage: "Large decorative fills, hero light",
+  },
+  {
+    name: "Dusk",
+    varName: "--gradient-dusk",
+    css: "plum → coral → gold, 160°",
+    usage: "The cool counterweight — accents & mascot pond",
+  },
+];
+
 export const colorTokens = [
-  { name: "Cream", varName: "--color-cream", light: "#FAF6F2", dark: "#17120F", usage: "App background base" },
-  { name: "Cream Soft", varName: "--color-cream-soft", light: "#FFFFFF", dark: "#211A16", usage: "Card surfaces" },
-  { name: "Blush", varName: "--color-blush", light: "#EDE0DD", dark: "#2E2220", usage: "Hover states, subtle fills" },
-  { name: "Blush Deep", varName: "--color-blush-deep", light: "#DFC9C6", dark: "#3D2D2A", usage: "Borders, dividers" },
-  { name: "Rose", varName: "--color-rose", light: "#A9748A", dark: "#C98CA0", usage: "Primary actions" },
-  { name: "Rose Deep", varName: "--color-rose-deep", light: "#8F5D74", dark: "#B5748C", usage: "Primary hover" },
-  { name: "Rose Dark", varName: "--color-rose-dark", light: "#6F4457", dark: "#E3AEBD", usage: "Emphasis text, focus rings" },
-  { name: "Gold", varName: "--color-gold", light: "#B8935B", dark: "#CDA467", usage: "Accents" },
-  { name: "Gold Soft", varName: "--color-gold-soft", light: "#D9C29A", dark: "#8C7248", usage: "Secondary accent" },
-  { name: "Ink", varName: "--color-ink", light: "#211815", dark: "#F3E9E3", usage: "Primary text" },
-  { name: "Ink Soft", varName: "--color-ink-soft", light: "#6B5B56", dark: "#B9A89F", usage: "Secondary text" },
-  { name: "Paw", varName: "--color-paw", light: "#F0E4DA", dark: "#2A211C", usage: "Tag backgrounds" },
+  { name: "Cream", varName: "--color-cream", light: "#FFF8F2", dark: "#120C0F", usage: "App background base" },
+  { name: "Cream Soft", varName: "--color-cream-soft", light: "#FFFDFB", dark: "#1E161A", usage: "Card surfaces" },
+  { name: "Blush", varName: "--color-blush", light: "#FEF3ED", dark: "#2A1E24", usage: "Hover states, subtle fills" },
+  { name: "Blush Deep", varName: "--color-blush-deep", light: "#F6E2D6", dark: "#3B2932", usage: "Borders, dividers" },
+  { name: "Coral", varName: "--color-rose", light: "#F4B3A1", dark: "#F2916F", usage: "Primary accent" },
+  { name: "Coral Deep", varName: "--color-rose-deep", light: "#EF9D84", dark: "#F6A686", usage: "Primary hover" },
+  { name: "Coral Dark", varName: "--color-rose-dark", light: "#A54627", dark: "#F7BBA2", usage: "Emphasis text, links, focus" },
+  { name: "Gold", varName: "--color-gold", light: "#F6D29A", dark: "#F2C069", usage: "Secondary accent" },
+  { name: "Gold Soft", varName: "--color-gold-soft", light: "#FBEBD0", dark: "#6D5334", usage: "Soft gold fills" },
+  { name: "Dusk", varName: "--color-dusk", light: "#BD95AD", dark: "#CB9EC0", usage: "Cool plum accent" },
+  { name: "Ink", varName: "--color-ink", light: "#3B2925", dark: "#FBEDE4", usage: "Primary text" },
+  { name: "Ink Soft", varName: "--color-ink-soft", light: "#7C5B52", dark: "#C7AB9F", usage: "Secondary text" },
+  { name: "Paw", varName: "--color-paw", light: "#FDEFE5", dark: "#2C1F27", usage: "Tag backgrounds" },
 ];
 
 export const typeScale = [
-  { name: "Display", sample: "Aa", size: "22px / 1.2", weight: "800", family: "Manrope" },
-  { name: "Heading", sample: "Aa", size: "16px / 1.3", weight: "700", family: "Manrope" },
-  { name: "Body", sample: "Aa", size: "14px / 1.6", weight: "400", family: "Inter" },
-  { name: "Body strong", sample: "Aa", size: "14px / 1.6", weight: "600", family: "Inter" },
-  { name: "Caption", sample: "Aa", size: "12px / 1.4", weight: "500", family: "Inter" },
+  { name: "Display", sample: "Aa", size: "30px / 1.15", weight: "700", family: "Quicksand" },
+  { name: "Heading", sample: "Aa", size: "18px / 1.3", weight: "700", family: "Quicksand" },
+  { name: "Body", sample: "Aa", size: "14px / 1.6", weight: "400", family: "Nunito" },
+  { name: "Body strong", sample: "Aa", size: "14px / 1.6", weight: "600", family: "Nunito" },
+  { name: "Caption", sample: "Aa", size: "12px / 1.4", weight: "500", family: "Nunito" },
   { name: "Mono", sample: "Aa", size: "11px / 1.4", weight: "400", family: "JetBrains Mono" },
 ];
 
@@ -33,35 +58,48 @@ export const spacingScale = [
 ];
 
 export const radiusScale = [
-  { token: "radius-md", px: 6 },
-  { token: "radius-lg", px: 8 },
-  { token: "radius-xl", px: 12 },
+  { token: "radius-sm", px: 8 },
+  { token: "radius-md", px: 12 },
+  { token: "radius-lg", px: 16 },
+  { token: "radius-xl", px: 24 },
   { token: "radius-full", px: 999 },
+];
+
+export const elevationScale = [
+  { token: "shadow-soft", label: "Soft", usage: "Buttons, resting chips" },
+  { token: "shadow-card", label: "Card", usage: "Cards, surfaces at rest" },
+  { token: "shadow-lift", label: "Lift", usage: "Hover / raised state" },
+  { token: "shadow-glow", label: "Glow", usage: "Coral glow on hover of primary" },
 ];
 
 export const principles = [
   {
-    title: "Restraint over decoration",
-    detail: "One accent color, used sparingly. Hairline borders instead of heavy shadows. Corners stay tight — 6–12px, not oversized pill shapes.",
+    title: "One horizon, used with intent",
+    detail:
+      "A single sunset gradient carries every primary action, active state, and the user's own voice. It earns attention precisely because nothing else competes for it.",
   },
   {
-    title: "Icons, not emoji",
-    detail: "Every glyph in the interface is a consistent-weight line icon. Emoji render differently per OS and read as informal — line icons stay on-brand everywhere.",
+    title: "Warm all the way down",
+    detail:
+      "No neutral grays. Text is a plum-brown ink, surfaces are peachy creams, shadows are tinted coral — so light and interface read as one continuous warm light.",
   },
   {
-    title: "Text does the heavy lifting",
-    detail: "No icon appears without a text label on first use. Icons reinforce meaning, they don't carry it alone.",
+    title: "Cute in shape, elegant in finish",
+    detail:
+      "Generous rounded corners and a friendly cat host keep it warm; hairline borders, restrained shadows, and a monospace face for facts keep it composed.",
+  },
+  {
+    title: "Two-tier action hierarchy",
+    detail:
+      "The gradient button leads; a soft ghost button follows. Never two primaries side by side — the eye should always know where to go first.",
   },
   {
     title: "Motion is a whisper",
-    detail: "Transitions run 150–200ms with no bounce or overshoot. Reduced-motion preferences are fully respected.",
+    detail: "Transitions run 120–220ms with no bounce or overshoot. Reduced-motion preferences are fully respected.",
   },
   {
     title: "Dual-theme by default",
-    detail: "Every token is defined for both light and dark from the start — dark mode is not an afterthought skin.",
-  },
-  {
-    title: "Mono for machine-ish facts",
-    detail: "Timestamps, metadata, and version-like values use a monospace face to read as precise, not decorative.",
+    detail:
+      "Every token is defined for both the day sky and the dusk from the start — dark mode is a second painting of the same scene, not an afterthought skin.",
   },
 ];

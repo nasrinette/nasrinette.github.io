@@ -5,6 +5,9 @@ export default function ProjectsView({ onOpen }: { onOpen: (projectId: string) =
   return (
     <div className="mx-auto max-w-5xl px-4 py-8 sm:px-8 sm:py-12">
       <header className="mb-8 space-y-2">
+        <p className="font-[var(--font-mono)] text-[11px] font-medium uppercase tracking-[0.2em] text-[var(--color-rose-dark)]">
+          Selected work
+        </p>
         <h1 className="font-[var(--font-display)] text-2xl font-bold text-[var(--color-ink)] sm:text-3xl">
           Case studies
         </h1>
@@ -12,6 +15,7 @@ export default function ProjectsView({ onOpen }: { onOpen: (projectId: string) =
           Full write-ups of shipped work — the problem, the process, and what actually changed. By{" "}
           {profile.name}.
         </p>
+        <span className="sunset-rule w-16" aria-hidden="true" />
       </header>
 
       {projects.length === 0 ? (
@@ -23,7 +27,7 @@ export default function ProjectsView({ onOpen }: { onOpen: (projectId: string) =
               key={project.id}
               type="button"
               onClick={() => onOpen(project.id)}
-              className="group flex flex-col overflow-hidden rounded-lg border border-[var(--color-blush-deep)]/60 bg-[var(--color-cream-soft)] text-left transition hover:-translate-y-0.5 hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-rose-dark)]"
+              className="card-warm card-lift focus-ring group flex flex-col overflow-hidden text-left"
             >
               <div
                 className="flex h-32 items-center justify-center"
@@ -32,7 +36,7 @@ export default function ProjectsView({ onOpen }: { onOpen: (projectId: string) =
                 }}
                 aria-hidden="true"
               >
-                <project.icon size={36} strokeWidth={1.5} className="text-white/90" />
+                <project.icon size={36} strokeWidth={1.75} style={{ color: "var(--color-on-sunset)" }} className="opacity-80" />
               </div>
               <div className="flex flex-1 flex-col gap-2 p-5">
                 <div className="flex items-start justify-between gap-2">

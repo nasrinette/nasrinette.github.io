@@ -51,7 +51,7 @@ export default function App() {
     setCaseStudyId(chip.projectId ?? null);
   }, []);
 
-  const handleAskLatteAboutProject = useCallback(
+  const handleAskLolaAboutProject = useCallback(
     (project: Project) => {
       setView("chat");
       requestProjectDetail(project.id, project.title);
@@ -119,7 +119,7 @@ export default function App() {
                 onBack={() => setCaseStudyId(null)}
                 onPrev={() => cycleCaseStudy(-1)}
                 onNext={() => cycleCaseStudy(1)}
-                onAskLatte={handleAskLatteAboutProject}
+                onAskLola={handleAskLolaAboutProject}
               />
             </div>
           </>

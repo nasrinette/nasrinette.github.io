@@ -6,27 +6,27 @@ interface CaseStudyViewProps {
   onBack: () => void;
   onPrev: () => void;
   onNext: () => void;
-  onAskLatte: (project: Project) => void;
+  onAskLola: (project: Project) => void;
 }
 
-export default function CaseStudyView({ project, onBack, onPrev, onNext, onAskLatte }: CaseStudyViewProps) {
+export default function CaseStudyView({ project, onBack, onPrev, onNext, onAskLola }: CaseStudyViewProps) {
   const Icon = project.icon;
   return (
     <div className="mx-auto max-w-3xl px-4 pb-16 pt-6 sm:px-8">
       <button
         type="button"
         onClick={onBack}
-        className="mb-4 flex items-center gap-1.5 rounded-md px-2 py-1 text-sm font-medium text-[var(--color-ink-soft)] transition hover:bg-[var(--color-blush)] hover:text-[var(--color-rose-dark)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-rose-dark)]"
+        className="focus-ring mb-4 flex items-center gap-1.5 rounded-[var(--radius-md)] px-2 py-1 text-sm font-medium text-[var(--color-ink-soft)] transition hover:bg-[var(--color-blush)] hover:text-[var(--color-rose-dark)]"
       >
         <ArrowLeft size={15} strokeWidth={2} aria-hidden="true" /> All case studies
       </button>
 
       <div
-        className="mb-6 flex h-40 items-center justify-center rounded-lg sm:h-56"
+        className="mb-6 flex h-40 items-center justify-center rounded-[var(--radius-xl)] shadow-[var(--shadow-card)] sm:h-56"
         style={{ background: `linear-gradient(135deg, ${project.gradient[0]}, ${project.gradient[1]})` }}
         aria-hidden="true"
       >
-        <Icon size={52} strokeWidth={1.5} className="text-white/90" />
+        <Icon size={52} strokeWidth={1.5} style={{ color: "var(--color-on-sunset)" }} className="opacity-80" />
       </div>
 
       <div className="mb-2 flex flex-wrap gap-1.5">
@@ -50,10 +50,7 @@ export default function CaseStudyView({ project, onBack, onPrev, onNext, onAskLa
 
       <section className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3">
         {project.results.map((metric) => (
-          <div
-            key={metric.label}
-            className="rounded-lg border border-[var(--color-blush-deep)]/60 bg-[var(--color-cream-soft)] p-4 text-center"
-          >
+          <div key={metric.label} className="card-warm p-4 text-center">
             <p className="font-[var(--font-display)] text-lg font-bold text-[var(--color-rose-dark)]">
               {metric.value}
             </p>
@@ -81,7 +78,10 @@ export default function CaseStudyView({ project, onBack, onPrev, onNext, onAskLa
         <ol className="space-y-3">
           {project.process.map((step, i) => (
             <li key={step} className="flex gap-3">
-              <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[var(--color-blush)] font-[var(--font-mono)] text-xs font-bold text-[var(--color-rose-dark)]">
+              <span
+                className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full font-[var(--font-mono)] text-xs font-bold text-[var(--color-on-sunset)] shadow-[var(--shadow-soft)]"
+                style={{ background: "var(--gradient-sunset)" }}
+              >
                 {i + 1}
               </span>
               <span className="text-sm leading-relaxed text-[var(--color-ink-soft)]">{step}</span>
@@ -100,13 +100,13 @@ export default function CaseStudyView({ project, onBack, onPrev, onNext, onAskLa
           <h2 className="mb-3 font-[var(--font-display)] text-lg font-bold text-[var(--color-ink)]">Gallery</h2>
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
             {project.gallery.map((block) => (
-              <div key={block.caption} className="overflow-hidden rounded-lg border border-[var(--color-blush-deep)]/60">
+              <div key={block.caption} className="card-warm overflow-hidden">
                 <div
                   className="flex h-28 items-center justify-center"
                   style={{ background: `linear-gradient(135deg, ${block.gradient[0]}, ${block.gradient[1]})` }}
                   aria-hidden="true"
                 >
-                  <block.icon size={26} strokeWidth={1.5} className="text-white/90" />
+                  <block.icon size={26} strokeWidth={1.75} style={{ color: "var(--color-on-sunset)" }} className="opacity-80" />
                 </div>
                 <p className="bg-[var(--color-cream-soft)] px-3 py-2 text-xs text-[var(--color-ink-soft)]">
                   {block.caption}
@@ -132,7 +132,7 @@ export default function CaseStudyView({ project, onBack, onPrev, onNext, onAskLa
       </section>
 
       {project.testimonial && (
-        <section className="mt-10 rounded-lg border border-[var(--color-blush-deep)]/60 bg-[var(--color-paw)]/50 p-5">
+        <section className="card-warm mt-10 border-l-[3px] border-l-[var(--color-rose)] p-5">
           <p className="text-[15px] italic leading-relaxed text-[var(--color-ink)]">
             "{project.testimonial.quote}"
           </p>
@@ -146,11 +146,11 @@ export default function CaseStudyView({ project, onBack, onPrev, onNext, onAskLa
       <div className="mt-10 flex flex-wrap items-center gap-3">
         <button
           type="button"
-          onClick={() => onAskLatte(project)}
-          className="flex items-center gap-2 rounded-md bg-[var(--color-rose)] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[var(--color-rose-deep)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-rose-dark)]"
+          onClick={() => onAskLola(project)}
+          className="btn-pastel focus-ring flex items-center gap-2 px-4 py-2 font-[var(--font-display)] text-sm font-semibold"
         >
           <MessageCircle size={15} strokeWidth={1.75} aria-hidden="true" />
-          Ask Latte about this project
+          Ask Lola about this project
         </button>
       </div>
 
@@ -158,14 +158,14 @@ export default function CaseStudyView({ project, onBack, onPrev, onNext, onAskLa
         <button
           type="button"
           onClick={onPrev}
-          className="flex items-center gap-1.5 text-sm font-medium text-[var(--color-ink-soft)] hover:text-[var(--color-rose-dark)]"
+          className="focus-ring flex items-center gap-1.5 rounded-[var(--radius-md)] px-2 py-1 text-sm font-medium text-[var(--color-ink-soft)] transition hover:text-[var(--color-rose-dark)]"
         >
           <ArrowLeft size={14} strokeWidth={2} aria-hidden="true" /> Previous
         </button>
         <button
           type="button"
           onClick={onNext}
-          className="flex items-center gap-1.5 text-sm font-medium text-[var(--color-ink-soft)] hover:text-[var(--color-rose-dark)]"
+          className="focus-ring flex items-center gap-1.5 rounded-[var(--radius-md)] px-2 py-1 text-sm font-medium text-[var(--color-ink-soft)] transition hover:text-[var(--color-rose-dark)]"
         >
           Next <ArrowRight size={14} strokeWidth={2} aria-hidden="true" />
         </button>

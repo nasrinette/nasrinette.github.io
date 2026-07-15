@@ -1,49 +1,143 @@
-@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&family=Nunito:ital,wght@0,400;0,500;0,600;0,700;1,500&family=JetBrains+Mono:wght@400;500&display=swap");
 @import "tailwindcss";
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* ============================================================
+   SUNSET — a design system
+   A warm coral→apricot→gold horizon over dusk creams.
+   Professional in its restraint, cute in its roundness,
+   elegant in its warm hairlines and soft light.
+   ============================================================ */
+
 @theme {
-  --font-display: "Manrope", "Inter", "Segoe UI", sans-serif;
-  --font-body: "Inter", "Segoe UI", sans-serif;
+  /* — Type ————————————————————————————————————————————— */
+  --font-display: "Quicksand", "Baloo 2", "Segoe UI", sans-serif;
+  --font-body: "Nunito", "Inter", "Segoe UI", sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
 
-  --color-cream: #faf6f2;
-  --color-cream-soft: #ffffff;
-  --color-blush: #ede0dd;
-  --color-blush-deep: #dfc9c6;
-  --color-rose: #a9748a;
-  --color-rose-deep: #8f5d74;
-  --color-rose-dark: #6f4457;
-  --color-gold: #b8935b;
-  --color-gold-soft: #d9c29a;
-  --color-ink: #211815;
-  --color-ink-soft: #6b5b56;
-  --color-paw: #f0e4da;
-  --color-wash-1: #f7cfe1;
-  --color-wash-2: #ddd0ec;
+  /* — Radius scale ————————————————————————————————————— */
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-full: 999px;
+  /* legacy single-radius alias, referenced across components */
+  --radius-ui: var(--radius-lg);
+
+  /* — Signature sunset gradients (light = pale pastel) ———— */
+  /* the through-line of the whole system: actions, active states, user voice */
+  --gradient-sunset: linear-gradient(103deg, #fac6b5 0%, #fad9ac 48%, #f9e6ad 100%);
+  /* airy wash for large decorative fills */
+  --gradient-sunset-soft: linear-gradient(103deg, #fde1d6 0%, #fdecca 50%, #fcf1cd 100%);
+  /* dusk band — the cool counterweight that keeps warmth from cloying */
+  --gradient-dusk: linear-gradient(160deg, #dcb8d1 0%, #f6c8b0 60%, #f9e6ad 100%);
+
+  /* — Palette (light — pale soft sunset) ———————————————— */
+  /* surfaces */
+  --color-cream: #fff8f2;        /* app base — airy peachy cream */
+  --color-cream-soft: #fffdfb;   /* raised card surface */
+  --color-blush: #fef3ed;        /* hover fills, pale peach */
+  --color-blush-deep: #f6e2d6;   /* borders, dividers */
+  --color-paw: #fdefe5;          /* tag / pill backgrounds */
+
+  /* sunset accent (kept under the "rose" var names for compatibility) */
+  --color-rose: #f4b3a1;         /* primary accent — pale coral */
+  --color-rose-deep: #ef9d84;    /* primary hover */
+  --color-rose-dark: #a54627;    /* emphasis text, links, focus (AA on cream + paw) */
+
+  /* apricot / gold */
+  --color-gold: #f6d29a;         /* secondary accent — pale gold */
+  --color-gold-soft: #fbebd0;    /* soft gold fill */
+
+  /* dusk — elegant cool accent */
+  --color-dusk: #bd95ad;
+  --color-dusk-soft: #f5eaf2;
+
+  /* ink */
+  --color-ink: #3b2925;          /* primary text — warm plum-brown */
+  --color-ink-soft: #7c5b52;     /* secondary text (AA on cream) */
+
+  /* ambient background washes */
+  --color-wash-1: #ffeee2;
+  --color-wash-2: #fff5e4;
+  --color-wash-3: #f9eef5;
+
+  /* soft circular halo decoration — light orange in light mode */
+  --color-halo: color-mix(in srgb, #f4a460 44%, transparent);
+
+  /* mascot pond tones */
+  --color-lily: #f9d2c1;
+  --color-lily-deep: #f4b3a1;
+
+  /* mascot fur + features — fixed so Lola reads in both themes */
+  --color-cat-fur: #fef4ee;
+  --color-cat-line: #6b4a3f;
+
+  /* — Warm-tinted elevation (soft) ————————————————————— */
+  --shadow-soft: 0 1px 2px color-mix(in srgb, #d98a6a 14%, transparent),
+    0 2px 6px color-mix(in srgb, #d98a6a 10%, transparent);
+  --shadow-card: 0 2px 4px color-mix(in srgb, #d98a6a 12%, transparent),
+    0 8px 22px color-mix(in srgb, #d98a6a 10%, transparent);
+  --shadow-lift: 0 6px 14px color-mix(in srgb, #d98a6a 18%, transparent),
+    0 16px 38px color-mix(in srgb, #d98a6a 13%, transparent);
+  --shadow-glow: 0 4px 16px color-mix(in srgb, #f4b3a1 46%, transparent);
+
+  /* ink used on the sunset gradient (buttons, active chips) — both themes */
+  --color-on-sunset: #402015;
 }
 
 :root {
   color-scheme: light;
 }
 
+/* — Palette (dark) — a plum-charcoal dusk lit by coral glow ——— */
+/* dark keeps the richer, more saturated sunset; softness is a light-mode choice */
 :root.dark {
   color-scheme: dark;
-  --color-cream: #17120f;
-  --color-cream-soft: #211a16;
-  --color-blush: #2e2220;
-  --color-blush-deep: #3d2d2a;
-  --color-rose: #c98ca0;
-  --color-rose-deep: #b5748c;
-  --color-rose-dark: #e3aebd;
-  --color-gold: #cda467;
-  --color-gold-soft: #8c7248;
-  --color-ink: #f3e9e3;
-  --color-ink-soft: #b9a89f;
-  --color-paw: #2a211c;
-  --color-wash-1: #241a16;
-  --color-wash-2: #2a1b1f;
+
+  /* muted dusty sunset — gentler against the deep plum-black ground */
+  --gradient-sunset: linear-gradient(103deg, #cf8a72 0%, #cf9c6a 48%, #cfae70 100%);
+  --gradient-sunset-soft: linear-gradient(103deg, #9c6a58 0%, #9e824f 50%, #9c8a52 100%);
+  --gradient-dusk: linear-gradient(160deg, #b98aa6 0%, #e6a07e 60%, #f4c85f 100%);
+
+  --color-cream: #120c0f;        /* deep plum-black — the night sky */
+  --color-cream-soft: #1e161a;   /* raised card surface, a step above base */
+  --color-blush: #2a1e24;        /* hover fills */
+  --color-blush-deep: #3b2932;   /* borders, dividers */
+  --color-paw: #2c1f27;          /* tag backgrounds */
+
+  --color-rose: #f2916f;
+  --color-rose-deep: #f6a686;
+  --color-rose-dark: #f7bba2;
+
+  --color-gold: #f2c069;
+  --color-gold-soft: #6d5334;
+
+  --color-dusk: #cb9ec0;
+  --color-dusk-soft: #3a2a37;
+
+  --color-ink: #fbede4;
+  --color-ink-soft: #c7ab9f;
+
+  --color-wash-1: #2a1917;
+  --color-wash-2: #2a2317;
+  --color-wash-3: #211823;
+
+  /* keep the halo subtle against the night sky */
+  --color-halo: color-mix(in srgb, #f2c069 15%, transparent);
+
+  --color-lily: #f2916f;
+  --color-lily-deep: #f6a686;
+
+  /* fur stays light so Lola reads on the dark ground; line stays dark on the fur */
+  --color-cat-fur: #f0e2d7;
+  --color-cat-line: #5a3f36;
+
+  --shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.4), 0 2px 6px rgba(0, 0, 0, 0.32);
+  --shadow-card: 0 2px 4px rgba(0, 0, 0, 0.42), 0 8px 22px rgba(0, 0, 0, 0.38);
+  --shadow-lift: 0 6px 14px rgba(0, 0, 0, 0.5), 0 16px 38px rgba(0, 0, 0, 0.44);
+  --shadow-glow: 0 4px 18px color-mix(in srgb, #cf8a72 38%, transparent);
 }
 
 html,
@@ -52,32 +146,167 @@ body,
   height: 100%;
 }
 
+/* The sunset sky — layered horizon light behind everything.
+   Peach low, gold mid-right, dusk-lavender high-left, over warm cream. */
 body {
   margin: 0;
   font-family: var(--font-body);
-  background: radial-gradient(1100px 750px at 12% -8%, var(--color-wash-1) 0%, transparent 58%),
-    radial-gradient(950px 700px at 108% 6%, var(--color-wash-2) 0%, transparent 55%), var(--color-cream);
+  background:
+    radial-gradient(1100px 620px at 50% 116%, var(--color-wash-1) 0%, transparent 58%),
+    radial-gradient(760px 560px at 100% 8%, var(--color-wash-2) 0%, transparent 60%),
+    radial-gradient(720px 540px at 0% -4%, var(--color-wash-3) 0%, transparent 58%),
+    radial-gradient(circle 440px at 80% 36%, var(--color-halo) 0%, transparent 66%),
+    var(--color-cream);
+  background-attachment: fixed;
   color: var(--color-ink);
   -webkit-font-smoothing: antialiased;
-  transition: background-color 200ms ease, color 200ms ease;
+  text-rendering: optimizeLegibility;
+  transition: background-color 220ms ease, color 220ms ease;
+  position: relative;
+}
+
+/* faint film grain to keep the gradients from banding */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.045;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+#root {
+  position: relative;
+  z-index: 1;
 }
 
 * {
   box-sizing: border-box;
 }
 
+::selection {
+  background: color-mix(in srgb, var(--color-rose) 30%, transparent);
+  color: var(--color-ink);
+}
+
+/* — Scrollbar ————————————————————————————————————————— */
+.scroll-warm {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-blush-deep) transparent;
+}
 .scroll-warm::-webkit-scrollbar {
   width: 8px;
+  height: 8px;
 }
 .scroll-warm::-webkit-scrollbar-track {
   background: transparent;
 }
 .scroll-warm::-webkit-scrollbar-thumb {
   background: var(--color-blush-deep);
-  border-radius: 999px;
+  border-radius: var(--radius-full);
 }
 .scroll-warm::-webkit-scrollbar-thumb:hover {
   background: var(--color-rose);
+}
+
+/* ============================================================
+   COMPONENT PRIMITIVES
+   ============================================================ */
+
+/* Primary action — the sunset itself. No stroke; the glow does the work. */
+.btn-pastel {
+  border: none;
+  border-radius: var(--radius-md);
+  color: var(--color-on-sunset);
+  background: var(--gradient-sunset);
+  box-shadow: var(--shadow-soft);
+  transition: filter 160ms ease, transform 120ms ease, box-shadow 200ms ease;
+}
+.btn-pastel:hover:not(:disabled) {
+  filter: saturate(1.08) brightness(1.02);
+  box-shadow: var(--shadow-glow);
+}
+.btn-pastel:active:not(:disabled) {
+  transform: translateY(1px);
+  box-shadow: var(--shadow-soft);
+}
+.btn-pastel:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+/* active / selected — a warmer, stronger glow instead of a stroke */
+.btn-pastel.is-active {
+  filter: saturate(1.14) brightness(1.03);
+  box-shadow: var(--shadow-glow);
+}
+
+/* Secondary action — soft, quiet, keeps hierarchy honest. */
+.btn-ghost {
+  border: 1.5px solid var(--color-blush-deep);
+  border-radius: var(--radius-md);
+  color: var(--color-ink);
+  background: color-mix(in srgb, var(--color-cream-soft) 80%, transparent);
+  transition: background-color 160ms ease, border-color 160ms ease, transform 120ms ease;
+}
+.btn-ghost:hover:not(:disabled) {
+  background: var(--color-blush);
+  border-color: color-mix(in srgb, var(--color-rose) 55%, var(--color-blush-deep));
+  color: var(--color-rose-dark);
+}
+.btn-ghost:active:not(:disabled) {
+  transform: translateY(1px);
+}
+.btn-ghost:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Raised surface — card. Hairline + warm shadow, optional lift on hover. */
+.card-warm {
+  border: 1px solid color-mix(in srgb, var(--color-blush-deep) 70%, transparent);
+  border-radius: var(--radius-lg);
+  background: var(--color-cream-soft);
+  box-shadow: var(--shadow-card);
+}
+.card-lift {
+  transition: transform 180ms ease, box-shadow 220ms ease, border-color 180ms ease;
+}
+.card-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lift);
+  border-color: color-mix(in srgb, var(--color-rose) 40%, var(--color-blush-deep));
+}
+
+/* Sunset-filled bubble — the user's voice. */
+.bubble-sunset {
+  background: var(--gradient-sunset);
+  color: var(--color-on-sunset);
+  border: 1.5px solid color-mix(in srgb, var(--color-rose-dark) 45%, transparent);
+  border-radius: var(--radius-ui);
+  box-shadow: var(--shadow-soft);
+}
+
+/* Soft warm tag / pill. */
+.tag-warm {
+  border-radius: var(--radius-full);
+  background: var(--color-paw);
+  color: var(--color-rose-dark);
+}
+
+/* Shared focus ring — coral, offset. */
+.focus-ring:focus-visible {
+  outline: 2px solid var(--color-rose-dark);
+  outline-offset: 2px;
+}
+
+/* A thin sunset rule — decorative divider / underline. */
+.sunset-rule {
+  height: 3px;
+  border-radius: var(--radius-full);
+  background: var(--gradient-sunset);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -90,6 +319,10 @@ body {
     scroll-behavior: auto !important;
   }
 }
+
+/* ============================================================
+   MOTION — a whisper: 120–220ms, no overshoot
+   ============================================================ */
 
 @keyframes blink {
   0%,
@@ -147,4 +380,75 @@ body {
 }
 .animate-pulse-soft {
   animation: pulse-soft 1.8s ease-in-out infinite;
+}
+
+/* slow sunset shimmer for the hero sun */
+@keyframes sun-breathe {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  50% {
+    transform: scale(1.04);
+    opacity: 1;
+  }
+}
+.animate-sun-breathe {
+  animation: sun-breathe 7s ease-in-out infinite;
+}
+
+/* Lola the mascot: drifts across her pond, bobs on the current */
+@keyframes lola-drift {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(58vw);
+  }
+}
+.animate-lola-drift {
+  animation: lola-drift 38s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+
+@keyframes lola-bob {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-1.5deg);
+  }
+  50% {
+    transform: translateY(-7px) rotate(1.5deg);
+  }
+}
+.animate-lola-bob {
+  animation: lola-bob 4.4s ease-in-out infinite;
+}
+
+@keyframes lola-tail {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(10deg);
+  }
+}
+.animate-lola-tail {
+  animation: lola-tail 2.8s ease-in-out infinite;
+  transform-origin: 4px 50%;
+}
+
+@keyframes lola-ripple {
+  0% {
+    transform: scale(0.85);
+    opacity: 0.4;
+  }
+  100% {
+    transform: scale(1.7);
+    opacity: 0;
+  }
+}
+.animate-lola-ripple {
+  animation: lola-ripple 3.2s ease-out infinite;
 }

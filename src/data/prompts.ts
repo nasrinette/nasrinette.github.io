@@ -34,7 +34,7 @@ export const starterPrompts: PromptDef[] = [
   {
     id: "fun",
     label: "Tell me something fun about you",
-    keywords: ["fun", "funny", "hobby", "hobbies", "cat", "latte", "random"],
+    keywords: ["fun", "funny", "hobby", "hobbies", "cat", "lola", "random"],
   },
 ];
 
