@@ -41,7 +41,7 @@ export default function ChatInput({ onSend, disabled }: ChatInputProps) {
 
   return (
     <div className="border-t border-[var(--color-blush-deep)]/60 bg-[var(--color-cream-soft)]/70 px-3 py-3 backdrop-blur-sm sm:px-5">
-      <div className="mx-auto flex max-w-4xl items-end gap-2">
+      <div className="mx-auto flex max-w-5xl items-end gap-2">
         <div className="flex-1 rounded-[var(--radius-ui)] border border-[var(--color-blush-deep)] bg-[var(--color-cream-soft)] px-3.5 py-2.5 focus-within:border-[var(--color-rose)]">
           <textarea
             ref={textareaRef}
@@ -77,7 +77,7 @@ export default function ChatInput({ onSend, disabled }: ChatInputProps) {
           <ArrowUp size={18} strokeWidth={2} aria-hidden="true" />
         </button>
       </div>
-      <p className="mx-auto mt-2 max-w-4xl text-center text-[10px] text-[var(--color-ink-soft)]/60">
+      <p className="mx-auto mt-2 max-w-5xl text-center text-[10px] text-[var(--color-ink-soft)]/60">
         {"Lola is a scripted guide, not a real AI — replies are pre-written by "}
         Elena.
       </p>

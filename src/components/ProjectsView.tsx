@@ -1,19 +1,179 @@
+import { ArrowRight } from "lucide-react";
 import { projects } from "../data/projects";
 import { profile } from "../data/profile";
+import type { Project } from "../types";
+import { Eyebrow, TagPill } from "./CaseStudyKit";
+
+type Variant = "feature" | "regular" | "wide";
+
+/* soft blurred blob of the project's gradient — colour without hurting text */
+function ColorBlob({ gradient, className = "" }: { gradient: [string, string]; className?: string }) {
+  return (
+    <span
+      aria-hidden="true"
+      className={`pointer-events-none absolute h-44 w-44 rounded-full opacity-60 blur-2xl transition-opacity duration-300 group-hover:opacity-80 ${className}`}
+      style={{ background: `linear-gradient(140deg, ${gradient[0]}, ${gradient[1]})` }}
+    />
+  );
+}
+
+function IconChip({ project, big }: { project: Project; big?: boolean }) {
+  const Icon = project.icon;
+  return (
+    <div
+      className={`flex shrink-0 items-center justify-center rounded-[var(--radius-lg)] shadow-[var(--shadow-soft)] ${
+        big ? "h-12 w-12" : "h-11 w-11"
+      }`}
+      style={{ background: `linear-gradient(140deg, ${project.gradient[0]}, ${project.gradient[1]})` }}
+      aria-hidden="true"
+    >
+      <Icon size={big ? 26 : 22} strokeWidth={1.75} style={{ color: "var(--color-on-sunset)" }} className="opacity-80" />
+    </div>
+  );
+}
+
+function ReadMore() {
+  return (
+    <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--color-rose-dark)]">
+      Read case study
+      <ArrowRight
+        size={15}
+        strokeWidth={2}
+        className="transition-transform duration-200 group-hover:translate-x-1"
+        aria-hidden="true"
+      />
+    </span>
+  );
+}
+
+function BentoTile({
+  project,
+  variant,
+  onOpen,
+}: {
+  project: Project;
+  variant: Variant;
+  onOpen: (id: string) => void;
+}) {
+  const base =
+    "card-warm card-lift focus-ring group relative overflow-hidden text-left flex flex-col";
+  const span =
+    variant === "feature"
+      ? "sm:col-span-2 lg:col-span-2 lg:row-span-2 p-6 gap-3"
+      : variant === "wide"
+        ? "sm:col-span-2 lg:col-span-3 p-5 sm:p-6"
+        : "p-5 gap-2.5";
+
+  if (variant === "wide") {
+    return (
+      <button type="button" onClick={() => onOpen(project.id)} className={`${base} ${span} flex-row items-center gap-5`}>
+        <ColorBlob gradient={project.gradient} className="-left-10 -top-12" />
+        <IconChip project={project} big />
+        <div className="relative min-w-0 flex-1">
+          <div className="flex items-baseline gap-2">
+            <h3 className="truncate font-[var(--font-display)] text-lg font-bold text-[var(--color-ink)] sm:text-xl">
+              {project.title}
+            </h3>
+            <span className="shrink-0 font-[var(--font-mono)] text-[11px] text-[var(--color-ink-soft)]">
+              {project.year}
+            </span>
+          </div>
+          <p className="mt-0.5 truncate text-sm text-[var(--color-ink-soft)]">{project.summary}</p>
+          <div className="mt-2 flex flex-wrap gap-1.5">
+            {project.tags.map((t) => (
+              <TagPill key={t}>{t}</TagPill>
+            ))}
+          </div>
+        </div>
+        <ArrowRight
+          size={18}
+          strokeWidth={2}
+          className="relative hidden shrink-0 -translate-x-1 text-[var(--color-rose-dark)] opacity-0 transition duration-200 group-hover:translate-x-0 group-hover:opacity-100 sm:block"
+          aria-hidden="true"
+        />
+      </button>
+    );
+  }
+
+  if (variant === "feature") {
+    return (
+      <button type="button" onClick={() => onOpen(project.id)} className={`${base} ${span}`}>
+        <ColorBlob gradient={project.gradient} className="-right-10 -top-12" />
+        <div className="relative flex items-center justify-between">
+          <IconChip project={project} big />
+          <span className="font-[var(--font-mono)] text-[11px] text-[var(--color-ink-soft)]">{project.year}</span>
+        </div>
+        <div className="relative">
+          <Eyebrow>{project.role}</Eyebrow>
+          <h3 className="mt-1 font-[var(--font-display)] text-2xl font-bold text-[var(--color-ink)]">{project.title}</h3>
+          <p className="mt-1.5 text-sm leading-relaxed text-[var(--color-ink-soft)]">{project.summary}</p>
+        </div>
+        <div className="relative mt-1 flex flex-wrap gap-x-6 gap-y-2">
+          {project.results.slice(0, 2).map((m) => (
+            <div key={m.label}>
+              <p className="font-[var(--font-display)] text-lg font-bold text-[var(--color-rose-dark)]">{m.value}</p>
+              <p className="text-[11px] leading-snug text-[var(--color-ink-soft)]">{m.label}</p>
+            </div>
+          ))}
+        </div>
+        <div className="relative mt-auto flex flex-wrap items-center justify-between gap-3 pt-2">
+          <div className="flex flex-wrap gap-1.5">
+            {project.tags.map((t) => (
+              <TagPill key={t}>{t}</TagPill>
+            ))}
+          </div>
+          <ReadMore />
+        </div>
+      </button>
+    );
+  }
+
+  // regular
+  return (
+    <button type="button" onClick={() => onOpen(project.id)} className={`${base} ${span}`}>
+      <ColorBlob gradient={project.gradient} className="-right-12 -top-14" />
+      <div className="relative flex items-center justify-between">
+        <IconChip project={project} />
+        <span className="font-[var(--font-mono)] text-[11px] text-[var(--color-ink-soft)]">{project.year}</span>
+      </div>
+      <h3 className="relative mt-1 font-[var(--font-display)] text-lg font-bold text-[var(--color-ink)]">
+        {project.title}
+      </h3>
+      <p className="relative text-sm leading-snug text-[var(--color-ink-soft)]">{project.summary}</p>
+      <div className="relative mt-auto flex items-center justify-between gap-2 pt-2">
+        <div className="flex flex-wrap gap-1.5">
+          {project.tags.slice(0, 2).map((t) => (
+            <TagPill key={t}>{t}</TagPill>
+          ))}
+        </div>
+        <ArrowRight
+          size={16}
+          strokeWidth={2}
+          className="shrink-0 -translate-x-1 text-[var(--color-rose-dark)] opacity-0 transition duration-200 group-hover:translate-x-0 group-hover:opacity-100"
+          aria-hidden="true"
+        />
+      </div>
+    </button>
+  );
+}
 
 export default function ProjectsView({ onOpen }: { onOpen: (projectId: string) => void }) {
+  const lastIndex = projects.length - 1;
+  const items = projects.map((project, i) => {
+    const variant: Variant =
+      i === 0 ? "feature" : i === lastIndex && projects.length > 2 ? "wide" : "regular";
+    return { project, variant };
+  });
+
   return (
     <div className="mx-auto max-w-5xl px-4 py-8 sm:px-8 sm:py-12">
       <header className="mb-8 space-y-2">
-        <p className="font-[var(--font-mono)] text-[11px] font-medium uppercase tracking-[0.2em] text-[var(--color-rose-dark)]">
-          Selected work
-        </p>
+        <Eyebrow>Selected work</Eyebrow>
         <h1 className="font-[var(--font-display)] text-2xl font-bold text-[var(--color-ink)] sm:text-3xl">
           Case studies
         </h1>
         <p className="max-w-xl text-sm text-[var(--color-ink-soft)]">
-          Full write-ups of shipped work — the problem, the process, and what actually changed. By{" "}
-          {profile.name}.
+          Full write-ups of shipped work — the problem, the process, and what actually changed. By {profile.name}.
         </p>
         <span className="sunset-rule w-16" aria-hidden="true" />
       </header>
@@ -21,48 +181,9 @@ export default function ProjectsView({ onOpen }: { onOpen: (projectId: string) =
       {projects.length === 0 ? (
         <p className="italic text-[var(--color-ink-soft)]">No case studies published yet — check back soon!</p>
       ) : (
-        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3">
-          {projects.map((project) => (
-            <button
-              key={project.id}
-              type="button"
-              onClick={() => onOpen(project.id)}
-              className="card-warm card-lift focus-ring group flex flex-col overflow-hidden text-left"
-            >
-              <div
-                className="flex h-32 items-center justify-center"
-                style={{
-                  background: `linear-gradient(135deg, ${project.gradient[0]}, ${project.gradient[1]})`,
-                }}
-                aria-hidden="true"
-              >
-                <project.icon size={36} strokeWidth={1.75} style={{ color: "var(--color-on-sunset)" }} className="opacity-80" />
-              </div>
-              <div className="flex flex-1 flex-col gap-2 p-5">
-                <div className="flex items-start justify-between gap-2">
-                  <h2 className="font-[var(--font-display)] text-base font-bold text-[var(--color-ink)]">
-                    {project.title}
-                  </h2>
-                  <span className="shrink-0 font-[var(--font-mono)] text-xs text-[var(--color-ink-soft)]">
-                    {project.year}
-                  </span>
-                </div>
-                <p className="text-sm leading-snug text-[var(--color-ink-soft)]">{project.summary}</p>
-                <div className="mt-auto flex flex-wrap gap-1.5 pt-2">
-                  {project.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="rounded-full bg-[var(--color-paw)] px-2.5 py-0.5 text-[11px] font-medium text-[var(--color-rose-dark)]"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-                <span className="pt-2 text-xs font-semibold text-[var(--color-rose-dark)] transition group-hover:underline">
-                  Read case study →
-                </span>
-              </div>
-            </button>
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:auto-rows-fr">
+          {items.map(({ project, variant }) => (
+            <BentoTile key={project.id} project={project} variant={variant} onOpen={onOpen} />
           ))}
         </div>
       )}

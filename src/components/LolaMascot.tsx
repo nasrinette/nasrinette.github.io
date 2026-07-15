@@ -1,19 +1,47 @@
+import { useState } from "react";
+import { useCatPurr } from "../hooks/useCatPurr";
+
 interface LolaMascotProps {
   className?: string;
 }
 
 /**
  * Lola, drifting across her lily pond in the chat background.
- * Purely decorative — sits behind the conversation and ignores pointer events.
+ * The pond ignores pointer events, but Lola herself sits above the messages
+ * so she can be petted — hover her and she stops to purr (Elena's cat, saying hi).
  */
 export default function LolaMascot({ className = "" }: LolaMascotProps) {
+  const { start, stop } = useCatPurr();
+  const [petted, setPetted] = useState(false);
+
+  const onEnter = () => {
+    setPetted(true);
+    start();
+  };
+  const onLeave = () => {
+    setPetted(false);
+    stop();
+  };
+
   return (
     <div
-      className={`pointer-events-none absolute inset-0 z-0 overflow-hidden ${className}`}
+      className={`pointer-events-none absolute inset-0 z-20 overflow-hidden ${className}`}
       aria-hidden="true"
     >
-      <div className="animate-lola-drift absolute bottom-4 left-[-14%] sm:bottom-8">
-        <div className="animate-lola-bob relative w-24 sm:w-32" style={{ filter: "drop-shadow(0 6px 10px rgba(30, 45, 35, 0.18))" }}>
+      <div
+        className="animate-lola-drift absolute bottom-4 left-[-14%] sm:bottom-8"
+        style={{ animationPlayState: petted ? "paused" : "running" }}
+      >
+        <div
+          className="animate-lola-bob pointer-events-auto relative w-24 cursor-pointer sm:w-32"
+          style={{
+            filter: "drop-shadow(0 6px 10px rgba(30, 45, 35, 0.18))",
+            animationPlayState: petted ? "paused" : "running",
+          }}
+          title="Pet me — I'm Lola, Elena's cat 🐾"
+          onMouseEnter={onEnter}
+          onMouseLeave={onLeave}
+        >
           {/* ripples spreading from the pad */}
           <span
             className="animate-lola-ripple absolute left-1/2 top-[62%] h-6 w-16 -translate-x-1/2 rounded-full border border-[var(--color-rose)]/40"

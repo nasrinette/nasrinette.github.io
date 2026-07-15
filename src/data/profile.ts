@@ -42,7 +42,7 @@ export const profile = {
     { step: "Ship & measure", detail: "Work with engineers past handoff, then check the data." },
   ],
   funFacts: [
-    "Named the studio cat mascot 'Lola' after the stray who wandered into a client meeting and stayed.",
+    "Lola — the cat guiding you around this site — is Elena's own rescue, a stray who wandered into a client meeting and never left.",
     "Once redesigned a checkout flow entirely on a napkin during a flight delay.",
     "Collects those little rubber duck stress toys — 14 and counting.",
     "Learned to solder so she could stop bothering the hardware team with 'quick' questions.",
@@ -154,3 +154,4 @@ export const profile = {
 };
 
 export const catName = "Lola";
+export const catTagline = "Elena's cat · your guide";

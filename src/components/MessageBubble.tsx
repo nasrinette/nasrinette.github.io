@@ -59,7 +59,7 @@ export default function MessageBubble({
         <div
           className={
             isUser
-              ? "bubble-sunset min-w-0 px-4 py-2.5 text-sm shadow-sm"
+              ? "bubble-sunset min-w-0 px-4 py-2.5 text-sm"
               : "min-w-0 rounded-[var(--radius-ui)] border border-[var(--color-blush-deep)]/60 bg-[var(--color-cream-soft)] px-4 py-2.5 text-sm text-[var(--color-ink)] shadow-sm"
           }
         >

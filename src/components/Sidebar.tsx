@@ -1,7 +1,7 @@
 import { Component, FolderKanban, MessageCircle, User, X } from "lucide-react";
 import CatAvatar from "./CatAvatar";
 import ThemeToggle from "./ThemeToggle";
-import { catName, profile } from "../data/profile";
+import { catName, catTagline, profile } from "../data/profile";
 import type { ThemeMode } from "../hooks/useTheme";
 import type { AppView } from "../types";
 
@@ -39,12 +39,12 @@ function SidebarContent({ view, onNavigate, themeMode, onThemeChange }: SidebarC
   return (
     <>
       <div className="flex items-center gap-3 px-5 pb-5 pt-6">
-        <CatAvatar size={30} />
+        <CatAvatar size={32} />
         <div className="min-w-0">
           <p className="truncate font-[var(--font-display)] text-sm font-bold text-[var(--color-ink)]">
-            {catName}
+            {catName} <span aria-hidden="true">🐾</span>
           </p>
-          <p className="truncate text-[11px] text-[var(--color-ink-soft)]">{profile.name}'s portfolio</p>
+          <p className="truncate text-[11px] text-[var(--color-ink-soft)]">{catTagline}</p>
         </div>
       </div>
 

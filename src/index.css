@@ -280,11 +280,12 @@ body::before {
   border-color: color-mix(in srgb, var(--color-rose) 40%, var(--color-blush-deep));
 }
 
-/* Sunset-filled bubble — the user's voice. */
+/* The user's message — identical surface to the assistant bubble; sender is
+   read from alignment, not colour. The sunset gradient stays a button-only cue. */
 .bubble-sunset {
-  background: var(--gradient-sunset);
-  color: var(--color-on-sunset);
-  border: 1.5px solid color-mix(in srgb, var(--color-rose-dark) 45%, transparent);
+  background: var(--color-cream-soft);
+  color: var(--color-ink);
+  border: 1px solid color-mix(in srgb, var(--color-blush-deep) 60%, transparent);
   border-radius: var(--radius-ui);
   box-shadow: var(--shadow-soft);
 }

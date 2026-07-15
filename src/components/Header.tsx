@@ -20,14 +20,14 @@ export default function Header({ onClear, onOpenMenu }: HeaderProps) {
           <Menu size={18} strokeWidth={1.75} aria-hidden="true" />
         </button>
         <div className="flex min-w-0 items-center gap-3">
-          <CatAvatar size={34} />
+          <CatAvatar size={36} />
           <div className="min-w-0">
             <h1 className="truncate font-[var(--font-display)] text-sm font-bold text-[var(--color-ink)] sm:text-base">
-              {catName} <span className="text-[var(--color-ink-soft)]">· {profile.name}'s portfolio</span>
+              {catName} <span className="text-[var(--color-ink-soft)]">· {profile.name}'s cat &amp; guide</span>
             </h1>
             <p className="flex items-center gap-1.5 truncate text-[11px] text-[var(--color-ink-soft)]">
               <span className="inline-block h-1.5 w-1.5 rounded-full bg-[var(--color-gold)]" aria-hidden="true" />
-              {profile.role}
+              Guiding you through {profile.name}'s work
             </p>
           </div>
         </div>
