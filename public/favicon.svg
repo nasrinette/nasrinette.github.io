@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="9.5 -0.5 25 25">
+  <!--
+    Lola's head, cropped from CatAvatar.tsx and simplified for 16px:
+    whiskers, mouth and body are dropped (they turn to mush at tab size)
+    and the fur outline is thickened, since her 0.45-opacity hairline
+    disappears at this scale. Geometry otherwise matches the mascot.
+    Fur stays light in both themes, so she reads on light tab bars via
+    the dark outline and on dark tab bars via the fill.
+  -->
+  <style>
+    :root {
+      --fur: #fef4ee;
+      --line: #6b4a3f;
+      --lily: #f9d2c1;
+      --lily-deep: #f4b3a1;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --fur: #f0e2d7;
+        --line: #5a3f36;
+        --lily: #f2916f;
+        --lily-deep: #f6a686;
+      }
+    }
+  </style>
+
+  <g fill="var(--fur)" stroke="var(--line)" stroke-width="1.4" stroke-linejoin="round">
+    <path d="M12.8 7.5 L11.5 0.9 L19 4.3 Z" />
+    <path d="M31.2 7.5 L32.5 0.9 L25 4.3 Z" />
+  </g>
+  <path d="M13.7 6 L13.1 2.7 L16.8 4.4 Z" fill="var(--lily)" />
+  <path d="M30.3 6 L30.9 2.7 L27.2 4.4 Z" fill="var(--lily)" />
+
+  <circle cx="22" cy="12.5" r="10.5" fill="var(--fur)" stroke="var(--line)" stroke-width="1.4" />
+
+  <circle cx="17.8" cy="11.8" r="1.6" fill="var(--line)" />
+  <circle cx="26.2" cy="11.8" r="1.6" fill="var(--line)" />
+
+  <path d="M20.9 15.2 L23.1 15.2 L22 16.8 Z" fill="var(--lily-deep)" />
+</svg>

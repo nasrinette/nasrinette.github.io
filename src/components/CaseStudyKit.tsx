@@ -1,5 +1,6 @@
 import type { ComponentType, ReactNode } from "react";
-import { Lightbulb, Quote } from "lucide-react";
+import { Frown, Lightbulb, Target } from "lucide-react";
+import type { Persona } from "../types";
 import CatAvatar from "./CatAvatar";
 import ToolLogo from "./ToolLogo";
 
@@ -25,7 +26,7 @@ export function LolaTurn({ children }: { children: ReactNode }) {
   return (
     <div className="flex animate-pop-in items-start gap-2">
       <CatAvatar size={30} className="mt-0.5" />
-      <div className="min-w-0 max-w-[85%] flex-1 space-y-3 rounded-[var(--radius-ui)] border border-[var(--color-blush-deep)]/60 bg-[var(--color-cream-soft)] px-4 py-3 text-sm text-[var(--color-ink)] shadow-sm sm:max-w-[75%]">
+      <div className="min-w-0 max-w-full flex-1 space-y-3 rounded-[var(--radius-ui)] border border-[var(--color-blush-deep)]/60 bg-[var(--color-cream-soft)] px-4 py-3 text-sm text-[var(--color-ink)] shadow-sm">
         {children}
       </div>
     </div>
@@ -138,22 +139,80 @@ export function KeyInsight({ children, label = "Key insight" }: { children: Reac
   );
 }
 
-/* — Testimonial — quote block with a decorative sunset quote mark —— */
+/* — PersonaCard — a research persona: who we designed for ————————— */
+export function PersonaCard({ persona }: { persona: Persona }) {
+  const initials = persona.name
+    .split(" ")
+    .map((w) => w[0])
+    .slice(0, 2)
+    .join("");
+  return (
+    <article className="card-warm flex h-full flex-col gap-3 p-4">
+      <div className="flex items-center gap-3">
+        <span
+          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full font-[var(--font-display)] text-sm font-bold text-[var(--color-on-sunset)] shadow-[var(--shadow-soft)]"
+          style={{ background: "var(--gradient-sunset)" }}
+          aria-hidden="true"
+        >
+          {initials}
+        </span>
+        <div className="min-w-0">
+          <p className="font-[var(--font-display)] text-sm font-bold text-[var(--color-ink)]">{persona.name}</p>
+          <p className="text-xs leading-snug text-[var(--color-ink-soft)]">{persona.descriptor}</p>
+        </div>
+      </div>
+      <blockquote className="border-l-2 border-[var(--color-rose)] pl-2.5 text-[13px] italic leading-relaxed text-[var(--color-ink)]">
+        “{persona.quote}”
+      </blockquote>
+      <div className="space-y-3 sm:grid sm:grid-cols-2 sm:gap-4 sm:space-y-0">
+        <div>
+          <p className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wide text-[var(--color-rose-dark)]">
+            <Target size={12} strokeWidth={2} aria-hidden="true" /> Goals
+          </p>
+          <ul className="mt-1 space-y-1 text-xs leading-relaxed text-[var(--color-ink-soft)]">
+            {persona.goals.map((g) => (
+              <li key={g} className="flex gap-1.5">
+                <span aria-hidden="true" className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-[var(--color-gold)]" />
+                {g}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <p className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wide text-[var(--color-dusk)]">
+            <Frown size={12} strokeWidth={2} aria-hidden="true" /> Frustrations
+          </p>
+          <ul className="mt-1 space-y-1 text-xs leading-relaxed text-[var(--color-ink-soft)]">
+            {persona.frustrations.map((f) => (
+              <li key={f} className="flex gap-1.5">
+                <span aria-hidden="true" className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-[var(--color-dusk)]" />
+                {f}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </article>
+  );
+}
+
+export function PersonaGrid({ personas }: { personas: Persona[] }) {
+  return (
+    <div className="space-y-3">
+      {personas.map((p) => (
+        <PersonaCard key={p.name} persona={p} />
+      ))}
+    </div>
+  );
+}
+
+/* — Testimonial — the user's voice, set as plain text: just a quote ——— */
 export function Testimonial({ quote, author, role }: { quote: string; author: string; role: string }) {
   return (
-    <figure className="card-warm relative overflow-hidden border-l-[3px] border-l-[var(--color-rose)] p-5 sm:p-6">
-      <Quote
-        size={64}
-        strokeWidth={1}
-        className="pointer-events-none absolute -right-2 -top-3 text-[var(--color-rose)] opacity-15"
-        aria-hidden="true"
-      />
-      <blockquote className="relative text-[15px] italic leading-relaxed text-[var(--color-ink)]">
-        {quote}
-      </blockquote>
-      <figcaption className="relative mt-3 text-sm font-semibold text-[var(--color-rose-dark)]">
-        {author}
-        <span className="ml-1.5 font-normal text-[var(--color-ink-soft)]">{role}</span>
+    <figure className="border-l-2 border-[var(--color-rose)] py-0.5 pl-4">
+      <blockquote className="text-[15px] italic leading-relaxed text-[var(--color-ink)]">“{quote}”</blockquote>
+      <figcaption className="mt-1.5 text-xs text-[var(--color-ink-soft)]">
+        — <span className="font-semibold text-[var(--color-ink)]">{author}</span> · {role}
       </figcaption>
     </figure>
   );

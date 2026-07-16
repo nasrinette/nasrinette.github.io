@@ -4,7 +4,7 @@ import { profile } from "../data/profile";
 import type { Project } from "../types";
 import { Eyebrow, TagPill } from "./CaseStudyKit";
 
-type Variant = "feature" | "regular" | "wide";
+type Variant = "feature" | "regular" | "mini";
 
 /* soft blurred blob of the project's gradient — colour without hurting text */
 function ColorBlob({ gradient, className = "" }: { gradient: [string, string]; className?: string }) {
@@ -60,43 +60,28 @@ function BentoTile({
   const span =
     variant === "feature"
       ? "sm:col-span-2 lg:col-span-2 lg:row-span-2 p-6 gap-3"
-      : variant === "wide"
-        ? "sm:col-span-2 lg:col-span-3 p-5 sm:p-6"
-        : "p-5 gap-2.5";
+      : "p-5 gap-2.5";
 
-  if (variant === "wide") {
+  if (variant === "mini") {
     return (
-      <button type="button" onClick={() => onOpen(project.id)} className={`${base} ${span} flex-row items-center gap-5`}>
-        <ColorBlob gradient={project.gradient} className="-left-10 -top-12" />
-        <IconChip project={project} big />
+      <button type="button" onClick={() => onOpen(project.id)} className={`${base} flex-row items-center gap-3 p-4`}>
+        <ColorBlob gradient={project.gradient} className="-left-14 -top-16" />
+        <IconChip project={project} />
         <div className="relative min-w-0 flex-1">
-          <div className="flex items-baseline gap-2">
-            <h3 className="truncate font-[var(--font-display)] text-lg font-bold text-[var(--color-ink)] sm:text-xl">
+          <div className="flex items-baseline justify-between gap-2">
+            <h3 className="truncate font-[var(--font-display)] text-base font-bold text-[var(--color-ink)]">
               {project.title}
             </h3>
             <span className="shrink-0 font-[var(--font-mono)] text-[11px] text-[var(--color-ink-soft)]">
               {project.year}
             </span>
           </div>
-          <p className="mt-0.5 truncate text-sm text-[var(--color-ink-soft)]">{project.summary}</p>
-          <div className="mt-2 flex flex-wrap gap-1.5">
-            {project.tags.map((t) => (
-              <TagPill key={t}>{t}</TagPill>
-            ))}
-          </div>
+          <p className="truncate text-xs text-[var(--color-ink-soft)]">{project.summary}</p>
         </div>
-        {project.cover && (
-          <img
-            src={project.cover}
-            alt=""
-            loading="lazy"
-            className="relative hidden min-h-24 w-56 shrink-0 self-stretch rounded-[var(--radius-lg)] border border-[var(--color-blush-deep)]/50 bg-[var(--color-blush)] object-cover sm:block"
-          />
-        )}
         <ArrowRight
-          size={18}
+          size={15}
           strokeWidth={2}
-          className="relative hidden shrink-0 -translate-x-1 text-[var(--color-rose-dark)] opacity-0 transition duration-200 group-hover:translate-x-0 group-hover:opacity-100 sm:block"
+          className="relative shrink-0 -translate-x-1 text-[var(--color-rose-dark)] opacity-0 transition duration-200 group-hover:translate-x-0 group-hover:opacity-100"
           aria-hidden="true"
         />
       </button>
@@ -129,7 +114,7 @@ function BentoTile({
             src={project.cover}
             alt=""
             loading="lazy"
-            className="relative mt-2 min-h-0 w-full flex-1 rounded-[var(--radius-lg)] border border-[var(--color-blush-deep)]/50 bg-[var(--color-blush)] object-cover object-top"
+            className="relative mt-2 min-h-40 w-full flex-1 rounded-[var(--radius-lg)] border border-[var(--color-blush-deep)]/50 bg-[var(--color-blush)] object-cover object-top"
           />
         )}
         <div className="relative mt-auto flex flex-wrap items-center justify-between gap-3 pt-2">
@@ -157,7 +142,7 @@ function BentoTile({
           src={project.cover}
           alt=""
           loading="lazy"
-          className="relative mt-1 h-24 w-full rounded-[var(--radius-lg)] border border-[var(--color-blush-deep)]/50 bg-[var(--color-blush)] object-cover object-top"
+          className="relative mt-1 aspect-[16/10] w-full rounded-[var(--radius-lg)] border border-[var(--color-blush-deep)]/50 bg-[var(--color-blush)] object-cover object-top"
         />
       )}
       <h3 className="relative mt-1 font-[var(--font-display)] text-lg font-bold text-[var(--color-ink)]">
@@ -182,12 +167,10 @@ function BentoTile({
 }
 
 export default function ProjectsView({ onOpen }: { onOpen: (projectId: string) => void }) {
-  const lastIndex = projects.length - 1;
-  const items = projects.map((project, i) => {
-    const variant: Variant =
-      i === 0 ? "feature" : i === lastIndex && projects.length > 2 ? "wide" : "regular";
-    return { project, variant };
-  });
+  // the array order IS the importance order — the layout de-escalates with it:
+  // #1 gets the 2×2 feature spot, #2–6 full cards, the rest compact rows.
+  const featured = projects.slice(0, 6);
+  const more = projects.slice(6);
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-8 sm:px-8 sm:py-12">
@@ -205,11 +188,26 @@ export default function ProjectsView({ onOpen }: { onOpen: (projectId: string) =
       {projects.length === 0 ? (
         <p className="italic text-[var(--color-ink-soft)]">No case studies published yet — check back soon!</p>
       ) : (
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:auto-rows-fr">
-          {items.map(({ project, variant }) => (
-            <BentoTile key={project.id} project={project} variant={variant} onOpen={onOpen} />
-          ))}
-        </div>
+        <>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {featured.map((project, i) => (
+              <BentoTile key={project.id} project={project} variant={i === 0 ? "feature" : "regular"} onOpen={onOpen} />
+            ))}
+          </div>
+          {more.length > 0 && (
+            <>
+              <div className="mb-4 mt-10 flex items-center gap-3">
+                <Eyebrow>More studies</Eyebrow>
+                <span className="h-px flex-1 bg-[var(--color-blush-deep)]/60" aria-hidden="true" />
+              </div>
+              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                {more.map((project) => (
+                  <BentoTile key={project.id} project={project} variant="mini" onOpen={onOpen} />
+                ))}
+              </div>
+            </>
+          )}
+        </>
       )}
     </div>
   );

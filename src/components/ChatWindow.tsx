@@ -77,7 +77,7 @@ export default function ChatWindow({
         onScroll={handleScroll}
         className="scroll-warm relative z-10 h-full overflow-y-auto px-3 py-4 sm:px-6"
       >
-        <div className="mx-auto flex max-w-5xl flex-col gap-4">
+        <div className="mx-auto flex max-w-6xl flex-col gap-4">
           {messages.length === 0 && !isTyping && (
             <div className="flex flex-1 flex-col items-center justify-center gap-2 py-16 text-center text-[var(--color-ink-soft)]">
               <p className="text-sm">Lola is paddling over…</p>

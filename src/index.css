@@ -383,6 +383,20 @@ body::before {
   animation: pulse-soft 1.8s ease-in-out infinite;
 }
 
+/* expanding ring that draws the eye to the open-live-site link */
+@keyframes link-beacon {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--color-rose) 65%, transparent);
+  }
+  70%,
+  100% {
+    box-shadow: 0 0 0 7px transparent;
+  }
+}
+.animate-link-beacon {
+  animation: link-beacon 2.2s ease-out infinite;
+}
+
 /* slow sunset shimmer for the hero sun */
 @keyframes sun-breathe {
   0%,

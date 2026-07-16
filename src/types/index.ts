@@ -37,22 +37,50 @@ export interface Metric {
   value: string;
 }
 
+/** A mockup shell to present a screenshot in: a phone bezel or a desktop browser window. */
+export type DeviceKind = "phone" | "browser";
+
 export interface GalleryBlock {
   caption: string;
   gradient: [string, string];
   icon: LucideIcon;
   /** Real screenshot path (under /assets); falls back to gradient + icon when absent. */
   image?: string;
+  /**
+   * A demo clip (under /assets) that plays with controls in the artifact panel
+   * instead of a still. Needs `image` alongside it as the poster — that's what
+   * the collage and chips show, and what the player holds until playback.
+   */
+  video?: string;
   /** "contain" shows the whole image (labelled charts, dense diagrams); default "cover". */
   fit?: "cover" | "contain";
-  /** "phone" renders in the horizontal screens rail; default "wide" (grid tile). */
+  /** "phone" renders in a tall 9:16 window; default "wide" (16:10). */
   variant?: "wide" | "phone";
+  /** Dresses the shot in a device mockup in the artifact panel — a phone bezel or a browser window. */
+  device?: DeviceKind;
+  /**
+   * Which part of the story this shot belongs to: "process" (sketches,
+   * wireframes, research artifacts), "findings" (charts, data, evidence),
+   * or "solution" (the shipped design — the default).
+   */
+  stage?: "process" | "findings" | "solution";
 }
 
 export interface Testimonial {
   quote: string;
   author: string;
   role: string;
+}
+
+/** A research persona — who the project was designed for. */
+export interface Persona {
+  name: string;
+  /** Age/role context, e.g. "72 — retired teacher, first-time digital diner". */
+  descriptor: string;
+  /** Short first-person line capturing their stance. */
+  quote: string;
+  goals: string[];
+  frustrations: string[];
 }
 
 export interface Project {
@@ -74,6 +102,8 @@ export interface Project {
   heroImage?: string;
   /** "contain" letterboxes the hero over the gradient (portrait GIFs); default "cover". */
   heroFit?: "cover" | "contain";
+  /** Dresses the hero shot in a device mockup in the artifact panel. */
+  heroDevice?: DeviceKind;
   link?: string;
   /** Short label for the external `link` tab in the artifact panel (e.g. "Live site", "Figma prototype"); defaults to "Live". */
   linkLabel?: string;
@@ -82,6 +112,8 @@ export interface Project {
   problem: string;
   goals: string[];
   process: string[];
+  /** Research personas, shown in the Process section. */
+  personas?: Persona[];
   solution: string;
   results: Metric[];
   gallery: GalleryBlock[];
