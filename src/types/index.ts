@@ -75,6 +75,8 @@ export interface Project {
   /** "contain" letterboxes the hero over the gradient (portrait GIFs); default "cover". */
   heroFit?: "cover" | "contain";
   link?: string;
+  /** Short label for the external `link` tab in the artifact panel (e.g. "Live site", "Figma prototype"); defaults to "Live". */
+  linkLabel?: string;
   problem: string;
   goals: string[];
   process: string[];

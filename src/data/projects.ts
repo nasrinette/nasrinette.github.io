@@ -40,6 +40,7 @@ export const projects: Project[] = [
     heroImage: "/assets/menu-gif.gif",
     heroFit: "contain",
     link: "https://interactive-menu-app.netlify.app/",
+    linkLabel: "Live site",
     problem:
       "Despite paper menus forcing diners to wait for service and guess at ingredients, 68% of research participants initially preferred them over digital alternatives. The issue isn't technology adoption — existing digital solutions simply don't solve the real pain points: service dependency, opaque ingredient info, and broken group payments.",
     goals: [
@@ -96,6 +97,7 @@ export const projects: Project[] = [
     cover: "/assets/goodreads-cover.png",
     heroImage: "/assets/goodreads-cover.png",
     link: "https://quantux.telecom-paris.fr/2025/03/07/evaluating-the-usability-of-goodreads/",
+    linkLabel: "Read the write-up",
     problem:
       "Goodreads is one of the world's largest book platforms, yet there's little public research on its actual usability. As users ourselves, we'd felt the friction — so we asked: how intuitive, efficient, and satisfying is Goodreads for someone trying to find a book recommendation?",
     goals: [
@@ -152,6 +154,7 @@ export const projects: Project[] = [
     heroImage: "/assets/reserve/illumilend-hero.gif",
     heroFit: "contain",
     link: "https://www.figma.com/proto/wOZYuPmU3fsbzqpPIKWBUE/reserve?node-id=2013-425&t=B4GfEWrhlV6EvaMJ-0&scaling=min-zoom&content-scaling=fixed&page-id=2031%3A2918&starting-point-node-id=2013%3A425",
+    linkLabel: "Figma prototype",
     problem:
       "Digital reservation systems handle bookings well but abandon users at the storage room door. Students hunt through shelves translating codes like 'B-07' into physical locations, leave without any confirmation their pickup registered, and staff manually reconcile inventory when things go missing.",
     goals: [
@@ -209,6 +212,7 @@ export const projects: Project[] = [
     cover: "/assets/coffee/coffee-main.png",
     heroImage: "/assets/coffee/coffee-main.png",
     link: "https://data-vis-project.netlify.app/",
+    linkLabel: "Live site",
     problem:
       "Coffee industry data lives in siloed datasets — FAO statistics, production reports, consumer surveys, product reviews — in incompatible formats. Static charts miss the network structure of trade flows and the decades-long evolution of production.",
     goals: [

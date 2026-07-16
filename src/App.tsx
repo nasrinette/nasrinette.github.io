@@ -120,7 +120,7 @@ export default function App() {
         {view === "projects" && activeCaseStudy && (
           <>
             <SectionTopBar title={activeCaseStudy.title} onOpenMenu={openMobileNav} />
-            <div className="scroll-warm min-h-0 flex-1 overflow-y-auto">
+            <div className="min-h-0 flex-1 overflow-hidden">
               <CaseStudyView
                 project={activeCaseStudy}
                 onBack={() => setCaseStudyId(null)}
