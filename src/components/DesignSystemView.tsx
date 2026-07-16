@@ -36,8 +36,10 @@ import {
 /* Demos use real portfolio content — Protoca's metrics, personas, and gallery,
    the real starter prompts — never invented stand-ins: the system is shown
    doing its actual job. */
-const demoProject = projects.find((p) => p.id === "protoca") ?? projects[0];
+const demoProject = projects.find((p) => p.id === "interactive-menu") ?? projects[0];
 const demoTestimonial = projects.map((p) => p.testimonial).find(Boolean);
+const demoClips = demoProject.gallery.filter((b) => b.video).length;
+const demoScreens = demoProject.gallery.filter((b) => b.image).length - demoClips;
 const noop = () => {};
 
 function SectionTitle({ children }: { children: ReactNode }) {
@@ -255,9 +257,9 @@ export default function DesignSystemView() {
             <div className="space-y-4">
               <ArtifactChip
                 title={demoProject.title}
-                subtitle="demo · 5 screens"
-                image="/assets/protoca/protoca-poster.png"
-                video
+                subtitle={[demoClips > 0 ? "demo" : null, `${demoScreens} screens`].filter(Boolean).join(" · ")}
+                image={demoProject.cover}
+                video={demoClips > 0}
                 gradient={demoProject.gradient}
                 icon={demoProject.icon}
                 onOpen={noop}

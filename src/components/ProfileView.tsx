@@ -6,7 +6,8 @@ import ToolLogo from "./ToolLogo";
 export default function ProfileView() {
   return (
     <div className="mx-auto max-w-5xl px-4 py-8 sm:px-8 sm:py-12">
-      <header className="mb-8 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
+      {/* one column, centered on mobile; avatar-beside-text from sm up */}
+      <header className="mb-8 flex flex-col items-center gap-4 text-center sm:flex-row sm:items-center sm:text-left">
         <img
           src="/assets/me.png"
           alt={profile.name}
@@ -23,7 +24,7 @@ export default function ProfileView() {
           <p className="text-sm text-[var(--color-ink-soft)]">{profile.location}</p>
           <p className="mt-1 text-sm italic text-[var(--color-rose-dark)]">{profile.tagline}</p>
           {/* contact leads the page — a recruiter shouldn't have to scroll to reach out */}
-          <div className="mt-3">
+          <div className="mt-3 flex justify-center sm:justify-start">
             <ContactCard />
           </div>
         </div>
