@@ -41,6 +41,12 @@ export interface GalleryBlock {
   caption: string;
   gradient: [string, string];
   icon: LucideIcon;
+  /** Real screenshot path (under /assets); falls back to gradient + icon when absent. */
+  image?: string;
+  /** "contain" shows the whole image (labelled charts, dense diagrams); default "cover". */
+  fit?: "cover" | "contain";
+  /** "phone" renders in the horizontal screens rail; default "wide" (grid tile). */
+  variant?: "wide" | "phone";
 }
 
 export interface Testimonial {
@@ -62,6 +68,12 @@ export interface Project {
   highlights: string[];
   gradient: [string, string];
   icon: LucideIcon;
+  /** Cover image for the project card. */
+  cover?: string;
+  /** Banner image for the case study hero. */
+  heroImage?: string;
+  /** "contain" letterboxes the hero over the gradient (portrait GIFs); default "cover". */
+  heroFit?: "cover" | "contain";
   link?: string;
   problem: string;
   goals: string[];

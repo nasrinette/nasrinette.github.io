@@ -5,7 +5,9 @@ import {
   GalleryTile,
   KeyInsight,
   MetricRow,
+  PhoneScreen,
   ProcessTimeline,
+  ScreenRail,
   SectionHeading,
   Testimonial,
   ToolChip,
@@ -20,6 +22,9 @@ interface CaseStudyViewProps {
 }
 
 export default function CaseStudyView({ project, onBack, onPrev, onNext, onAskLola }: CaseStudyViewProps) {
+  const phoneShots = project.gallery.filter((b) => b.variant === "phone" && b.image);
+  const wideShots = project.gallery.filter((b) => b.variant !== "phone");
+
   return (
     <div className="mx-auto max-w-5xl px-4 pb-16 pt-6 sm:px-8">
       <button
@@ -36,6 +41,8 @@ export default function CaseStudyView({ project, onBack, onPrev, onNext, onAskLo
         tags={project.tags}
         title={project.title}
         meta={`${project.role} · ${project.year} · ${project.duration}`}
+        image={project.heroImage}
+        imageFit={project.heroFit}
       />
 
       <p className="mt-5 text-[15px] leading-relaxed text-[var(--color-ink)]">{project.description}</p>
@@ -71,11 +78,34 @@ export default function CaseStudyView({ project, onBack, onPrev, onNext, onAskLo
       {project.gallery.length > 0 && (
         <section className="mt-10">
           <SectionHeading>Gallery</SectionHeading>
-          <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
-            {project.gallery.map((block) => (
-              <GalleryTile key={block.caption} gradient={block.gradient} icon={block.icon} caption={block.caption} />
-            ))}
-          </div>
+          {phoneShots.length > 0 && (
+            <div className="mb-5">
+              <ScreenRail>
+                {phoneShots.map((block) => (
+                  <PhoneScreen
+                    key={block.caption}
+                    image={block.image!}
+                    caption={block.caption}
+                    gradient={block.gradient}
+                  />
+                ))}
+              </ScreenRail>
+            </div>
+          )}
+          {wideShots.length > 0 && (
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              {wideShots.map((block) => (
+                <GalleryTile
+                  key={block.caption}
+                  gradient={block.gradient}
+                  icon={block.icon}
+                  caption={block.caption}
+                  image={block.image}
+                  fit={block.fit}
+                />
+              ))}
+            </div>
+          )}
         </section>
       )}
 

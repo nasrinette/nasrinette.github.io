@@ -1,5 +1,11 @@
-import { ArrowRight, Mail } from "lucide-react";
+import { ArrowRight, FileText, Mail } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 import { profile } from "../data/profile";
+import ToolLogo from "./ToolLogo";
+
+const LINK_ICONS: Record<string, LucideIcon> = {
+  "CV (PDF)": FileText,
+};
 
 export default function ContactCard() {
   return (
@@ -15,15 +21,25 @@ export default function ContactCard() {
         <ArrowRight size={14} strokeWidth={2} className="shrink-0" aria-hidden="true" />
       </a>
       <div className="flex flex-wrap gap-2">
-        {profile.contact.links.map((link) => (
-          <a
-            key={link.label}
-            href={link.url}
-            className="btn-pastel px-3 py-1 text-xs font-medium"
-          >
-            {link.label}
-          </a>
-        ))}
+        {profile.contact.links.map((link) => {
+          const Icon = LINK_ICONS[link.label];
+          return (
+            <a
+              key={link.label}
+              href={link.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-pastel inline-flex items-center gap-1.5 px-3 py-1 text-xs font-medium"
+            >
+              {Icon ? (
+                <Icon size={12} strokeWidth={1.75} aria-hidden="true" />
+              ) : (
+                <ToolLogo name={link.label} size={12} />
+              )}
+              {link.label}
+            </a>
+          );
+        })}
       </div>
     </div>
   );

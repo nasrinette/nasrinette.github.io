@@ -1,20 +1,18 @@
 import { profile } from "../data/profile";
 import CatAvatar from "./CatAvatar";
 import ContactCard from "./ContactCard";
+import ToolLogo from "./ToolLogo";
 
 export default function ProfileView() {
   return (
     <div className="mx-auto max-w-5xl px-4 py-8 sm:px-8 sm:py-12">
       <header className="mb-8 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
-        <div
-          className="flex h-20 w-20 shrink-0 items-center justify-center rounded-full font-[var(--font-display)] text-3xl font-bold text-[var(--color-on-sunset)] shadow-[var(--shadow-glow)]"
+        <img
+          src="/assets/me.png"
+          alt={profile.name}
+          className="h-20 w-20 shrink-0 rounded-full object-cover shadow-[var(--shadow-glow)]"
           style={{ background: "var(--gradient-sunset)" }}
-        >
-          {profile.name
-            .split(" ")
-            .map((n) => n[0])
-            .join("")}
-        </div>
+        />
         <div>
           <p className="font-[var(--font-mono)] text-[11px] font-medium uppercase tracking-[0.2em] text-[var(--color-rose-dark)]">
             {profile.role}
@@ -90,8 +88,9 @@ export default function ProfileView() {
                   {group.items.map((item) => (
                     <span
                       key={item}
-                      className="rounded-full bg-[var(--color-paw)] px-2.5 py-0.5 text-[11px] font-medium text-[var(--color-ink)]"
+                      className="inline-flex items-center gap-1 rounded-full bg-[var(--color-paw)] px-2.5 py-0.5 text-[11px] font-medium text-[var(--color-ink)]"
                     >
+                      <ToolLogo name={item} size={11} className="text-[var(--color-rose-dark)]" />
                       {item}
                     </span>
                   ))}

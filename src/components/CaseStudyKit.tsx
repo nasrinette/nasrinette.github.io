@@ -1,5 +1,6 @@
 import type { ComponentType, ReactNode } from "react";
 import { Lightbulb, Quote } from "lucide-react";
+import ToolLogo from "./ToolLogo";
 
 /* ============================================================
    CASE STUDY KIT
@@ -142,68 +143,147 @@ export function TagPill({ children }: { children: ReactNode }) {
   return <span className="tag-warm px-2.5 py-0.5 text-[11px] font-medium">{children}</span>;
 }
 
-/* — ToolChip — outlined tool token ———————————————————————————— */
+/* — ToolChip — outlined tool token with its brand mark ————————— */
 export function ToolChip({ children }: { children: ReactNode }) {
   return (
-    <span className="rounded-full border border-[var(--color-blush-deep)] px-3 py-1 text-xs font-medium text-[var(--color-ink)]">
+    <span className="inline-flex items-center gap-1.5 rounded-full border border-[var(--color-blush-deep)] px-3 py-1 text-xs font-medium text-[var(--color-ink)]">
+      {typeof children === "string" && <ToolLogo name={children} size={13} className="text-[var(--color-rose-dark)]" />}
       {children}
     </span>
   );
 }
 
-/* — GalleryTile — gradient thumbnail + caption ———————————————— */
+/* — GalleryTile — screenshot (or gradient fallback) + caption ——— */
 export function GalleryTile({
   gradient,
   icon: Icon,
   caption,
+  image,
+  fit = "cover",
 }: {
   gradient: [string, string];
   icon: IconType;
   caption: string;
+  image?: string;
+  fit?: "cover" | "contain";
 }) {
   return (
-    <figure className="card-warm card-lift overflow-hidden">
-      <div
-        className="flex h-28 items-center justify-center"
-        style={{ background: `linear-gradient(135deg, ${gradient[0]}, ${gradient[1]})` }}
-        aria-hidden="true"
-      >
-        <Icon size={26} strokeWidth={1.75} style={{ color: "var(--color-on-sunset)" }} className="opacity-80" />
-      </div>
-      <figcaption className="bg-[var(--color-cream-soft)] px-3 py-2 text-xs text-[var(--color-ink-soft)]">
+    <figure className="card-warm card-lift flex h-full flex-col overflow-hidden">
+      {image ? (
+        <img
+          src={image}
+          alt={caption}
+          loading="lazy"
+          className={`h-56 w-full bg-[var(--color-blush)] ${
+            fit === "contain" ? "object-contain p-2" : "object-cover object-top"
+          }`}
+        />
+      ) : (
+        <div
+          className="flex h-28 items-center justify-center"
+          style={{ background: `linear-gradient(135deg, ${gradient[0]}, ${gradient[1]})` }}
+          aria-hidden="true"
+        >
+          <Icon size={26} strokeWidth={1.75} style={{ color: "var(--color-on-sunset)" }} className="opacity-80" />
+        </div>
+      )}
+      <figcaption className="mt-auto bg-[var(--color-cream-soft)] px-3 py-2 text-xs text-[var(--color-ink-soft)]">
         {caption}
       </figcaption>
     </figure>
   );
 }
 
-/* — CaseStudyHero — banner with icon, tags, title & meta ——————— */
+/* — PhoneScreen — a portrait mockup on its project-gradient backdrop —— */
+export function PhoneScreen({
+  image,
+  caption,
+  gradient,
+}: {
+  image: string;
+  caption: string;
+  gradient: [string, string];
+}) {
+  return (
+    <figure className="w-44 shrink-0 snap-center sm:w-48">
+      <div
+        className="relative overflow-hidden rounded-[var(--radius-xl)] border border-[var(--color-blush-deep)]/50 shadow-[var(--shadow-card)] transition duration-200 hover:-translate-y-1 hover:shadow-[var(--shadow-lift)]"
+        style={{ background: `linear-gradient(165deg, ${gradient[0]}2e, ${gradient[1]}52)` }}
+      >
+        {/* soft glow behind the device */}
+        <span
+          className="pointer-events-none absolute left-1/2 top-1/2 h-3/4 w-3/4 -translate-x-1/2 -translate-y-1/2 rounded-full opacity-50 blur-2xl"
+          style={{ background: `linear-gradient(140deg, ${gradient[0]}, ${gradient[1]})` }}
+          aria-hidden="true"
+        />
+        <img
+          src={image}
+          alt={caption}
+          loading="lazy"
+          className="relative aspect-[9/17] w-full object-contain px-3 py-4 drop-shadow-lg"
+        />
+      </div>
+      <figcaption className="mt-2 px-1 text-center text-xs leading-snug text-[var(--color-ink-soft)]">
+        {caption}
+      </figcaption>
+    </figure>
+  );
+}
+
+/* — ScreenRail — horizontally snapping strip of PhoneScreens ————— */
+export function ScreenRail({ children }: { children: ReactNode }) {
+  return (
+    <div className="-mx-4 overflow-x-auto px-4 pb-2 sm:mx-0 sm:px-0">
+      <div className="flex w-max min-w-full snap-x snap-mandatory justify-center gap-4 sm:gap-5">
+        {children}
+      </div>
+    </div>
+  );
+}
+
+/* — CaseStudyHero — banner with image (or icon), tags, title & meta — */
 export function CaseStudyHero({
   gradient,
   icon: Icon,
   tags,
   title,
   meta,
+  image,
+  imageFit = "cover",
 }: {
   gradient: [string, string];
   icon: IconType;
   tags: string[];
   title: string;
   meta: string;
+  image?: string;
+  imageFit?: "cover" | "contain";
 }) {
   return (
     <div className="mb-6">
       <div
-        className="relative flex h-40 items-center justify-center overflow-hidden rounded-[var(--radius-xl)] shadow-[var(--shadow-card)] sm:h-56"
+        className="relative flex h-40 items-center justify-center overflow-hidden rounded-[var(--radius-xl)] shadow-[var(--shadow-card)] sm:h-64"
         style={{ background: `linear-gradient(135deg, ${gradient[0]}, ${gradient[1]})` }}
       >
-        {/* soft light bloom in the corner for depth */}
-        <span
-          className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full"
-          style={{ background: "color-mix(in srgb, var(--color-cream-soft) 40%, transparent)", filter: "blur(24px)" }}
-          aria-hidden="true"
-        />
-        <Icon size={56} strokeWidth={1.5} style={{ color: "var(--color-on-sunset)" }} className="relative opacity-80" />
+        {image ? (
+          <img
+            src={image}
+            alt=""
+            className={`absolute inset-0 h-full w-full ${
+              imageFit === "contain" ? "object-contain py-3" : "object-cover"
+            }`}
+          />
+        ) : (
+          <>
+            {/* soft light bloom in the corner for depth */}
+            <span
+              className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full"
+              style={{ background: "color-mix(in srgb, var(--color-cream-soft) 40%, transparent)", filter: "blur(24px)" }}
+              aria-hidden="true"
+            />
+            <Icon size={56} strokeWidth={1.5} style={{ color: "var(--color-on-sunset)" }} className="relative opacity-80" />
+          </>
+        )}
       </div>
       <div className="mt-4 flex flex-wrap gap-1.5">
         {tags.map((t) => (

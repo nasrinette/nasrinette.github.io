@@ -36,6 +36,9 @@ export const projects: Project[] = [
     ],
     gradient: ["#f6b4a2", "#f19a86"],
     icon: QrCode,
+    cover: "/assets/menu-cover.png",
+    heroImage: "/assets/menu-gif.gif",
+    heroFit: "contain",
     link: "https://interactive-menu-app.netlify.app/",
     problem:
       "Despite paper menus forcing diners to wait for service and guess at ingredients, 68% of research participants initially preferred them over digital alternatives. The issue isn't technology adoption — existing digital solutions simply don't solve the real pain points: service dependency, opaque ingredient info, and broken group payments.",
@@ -59,9 +62,12 @@ export const projects: Project[] = [
       { label: "Paper-menu preference", value: "68% → won over" },
     ],
     gallery: [
-      { caption: "QR-code entry — no app download", gradient: ["#f9cbbd", "#f6b4a2"], icon: Smartphone },
-      { caption: "Full ingredient transparency & smart filters", gradient: ["#f6b4a2", "#f19a86"], icon: ListChecks },
-      { caption: "Individual payment for group dining", gradient: ["#f4a894", "#f19a86"], icon: Receipt },
+      { caption: "Low-fidelity prototype combining all four team sketches", gradient: ["#f9cbbd", "#f6b4a2"], icon: Smartphone, image: "/assets/low-fi-prototypes.png" },
+      { caption: "High-fidelity prototype — browsing to payment", gradient: ["#f6b4a2", "#f19a86"], icon: ListChecks, image: "/assets/hi-fi-menu.png" },
+      { caption: "Complete ingredient transparency for every dish", gradient: ["#f4a894", "#f19a86"], icon: ListChecks, image: "/assets/ingredients.png", variant: "phone" },
+      { caption: "Individual payment for group dining", gradient: ["#f9cbbd", "#f6b4a2"], icon: Receipt, image: "/assets/payment.png", variant: "phone" },
+      { caption: "Persistent accessibility controls on every screen", gradient: ["#f6b4a2", "#f19a86"], icon: Smartphone, image: "/assets/accessibility.png", variant: "phone" },
+      { caption: "Smart dietary filters trim the menu in real time", gradient: ["#f4a894", "#f19a86"], icon: ListChecks, image: "/assets/filtering.png", variant: "phone" },
     ],
     testimonial: {
       quote: "We can split the bill with friends.",
@@ -87,6 +93,8 @@ export const projects: Project[] = [
     ],
     gradient: ["#f7d49a", "#f3c079"],
     icon: BookOpen,
+    cover: "/assets/goodreads-cover.png",
+    heroImage: "/assets/goodreads-cover.png",
     link: "https://quantux.telecom-paris.fr/2025/03/07/evaluating-the-usability-of-goodreads/",
     problem:
       "Goodreads is one of the world's largest book platforms, yet there's little public research on its actual usability. As users ourselves, we'd felt the friction — so we asked: how intuitive, efficient, and satisfying is Goodreads for someone trying to find a book recommendation?",
@@ -109,9 +117,12 @@ export const projects: Project[] = [
       { label: "Key insight", value: "Time ≠ engagement" },
     ],
     gallery: [
-      { caption: "Cursor-tracking heatmaps of navigation", gradient: ["#fbe4bb", "#f7d49a"], icon: MousePointer2 },
-      { caption: "Correlation analysis: time vs. satisfaction", gradient: ["#f7d49a", "#f3c079"], icon: BarChart3 },
-      { caption: "3-task protocol with 16 participants", gradient: ["#f5c88a", "#f3c079"], icon: Search },
+      { caption: "User journey map — emotional highs and lows", gradient: ["#fbe4bb", "#f7d49a"], icon: Search, image: "/assets/user-journey.png", fit: "contain" },
+      { caption: "Heatmap: users gravitate to Browse and My Books", gradient: ["#f7d49a", "#f3c079"], icon: MousePointer2, image: "/assets/heatmap.png" },
+      { caption: "Correlation matrix: more time, lower satisfaction", gradient: ["#f5c88a", "#f3c079"], icon: BarChart3, image: "/assets/matrix.png", fit: "contain" },
+      { caption: "Interaction frequency across site sections", gradient: ["#fbe4bb", "#f7d49a"], icon: BarChart3, image: "/assets/freq-barchart.png", fit: "contain" },
+      { caption: "Average time per feature — Community lags", gradient: ["#f7d49a", "#f3c079"], icon: BarChart3, image: "/assets/avg-time.png", fit: "contain" },
+      { caption: "Helpfulness ratings: Similar Books wins", gradient: ["#f5c88a", "#f3c079"], icon: BarChart3, image: "/assets/helpfullness.png", fit: "contain" },
     ],
     testimonial: {
       quote: "This feels like it wasn't touched since 2009.",
@@ -137,6 +148,9 @@ export const projects: Project[] = [
     ],
     gradient: ["#dcb4cd", "#c79bb9"],
     icon: Lightbulb,
+    cover: "/assets/reserve/illumilend-hero.png",
+    heroImage: "/assets/reserve/illumilend-hero.gif",
+    heroFit: "contain",
     link: "https://www.figma.com/proto/wOZYuPmU3fsbzqpPIKWBUE/reserve?node-id=2013-425&t=B4GfEWrhlV6EvaMJ-0&scaling=min-zoom&content-scaling=fixed&page-id=2031%3A2918&starting-point-node-id=2013%3A425",
     problem:
       "Digital reservation systems handle bookings well but abandon users at the storage room door. Students hunt through shelves translating codes like 'B-07' into physical locations, leave without any confirmation their pickup registered, and staff manually reconcile inventory when things go missing.",
@@ -159,9 +173,14 @@ export const projects: Project[] = [
       { label: "Wrong items picked with lights on", value: "0" },
     ],
     gallery: [
-      { caption: "Color-coded floor arrows & shelf lighting", gradient: ["#e8cadd", "#dcb4cd"], icon: Lamp },
-      { caption: "Hand-drawn sketches to Figma wireframes", gradient: ["#dcb4cd", "#c79bb9"], icon: PenTool },
-      { caption: "Task-based study with 10 participants", gradient: ["#d2a6c4", "#c79bb9"], icon: Users },
+      { caption: "Hand-drawn room layouts simulating light patterns", gradient: ["#e8cadd", "#dcb4cd"], icon: PenTool, image: "/assets/reserve/ill-skc.png" },
+      { caption: "Digital wireframes of the initial UI", gradient: ["#dcb4cd", "#c79bb9"], icon: PenTool, image: "/assets/reserve/wireframe1.png" },
+      { caption: "LED lighting on numbered cubby positions", gradient: ["#d2a6c4", "#c79bb9"], icon: Lamp, image: "/assets/reserve/room-study.png" },
+      { caption: "Welcome screen with pickup instructions", gradient: ["#e8cadd", "#dcb4cd"], icon: Users, image: "/assets/reserve/f1.png", variant: "phone" },
+      { caption: "Your reservations — ongoing and past", gradient: ["#dcb4cd", "#c79bb9"], icon: Users, image: "/assets/reserve/f2.png", variant: "phone" },
+      { caption: "Browsing items to reserve", gradient: ["#e8cadd", "#dcb4cd"], icon: Users, image: "/assets/reserve/f4.png", variant: "phone" },
+      { caption: "Picking reservation dates on the calendar", gradient: ["#dcb4cd", "#c79bb9"], icon: Users, image: "/assets/reserve/f5.png", variant: "phone" },
+      { caption: "Wall display mirrors the mobile interface", gradient: ["#d2a6c4", "#c79bb9"], icon: Lamp, image: "/assets/reserve/big-screen.png" },
     ],
     testimonial: {
       quote: "The color makes it super fast. I didn't even think about it, just followed the blue light.",
@@ -187,6 +206,8 @@ export const projects: Project[] = [
     ],
     gradient: ["#f8c3a0", "#f3a988"],
     icon: Coffee,
+    cover: "/assets/coffee/coffee-main.png",
+    heroImage: "/assets/coffee/coffee-main.png",
     link: "https://data-vis-project.netlify.app/",
     problem:
       "Coffee industry data lives in siloed datasets — FAO statistics, production reports, consumer surveys, product reviews — in incompatible formats. Static charts miss the network structure of trade flows and the decades-long evolution of production.",
@@ -209,9 +230,10 @@ export const projects: Project[] = [
       { label: "Interactive visuals", value: "11" },
     ],
     gallery: [
-      { caption: "Force-directed global trade network", gradient: ["#fbd7bc", "#f8c3a0"], icon: Network },
-      { caption: "Choropleth production map with year slider", gradient: ["#f8c3a0", "#f3a988"], icon: Globe2 },
-      { caption: "Consumption & quality dashboards", gradient: ["#f6b596", "#f3a988"], icon: BarChart3 },
+      { caption: "Force-directed global trade network", gradient: ["#fbd7bc", "#f8c3a0"], icon: Network, image: "/assets/coffee/trade.png" },
+      { caption: "Production dashboard with year slider", gradient: ["#f8c3a0", "#f3a988"], icon: Globe2, image: "/assets/coffee/coffee-prod.png" },
+      { caption: "Consumption patterns over time", gradient: ["#f6b596", "#f3a988"], icon: BarChart3, image: "/assets/coffee/coffee-cons.png" },
+      { caption: "Quality metrics — price, rating, reviews", gradient: ["#fbd7bc", "#f8c3a0"], icon: BarChart3, image: "/assets/coffee/coffee-qual.png" },
     ],
   },
 ];

@@ -9,15 +9,24 @@ export default function ProjectCard({ project, onLearnMore }: ProjectCardProps) 
   const Icon = project.icon;
   return (
     <div className="card-warm card-lift w-64 shrink-0 snap-start overflow-hidden">
-      <div
-        className="flex h-24 items-center justify-center"
-        style={{
-          background: `linear-gradient(135deg, ${project.gradient[0]}, ${project.gradient[1]})`,
-        }}
-        aria-hidden="true"
-      >
-        <Icon size={30} strokeWidth={1.75} style={{ color: "var(--color-on-sunset)" }} className="opacity-80" />
-      </div>
+      {project.cover ? (
+        <img
+          src={project.cover}
+          alt=""
+          loading="lazy"
+          className="h-28 w-full bg-[var(--color-blush)] object-cover object-top"
+        />
+      ) : (
+        <div
+          className="flex h-24 items-center justify-center"
+          style={{
+            background: `linear-gradient(135deg, ${project.gradient[0]}, ${project.gradient[1]})`,
+          }}
+          aria-hidden="true"
+        >
+          <Icon size={30} strokeWidth={1.75} style={{ color: "var(--color-on-sunset)" }} className="opacity-80" />
+        </div>
+      )}
       <div className="space-y-2 p-4">
         <div className="flex items-center justify-between gap-2">
           <h3 className="font-[var(--font-display)] text-sm font-bold text-[var(--color-ink)]">

@@ -85,6 +85,14 @@ function BentoTile({
             ))}
           </div>
         </div>
+        {project.cover && (
+          <img
+            src={project.cover}
+            alt=""
+            loading="lazy"
+            className="relative hidden min-h-24 w-56 shrink-0 self-stretch rounded-[var(--radius-lg)] border border-[var(--color-blush-deep)]/50 bg-[var(--color-blush)] object-cover sm:block"
+          />
+        )}
         <ArrowRight
           size={18}
           strokeWidth={2}
@@ -116,6 +124,14 @@ function BentoTile({
             </div>
           ))}
         </div>
+        {project.cover && (
+          <img
+            src={project.cover}
+            alt=""
+            loading="lazy"
+            className="relative mt-2 min-h-0 w-full flex-1 rounded-[var(--radius-lg)] border border-[var(--color-blush-deep)]/50 bg-[var(--color-blush)] object-cover object-top"
+          />
+        )}
         <div className="relative mt-auto flex flex-wrap items-center justify-between gap-3 pt-2">
           <div className="flex flex-wrap gap-1.5">
             {project.tags.map((t) => (
@@ -136,6 +152,14 @@ function BentoTile({
         <IconChip project={project} />
         <span className="font-[var(--font-mono)] text-[11px] text-[var(--color-ink-soft)]">{project.year}</span>
       </div>
+      {project.cover && (
+        <img
+          src={project.cover}
+          alt=""
+          loading="lazy"
+          className="relative mt-1 h-24 w-full rounded-[var(--radius-lg)] border border-[var(--color-blush-deep)]/50 bg-[var(--color-blush)] object-cover object-top"
+        />
+      )}
       <h3 className="relative mt-1 font-[var(--font-display)] text-lg font-bold text-[var(--color-ink)]">
         {project.title}
       </h3>
