@@ -1,50 +1,43 @@
 import type { PromptDef } from "../types";
 
+/* Lola is the guide, not Nazrin — a visitor is asking *her* about *Nazrin*, so
+   the copy stays in third person on both sides of the turn. */
 export const starterPrompts: PromptDef[] = [
   {
     id: "about",
-    label: "Tell me about yourself",
-    keywords: ["about", "who are you", "yourself", "intro", "background", "bio"],
+    label: "Tell me about Nazrin",
+    keywords: ["about", "who", "yourself", "nazrin", "intro", "background", "bio"],
   },
   {
     id: "projects",
-    label: "Show me your projects",
+    label: "Show me her projects",
     keywords: ["project", "projects", "work", "portfolio", "case study", "case studies"],
   },
   {
-    id: "design-system",
-    label: "Show me your design system",
-    keywords: ["design system", "tokens", "components", "colors", "typography", "palette"],
-  },
-  {
-    id: "process",
-    label: "What's your design process?",
-    keywords: ["process", "how do you work", "workflow", "methodology", "approach"],
-  },
-  {
-    id: "skills",
-    label: "What tools do you use?",
-    keywords: ["tools", "skills", "software", "stack", "figma"],
-  },
-  {
     id: "contact",
-    label: "How can I reach you?",
+    label: "How can I reach her?",
     keywords: ["contact", "reach", "email", "hire", "available", "availability", "resume", "cv"],
   },
   {
     id: "fun",
-    label: "Tell me something fun about you",
-    keywords: ["fun", "funny", "hobby", "hobbies", "cat", "lola", "random"],
+    label: "Tell me something fun about her",
+    // "lola" is deliberately not a keyword: mentioning the cat by name is
+    // addressing the guide, not asking for fun facts about Nazrin
+    keywords: ["fun", "funny", "hobby", "hobbies", "cat", "random"],
   },
 ];
 
+/* Follow-ups continue the thread just pulled — never a menu of everything. An
+   answer that ends in a view leads with its nav chip, so at most one or two
+   suggestions ever sit under a reply. Intents with no chip (process, skills,
+   design system) stay reachable by typing. */
 export const followUpChips: Record<string, string[]> = {
-  about: ["Show me your projects", "What's your design process?", "How can I reach you?"],
-  projects: ["What's your design process?", "What tools do you use?", "How can I reach you?"],
-  "design-system": ["Show me your projects", "What tools do you use?"],
-  process: ["Show me your projects", "What tools do you use?"],
-  skills: ["Show me your projects", "Show me your design system"],
-  contact: ["Tell me about yourself", "Show me your projects"],
-  fun: ["Tell me about yourself", "Show me your projects"],
-  fallback: ["Tell me about yourself", "Show me your projects", "How can I reach you?"],
+  about: ["How can I reach her?"],
+  projects: ["Tell me about Nazrin", "How can I reach her?"],
+  contact: ["Show me her projects"],
+  fun: ["Tell me about Nazrin"],
+  "design-system": ["Show me her projects"],
+  process: ["Show me her projects"],
+  skills: ["Show me her projects"],
+  fallback: ["Tell me about Nazrin", "Show me her projects", "How can I reach her?"],
 };

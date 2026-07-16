@@ -89,23 +89,15 @@ export default function MessageBubble({
       >
         {formatTime(message.createdAt)}
       </span>
-      {message.chips && message.chips.length > 0 && (
+      {((message.chips?.length ?? 0) > 0 || (message.navChips?.length ?? 0) > 0) && (
         <div className={isUser ? "mr-1" : "ml-9"}>
-          <PromptChips chips={message.chips} onSelect={onChipSelect} disabled={inputDisabled} />
-        </div>
-      )}
-      {message.navChips && message.navChips.length > 0 && (
-        <div className={`flex flex-wrap gap-2 ${isUser ? "mr-1" : "ml-9"}`}>
-          {message.navChips.map((chip) => (
-            <button
-              key={chip.label}
-              type="button"
-              onClick={() => onNavigate(chip)}
-              className="btn-pastel px-3 py-1.5 font-[var(--font-display)] text-xs font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-rose-dark)]"
-            >
-              {chip.label}
-            </button>
-          ))}
+          <PromptChips
+            chips={message.chips ?? []}
+            navChips={message.navChips}
+            onSelect={onChipSelect}
+            onNavigate={onNavigate}
+            disabled={inputDisabled}
+          />
         </div>
       )}
     </div>

@@ -19,7 +19,23 @@ function normalize(input: string): string {
     .replace(/\s+/g, " ");
 }
 
-const GREETINGS = ["hi", "hello", "hey", "yo", "sup", "howdy", "hiya"];
+const GREETINGS = ["hi", "hello", "hey", "yo", "sup", "howdy", "hiya", "bonjour", "salut"];
+
+/* A hello aimed at the cat is still a hello. "hi lola" must greet, not score
+   on keywords — so a message made only of greeting words and her name (with
+   any amount of trailing a's) is a greeting, checked before anything scores. */
+function isPureGreeting(input: string): boolean {
+  let sawGreeting = false;
+  for (const token of input.split(" ")) {
+    if (GREETINGS.includes(token)) {
+      sawGreeting = true;
+      continue;
+    }
+    if (token.startsWith("lola") || token === "there" || token === "kitty") continue;
+    return false;
+  }
+  return sawGreeting;
+}
 const THANKS = ["thanks", "thank you", "thx", "ty", "appreciate"];
 const IDENTITY = [
   "are you real",
@@ -36,6 +52,8 @@ export function matchIntent(rawInput: string): Intent {
   if (!input) return { type: "fallback" };
 
   if (input === "meow" || input === "meow meow") return { type: "meow" };
+
+  if (isPureGreeting(input)) return { type: "greeting" };
 
   if (IDENTITY.some((phrase) => input.includes(phrase))) {
     return { type: "identity" };

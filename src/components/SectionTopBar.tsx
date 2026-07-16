@@ -12,7 +12,7 @@ export default function SectionTopBar({ title, onOpenMenu }: SectionTopBarProps)
         type="button"
         onClick={onOpenMenu}
         aria-label="Open menu"
-        className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md text-[var(--color-ink-soft)] hover:bg-[var(--color-blush)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-rose-dark)]"
+        className="flex h-8 w-8 shrink-0 items-center justify-center rounded-[var(--radius-ui)] text-[var(--color-ink-soft)] hover:bg-[var(--color-blush)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-rose-dark)]"
       >
         <Menu size={18} strokeWidth={1.75} aria-hidden="true" />
       </button>

@@ -90,7 +90,6 @@ export interface Project {
   description: string;
   role: string;
   year: string;
-  duration: string;
   tags: string[];
   tools: string[];
   highlights: string[];
@@ -116,6 +115,10 @@ export interface Project {
   personas?: Persona[];
   solution: string;
   results: Metric[];
+  /** Where the design falls short — shown in the Impact section, before `futureWork`. */
+  limitations?: string;
+  /** Where the project goes next — shown at the end of the Impact section. */
+  futureWork?: string;
   gallery: GalleryBlock[];
   testimonial?: Testimonial;
 }

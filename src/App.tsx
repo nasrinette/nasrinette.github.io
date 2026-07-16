@@ -8,38 +8,48 @@ import ProjectsView from "./components/ProjectsView";
 import CaseStudyView from "./components/CaseStudyView";
 import DesignSystemView from "./components/DesignSystemView";
 import ProfileView from "./components/ProfileView";
+import ConfirmDialog from "./components/ConfirmDialog";
 import { useChatEngine } from "./hooks/useChatEngine";
 import { useTheme } from "./hooks/useTheme";
 import { projects } from "./data/projects";
 import type { AppView, NavChip, Project } from "./types";
 
 export default function App() {
-  const { messages, isTyping, sendMessage, requestProjectDetail, retryMessage, clearChat } =
-    useChatEngine();
+  const { messages, isTyping, sendMessage, retryMessage, clearChat } = useChatEngine();
   const { mode: themeMode, setMode: setThemeMode } = useTheme();
 
   const [view, setView] = useState<AppView>("chat");
   const [caseStudyId, setCaseStudyId] = useState<string | null>(null);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
   const activeCaseStudy = useMemo(
     () => (caseStudyId ? projects.find((p) => p.id === caseStudyId) ?? null : null),
     [caseStudyId]
   );
 
-  const handleProjectLearnMore = useCallback(
-    (project: Project) => {
-      requestProjectDetail(project.id, project.title);
-    },
-    [requestProjectDetail]
-  );
+  // a card in the chat is a doorway to the case study, not a prompt for a
+  // summary of it — clicking through goes straight to the real thing.
+  const handleProjectLearnMore = useCallback((project: Project) => {
+    setView("projects");
+    setCaseStudyId(project.id);
+  }, []);
 
+  // a real conversation deserves the app's own dialog, not a "localhost says"
+  // browser alert — a fresh chat (welcome only) just clears without asking
+  const [confirmClearOpen, setConfirmClearOpen] = useState(false);
   const handleClear = useCallback(() => {
-    if (messages.length > 1 && !window.confirm("Start a new conversation? This clears your chat history.")) {
+    if (messages.length > 1) {
+      setConfirmClearOpen(true);
       return;
     }
     clearChat();
   }, [messages.length, clearChat]);
+
+  const handleConfirmClear = useCallback(() => {
+    setConfirmClearOpen(false);
+    clearChat();
+  }, [clearChat]);
 
   const handleSidebarNavigate = useCallback((next: AppView) => {
     setView(next);
@@ -55,14 +65,6 @@ export default function App() {
     setView(chip.view);
     setCaseStudyId(chip.projectId ?? null);
   }, []);
-
-  const handleAskLolaAboutProject = useCallback(
-    (project: Project) => {
-      setView("chat");
-      requestProjectDetail(project.id, project.title);
-    },
-    [requestProjectDetail]
-  );
 
   const cycleCaseStudy = useCallback(
     (direction: 1 | -1) => {
@@ -87,6 +89,8 @@ export default function App() {
         onOpenCaseStudy={handleSidebarOpenCaseStudy}
         mobileOpen={mobileNavOpen}
         onCloseMobile={closeMobileNav}
+        collapsed={sidebarCollapsed}
+        onToggleCollapse={() => setSidebarCollapsed((c) => !c)}
         themeMode={themeMode}
         onThemeChange={setThemeMode}
       />
@@ -126,7 +130,6 @@ export default function App() {
                 onBack={() => setCaseStudyId(null)}
                 onPrev={() => cycleCaseStudy(-1)}
                 onNext={() => cycleCaseStudy(1)}
-                onAskLola={handleAskLolaAboutProject}
               />
             </div>
           </>
@@ -150,6 +153,15 @@ export default function App() {
           </>
         )}
       </div>
+
+      <ConfirmDialog
+        open={confirmClearOpen}
+        title="Start a new conversation?"
+        message="This clears your chat history with Lola — the case studies and profile stay right where they are."
+        confirmLabel="Restart chat"
+        onConfirm={handleConfirmClear}
+        onCancel={() => setConfirmClearOpen(false)}
+      />
     </div>
   );
 }

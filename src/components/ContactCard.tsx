@@ -1,46 +1,55 @@
-import { ArrowRight, FileText, Mail } from "lucide-react";
-import type { LucideIcon } from "lucide-react";
+import { FileText, Mail } from "lucide-react";
 import { profile } from "../data/profile";
 import ToolLogo from "./ToolLogo";
 
-const LINK_ICONS: Record<string, LucideIcon> = {
-  "CV (PDF)": FileText,
-};
+/* — ContactIcons — the contact surface is a row of round brand marks, like a
+   site footer's social row: no labels, no rows, nothing button-shaped beyond
+   the circle itself. The full address travels in the tooltip and aria-label. — */
+export function ContactIcons({ size = "md" }: { size?: "sm" | "md" }) {
+  // the mark fills the ring (~55% of the diameter) — a small glyph in a big
+  // circle reads as empty chrome, this reads as the brand in a frame
+  const circle = size === "md" ? "h-8 w-8" : "h-6 w-6";
+  const glyph = size === "md" ? 17 : 13;
 
-export default function ContactCard() {
+  const items = [
+    {
+      label: `Email — ${profile.contact.email}`,
+      href: `mailto:${profile.contact.email}`,
+      external: false,
+      icon: <Mail size={glyph} strokeWidth={1.75} aria-hidden="true" />,
+    },
+    ...profile.contact.links.map((link) => ({
+      label: /cv|pdf|resume/i.test(link.label) ? "CV (PDF) — opens in a new tab" : `${link.label} — ${link.url.replace(/^https?:\/\/(www\.)?/, "")}`,
+      href: link.url,
+      external: true,
+      icon: /cv|pdf|resume/i.test(link.label) ? (
+        <FileText size={glyph} strokeWidth={1.75} aria-hidden="true" />
+      ) : (
+        <ToolLogo name={link.label} size={glyph} />
+      ),
+    })),
+  ];
+
   return (
-    <div className="w-full max-w-xs space-y-3 rounded-[var(--radius-ui)] border border-[var(--color-blush-deep)]/60 bg-[var(--color-cream-soft)] p-4">
-      <a
-        href={`mailto:${profile.contact.email}`}
-        className="btn-pastel flex items-center justify-between gap-2 px-3 py-2 text-sm font-semibold"
-      >
-        <span className="flex min-w-0 items-center gap-2">
-          <Mail size={14} strokeWidth={1.75} className="shrink-0" aria-hidden="true" />
-          <span className="truncate">{profile.contact.email}</span>
-        </span>
-        <ArrowRight size={14} strokeWidth={2} className="shrink-0" aria-hidden="true" />
-      </a>
-      <div className="flex flex-wrap gap-2">
-        {profile.contact.links.map((link) => {
-          const Icon = LINK_ICONS[link.label];
-          return (
-            <a
-              key={link.label}
-              href={link.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-pastel inline-flex items-center gap-1.5 px-3 py-1 text-xs font-medium"
-            >
-              {Icon ? (
-                <Icon size={12} strokeWidth={1.75} aria-hidden="true" />
-              ) : (
-                <ToolLogo name={link.label} size={12} />
-              )}
-              {link.label}
-            </a>
-          );
-        })}
-      </div>
+    <div className="flex flex-wrap items-center gap-2" role="group" aria-label="Contact links">
+      {items.map((item) => (
+        <a
+          key={item.href}
+          href={item.href}
+          {...(item.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+          aria-label={item.label}
+          title={item.label}
+          // outlined, not filled: ring and glyph share one color via
+          // border-current — the app's rust accent, per the reference
+          className={`focus-ring group flex ${circle} items-center justify-center rounded-full border border-current text-[var(--color-rose-dark)] transition hover:-translate-y-0.5`}
+        >
+          <span className="transition group-hover:scale-110">{item.icon}</span>
+        </a>
+      ))}
     </div>
   );
+}
+
+export default function ContactCard() {
+  return <ContactIcons size="md" />;
 }

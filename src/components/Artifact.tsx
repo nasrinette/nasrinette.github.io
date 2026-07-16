@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import type { ReactNode } from "react";
 import {
   ChevronLeft,
   ChevronRight,
@@ -97,68 +96,6 @@ function DeviceMockup({ src, alt, device, url }: { src: string; alt: string; dev
    docked to the right of the conversation. Owned by the design
    system, consumed by CaseStudyView.
    ============================================================ */
-
-function ArtifactHeader({ title, trailing }: { title: string; trailing?: ReactNode }) {
-  return (
-    <div className="flex items-center gap-2 border-b border-[var(--color-blush-deep)]/60 bg-[var(--color-blush)]/60 px-3 py-2">
-      <ImageIcon size={13} strokeWidth={1.75} className="shrink-0 text-[var(--color-rose-dark)]" aria-hidden="true" />
-      <span className="min-w-0 flex-1 truncate font-[var(--font-mono)] text-[11px] font-medium text-[var(--color-ink-soft)]">
-        {title}
-      </span>
-      {trailing}
-    </div>
-  );
-}
-
-/* — ArtifactCard — the inline chat preview, click to open the panel ————— */
-export function ArtifactCard({
-  image,
-  title,
-  fit = "cover",
-  aspect = "wide",
-  active = false,
-  onOpen,
-}: {
-  image: string;
-  title: string;
-  fit?: "cover" | "contain";
-  aspect?: "wide" | "phone" | "hero";
-  active?: boolean;
-  onOpen: () => void;
-}) {
-  const heightClass =
-    aspect === "hero" ? "h-44 sm:h-64" : aspect === "phone" ? "aspect-[9/17]" : "h-48";
-
-  return (
-    <button
-      type="button"
-      onClick={onOpen}
-      className={`card-warm card-lift focus-ring group block w-full overflow-hidden text-left transition ${
-        active ? "border-[var(--color-rose)] ring-1 ring-[var(--color-rose)]" : ""
-      }`}
-    >
-      <ArtifactHeader
-        title={title}
-        trailing={
-          <Maximize2
-            size={12}
-            strokeWidth={2}
-            className="shrink-0 text-[var(--color-ink-soft)] transition group-hover:text-[var(--color-rose-dark)]"
-            aria-hidden="true"
-          />
-        }
-      />
-      <div className={`relative w-full overflow-hidden bg-[var(--color-blush)] ${heightClass}`}>
-        <img
-          src={image}
-          alt={title}
-          loading="lazy"
-          className={`h-full w-full ${fit === "contain" ? "object-contain p-2" : "object-cover object-top"}`}
-        />
-      </div>
-    </button>
-  );
-}
 
 /* — ArtifactChip — a compact inline reference to visuals, the way Claude
    references an artifact: thumbnail, label, and an Open affordance. The
@@ -527,23 +464,52 @@ export function ArtifactPanel({
               ))}
           </div>
           {count > 1 && (
-            <div className="flex shrink-0 items-center justify-between border-t border-[var(--color-blush-deep)]/60 px-3 py-2">
+            // a counter says "2 exist"; thumbnails show them — the strip makes
+            // the rest of the gallery visible before anyone reads anything
+            <div className="flex shrink-0 items-center gap-1.5 border-t border-[var(--color-blush-deep)]/60 px-2 py-2">
               <button
                 type="button"
+                aria-label="Previous screen"
                 onClick={() => onNavigate((index - 1 + count) % count)}
-                className="focus-ring flex items-center gap-1 rounded-[var(--radius-sm)] px-2 py-1 text-xs font-medium text-[var(--color-ink-soft)] transition hover:text-[var(--color-rose-dark)]"
+                className="focus-ring shrink-0 rounded-[var(--radius-sm)] p-1 text-[var(--color-ink-soft)] transition hover:text-[var(--color-rose-dark)]"
               >
-                <ChevronLeft size={14} strokeWidth={2} aria-hidden="true" /> Prev
+                <ChevronLeft size={15} strokeWidth={2} aria-hidden="true" />
               </button>
-              <span className="font-[var(--font-mono)] text-[11px] text-[var(--color-ink-soft)]">
-                {index + 1} / {count}
-              </span>
+              <div className="scroll-warm flex min-w-0 flex-1 gap-1.5 overflow-x-auto py-0.5">
+                {images.map((img, i) => (
+                  <button
+                    key={img.src}
+                    type="button"
+                    data-active={i === index || undefined}
+                    aria-label={`Screen ${i + 1} of ${count}: ${img.title}`}
+                    aria-current={i === index ? "true" : undefined}
+                    onClick={() => onNavigate(i)}
+                    ref={(el) => {
+                      // keep the active thumb in view as prev/next walks the strip
+                      if (el && i === index) el.scrollIntoView({ block: "nearest", inline: "nearest" });
+                    }}
+                    // auto margins center the strip when it fits; justify-center
+                    // would strand the left thumbs beyond the scroll origin
+                    className={`focus-ring relative h-11 w-16 shrink-0 overflow-hidden rounded-[var(--radius-sm)] border transition ${
+                      i === 0 ? "ml-auto" : ""
+                    } ${i === count - 1 ? "mr-auto" : ""} ${
+                      i === index
+                        ? "border-[var(--color-rose)] ring-1 ring-[var(--color-rose)]"
+                        : "border-[var(--color-blush-deep)]/60 opacity-60 hover:opacity-100"
+                    }`}
+                  >
+                    <img src={img.src} alt="" loading="lazy" className="h-full w-full bg-[var(--color-blush)] object-cover object-top" />
+                    {img.video && <PlayBadge size={18} />}
+                  </button>
+                ))}
+              </div>
               <button
                 type="button"
+                aria-label="Next screen"
                 onClick={() => onNavigate((index + 1) % count)}
-                className="focus-ring flex items-center gap-1 rounded-[var(--radius-sm)] px-2 py-1 text-xs font-medium text-[var(--color-ink-soft)] transition hover:text-[var(--color-rose-dark)]"
+                className="focus-ring shrink-0 rounded-[var(--radius-sm)] p-1 text-[var(--color-ink-soft)] transition hover:text-[var(--color-rose-dark)]"
               >
-                Next <ChevronRight size={14} strokeWidth={2} aria-hidden="true" />
+                <ChevronRight size={15} strokeWidth={2} aria-hidden="true" />
               </button>
             </div>
           )}

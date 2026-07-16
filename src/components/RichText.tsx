@@ -1,16 +1,39 @@
 import { Fragment } from "react";
 
+const ITALIC = /(\*[^*]+\*)/g;
+/** **bold** (which may wrap *italic*), or *italic* on its own. */
+const EMPHASIS = /(\*\*.+?\*\*|\*[^*]+\*)/g;
+
+const isWrapped = (s: string, mark: string) =>
+  s.startsWith(mark) && s.endsWith(mark) && s.length > mark.length * 2;
+
+function renderItalics(text: string, keyPrefix: string) {
+  return text
+    .split(ITALIC)
+    .filter(Boolean)
+    .map((part, i) =>
+      isWrapped(part, "*") ? (
+        <em key={`${keyPrefix}-i${i}`}>{part.slice(1, -1)}</em>
+      ) : (
+        <Fragment key={`${keyPrefix}-i${i}`}>{part}</Fragment>
+      )
+    );
+}
+
 function renderInline(line: string, keyPrefix: string) {
-  const parts = line.split(/(\*\*[^*]+\*\*)/g).filter(Boolean);
+  const parts = line.split(EMPHASIS).filter(Boolean);
   return parts.map((part, i) => {
-    if (part.startsWith("**") && part.endsWith("**")) {
+    const key = `${keyPrefix}-${i}`;
+    // bold recurses, so a stressed word inside a bold lead still reads as one
+    if (isWrapped(part, "**")) {
       return (
-        <strong key={`${keyPrefix}-${i}`} className="font-semibold text-[var(--color-rose-dark)]">
-          {part.slice(2, -2)}
+        <strong key={key} className="font-semibold text-[var(--color-rose-dark)]">
+          {renderItalics(part.slice(2, -2), key)}
         </strong>
       );
     }
-    return <Fragment key={`${keyPrefix}-${i}`}>{part}</Fragment>;
+    if (isWrapped(part, "*")) return <em key={key}>{part.slice(1, -1)}</em>;
+    return <Fragment key={key}>{part}</Fragment>;
   });
 }
 

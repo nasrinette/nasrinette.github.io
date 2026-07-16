@@ -1,7 +1,8 @@
-import type { ComponentType, ReactNode } from "react";
-import { Frown, Lightbulb, Target } from "lucide-react";
+import type { ReactNode } from "react";
+import { Frown, Target } from "lucide-react";
 import type { Persona } from "../types";
 import CatAvatar from "./CatAvatar";
+import RichText from "./RichText";
 import ToolLogo from "./ToolLogo";
 
 /* ============================================================
@@ -10,8 +11,6 @@ import ToolLogo from "./ToolLogo";
    case study. Owned by the design system, consumed by
    CaseStudyView and documented in DesignSystemView.
    ============================================================ */
-
-type IconType = ComponentType<{ size?: number; strokeWidth?: number; className?: string; style?: object }>;
 
 /* — UserTurn / LolaTurn — chat bubbles a case study is told through ——— */
 export function UserTurn({ children }: { children: ReactNode }) {
@@ -77,11 +76,16 @@ export function MetricStat({ value, label }: { value: string; label: string }) {
 }
 
 export function MetricRow({ metrics }: { metrics: { value: string; label: string }[] }) {
+  // container-, not viewport-relative: the artifact panel steals width from this
+  // column, so a wide window can still leave a narrow column. Sizing on the
+  // viewport crams three cards into space that isn't there.
   return (
-    <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-      {metrics.map((m) => (
-        <MetricStat key={m.label} value={m.value} label={m.label} />
-      ))}
+    <div className="@container">
+      <div className="grid grid-cols-1 gap-3 @xs:grid-cols-2 @lg:grid-cols-3">
+        {metrics.map((m) => (
+          <MetricStat key={m.label} value={m.value} label={m.label} />
+        ))}
+      </div>
     </div>
   );
 }
@@ -106,36 +110,15 @@ export function ProcessTimeline({ steps }: { steps: string[] }) {
             >
               {i + 1}
             </span>
-            <p className="pt-0.5 text-sm leading-relaxed text-[var(--color-ink-soft)]">{step}</p>
+            {/* steps lead with a bolded phase name — Discover, Define… — so the
+                shape of the process reads before any of the prose does */}
+            <div className="pt-0.5 text-sm leading-relaxed text-[var(--color-ink-soft)]">
+              <RichText text={step} />
+            </div>
           </li>
         );
       })}
     </ol>
-  );
-}
-
-/* — KeyInsight — a soft-tinted callout for a takeaway ——————————— */
-export function KeyInsight({ children, label = "Key insight" }: { children: ReactNode; label?: string }) {
-  return (
-    <aside
-      className="relative overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-blush-deep)]/60 border-l-[3px] border-l-[var(--color-rose)] p-4 shadow-[var(--shadow-soft)]"
-      style={{ background: "color-mix(in srgb, var(--color-rose) 16%, var(--color-cream-soft))" }}
-    >
-      <div className="flex gap-3">
-        <span
-          className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[var(--color-cream-soft)] text-[var(--color-rose-dark)]"
-          aria-hidden="true"
-        >
-          <Lightbulb size={16} strokeWidth={1.75} />
-        </span>
-        <div className="min-w-0">
-          <p className="font-[var(--font-display)] text-xs font-bold uppercase tracking-wide text-[var(--color-rose-dark)]">
-            {label}
-          </p>
-          <p className="mt-0.5 text-sm leading-relaxed text-[var(--color-ink)]">{children}</p>
-        </div>
-      </div>
-    </aside>
   );
 }
 
@@ -164,7 +147,7 @@ export function PersonaCard({ persona }: { persona: Persona }) {
       <blockquote className="border-l-2 border-[var(--color-rose)] pl-2.5 text-[13px] italic leading-relaxed text-[var(--color-ink)]">
         “{persona.quote}”
       </blockquote>
-      <div className="space-y-3 sm:grid sm:grid-cols-2 sm:gap-4 sm:space-y-0">
+      <div className="@container/persona space-y-3 @sm/persona:grid @sm/persona:grid-cols-2 @sm/persona:gap-4 @sm/persona:space-y-0">
         <div>
           <p className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wide text-[var(--color-rose-dark)]">
             <Target size={12} strokeWidth={2} aria-hidden="true" /> Goals
@@ -233,55 +216,4 @@ export function ToolChip({ children }: { children: ReactNode }) {
   );
 }
 
-/* — GalleryTile — screenshot (or gradient fallback) + caption ——— */
-export function GalleryTile({
-  gradient,
-  icon: Icon,
-  caption,
-  image,
-  fit = "cover",
-}: {
-  gradient: [string, string];
-  icon: IconType;
-  caption: string;
-  image?: string;
-  fit?: "cover" | "contain";
-}) {
-  return (
-    <figure className="card-warm card-lift flex h-full flex-col overflow-hidden">
-      {image ? (
-        <img
-          src={image}
-          alt={caption}
-          loading="lazy"
-          className={`h-56 w-full bg-[var(--color-blush)] ${
-            fit === "contain" ? "object-contain p-2" : "object-cover object-top"
-          }`}
-        />
-      ) : (
-        <div
-          className="flex h-28 items-center justify-center"
-          style={{ background: `linear-gradient(135deg, ${gradient[0]}, ${gradient[1]})` }}
-          aria-hidden="true"
-        >
-          <Icon size={26} strokeWidth={1.75} style={{ color: "var(--color-on-sunset)" }} className="opacity-80" />
-        </div>
-      )}
-      <figcaption className="mt-auto bg-[var(--color-cream-soft)] px-3 py-2 text-xs text-[var(--color-ink-soft)]">
-        {caption}
-      </figcaption>
-    </figure>
-  );
-}
-
-/* — ScreenRail — horizontally snapping strip of phone-sized artifacts —— */
-export function ScreenRail({ children }: { children: ReactNode }) {
-  return (
-    <div className="-mx-4 overflow-x-auto px-4 pb-2 sm:mx-0 sm:px-0">
-      <div className="flex w-max min-w-full snap-x snap-mandatory justify-center gap-4 sm:gap-5">
-        {children}
-      </div>
-    </div>
-  );
-}
 

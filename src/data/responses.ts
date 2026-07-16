@@ -17,9 +17,8 @@ function bulletList(items: string[]): string {
 export function aboutResponse(): ResponseContent {
   return {
     text: [
-      `**${profile.name}** here — ${profile.role}, based in ${profile.location}.`,
-      profile.bio.slice(0, 3).join("\n\n"),
-      `**Focus areas:**\n\n${bulletList(profile.focusAreas)}`,
+      `**${profile.name}** — ${profile.role}, based in ${profile.location}.`,
+      profile.bio.slice(0, 2).join("\n\n"),
     ].join("\n\n"),
     chips: followUpChips.about,
     navChips: [{ label: "View full profile →", view: "profile" }],
@@ -52,12 +51,12 @@ export function projectDetailResponse(id: string): ResponseContent {
   }
   return {
     text: [
-      `**${project.title}** — ${project.role}, ${project.year} (${project.duration})`,
+      `**${project.title}** — ${project.role}, ${project.year}`,
       project.description,
       `**Highlights:**\n\n${bulletList(project.highlights)}`,
       `**Tools:** ${project.tools.join(", ")}`,
     ].join("\n\n"),
-    chips: ["Show me your projects", "What's your design process?", "How can I reach you?"],
+    chips: followUpChips.projects,
     navChips: [{ label: "Open full case study →", view: "projects", projectId: project.id }],
   };
 }
@@ -76,7 +75,7 @@ export function skillsResponse(): ResponseContent {
   return {
     text: [
       `**Tools in daily rotation:**\n\n${bulletList(profile.tools)}`,
-      `Hands-on across the full design cycle — with a frontend background (React, Tailwind), so designs ship the way they were specced.`,
+      `She's hands-on across the full design cycle, and her frontend background (React, Tailwind) means designs ship the way they were specced.`,
     ].join("\n\n"),
     chips: followUpChips.skills,
     navChips: [{ label: "View full profile →", view: "profile" }],

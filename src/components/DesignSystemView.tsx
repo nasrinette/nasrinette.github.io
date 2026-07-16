@@ -1,5 +1,5 @@
+import { useState } from "react";
 import type { ReactNode } from "react";
-import { Home, Palette, Zap } from "lucide-react";
 import {
   colorTokens,
   elevationScale,
@@ -9,17 +9,36 @@ import {
   spacingScale,
   typeScale,
 } from "../data/designSystem";
+import { projects } from "../data/projects";
+import { starterPrompts } from "../data/prompts";
+import type { ThemeMode } from "../hooks/useTheme";
+import { ArtifactChip, ArtifactCollage } from "./Artifact";
 import CatAvatar from "./CatAvatar";
+import ConfirmDialog from "./ConfirmDialog";
+import { ContactIcons } from "./ContactCard";
+import ProjectCard from "./ProjectCard";
+import PromptChips from "./PromptChips";
+import RichText from "./RichText";
+import ThemeToggle from "./ThemeToggle";
+import TypingIndicator from "./TypingIndicator";
 import {
-  GalleryTile,
-  KeyInsight,
+  LolaTurn,
   MetricRow,
+  PersonaCard,
   ProcessTimeline,
   SectionHeading,
   TagPill,
   Testimonial,
   ToolChip,
+  UserTurn,
 } from "./CaseStudyKit";
+
+/* Demos use real portfolio content — Protoca's metrics, personas, and gallery,
+   the real starter prompts — never invented stand-ins: the system is shown
+   doing its actual job. */
+const demoProject = projects.find((p) => p.id === "protoca") ?? projects[0];
+const demoTestimonial = projects.map((p) => p.testimonial).find(Boolean);
+const noop = () => {};
 
 function SectionTitle({ children }: { children: ReactNode }) {
   return (
@@ -31,6 +50,9 @@ function SectionTitle({ children }: { children: ReactNode }) {
 }
 
 export default function DesignSystemView() {
+  const [dialogOpen, setDialogOpen] = useState(false);
+  // local, cosmetic mode so the doc shows the cycle without touching the app theme
+  const [demoTheme, setDemoTheme] = useState<ThemeMode>("light");
   return (
     <div className="mx-auto max-w-5xl px-4 py-8 sm:px-8 sm:py-12">
       <header className="mb-12 space-y-3">
@@ -173,19 +195,97 @@ export default function DesignSystemView() {
 
       <section className="mb-12">
         <SectionTitle>Components</SectionTitle>
-        <div className="card-warm flex flex-wrap items-center gap-3 p-5">
-          <button type="button" className="btn-pastel px-4 py-2 font-[var(--font-display)] text-sm font-semibold">
-            Primary button
-          </button>
-          <button type="button" className="btn-ghost px-4 py-2 font-[var(--font-display)] text-sm font-semibold">
-            Secondary button
-          </button>
-          <span className="tag-warm px-2.5 py-0.5 text-[11px] font-medium">Tag</span>
-          <CatAvatar size={30} />
-          <div className="rounded-[var(--radius-ui)] border border-[var(--color-blush-deep)]/60 bg-[var(--color-cream-soft)] px-4 py-2.5 text-sm text-[var(--color-ink)] shadow-[var(--shadow-soft)]">
-            Assistant bubble
+        <div className="space-y-8">
+          <div>
+            <p className="mb-3 font-[var(--font-mono)] text-[10px] uppercase tracking-wide text-[var(--color-ink-soft)]">
+              Essentials — buttons, tag, avatar, typing, theme, contact
+            </p>
+            <div className="card-warm flex flex-wrap items-center gap-3 p-5">
+              <button type="button" className="btn-pastel px-4 py-2 font-[var(--font-display)] text-sm font-semibold">
+                Primary button
+              </button>
+              <button type="button" className="btn-ghost px-4 py-2 font-[var(--font-display)] text-sm font-semibold">
+                Secondary button
+              </button>
+              <TagPill>AI</TagPill>
+              <CatAvatar size={30} />
+              <TypingIndicator />
+              <ThemeToggle mode={demoTheme} onChange={setDemoTheme} />
+              <ContactIcons size="sm" />
+            </div>
           </div>
-          <div className="bubble-sunset px-4 py-2.5 text-sm">User bubble</div>
+
+          <div>
+            <p className="mb-3 font-[var(--font-mono)] text-[10px] uppercase tracking-wide text-[var(--color-ink-soft)]">
+              Chat turns — with bold, italic, and bullets via RichText
+            </p>
+            <div className="space-y-3">
+              <UserTurn>Tell me about the {demoProject.title} case study.</UserTurn>
+              <LolaTurn>
+                <div className="text-sm">
+                  <RichText text={"**A bold lead carries the idea** — with *stress* where it matters.\n\n- Bullets for flows\n- One move per line"} />
+                </div>
+              </LolaTurn>
+            </div>
+          </div>
+
+          <div>
+            <p className="mb-3 font-[var(--font-mono)] text-[10px] uppercase tracking-wide text-[var(--color-ink-soft)]">
+              Suggestion chips — questions and navigation share one row
+            </p>
+            <PromptChips
+              chips={[starterPrompts[0].label, starterPrompts[2].label]}
+              navChips={[{ label: "View full profile →", view: "profile" }]}
+              onSelect={noop}
+              onNavigate={noop}
+            />
+          </div>
+
+          <div>
+            <p className="mb-3 font-[var(--font-mono)] text-[10px] uppercase tracking-wide text-[var(--color-ink-soft)]">
+              Project card — the chat carousel unit
+            </p>
+            <ProjectCard project={demoProject} onLearnMore={noop} />
+          </div>
+
+          <div>
+            <p className="mb-3 font-[var(--font-mono)] text-[10px] uppercase tracking-wide text-[var(--color-ink-soft)]">
+              Artifact chip & collage — how visuals are referenced and showcased
+            </p>
+            <div className="space-y-4">
+              <ArtifactChip
+                title={demoProject.title}
+                subtitle="demo · 5 screens"
+                image="/assets/protoca/protoca-poster.png"
+                video
+                gradient={demoProject.gradient}
+                icon={demoProject.icon}
+                onOpen={noop}
+              />
+              <ArtifactCollage blocks={demoProject.gallery.slice(0, 4)} onOpen={noop} />
+            </div>
+          </div>
+
+          <div>
+            <p className="mb-3 font-[var(--font-mono)] text-[10px] uppercase tracking-wide text-[var(--color-ink-soft)]">
+              Confirm dialog — the app's own voice for destructive actions
+            </p>
+            <button
+              type="button"
+              onClick={() => setDialogOpen(true)}
+              className="btn-ghost px-4 py-2 font-[var(--font-display)] text-sm font-semibold"
+            >
+              Preview the confirm dialog
+            </button>
+            <ConfirmDialog
+              open={dialogOpen}
+              title="Start a new conversation?"
+              message="This clears your chat history with Lola — the case studies and profile stay right where they are."
+              confirmLabel="Restart chat"
+              onConfirm={() => setDialogOpen(false)}
+              onCancel={() => setDialogOpen(false)}
+            />
+          </div>
         </div>
       </section>
 
@@ -206,63 +306,35 @@ export default function DesignSystemView() {
 
           <div>
             <p className="mb-3 font-[var(--font-mono)] text-[10px] uppercase tracking-wide text-[var(--color-ink-soft)]">
-              Metric row
+              Metric row — {demoProject.title}'s real results
             </p>
-            <MetricRow
-              metrics={[
-                { value: "38% → 11%", label: "Onboarding drop-off" },
-                { value: "9 min → 1m 40s", label: "Setup time" },
-                { value: "+61%", label: "First-invoice completion" },
-              ]}
-            />
+            <MetricRow metrics={demoProject.results} />
           </div>
 
           <div>
             <p className="mb-3 font-[var(--font-mono)] text-[10px] uppercase tracking-wide text-[var(--color-ink-soft)]">
-              Process timeline
+              Process timeline — bold phase leads, from {demoProject.title}
             </p>
             <div className="card-warm p-5">
-              <ProcessTimeline
-                steps={[
-                  "Mapped the existing flow and tagged every field as required-now or deferrable",
-                  "Ran three rounds of concept testing on a radically shorter path",
-                  "Paired with engineering weekly to validate what could ship incrementally",
-                ]}
-              />
+              <ProcessTimeline steps={demoProject.process.slice(0, 3)} />
             </div>
           </div>
 
           <div>
             <p className="mb-3 font-[var(--font-mono)] text-[10px] uppercase tracking-wide text-[var(--color-ink-soft)]">
-              Key insight
+              Persona card — a real research persona
             </p>
-            <KeyInsight label="The solution">
-              Cut setup to four required fields and deferred everything else to a “finish your profile”
-              prompt that appears after the first invoice is sent — when the user is motivated, not before.
-            </KeyInsight>
+            {demoProject.personas?.[0] && <PersonaCard persona={demoProject.personas[0]} />}
           </div>
 
-          <div>
-            <p className="mb-3 font-[var(--font-mono)] text-[10px] uppercase tracking-wide text-[var(--color-ink-soft)]">
-              Gallery tiles
-            </p>
-            <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
-              <GalleryTile gradient={["#f9cbbd", "#f6b4a2"]} icon={Zap} caption="New 4-field fast start" />
-              <GalleryTile gradient={["#f7d49a", "#f3c079"]} icon={Home} caption="'This week' home view" />
-              <GalleryTile gradient={["#dcb4cd", "#c79bb9"]} icon={Palette} caption="Contrast-checked tokens" />
+          {demoTestimonial && (
+            <div>
+              <p className="mb-3 font-[var(--font-mono)] text-[10px] uppercase tracking-wide text-[var(--color-ink-soft)]">
+                Testimonial
+              </p>
+              <Testimonial {...demoTestimonial} />
             </div>
-          </div>
-
-          <div>
-            <p className="mb-3 font-[var(--font-mono)] text-[10px] uppercase tracking-wide text-[var(--color-ink-soft)]">
-              Testimonial
-            </p>
-            <Testimonial
-              quote="She turned our worst-performing screen into the reason people finish onboarding."
-              author="Priya Nathan"
-              role="Head of Product"
-            />
-          </div>
+          )}
 
           <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
             <div className="flex items-center gap-2">

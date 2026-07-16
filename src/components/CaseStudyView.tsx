@@ -1,11 +1,11 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { PointerEvent as ReactPointerEvent } from "react";
-import { ArrowLeft, ArrowRight, ExternalLink, MessageCircle } from "lucide-react";
+import { ArrowLeft, ArrowRight, ExternalLink } from "lucide-react";
 import type { Project } from "../types";
 import { useMediaQuery } from "../hooks/useMediaQuery";
 import { ArtifactChip, ArtifactCollage, ArtifactPanel, type ArtifactImage, type ArtifactTab } from "./Artifact";
+import RichText from "./RichText";
 import {
-  KeyInsight,
   LolaTurn,
   MetricRow,
   PersonaGrid,
@@ -22,11 +22,13 @@ interface CaseStudyViewProps {
   onBack: () => void;
   onPrev: () => void;
   onNext: () => void;
-  onAskLola: (project: Project) => void;
 }
 
 const MIN_PANEL_WIDTH = 320;
-const DEFAULT_PANEL_WIDTH = 440;
+const DEFAULT_PANEL_WIDTH = 400;
+/** Share of the window the panel opens at — the case study is the page, so the
+    preview takes the smaller half and the writing keeps the room to be read. */
+const PANEL_WIDTH_RATIO = 0.32;
 
 const SECTIONS = [
   { id: "overview", label: "Overview" },
@@ -51,7 +53,7 @@ function artifactSubtitle(blocks: { video?: string }[], hasLivePreview: boolean)
     .join(" · ");
 }
 
-export default function CaseStudyView({ project, onBack, onPrev, onNext, onAskLola }: CaseStudyViewProps) {
+export default function CaseStudyView({ project, onBack, onPrev, onNext }: CaseStudyViewProps) {
   const isDesktop = useMediaQuery("(min-width: 768px)");
 
   // each shot illustrates one part of the story — sketches sit with the
@@ -112,7 +114,7 @@ export default function CaseStudyView({ project, onBack, onPrev, onNext, onAskLo
   const [panelWidth, setPanelWidth] = useState(() => {
     if (typeof window === "undefined") return DEFAULT_PANEL_WIDTH;
     const max = Math.max(MIN_PANEL_WIDTH, window.innerWidth - 480);
-    return Math.min(max, Math.max(DEFAULT_PANEL_WIDTH, Math.round(window.innerWidth * 0.42)));
+    return Math.min(max, Math.max(DEFAULT_PANEL_WIDTH, Math.round(window.innerWidth * PANEL_WIDTH_RATIO)));
   });
   const [resizing, setResizing] = useState(false);
   const [fullscreen, setFullscreen] = useState(false);
@@ -239,7 +241,7 @@ export default function CaseStudyView({ project, onBack, onPrev, onNext, onAskLo
               </h1>
               <div className="flex flex-wrap items-center gap-2">
                 <p className="font-[var(--font-mono)] text-xs text-[var(--color-ink-soft)]">
-                  {project.role} · {project.year} · {project.duration}
+                  {project.role} · {project.year}
                 </p>
                 {project.link && (
                   <a
@@ -275,7 +277,9 @@ export default function CaseStudyView({ project, onBack, onPrev, onNext, onAskLo
                   <project.icon size={40} strokeWidth={1.5} style={{ color: "var(--color-on-sunset)" }} className="opacity-80" />
                 </div>
               )}
-              <p className="text-[15px] leading-relaxed text-[var(--color-ink)]">{project.description}</p>
+              <div className="text-[15px] text-[var(--color-ink)]">
+                <RichText text={project.description} />
+              </div>
               <div className="flex flex-wrap gap-2">
                 {project.tools.map((tool) => (
                   <ToolChip key={tool}>{tool}</ToolChip>
@@ -287,7 +291,9 @@ export default function CaseStudyView({ project, onBack, onPrev, onNext, onAskLo
             <section id="cs-problem" className="scroll-mt-16">
             <LolaTurn>
               <SectionHeading eyebrow="01">The problem</SectionHeading>
-              <p className="text-sm leading-relaxed text-[var(--color-ink-soft)]">{project.problem}</p>
+              <div className="text-sm text-[var(--color-ink-soft)]">
+                <RichText text={project.problem} />
+              </div>
               <p className="pt-1 text-xs font-semibold uppercase tracking-wide text-[var(--color-ink-soft)]/80">
                 What success looked like
               </p>
@@ -324,7 +330,11 @@ export default function CaseStudyView({ project, onBack, onPrev, onNext, onAskLo
             <section id="cs-solution" className="scroll-mt-16">
             <LolaTurn>
               <SectionHeading eyebrow="03">Solution</SectionHeading>
-              <KeyInsight label="The solution">{project.solution}</KeyInsight>
+              {/* the section is already titled Solution — a "The solution"
+                  callout inside it would just box the same label twice */}
+              <div className="text-sm text-[var(--color-ink-soft)]">
+                <RichText text={project.solution} />
+              </div>
               {(solutionImages.length > 0 || hasLivePreview) && (
                 <ArtifactChip
                   title="Final screens"
@@ -353,22 +363,29 @@ export default function CaseStudyView({ project, onBack, onPrev, onNext, onAskLo
                   role={project.testimonial.role}
                 />
               )}
+              {project.limitations && (
+                <>
+                  <p className="pt-1 text-xs font-semibold uppercase tracking-wide text-[var(--color-ink-soft)]/80">
+                    Limitations
+                  </p>
+                  <div className="text-sm text-[var(--color-ink-soft)]">
+                    <RichText text={project.limitations} />
+                  </div>
+                </>
+              )}
+              {project.futureWork && (
+                <>
+                  <p className="pt-1 text-xs font-semibold uppercase tracking-wide text-[var(--color-ink-soft)]/80">
+                    What&apos;s next
+                  </p>
+                  <div className="text-sm text-[var(--color-ink-soft)]">
+                    <RichText text={project.futureWork} />
+                  </div>
+                </>
+              )}
             </LolaTurn>
             </section>
 
-            <LolaTurn>
-              <p className="text-sm leading-relaxed text-[var(--color-ink)]">
-                Curious about the details, or want to see something from a different angle?
-              </p>
-              <button
-                type="button"
-                onClick={() => onAskLola(project)}
-                className="btn-pastel focus-ring flex items-center gap-2 px-4 py-2 font-[var(--font-display)] text-sm font-semibold"
-              >
-                <MessageCircle size={15} strokeWidth={1.75} aria-hidden="true" />
-                Ask Lola about this project
-              </button>
-            </LolaTurn>
           </div>
 
           <div className="mt-10 flex items-center justify-between border-t border-[var(--color-blush-deep)]/50 pt-4">

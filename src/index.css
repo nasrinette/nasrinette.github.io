@@ -16,14 +16,16 @@
   --font-body: "Nunito", "Inter", "Segoe UI", sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
 
-  /* — Radius scale ————————————————————————————————————— */
-  --radius-sm: 0.5rem;
-  --radius-md: 0.75rem;
-  --radius-lg: 1rem;
-  --radius-xl: 1.5rem;
+  /* — Radius ————————————————————————————————————————————
+     One radius for every button and container: 10px. The graded scale is
+     collapsed on purpose — the old names stay as aliases so nothing breaks,
+     but they all mean the same corner now. Only circles keep radius-full. */
+  --radius-ui: 10px;
+  --radius-sm: var(--radius-ui);
+  --radius-md: var(--radius-ui);
+  --radius-lg: var(--radius-ui);
+  --radius-xl: var(--radius-ui);
   --radius-full: 999px;
-  /* legacy single-radius alias, referenced across components */
-  --radius-ui: var(--radius-lg);
 
   /* — Signature sunset gradients (light = pale pastel) ———— */
   /* the through-line of the whole system: actions, active states, user voice */
@@ -101,28 +103,31 @@
   --gradient-sunset-soft: linear-gradient(103deg, #9c6a58 0%, #9e824f 50%, #9c8a52 100%);
   --gradient-dusk: linear-gradient(160deg, #b98aa6 0%, #e6a07e 60%, #f4c85f 100%);
 
-  --color-cream: #120c0f;        /* deep plum-black — the night sky */
-  --color-cream-soft: #1e161a;   /* raised card surface, a step above base */
-  --color-blush: #2a1e24;        /* hover fills */
-  --color-blush-deep: #3b2932;   /* borders, dividers */
-  --color-paw: #2c1f27;          /* tag backgrounds */
+  /* The ground drops; everything stacked on it is re-solved to hold the same
+     contrast against the new base that it held against the old one — so the
+     dusk reads darker without the elevation flattening into it. */
+  --color-cream: #060409;        /* deep plum-black — the night sky */
+  --color-cream-soft: #181014;   /* raised card surface, a step above base */
+  --color-blush: #24191e;        /* hover fills */
+  --color-blush-deep: #35262f;   /* borders, dividers */
+  --color-paw: #1f1622;          /* tag backgrounds */
 
   --color-rose: #f2916f;
   --color-rose-deep: #f6a686;
   --color-rose-dark: #f7bba2;
 
   --color-gold: #f2c069;
-  --color-gold-soft: #6d5334;
+  --color-gold-soft: #3d2e1e;
 
   --color-dusk: #cb9ec0;
-  --color-dusk-soft: #3a2a37;
+  --color-dusk-soft: #1e161d;
 
   --color-ink: #fbede4;
   --color-ink-soft: #c7ab9f;
 
-  --color-wash-1: #2a1917;
-  --color-wash-2: #2a2317;
-  --color-wash-3: #211823;
+  --color-wash-1: #130c0b;
+  --color-wash-2: #13110b;
+  --color-wash-3: #0f0b11;
 
   /* keep the halo subtle against the night sky */
   --color-halo: color-mix(in srgb, #f2c069 15%, transparent);

@@ -10,7 +10,7 @@ export default function ProfileView() {
         <img
           src="/assets/me.png"
           alt={profile.name}
-          className="h-20 w-20 shrink-0 rounded-full object-cover shadow-[var(--shadow-glow)]"
+          className="h-28 w-28 shrink-0 rounded-full object-cover shadow-[var(--shadow-glow)] sm:h-36 sm:w-36"
           style={{ background: "var(--gradient-sunset)" }}
         />
         <div>
@@ -22,6 +22,10 @@ export default function ProfileView() {
           </h1>
           <p className="text-sm text-[var(--color-ink-soft)]">{profile.location}</p>
           <p className="mt-1 text-sm italic text-[var(--color-rose-dark)]">{profile.tagline}</p>
+          {/* contact leads the page — a recruiter shouldn't have to scroll to reach out */}
+          <div className="mt-3">
+            <ContactCard />
+          </div>
         </div>
       </header>
 
@@ -132,10 +136,6 @@ export default function ProfileView() {
         </ul>
       </section>
 
-      <section>
-        <h2 className="mb-3 font-[var(--font-display)] text-lg font-bold text-[var(--color-ink)]">Get in touch</h2>
-        <ContactCard />
-      </section>
     </div>
   );
 }

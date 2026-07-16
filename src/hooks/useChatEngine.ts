@@ -21,7 +21,12 @@ import {
 import { welcomeChips, welcomeText } from "../data/welcome";
 
 export const MAX_MESSAGE_LENGTH = 500;
-const STORAGE_KEY = "ai-portfolio-chat-v1";
+// Chips and canned replies are persisted inside each stored message, so a
+// returning visitor replays whatever copy was live on their last visit. Bump
+// the version whenever prompts/responses change meaningfully — stale history
+// is discarded and the visitor gets the current welcome instead.
+const STORAGE_KEY = "ai-portfolio-chat-v2";
+const STALE_STORAGE_KEYS = ["ai-portfolio-chat-v1"];
 
 let idCounter = 0;
 function makeId(prefix: string): string {
@@ -49,6 +54,7 @@ function isValidHistory(value: unknown): value is ChatMessage[] {
 
 function loadHistory(): ChatMessage[] | null {
   try {
+    for (const key of STALE_STORAGE_KEYS) localStorage.removeItem(key);
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) return null;
     const parsed = JSON.parse(raw);
@@ -154,6 +160,12 @@ export function useChatEngine() {
   useEffect(() => {
     const restored = loadHistory();
     if (restored && restored.length > 0) {
+      // the opening message is always the welcome — its suggestion chips are
+      // navigation, not conversation, so they follow today's copy, not the
+      // copy that was live when this visitor's history was saved
+      if (restored[0].sender === "cat" && restored[0].chips) {
+        restored[0] = { ...restored[0], text: welcomeText(), chips: welcomeChips };
+      }
       setMessages(restored);
       const last = restored[restored.length - 1];
       if (last.sender === "user") {

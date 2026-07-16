@@ -23,19 +23,19 @@ export const gradientTokens = [
 ];
 
 export const colorTokens = [
-  { name: "Cream", varName: "--color-cream", light: "#FFF8F2", dark: "#120C0F", usage: "App background base" },
-  { name: "Cream Soft", varName: "--color-cream-soft", light: "#FFFDFB", dark: "#1E161A", usage: "Card surfaces" },
-  { name: "Blush", varName: "--color-blush", light: "#FEF3ED", dark: "#2A1E24", usage: "Hover states, subtle fills" },
-  { name: "Blush Deep", varName: "--color-blush-deep", light: "#F6E2D6", dark: "#3B2932", usage: "Borders, dividers" },
+  { name: "Cream", varName: "--color-cream", light: "#FFF8F2", dark: "#060409", usage: "App background base" },
+  { name: "Cream Soft", varName: "--color-cream-soft", light: "#FFFDFB", dark: "#181014", usage: "Card surfaces" },
+  { name: "Blush", varName: "--color-blush", light: "#FEF3ED", dark: "#24191E", usage: "Hover states, subtle fills" },
+  { name: "Blush Deep", varName: "--color-blush-deep", light: "#F6E2D6", dark: "#35262F", usage: "Borders, dividers" },
   { name: "Coral", varName: "--color-rose", light: "#F4B3A1", dark: "#F2916F", usage: "Primary accent" },
   { name: "Coral Deep", varName: "--color-rose-deep", light: "#EF9D84", dark: "#F6A686", usage: "Primary hover" },
   { name: "Coral Dark", varName: "--color-rose-dark", light: "#A54627", dark: "#F7BBA2", usage: "Emphasis text, links, focus" },
   { name: "Gold", varName: "--color-gold", light: "#F6D29A", dark: "#F2C069", usage: "Secondary accent" },
-  { name: "Gold Soft", varName: "--color-gold-soft", light: "#FBEBD0", dark: "#6D5334", usage: "Soft gold fills" },
+  { name: "Gold Soft", varName: "--color-gold-soft", light: "#FBEBD0", dark: "#3D2E1E", usage: "Soft gold fills" },
   { name: "Dusk", varName: "--color-dusk", light: "#BD95AD", dark: "#CB9EC0", usage: "Cool plum accent" },
   { name: "Ink", varName: "--color-ink", light: "#3B2925", dark: "#FBEDE4", usage: "Primary text" },
   { name: "Ink Soft", varName: "--color-ink-soft", light: "#7C5B52", dark: "#C7AB9F", usage: "Secondary text" },
-  { name: "Paw", varName: "--color-paw", light: "#FDEFE5", dark: "#2C1F27", usage: "Tag backgrounds" },
+  { name: "Paw", varName: "--color-paw", light: "#FDEFE5", dark: "#1F1622", usage: "Tag backgrounds" },
 ];
 
 export const typeScale = [
@@ -57,11 +57,9 @@ export const spacingScale = [
   { token: "space-12", px: 48 },
 ];
 
+// one radius across every button and container; circles are the only exception
 export const radiusScale = [
-  { token: "radius-sm", px: 8 },
-  { token: "radius-md", px: 12 },
-  { token: "radius-lg", px: 16 },
-  { token: "radius-xl", px: 24 },
+  { token: "radius-ui", px: 10 },
   { token: "radius-full", px: 999 },
 ];
 

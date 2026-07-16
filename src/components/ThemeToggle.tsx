@@ -1,23 +1,29 @@
-import { Laptop, Moon, Sun } from "lucide-react";
+import { Moon, Sun } from "lucide-react";
 import type { ThemeMode } from "../hooks/useTheme";
 
 interface ThemeToggleProps {
   mode: ThemeMode;
   onChange: (mode: ThemeMode) => void;
+  /** Stacks the two segments for narrow homes like the collapsed rail. */
+  vertical?: boolean;
 }
 
+/* The segmented two-state control: both modes visible, the active one lit.
+   Light and dark only — the system preference just picks the starting mode
+   on a first visit. */
 const OPTIONS: { mode: ThemeMode; label: string; icon: typeof Sun }[] = [
   { mode: "light", label: "Light theme", icon: Sun },
   { mode: "dark", label: "Dark theme", icon: Moon },
-  { mode: "system", label: "Match system theme", icon: Laptop },
 ];
 
-export default function ThemeToggle({ mode, onChange }: ThemeToggleProps) {
+export default function ThemeToggle({ mode, onChange, vertical = false }: ThemeToggleProps) {
   return (
     <div
       role="radiogroup"
       aria-label="Theme"
-      className="flex items-center gap-0.5 rounded-[var(--radius-md)] border border-[var(--color-blush-deep)] bg-[var(--color-cream)] p-0.5"
+      className={`flex items-center gap-0.5 rounded-[var(--radius-md)] border border-[var(--color-blush-deep)] bg-[var(--color-cream)] p-0.5 ${
+        vertical ? "flex-col" : ""
+      }`}
     >
       {OPTIONS.map(({ mode: optionMode, label, icon: Icon }) => {
         const active = mode === optionMode;

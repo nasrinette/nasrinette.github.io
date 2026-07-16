@@ -1,7 +1,9 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
-export type ThemeMode = "light" | "dark" | "system";
-type ResolvedTheme = "light" | "dark";
+/* Two modes only — light and dark. The system preference picks the starting
+   point on a first visit, but it isn't a mode of its own: one icon, one
+   click, one switch. */
+export type ThemeMode = "light" | "dark";
 
 const STORAGE_KEY = "ai-portfolio-theme";
 
@@ -9,40 +11,29 @@ function systemPrefersDark(): boolean {
   return window.matchMedia("(prefers-color-scheme: dark)").matches;
 }
 
-function resolveTheme(mode: ThemeMode): ResolvedTheme {
-  return mode === "system" ? (systemPrefersDark() ? "dark" : "light") : mode;
-}
-
-function applyTheme(resolved: ResolvedTheme) {
-  document.documentElement.classList.toggle("dark", resolved === "dark");
+function applyTheme(mode: ThemeMode) {
+  document.documentElement.classList.toggle("dark", mode === "dark");
   const meta = document.querySelector('meta[name="theme-color"]');
-  if (meta) meta.setAttribute("content", resolved === "dark" ? "#17120f" : "#faf6f2");
+  if (meta) meta.setAttribute("content", mode === "dark" ? "#17120f" : "#faf6f2");
 }
 
 function loadStoredMode(): ThemeMode {
   try {
     const stored = localStorage.getItem(STORAGE_KEY);
-    if (stored === "light" || stored === "dark" || stored === "system") return stored;
+    if (stored === "light" || stored === "dark") return stored;
+    // "system" from before the third mode was removed, or nothing stored:
+    // resolve the preference once and carry on with a plain light/dark
+    return systemPrefersDark() ? "dark" : "light";
   } catch {
-    // storage unavailable — fall through to default
+    return "light";
   }
-  return "system";
 }
 
 export function useTheme() {
   const [mode, setModeState] = useState<ThemeMode>(loadStoredMode);
-  const resolved = useMemo(() => resolveTheme(mode), [mode]);
 
   useEffect(() => {
-    applyTheme(resolved);
-  }, [resolved]);
-
-  useEffect(() => {
-    if (mode !== "system") return;
-    const mq = window.matchMedia("(prefers-color-scheme: dark)");
-    const handler = () => applyTheme(resolveTheme("system"));
-    mq.addEventListener("change", handler);
-    return () => mq.removeEventListener("change", handler);
+    applyTheme(mode);
   }, [mode]);
 
   const setMode = useCallback((next: ThemeMode) => {
@@ -54,5 +45,5 @@ export function useTheme() {
     }
   }, []);
 
-  return { mode, resolved, setMode };
+  return { mode, resolved: mode, setMode };
 }

@@ -3,21 +3,26 @@ import type { EducationEntry, ExperienceEntry, SkillGroup, Testimonial } from ".
 export const profile = {
   name: "Nazrin Nasirova",
   role: "Product Designer",
-  tagline: "I turn user research into validated, buildable designs.",
+  // no first person: it sits directly above a third-person bio
+  tagline: "Loves building products based on user research",
   location: "Paris, France (open to relocation)",
   yearsExperience: 3,
   availability: "Seeking a CDD or CDI as Product Designer in France, starting October 2026",
+  /** The same fact sized for tight corners (sidebar footer): status card line, not a sentence. */
+  availabilityShort: "CDD / CDI · Product Designer · France · from Oct 2026",
   stats: [
-    { label: "Shipped case studies", value: "4" },
+    { label: "Years of experience in interaction design", value: "3+" },
     { label: "Prototypes built at Wiremind", value: "20+" },
     { label: "Research & testing participants", value: "50+" },
     { label: "Languages spoken", value: "4" },
   ],
+  // third person throughout: Lola narrates this in chat, and the profile page
+  // reads as a portfolio bio rather than Nazrin speaking
   bio: [
-    "Hi, I'm Nazrin — a product designer with hands-on experience across the full design cycle: user research, wireframing, high-fidelity prototyping, and usability testing.",
-    "I'm currently at Wiremind in Paris, turning user insights into validated designs through rapid Gen AI-aided iteration, while finishing my MSc in Interaction, Graphics & Design at Institut Polytechnique de Paris.",
-    "My frontend background (React, Tailwind) means I design with implementation in mind — I've shipped the components, so I know what a handoff actually costs.",
-    "I combine research methods like interviews, personas, and competitive analysis with iterative prototyping, and I don't call a design done until it's been validated with real users.",
+    "Nazrin is a product designer with hands-on experience across the full design cycle: user research, wireframing, high-fidelity prototyping, and usability testing.",
+    "She's currently at Wiremind in Paris, turning user insights into validated designs through rapid Gen AI-aided iteration, while finishing her MSc in Interaction, Graphics & Design at Institut Polytechnique de Paris.",
+    "Her frontend background (React, Tailwind) means she designs with implementation in mind — she's shipped the components, so she knows what a handoff actually costs.",
+    "She combines research methods like interviews, personas, and competitive analysis with iterative prototyping, and doesn't call a design done until it's been validated with real users.",
   ],
   focusAreas: [
     "User research & personas",
@@ -44,11 +49,10 @@ export const profile = {
     { step: "Ship", detail: "Designs specced with implementation in mind, because I've been on the frontend side of the handoff." },
   ],
   funFacts: [
-    "Took 2nd place at the Huawei Tech Arena Hackathon in Finland.",
-    "Speaks four languages — Azerbaijani, Turkish, English (IELTS 8.0), and French (B2, in progress).",
-    "Translated Khan Academy educational content from English to Azerbaijani as a volunteer.",
-    "Finished in the top 5 of her cohort at the Université de Strasbourg Summer School.",
-    "Studied on the TotalEnergies E&P International Scholarship Program.",
+    "She's the eldest daughter of four — which she reckons is why she turned out so responsible.",
+    "She moved to France two years ago on the TotalEnergies international scholarship programme; without it, she wouldn't have been able to.",
+    "She's improving her French right now, one individual class at a time.",
+    "She likes building whatever project wanders into her head, using gen AI to get it real.",
   ],
   experience: [
     {
@@ -122,11 +126,12 @@ export const profile = {
   testimonials: [] as Testimonial[],
   contact: {
     email: "nazrin.nasirovaa@gmail.com",
-    resumeUrl: "https://nasrinette.github.io/Nazrin_Nasirova_CV.pdf",
+    // served from this site's own assets, so the portfolio and the CV can't drift apart
+    resumeUrl: "/assets/Nazrin_Nasirova_CV_Product_Designer.pdf",
     links: [
       { label: "LinkedIn", url: "https://www.linkedin.com/in/nazrin-nasirova/" },
       { label: "GitHub", url: "https://github.com/nasrinette" },
-      { label: "CV (PDF)", url: "https://nasrinette.github.io/Nazrin_Nasirova_CV.pdf" },
+      { label: "CV (PDF)", url: "/assets/Nazrin_Nasirova_CV_Product_Designer.pdf" },
     ],
   },
 };
