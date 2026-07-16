@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { PointerEvent as ReactPointerEvent } from "react";
-import { ArrowLeft, ArrowRight, MessageCircle } from "lucide-react";
+import { ArrowLeft, ArrowRight, MessageCircle, MonitorPlay } from "lucide-react";
 import type { Project } from "../types";
 import { useMediaQuery } from "../hooks/useMediaQuery";
 import { ArtifactCard, ArtifactPanel, type ArtifactImage } from "./Artifact";
@@ -46,15 +46,18 @@ export default function CaseStudyView({ project, onBack, onPrev, onNext, onAskLo
     return list;
   }, [project]);
 
+  const hasLivePreview = Boolean(project.link && project.embed);
+
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const [panelWidth, setPanelWidth] = useState(DEFAULT_PANEL_WIDTH);
   const [resizing, setResizing] = useState(false);
   const dragRef = useRef<{ startX: number; startWidth: number } | null>(null);
 
-  // opening a new case study starts fresh — auto-surface the hero artifact on
-  // desktop, the way Claude opens the panel as soon as there's something to show.
+  // opening a new case study starts fresh — auto-surface the hero artifact (or
+  // the live preview when there are no shots) on desktop, the way Claude opens
+  // the panel as soon as there's something to show.
   useEffect(() => {
-    setOpenIndex(isDesktop && artifacts.length > 0 ? 0 : null);
+    setOpenIndex(isDesktop && (artifacts.length > 0 || hasLivePreview) ? 0 : null);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [project.id]);
 
@@ -130,6 +133,23 @@ export default function CaseStudyView({ project, onBack, onPrev, onNext, onAskLo
                   active={activeSrc === project.heroImage}
                   onOpen={() => openArtifact(project.heroImage!)}
                 />
+              ) : hasLivePreview ? (
+                <button
+                  type="button"
+                  onClick={() => setOpenIndex(0)}
+                  aria-label={`Open live preview of ${project.title}`}
+                  className={`card-warm card-lift focus-ring group relative flex h-32 w-full items-center justify-center overflow-hidden text-left transition ${
+                    openIndex !== null ? "border-[var(--color-rose)] ring-1 ring-[var(--color-rose)]" : ""
+                  }`}
+                  style={{ background: `linear-gradient(135deg, ${project.gradient[0]}, ${project.gradient[1]})` }}
+                >
+                  <project.icon size={40} strokeWidth={1.5} style={{ color: "var(--color-on-sunset)" }} className="opacity-80" aria-hidden="true" />
+                  <span
+                    className="absolute bottom-2 right-2 flex items-center gap-1.5 rounded-full bg-[var(--color-cream-soft)]/90 px-2.5 py-1 text-[11px] font-semibold text-[var(--color-rose-dark)] shadow-sm transition group-hover:bg-[var(--color-cream-soft)]"
+                  >
+                    <MonitorPlay size={12} strokeWidth={2} aria-hidden="true" /> Live preview
+                  </span>
+                </button>
               ) : (
                 <div
                   className="flex h-32 items-center justify-center rounded-[var(--radius-lg)]"
@@ -266,7 +286,7 @@ export default function CaseStudyView({ project, onBack, onPrev, onNext, onAskLo
           index={openIndex}
           liveUrl={project.link}
           liveTabLabel={project.linkLabel}
-          liveEmbeddable={project.linkLabel === "Live site"}
+          liveEmbeddable={Boolean(project.embed)}
           onClose={() => setOpenIndex(null)}
           onNavigate={setOpenIndex}
           width={panelWidth}

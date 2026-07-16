@@ -121,10 +121,15 @@ export function ArtifactPanel({
   resizing: boolean;
   layout: "split" | "overlay";
 }) {
-  const [tab, setTab] = useState<"gallery" | "live">("gallery");
   const count = images.length;
+  const [tab, setTab] = useState<"gallery" | "live">(count === 0 && liveUrl ? "live" : "gallery");
   const current = images[index];
   const LiveTabIcon = linkIcon(liveTabLabel);
+
+  // image-less case studies only have the live preview to show
+  useEffect(() => {
+    if (count === 0 && liveUrl) setTab("live");
+  }, [count, liveUrl]);
 
   useEffect(() => {
     function onKeyDown(e: KeyboardEvent) {
@@ -172,17 +177,19 @@ export function ArtifactPanel({
       <div className="flex items-center gap-2 border-b border-[var(--color-blush-deep)]/60 bg-[var(--color-blush)]/60 px-3 py-2">
         {liveUrl ? (
           <div className="flex min-w-0 flex-1 gap-1">
-            <button
-              type="button"
-              onClick={() => setTab("gallery")}
-              className={`flex items-center gap-1.5 rounded-[var(--radius-sm)] px-2 py-1 text-xs font-semibold transition ${
-                tab === "gallery"
-                  ? "bg-[var(--color-cream-soft)] text-[var(--color-rose-dark)] shadow-sm"
-                  : "text-[var(--color-ink-soft)] hover:text-[var(--color-rose-dark)]"
-              }`}
-            >
-              <ImageIcon size={12} strokeWidth={2} aria-hidden="true" /> Gallery
-            </button>
+            {count > 0 && (
+              <button
+                type="button"
+                onClick={() => setTab("gallery")}
+                className={`flex items-center gap-1.5 rounded-[var(--radius-sm)] px-2 py-1 text-xs font-semibold transition ${
+                  tab === "gallery"
+                    ? "bg-[var(--color-cream-soft)] text-[var(--color-rose-dark)] shadow-sm"
+                    : "text-[var(--color-ink-soft)] hover:text-[var(--color-rose-dark)]"
+                }`}
+              >
+                <ImageIcon size={12} strokeWidth={2} aria-hidden="true" /> Gallery
+              </button>
+            )}
             <button
               type="button"
               onClick={() => setTab("live")}
@@ -267,9 +274,6 @@ export function ArtifactPanel({
             className="h-full w-full border-0"
             sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
           />
-          <p className="pointer-events-none absolute inset-x-0 bottom-0 bg-[var(--color-cream-soft)]/90 px-3 py-1.5 text-center text-[11px] text-[var(--color-ink-soft)]">
-            If the preview stays blank, the site blocks embedding — use the open-in-new-tab icon above.
-          </p>
         </div>
       ) : (
         <div className="flex min-h-0 flex-1 flex-col items-center justify-center gap-3 bg-[var(--color-blush)] p-6 text-center">

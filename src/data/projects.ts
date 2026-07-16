@@ -1,19 +1,31 @@
 import {
+  Apple,
   BarChart3,
   BookOpen,
+  Camera,
+  CloudRain,
+  CloudSun,
   Coffee,
+  Download,
   Globe2,
   Lamp,
+  Languages,
+  Layers,
   Lightbulb,
   ListChecks,
+  MessageSquare,
   MousePointer2,
   Network,
   PenTool,
   QrCode,
   Receipt,
+  Salad,
   Search,
   Smartphone,
+  Sparkles,
+  Sun,
   Users,
+  Zap,
 } from "lucide-react";
 import type { Project } from "../types";
 
@@ -41,6 +53,7 @@ export const projects: Project[] = [
     heroFit: "contain",
     link: "https://interactive-menu-app.netlify.app/",
     linkLabel: "Live site",
+    embed: true,
     problem:
       "Despite paper menus forcing diners to wait for service and guess at ingredients, 68% of research participants initially preferred them over digital alternatives. The issue isn't technology adoption — existing digital solutions simply don't solve the real pain points: service dependency, opaque ingredient info, and broken group payments.",
     goals: [
@@ -213,6 +226,7 @@ export const projects: Project[] = [
     heroImage: "/assets/coffee/coffee-main.png",
     link: "https://data-vis-project.netlify.app/",
     linkLabel: "Live site",
+    embed: true,
     problem:
       "Coffee industry data lives in siloed datasets — FAO statistics, production reports, consumer surveys, product reviews — in incompatible formats. Static charts miss the network structure of trade flows and the decades-long evolution of production.",
     goals: [
@@ -238,6 +252,241 @@ export const projects: Project[] = [
       { caption: "Production dashboard with year slider", gradient: ["#f8c3a0", "#f3a988"], icon: Globe2, image: "/assets/coffee/coffee-prod.png" },
       { caption: "Consumption patterns over time", gradient: ["#f6b596", "#f3a988"], icon: BarChart3, image: "/assets/coffee/coffee-cons.png" },
       { caption: "Quality metrics — price, rating, reviews", gradient: ["#fbd7bc", "#f8c3a0"], icon: BarChart3, image: "/assets/coffee/coffee-qual.png" },
+    ],
+  },
+  {
+    id: "protoca",
+    title: "Protoca",
+    summary: "A Chrome extension that captures any live web page and lets you redesign it in place.",
+    description:
+      "Protoca freezes any live URL into a fully self-contained, editable HTML snapshot and opens it in a precision visual editor. Move, resize, restyle, restructure — then export as standalone HTML, PNG, or ZIP. Built for designers who want to redesign a real page without learning anyone else's tooling.",
+    role: "Design Engineer",
+    year: "2026",
+    duration: "1 week",
+    tags: ["Chrome Extension", "Design Tools", "Creative Coding"],
+    tools: ["JavaScript (MV3)", "Chrome APIs", "SVG", "Python"],
+    highlights: [
+      "One-click capture inlines every asset and strips scripts while preserving layout",
+      "Figma-style editor: drag to move, eight-handle resize, smart guides, in-place text editing",
+      "Single commit/undo/redo history with gesture coalescing — every mutation is a reversible op",
+    ],
+    gradient: ["#eba8b5", "#dd8fa4"],
+    icon: Layers,
+    problem:
+      "Redesigning an existing website usually means rebuilding it from screenshots in a design tool — losing real layout, real content, and real CSS in the process. Designers need a way to work on the actual page, not a picture of it.",
+    goals: [
+      "Freeze any live page into a self-contained snapshot that survives offline",
+      "Make direct manipulation feel like a native design tool — selection, drag, resize, text editing",
+      "Keep every mutation undoable and export the result in formats people actually use",
+    ],
+    process: [
+      "Built the capture pipeline as a content script that inlines assets, strips JavaScript, and preserves layout",
+      "Centralized all coordinate transforms in one module and selection on stable element IDs — the invariants most prior attempts in this space skipped",
+      "Modeled every mutation as a { do, undo } operation feeding a single history with gesture coalescing",
+      "Added floating Properties and Layers panels that appear beside the selection and a full keyboard cheatsheet",
+    ],
+    solution:
+      "Click the toolbar icon on any page and it freezes into an editable snapshot in a new tab. Click anything to select it, drag to move with smart-guide snapping, double-click to edit text, and restyle via the floating Properties panel. A dashboard collects every capture, and export produces a standalone HTML file, a PNG, or a ZIP.",
+    results: [
+      { label: "From live URL to editable snapshot", value: "1 click" },
+      { label: "Export formats", value: "HTML · PNG · ZIP" },
+      { label: "Runtime dependencies", value: "0" },
+    ],
+    gallery: [
+      { caption: "Capture freezes the page — assets inlined, scripts stripped, layout preserved", gradient: ["#f3c4cd", "#eba8b5"], icon: Camera },
+      { caption: "Floating Properties and Layers panels appear next to your selection", gradient: ["#eba8b5", "#dd8fa4"], icon: Layers },
+      { caption: "Drag, eight-handle resize, smart guides, and snap alignment", gradient: ["#e49bab", "#dd8fa4"], icon: MousePointer2 },
+      { caption: "Export a standalone .html, a PNG, or a ZIP", gradient: ["#f3c4cd", "#eba8b5"], icon: Download },
+    ],
+  },
+  {
+    id: "lingopro",
+    title: "LingoPro",
+    summary: "Turn any text into an AI-generated vocabulary lesson, shared with students via one link.",
+    description:
+      "A zero-dependency web app for language teachers: paste a text, choose a CEFR level (A1–C2) and translation language, and AI extracts the key vocabulary and writes quizzes. Students open a link, type their first name, and work through five activity types while the teacher watches results roll in live — no accounts, no installs.",
+    role: "Full-Stack Developer & Designer",
+    year: "2026",
+    duration: "1 week",
+    tags: ["EdTech", "AI", "Full-Stack"],
+    tools: ["Node.js", "SQLite", "Vanilla JS", "LLM APIs"],
+    highlights: [
+      "Five scored activity types generated from a single pasted text: flashcards, QCM, associations, cloze, and a full lexique",
+      "Zero npm dependencies — HTTP server, SQLite, and AI client all on Node built-ins",
+      "Teacher link opens a live results dashboard: per-student progress, scores, attempts, and time spent",
+    ],
+    gradient: ["#c3b3dd", "#a794c9"],
+    icon: Languages,
+    link: "https://lingopro-production.up.railway.app/",
+    linkLabel: "Live site",
+    embed: true,
+    problem:
+      "Making a vocabulary lesson from an authentic text is slow, manual work — picking words, writing definitions at the right level, translating, building quizzes — and most classroom tools then demand student accounts and installs before anyone can practice.",
+    goals: [
+      "Generate a complete, level-appropriate lesson from any pasted text in one AI call",
+      "Let students start practicing with nothing but a link and their first name",
+      "Give teachers real visibility: who did which activity, best scores, and full attempt history",
+    ],
+    process: [
+      "Designed a strict-JSON prompt with schema validation and repair — malformed items are dropped and answer options re-shuffled instead of failing the lesson",
+      "Built the whole stack on Node built-ins, including SQLite via node:sqlite, so it deploys anywhere with zero install",
+      "Made the student UI speak the lesson's language automatically (French, English, Spanish, German, Italian)",
+      "Added a demo mode with a built-in sample lesson so the app is fully usable without an API key",
+    ],
+    solution:
+      "Creating a lesson yields two links: a short student link the class shares, and a private teacher link that opens an interactive preview with a Results mode. Students' progress resumes by first name, each completed activity posts its score automatically, and the teacher view refreshes live. Any OpenAI-compatible provider works by changing three lines of config.",
+    results: [
+      { label: "Activity types per lesson", value: "5" },
+      { label: "CEFR levels supported", value: "A1–C2" },
+      { label: "npm dependencies", value: "0" },
+    ],
+    gallery: [
+      { caption: "Paste a text, pick a level and translation language — AI does the rest", gradient: ["#d5c9e8", "#c3b3dd"], icon: Sparkles },
+      { caption: "Five tabs: lexique, flashcards, QCM, associations, texte à trous", gradient: ["#c3b3dd", "#a794c9"], icon: ListChecks },
+      { caption: "Pronunciation built in — the UI speaks the lesson's language", gradient: ["#baa6d4", "#a794c9"], icon: Languages },
+      { caption: "Teacher results: per-student progress, scores, and attempt history", gradient: ["#d5c9e8", "#c3b3dd"], icon: Users },
+    ],
+  },
+  {
+    id: "nourish-mcp",
+    title: "Nourish MCP",
+    summary: "A calorie tracker you update by just telling Claude what you ate.",
+    description:
+      "Nourish is a nutrition tracker with a built-in MCP server: connect it to Claude and log meals conversationally — describe your lunch or send a photo, and the log_meal tool records calories and macros straight into your dashboard. A calorie ring, macro bars, trend charts, and goals close the loop.",
+    role: "Full-Stack Developer",
+    year: "2026",
+    duration: "Ongoing",
+    tags: ["AI", "MCP", "Health"],
+    tools: ["Next.js", "TypeScript", "PostgreSQL", "MCP SDK"],
+    highlights: [
+      "MCP server exposes log_meal and get_today_summary tools, so any MCP client becomes the input UI",
+      "Log by chat, photo, or text — the AI estimates calories, protein, carbs, and fat",
+      "Dashboard with calorie ring, macro bars, history, range-filtered trend charts, and goals",
+    ],
+    gradient: ["#f2cf9b", "#e9b878"],
+    icon: Apple,
+    link: "https://ui-production-41e1.up.railway.app/",
+    linkLabel: "Live site",
+    embed: true,
+    problem:
+      "Calorie tracking fails because logging is tedious: searching food databases, weighing portions, and filling forms after every meal. Most people quit within weeks — the friction costs more than the insight returns.",
+    goals: [
+      "Reduce logging to a sentence: tell an AI assistant what you ate and move on",
+      "Keep the data in your own database with a real dashboard, not locked in a chat history",
+      "Make connecting Claude to the tracker a one-tap, key-based pairing",
+    ],
+    process: [
+      "Built the tracker as a Next.js app on PostgreSQL with a REST API for meals, goals, and summaries",
+      "Embedded an MCP server behind a per-user key route, exposing meal logging and daily summaries as typed tools with Zod schemas",
+      "Designed a connect page that generates the personal MCP endpoint and walks through pairing with Claude",
+      "Added dashboard views: calorie ring and macro bars for today, plus range-filtered calorie and macro trend charts",
+    ],
+    solution:
+      "You chat with Claude as usual — 'log a chicken salad and an espresso for lunch' — and the MCP tools write structured meals (calories, protein, carbs, fat, meal type, source) to the database. Open Nourish to see today's ring fill up, review history, and track weekly trends against your goals.",
+    results: [
+      { label: "Effort to log a meal", value: "One sentence" },
+      { label: "MCP tools exposed", value: "log_meal · get_today_summary" },
+      { label: "Meal sources supported", value: "Photo · text · manual" },
+    ],
+    gallery: [
+      { caption: "Tell Claude what you ate — the MCP tool logs it with estimated macros", gradient: ["#f7dfb8", "#f2cf9b"], icon: MessageSquare },
+      { caption: "Calorie ring and macro bars for the day at a glance", gradient: ["#f2cf9b", "#e9b878"], icon: BarChart3 },
+      { caption: "Range-filtered calorie and macro trend charts", gradient: ["#eec489", "#e9b878"], icon: BarChart3 },
+      { caption: "One-tap connect page pairs the tracker with Claude", gradient: ["#f7dfb8", "#f2cf9b"], icon: Network },
+    ],
+  },
+  {
+    id: "mister-garden",
+    title: "Mister Garden — Salad Builder",
+    summary: "Build your salad, watch nutrition facts and price update live.",
+    description:
+      "An unofficial, fan-made salad builder inspired by the Mister Garden menu. Pick a base, ingredients, bonus toppings, a sauce, and bread, and see live nutrition facts and an estimated price as you compose — in French or English.",
+    role: "Frontend Developer",
+    year: "2026",
+    duration: "1 week",
+    tags: ["Web App", "Nutrition", "i18n"],
+    tools: ["React", "Vite", "GitHub Actions"],
+    highlights: [
+      "80+ menu items across bases, ingredients, bonus toppings, sauces, and bread",
+      "Nutrition facts and estimated price recalculate live with every choice",
+      "Fully bilingual French/English interface, auto-deployed to GitHub Pages on every push",
+    ],
+    gradient: ["#cdd9a5", "#b3c383"],
+    icon: Salad,
+    link: "https://nasrinette.github.io/mister-garden-builder/",
+    linkLabel: "Live site",
+    embed: true,
+    problem:
+      "Composing a salad at the counter means guessing: no menu tells you what your exact combination of base, toppings, and sauce adds up to — in calories or in price — until it's already on your tray.",
+    goals: [
+      "Let people plan their exact salad before ordering",
+      "Show honest, per-ingredient nutrition that sums live",
+      "Keep it fast, bilingual, and free to host",
+    ],
+    process: [
+      "Compiled the menu into structured data — bases, ingredients, bonus toppings, sauces, and breads with per-item nutrition",
+      "Built the builder flow in React with live-updating totals for calories and estimated price",
+      "Localized the full interface into French and English",
+      "Set up a GitHub Actions workflow that builds and publishes to GitHub Pages on every push to main",
+    ],
+    solution:
+      "A single-page builder that mirrors the real ordering flow: choose your base, stack ingredients and bonus toppings, finish with sauce and bread. A running panel shows total calories, macros, and estimated price, updating instantly as you add or remove items.",
+    results: [
+      { label: "Menu items to compose from", value: "80+" },
+      { label: "Languages", value: "FR · EN" },
+      { label: "Nutrition & price feedback", value: "Live" },
+    ],
+    gallery: [
+      { caption: "Compose: base, ingredients, bonus, sauce, and bread", gradient: ["#dee6bf", "#cdd9a5"], icon: Salad },
+      { caption: "Nutrition facts and price update with every ingredient", gradient: ["#cdd9a5", "#b3c383"], icon: BarChart3 },
+      { caption: "Switch the whole interface between French and English", gradient: ["#c3cf94", "#b3c383"], icon: Globe2 },
+    ],
+  },
+  {
+    id: "atmos-ui",
+    title: "AtmosUI",
+    summary: "Weather-aware shader effects that let UI elements react to real conditions.",
+    description:
+      "A WebGL experiment giving icons, widgets, and UI components live weather and time awareness — without touching the user's wallpaper. Sun adds soft highlights, rain brings ripple effects that scale with intensity, fog casts a mild haze, and snow shimmers harder as it falls heavier.",
+    role: "Creative Developer",
+    year: "2025",
+    duration: "2 weeks",
+    tags: ["WebGL", "Shaders", "Ambient UI"],
+    tools: ["WebGL", "GLSL", "JavaScript"],
+    highlights: [
+      "Five GLSL shader effects — sun, rain, ice, fog, and lightning — composable over any UI element",
+      "Effect intensity is driven by the weather itself: heavier rain means stronger ripples",
+      "Sits on top of any background, so users keep the look they already like",
+    ],
+    gradient: ["#b9c8de", "#9db1cd"],
+    icon: CloudSun,
+    link: "https://nasrinette.github.io/atmos-UI/",
+    linkLabel: "Live demo",
+    embed: true,
+    problem:
+      "Ambient weather cues on our devices are all-or-nothing: either a full dynamic wallpaper that overrides personal aesthetics, or a static icon that says '12°' with no feeling. There's no middle layer where the interface itself gently reflects what's happening outside.",
+    goals: [
+      "Let icons, widgets, and components react to real weather and its intensity",
+      "Preserve the user's chosen wallpaper and aesthetic entirely",
+      "Make the effects legible at a glance — weather you sense, not read",
+    ],
+    process: [
+      "Prototyped each weather condition as a standalone GLSL fragment shader — sun, rain, ice, fog, lightning",
+      "Built an orchestration layer in JavaScript that applies shaders to individual UI elements and modulates them by intensity",
+      "Tuned each effect to stay subtle enough for a home screen: soft highlights, gentle ripples, mild haze",
+      "Published an interactive demo showing the effects on icons and widgets across conditions",
+    ],
+    solution:
+      "A shader library where every effect layers on top of existing UI elements rather than replacing the background. Rain ripples grow with precipitation, snow shimmer scales with snowfall, and sunny highlights warm the interface — giving a quick, ambient sense of the weather while the user's own look stays intact.",
+    results: [
+      { label: "Weather shader effects", value: "5" },
+      { label: "Wallpaper changes required", value: "0" },
+      { label: "Intensity-reactive", value: "Yes" },
+    ],
+    gallery: [
+      { caption: "Rain ripples that strengthen with heavier rainfall", gradient: ["#cdd8e8", "#b9c8de"], icon: CloudRain },
+      { caption: "Sunny highlights warm icons and widgets", gradient: ["#b9c8de", "#9db1cd"], icon: Sun },
+      { caption: "Lightning, fog, and ice shaders complete the set", gradient: ["#adbdd6", "#9db1cd"], icon: Zap },
     ],
   },
 ];

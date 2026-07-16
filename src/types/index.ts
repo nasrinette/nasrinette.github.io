@@ -77,6 +77,8 @@ export interface Project {
   link?: string;
   /** Short label for the external `link` tab in the artifact panel (e.g. "Live site", "Figma prototype"); defaults to "Live". */
   linkLabel?: string;
+  /** Render `link` as a live iframe preview in the artifact panel (the site must allow framing). */
+  embed?: boolean;
   problem: string;
   goals: string[];
   process: string[];
