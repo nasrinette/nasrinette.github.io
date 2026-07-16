@@ -1,5 +1,6 @@
 import type { ComponentType, ReactNode } from "react";
 import { Lightbulb, Quote } from "lucide-react";
+import CatAvatar from "./CatAvatar";
 import ToolLogo from "./ToolLogo";
 
 /* ============================================================
@@ -10,6 +11,26 @@ import ToolLogo from "./ToolLogo";
    ============================================================ */
 
 type IconType = ComponentType<{ size?: number; strokeWidth?: number; className?: string; style?: object }>;
+
+/* — UserTurn / LolaTurn — chat bubbles a case study is told through ——— */
+export function UserTurn({ children }: { children: ReactNode }) {
+  return (
+    <div className="flex animate-pop-in justify-end">
+      <div className="bubble-sunset max-w-[85%] px-4 py-2.5 text-sm sm:max-w-[75%]">{children}</div>
+    </div>
+  );
+}
+
+export function LolaTurn({ children }: { children: ReactNode }) {
+  return (
+    <div className="flex animate-pop-in items-start gap-2">
+      <CatAvatar size={30} className="mt-0.5" />
+      <div className="min-w-0 max-w-[85%] flex-1 space-y-3 rounded-[var(--radius-ui)] border border-[var(--color-blush-deep)]/60 bg-[var(--color-cream-soft)] px-4 py-3 text-sm text-[var(--color-ink)] shadow-sm sm:max-w-[75%]">
+        {children}
+      </div>
+    </div>
+  );
+}
 
 /* — Eyebrow — a small mono label above a heading ——————————— */
 export function Eyebrow({ children }: { children: ReactNode }) {
@@ -194,43 +215,7 @@ export function GalleryTile({
   );
 }
 
-/* — PhoneScreen — a portrait mockup on its project-gradient backdrop —— */
-export function PhoneScreen({
-  image,
-  caption,
-  gradient,
-}: {
-  image: string;
-  caption: string;
-  gradient: [string, string];
-}) {
-  return (
-    <figure className="w-44 shrink-0 snap-center sm:w-48">
-      <div
-        className="relative overflow-hidden rounded-[var(--radius-xl)] border border-[var(--color-blush-deep)]/50 shadow-[var(--shadow-card)] transition duration-200 hover:-translate-y-1 hover:shadow-[var(--shadow-lift)]"
-        style={{ background: `linear-gradient(165deg, ${gradient[0]}2e, ${gradient[1]}52)` }}
-      >
-        {/* soft glow behind the device */}
-        <span
-          className="pointer-events-none absolute left-1/2 top-1/2 h-3/4 w-3/4 -translate-x-1/2 -translate-y-1/2 rounded-full opacity-50 blur-2xl"
-          style={{ background: `linear-gradient(140deg, ${gradient[0]}, ${gradient[1]})` }}
-          aria-hidden="true"
-        />
-        <img
-          src={image}
-          alt={caption}
-          loading="lazy"
-          className="relative aspect-[9/17] w-full object-contain px-3 py-4 drop-shadow-lg"
-        />
-      </div>
-      <figcaption className="mt-2 px-1 text-center text-xs leading-snug text-[var(--color-ink-soft)]">
-        {caption}
-      </figcaption>
-    </figure>
-  );
-}
-
-/* — ScreenRail — horizontally snapping strip of PhoneScreens ————— */
+/* — ScreenRail — horizontally snapping strip of phone-sized artifacts —— */
 export function ScreenRail({ children }: { children: ReactNode }) {
   return (
     <div className="-mx-4 overflow-x-auto px-4 pb-2 sm:mx-0 sm:px-0">
@@ -241,59 +226,3 @@ export function ScreenRail({ children }: { children: ReactNode }) {
   );
 }
 
-/* — CaseStudyHero — banner with image (or icon), tags, title & meta — */
-export function CaseStudyHero({
-  gradient,
-  icon: Icon,
-  tags,
-  title,
-  meta,
-  image,
-  imageFit = "cover",
-}: {
-  gradient: [string, string];
-  icon: IconType;
-  tags: string[];
-  title: string;
-  meta: string;
-  image?: string;
-  imageFit?: "cover" | "contain";
-}) {
-  return (
-    <div className="mb-6">
-      <div
-        className="relative flex h-40 items-center justify-center overflow-hidden rounded-[var(--radius-xl)] shadow-[var(--shadow-card)] sm:h-64"
-        style={{ background: `linear-gradient(135deg, ${gradient[0]}, ${gradient[1]})` }}
-      >
-        {image ? (
-          <img
-            src={image}
-            alt=""
-            className={`absolute inset-0 h-full w-full ${
-              imageFit === "contain" ? "object-contain py-3" : "object-cover"
-            }`}
-          />
-        ) : (
-          <>
-            {/* soft light bloom in the corner for depth */}
-            <span
-              className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full"
-              style={{ background: "color-mix(in srgb, var(--color-cream-soft) 40%, transparent)", filter: "blur(24px)" }}
-              aria-hidden="true"
-            />
-            <Icon size={56} strokeWidth={1.5} style={{ color: "var(--color-on-sunset)" }} className="relative opacity-80" />
-          </>
-        )}
-      </div>
-      <div className="mt-4 flex flex-wrap gap-1.5">
-        {tags.map((t) => (
-          <TagPill key={t}>{t}</TagPill>
-        ))}
-      </div>
-      <h1 className="mt-2 font-[var(--font-display)] text-2xl font-bold text-[var(--color-ink)] sm:text-3xl">
-        {title}
-      </h1>
-      <p className="mt-1 font-[var(--font-mono)] text-xs text-[var(--color-ink-soft)]">{meta}</p>
-    </div>
-  );
-}

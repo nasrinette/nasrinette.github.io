@@ -46,6 +46,11 @@ export default function App() {
     setCaseStudyId(null);
   }, []);
 
+  const handleSidebarOpenCaseStudy = useCallback((projectId: string) => {
+    setView("projects");
+    setCaseStudyId(projectId);
+  }, []);
+
   const handleChipNavigate = useCallback((chip: NavChip) => {
     setView(chip.view);
     setCaseStudyId(chip.projectId ?? null);
@@ -77,7 +82,9 @@ export default function App() {
     <div className="flex h-[100dvh] w-full overflow-hidden bg-[var(--color-cream-soft)]/40">
       <Sidebar
         view={view}
+        caseStudyId={caseStudyId}
         onNavigate={handleSidebarNavigate}
+        onOpenCaseStudy={handleSidebarOpenCaseStudy}
         mobileOpen={mobileNavOpen}
         onCloseMobile={closeMobileNav}
         themeMode={themeMode}
