@@ -154,3 +154,8 @@ product appends its entry in the same turn.
 next to the field and stretches to exactly the input's height at every size
 (one line or grown), so the pair stays aligned as one row. Supersedes the
 inside-the-composer layout from #21.
+
+### 29. Send button as an equal square
+**Changed:** The button no longer stretches with the textarea: it is a fixed
+46px square (the single-line input's exact height), vertically centred
+beside the field at every input size.
