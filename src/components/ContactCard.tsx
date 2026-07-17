@@ -39,9 +39,9 @@ export function ContactIcons({ size = "md" }: { size?: "sm" | "md" }) {
           {...(item.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
           aria-label={item.label}
           title={item.label}
-          // outlined, not filled: ring and glyph share one color via
-          // border-current — the app's rust accent, per the reference
-          className={`focus-ring group flex ${circle} items-center justify-center rounded-full border border-current text-[var(--color-rose-dark)] transition hover:-translate-y-0.5`}
+          // dressed exactly like the action buttons: btn-pastel supplies the
+          // fill, the outline, the glyph colour, and the shared 10px corner
+          className={`btn-pastel focus-ring group flex ${circle} items-center justify-center transition hover:-translate-y-0.5`}
         >
           <span className="transition group-hover:scale-110">{item.icon}</span>
         </a>

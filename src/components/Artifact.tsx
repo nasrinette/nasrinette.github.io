@@ -432,7 +432,10 @@ export function ArtifactPanel({
         </button>
       </div>
 
-      {hasLiveTab && activeTab === "gallery" && current && (
+      {/* docked panel: the title gets its own row. Fullscreen and mobile
+          overlay: a full-width bar would block the view, so the title floats
+          over the image as a small chip instead (see below). */}
+      {hasLiveTab && activeTab === "gallery" && current && layout === "split" && (
         <div className="border-b border-[var(--color-blush-deep)]/60 px-3 py-1.5">
           <p className="truncate font-[var(--font-mono)] text-[13px] text-[var(--color-ink-soft)]">{current.title}</p>
         </div>
@@ -441,10 +444,16 @@ export function ArtifactPanel({
       {activeTab === "gallery" ? (
         <>
           <div
-            className={`scroll-warm flex min-h-0 flex-1 items-center justify-center overflow-auto bg-[var(--color-blush)] p-3 ${
+            className={`scroll-warm relative flex min-h-0 flex-1 items-center justify-center overflow-auto bg-[var(--color-blush)] p-3 ${
               resizing ? "pointer-events-none select-none" : ""
             }`}
           >
+            {hasLiveTab && layout === "overlay" && current?.title && (
+              // top-left keeps it clear of video controls at the bottom
+              <div className="pointer-events-none absolute left-3 top-3 z-10 max-w-[70%] rounded-[var(--radius-ui)] bg-[var(--color-cream-soft)]/85 px-3 py-1.5 shadow-sm backdrop-blur">
+                <p className="truncate font-[var(--font-mono)] text-[13px] text-[var(--color-ink-soft)]">{current.title}</p>
+              </div>
+            )}
             {current &&
               (current.video ? (
                 <video

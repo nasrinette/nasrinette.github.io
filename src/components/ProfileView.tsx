@@ -7,11 +7,13 @@ export default function ProfileView() {
   return (
     <div className="mx-auto max-w-5xl px-4 py-8 sm:px-8 sm:py-12">
       {/* one column, centered on mobile; avatar-beside-text from sm up */}
-      <header className="mb-8 flex flex-col items-center gap-4 text-center sm:flex-row sm:items-center sm:text-left">
+      {/* the photo is sized to run the full height of the text block beside
+          it, so the header reads as one row rather than a small badge */}
+      <header className="mb-8 flex flex-col items-center gap-4 text-center sm:flex-row sm:items-center sm:gap-8 sm:text-left">
         <img
           src="/assets/me.png"
           alt={profile.name}
-          className="h-28 w-28 shrink-0 rounded-full object-cover shadow-[var(--shadow-glow)] sm:h-36 sm:w-36"
+          className="h-28 w-28 shrink-0 rounded-full object-cover shadow-[var(--shadow-glow)] sm:h-48 sm:w-48"
           style={{ background: "var(--gradient-sunset)" }}
         />
         <div>
@@ -93,7 +95,7 @@ export default function ProfileView() {
                   {group.items.map((item) => (
                     <span
                       key={item}
-                      className="inline-flex items-center gap-1 rounded-full bg-[var(--color-paw)] px-2.5 py-0.5 text-[13px] font-medium text-[var(--color-ink)]"
+                      className="inline-flex items-center gap-1 rounded-full border border-[var(--color-blush-deep)]/70 bg-[var(--color-cream-soft)] px-2.5 py-0.5 text-[13px] font-medium text-[var(--color-ink)]"
                     >
                       <ToolLogo name={item} size={11} className="text-[var(--color-rose-dark)]" />
                       {item}

@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import { ChevronDown, Component, FolderKanban, MessageCircle, PanelLeftClose, PanelLeftOpen, User, X } from "lucide-react";
 import CatAvatar from "./CatAvatar";
-import { ContactIcons } from "./ContactCard";
 import ThemeToggle from "./ThemeToggle";
-import { catName, catTagline, profile } from "../data/profile";
+import { catName, catTagline } from "../data/profile";
 import { projects } from "../data/projects";
 import type { ThemeMode } from "../hooks/useTheme";
 import type { AppView } from "../types";
@@ -112,7 +111,7 @@ function SidebarContent({
               aria-current={active ? "page" : undefined}
               className={`flex w-full items-center gap-2.5 px-3 py-2 text-left font-[var(--font-display)] text-base font-semibold transition ${
                 active
-                  ? "btn-pastel is-active text-[var(--color-ink)]"
+                  ? "rounded-[var(--radius-md)] bg-[var(--color-blush)] text-[var(--color-rose-dark)]"
                   : "rounded-[var(--radius-md)] text-[var(--color-ink-soft)] hover:bg-[var(--color-blush)] hover:text-[var(--color-rose-dark)]"
               }`}
             >
@@ -130,7 +129,7 @@ function SidebarContent({
             aria-expanded={caseStudiesOpen}
             className={`flex w-full items-center gap-2.5 px-3 py-2 text-left font-[var(--font-display)] text-base font-semibold transition ${
               caseStudiesActive
-                ? "btn-pastel is-active text-[var(--color-ink)]"
+                ? "rounded-[var(--radius-md)] bg-[var(--color-blush)] text-[var(--color-rose-dark)]"
                 : "rounded-[var(--radius-md)] text-[var(--color-ink-soft)] hover:bg-[var(--color-blush)] hover:text-[var(--color-rose-dark)]"
             }`}
           >
@@ -163,7 +162,7 @@ function SidebarContent({
                     {/* each study's own mark — gradient + icon, a favicon-sized
                         version of the identity its cards and hero already use */}
                     <span
-                      className="flex h-5 w-5 shrink-0 items-center justify-center rounded-[6px] shadow-sm"
+                      className="flex h-5 w-5 shrink-0 items-center justify-center rounded-[var(--radius-ui)] shadow-sm"
                       style={{ background: `linear-gradient(135deg, ${project.gradient[0]}, ${project.gradient[1]})` }}
                       aria-hidden="true"
                     >
@@ -183,7 +182,7 @@ function SidebarContent({
           aria-current={view === "design-system" ? "page" : undefined}
           className={`flex w-full items-center gap-2.5 px-3 py-2 text-left font-[var(--font-display)] text-base font-semibold transition ${
             view === "design-system"
-              ? "btn-pastel is-active text-[var(--color-ink)]"
+              ? "rounded-[var(--radius-md)] bg-[var(--color-blush)] text-[var(--color-rose-dark)]"
               : "rounded-[var(--radius-md)] text-[var(--color-ink-soft)] hover:bg-[var(--color-blush)] hover:text-[var(--color-rose-dark)]"
           }`}
         >
@@ -197,7 +196,7 @@ function SidebarContent({
           aria-current={profileActive ? "page" : undefined}
           className={`flex w-full items-center gap-2.5 px-3 py-2 text-left font-[var(--font-display)] text-base font-semibold transition ${
             profileActive
-              ? "btn-pastel is-active text-[var(--color-ink)]"
+              ? "rounded-[var(--radius-md)] bg-[var(--color-blush)] text-[var(--color-rose-dark)]"
               : "rounded-[var(--radius-md)] text-[var(--color-ink-soft)] hover:bg-[var(--color-blush)] hover:text-[var(--color-rose-dark)]"
           }`}
         >
@@ -207,22 +206,13 @@ function SidebarContent({
       </nav>
 
       {/* flat on the sidebar surface — the stroke separates it, so boxing it
-          again would nest a container in a container. Work info first, the
-          theme switch closes the column. */}
-      <div className="space-y-2 border-t border-[var(--color-blush-deep)]/60 px-5 pb-4 pt-4">
-        <p className="flex items-center gap-1.5 font-[var(--font-display)] text-sm font-bold text-[var(--color-ink)]">
-          <span className="animate-pulse-soft inline-block h-1.5 w-1.5 rounded-full bg-[var(--color-gold)]" aria-hidden="true" />
-          Open to work
-        </p>
-        <p className="text-[13px] leading-snug text-[var(--color-ink-soft)]">{profile.availabilityShort}</p>
-        <ContactIcons size="sm" />
-        {/* -mx cancels the block's padding so the stroke runs edge to edge */}
-        <div className="-mx-5 mt-1 flex items-center justify-between gap-2 border-t border-[var(--color-blush-deep)]/60 px-5 pt-3">
-          <span className="text-[13px] font-medium uppercase tracking-wide text-[var(--color-ink-soft)]">
-            Theme
-          </span>
-          <ThemeToggle mode={themeMode} onChange={onThemeChange} />
-        </div>
+          again would nest a container in a container. The theme switch
+          closes the column. */}
+      <div className="flex items-center justify-between gap-2 border-t border-[var(--color-blush-deep)]/60 px-5 pb-4 pt-3">
+        <span className="text-[13px] font-medium uppercase tracking-wide text-[var(--color-ink-soft)]">
+          Theme
+        </span>
+        <ThemeToggle mode={themeMode} onChange={onThemeChange} />
       </div>
     </>
   );
@@ -245,7 +235,7 @@ export default function Sidebar({
       {collapsed ? (
         // the collapsed state is the same sidebar with the words removed:
         // every element keeps its place and its icon, tooltips carry the names
-        <div className="hidden w-12 shrink-0 flex-col items-center border-r border-[var(--color-blush-deep)]/60 bg-[var(--color-cream-soft)]/70 pb-3 pt-4 backdrop-blur-sm md:flex">
+        <div className="hidden w-12 shrink-0 flex-col items-center border-r border-[var(--color-blush-deep)]/60 bg-[var(--color-panel)]/70 pb-3 pt-4 backdrop-blur-sm md:flex">
           <button
             type="button"
             onClick={onToggleCollapse}
@@ -284,7 +274,7 @@ export default function Sidebar({
                 aria-current={active ? "page" : undefined}
                 className={`flex h-8 w-8 shrink-0 items-center justify-center transition ${
                   active
-                    ? "btn-pastel is-active text-[var(--color-ink)]"
+                    ? "rounded-[var(--radius-md)] bg-[var(--color-blush)] text-[var(--color-rose-dark)]"
                     : "rounded-[var(--radius-md)] text-[var(--color-ink-soft)] hover:bg-[var(--color-blush)] hover:text-[var(--color-rose-dark)]"
                 }`}
               >
@@ -302,7 +292,7 @@ export default function Sidebar({
                   aria-label={project.title}
                   title={project.title}
                   aria-current={active ? "page" : undefined}
-                  className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-[8px] shadow-sm transition hover:scale-110 ${
+                  className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-[var(--radius-ui)] shadow-sm transition hover:scale-110 ${
                     active ? "ring-2 ring-[var(--color-rose)]" : "opacity-80 hover:opacity-100"
                   }`}
                   style={{ background: `linear-gradient(135deg, ${project.gradient[0]}, ${project.gradient[1]})` }}
@@ -325,7 +315,7 @@ export default function Sidebar({
                 aria-current={active ? "page" : undefined}
                 className={`flex h-8 w-8 shrink-0 items-center justify-center transition ${
                   active
-                    ? "btn-pastel is-active text-[var(--color-ink)]"
+                    ? "rounded-[var(--radius-md)] bg-[var(--color-blush)] text-[var(--color-rose-dark)]"
                     : "rounded-[var(--radius-md)] text-[var(--color-ink-soft)] hover:bg-[var(--color-blush)] hover:text-[var(--color-rose-dark)]"
                 }`}
               >
@@ -338,7 +328,7 @@ export default function Sidebar({
           <ThemeToggle vertical mode={themeMode} onChange={onThemeChange} />
         </div>
       ) : (
-        <aside className="hidden w-60 shrink-0 flex-col border-r border-[var(--color-blush-deep)]/60 bg-[var(--color-cream-soft)]/70 backdrop-blur-sm md:flex">
+        <aside className="hidden w-60 shrink-0 flex-col border-r border-[var(--color-blush-deep)]/60 bg-[var(--color-panel)]/70 backdrop-blur-sm md:flex">
           <SidebarContent
             view={view}
             caseStudyId={caseStudyId}
@@ -359,7 +349,7 @@ export default function Sidebar({
             onClick={onCloseMobile}
             className="absolute inset-0 bg-black/30 backdrop-blur-[1px]"
           />
-          <aside className="relative z-10 flex w-72 max-w-[85vw] animate-pop-in flex-col bg-[var(--color-cream-soft)] shadow-xl">
+          <aside className="relative z-10 flex w-72 max-w-[85vw] animate-pop-in flex-col bg-[var(--color-panel)] shadow-xl">
             <button
               type="button"
               onClick={onCloseMobile}

@@ -4,6 +4,7 @@ import Sidebar from "./components/Sidebar";
 import SectionTopBar from "./components/SectionTopBar";
 import ChatWindow from "./components/ChatWindow";
 import ChatInput from "./components/ChatInput";
+import PromptChips from "./components/PromptChips";
 import ProjectsView from "./components/ProjectsView";
 import CaseStudyView from "./components/CaseStudyView";
 import DesignSystemView from "./components/DesignSystemView";
@@ -12,6 +13,7 @@ import ConfirmDialog from "./components/ConfirmDialog";
 import { useChatEngine } from "./hooks/useChatEngine";
 import { useTheme } from "./hooks/useTheme";
 import { projects } from "./data/projects";
+import { welcomeChips } from "./data/welcome";
 import type { AppView, NavChip, Project } from "./types";
 
 export default function App() {
@@ -80,6 +82,30 @@ export default function App() {
   const openMobileNav = () => setMobileNavOpen(true);
   const closeMobileNav = () => setMobileNavOpen(false);
 
+  // suggestions dock above the input, Claude-style, instead of trailing
+  // Lola's bubbles. The row always offers four buttons: the latest reply's
+  // own chips lead, starter prompts fill the remaining slots (skipping the
+  // question that was just asked).
+  const suggestions = useMemo(() => {
+    const latest = messages[messages.length - 1];
+    if (isTyping || latest?.sender !== "cat" || latest.status === "failed") return null;
+    const navChips = latest.navChips ?? [];
+    const lastAsked = [...messages]
+      .reverse()
+      .find((m) => m.sender === "user")
+      ?.text.trim()
+      .toLowerCase();
+    const chips = [...(latest.chips ?? [])];
+    const have = new Set(chips.map((c) => c.toLowerCase()));
+    for (const label of welcomeChips) {
+      if (chips.length + navChips.length >= 4) break;
+      if (have.has(label.toLowerCase()) || label.toLowerCase() === lastAsked) continue;
+      chips.push(label);
+      have.add(label.toLowerCase());
+    }
+    return chips.length + navChips.length > 0 ? { chips, navChips } : null;
+  }, [messages, isTyping]);
+
   return (
     <div className="flex h-[100dvh] w-full overflow-hidden bg-[var(--color-cream-soft)]/40">
       <Sidebar
@@ -102,12 +128,21 @@ export default function App() {
             <ChatWindow
               messages={messages}
               isTyping={isTyping}
-              onChipSelect={sendMessage}
               onRetry={retryMessage}
               onProjectLearnMore={handleProjectLearnMore}
-              onNavigate={handleChipNavigate}
-              inputDisabled={isTyping}
             />
+            {suggestions && (
+              <div className="px-3 pb-1 pt-2 sm:px-5">
+                <div className="mx-auto max-w-6xl">
+                  <PromptChips
+                    chips={suggestions.chips}
+                    navChips={suggestions.navChips}
+                    onSelect={sendMessage}
+                    onNavigate={handleChipNavigate}
+                  />
+                </div>
+              </div>
+            )}
             <ChatInput onSend={sendMessage} disabled={isTyping} />
           </>
         )}

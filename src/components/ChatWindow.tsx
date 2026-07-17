@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { ArrowDown } from "lucide-react";
-import type { ChatMessage, NavChip, Project } from "../types";
+import type { ChatMessage, Project } from "../types";
 import MessageBubble from "./MessageBubble";
 import TypingIndicator from "./TypingIndicator";
 import LolaMascot from "./LolaMascot";
@@ -8,24 +8,13 @@ import LolaMascot from "./LolaMascot";
 interface ChatWindowProps {
   messages: ChatMessage[];
   isTyping: boolean;
-  onChipSelect: (label: string) => void;
   onRetry: (id: string) => void;
   onProjectLearnMore: (project: Project) => void;
-  onNavigate: (chip: NavChip) => void;
-  inputDisabled: boolean;
 }
 
 const BOTTOM_THRESHOLD = 96;
 
-export default function ChatWindow({
-  messages,
-  isTyping,
-  onChipSelect,
-  onRetry,
-  onProjectLearnMore,
-  onNavigate,
-  inputDisabled,
-}: ChatWindowProps) {
+export default function ChatWindow({ messages, isTyping, onRetry, onProjectLearnMore }: ChatWindowProps) {
   const scrollRef = useRef<HTMLDivElement | null>(null);
   const [pinnedToBottom, setPinnedToBottom] = useState(true);
   const [unseenCount, setUnseenCount] = useState(0);
@@ -84,15 +73,7 @@ export default function ChatWindow({
             </div>
           )}
           {messages.map((message) => (
-            <MessageBubble
-              key={message.id}
-              message={message}
-              onChipSelect={onChipSelect}
-              onRetry={onRetry}
-              onProjectLearnMore={onProjectLearnMore}
-              onNavigate={onNavigate}
-              inputDisabled={inputDisabled}
-            />
+            <MessageBubble key={message.id} message={message} onRetry={onRetry} onProjectLearnMore={onProjectLearnMore} />
           ))}
           {isTyping && <TypingIndicator />}
         </div>

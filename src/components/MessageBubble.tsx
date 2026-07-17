@@ -1,19 +1,17 @@
 import { RotateCcw } from "lucide-react";
-import type { ChatMessage, NavChip, Project } from "../types";
+import type { ChatMessage, Project } from "../types";
 import BubbleCat, { PERCH_CLEARANCE, pickPerch } from "./BubbleCat";
 import CatAvatar from "./CatAvatar";
 import RichText from "./RichText";
-import PromptChips from "./PromptChips";
 import ProjectCarousel from "./ProjectCarousel";
 import ContactCard from "./ContactCard";
 
+// suggestion chips are not rendered here: they dock above the chat input
+// (see App), the way Claude offers suggested replies
 interface MessageBubbleProps {
   message: ChatMessage;
-  onChipSelect: (label: string) => void;
   onRetry: (id: string) => void;
   onProjectLearnMore: (project: Project) => void;
-  onNavigate: (chip: NavChip) => void;
-  inputDisabled: boolean;
 }
 
 function formatTime(ts: number): string {
@@ -24,14 +22,7 @@ function formatTime(ts: number): string {
   }
 }
 
-export default function MessageBubble({
-  message,
-  onChipSelect,
-  onRetry,
-  onProjectLearnMore,
-  onNavigate,
-  inputDisabled,
-}: MessageBubbleProps) {
+export default function MessageBubble({ message, onRetry, onProjectLearnMore }: MessageBubbleProps) {
   const isUser = message.sender === "user";
   // Sometimes Lola climbs onto one of her own bubbles; stable per message.
   const perch = !isUser && message.status !== "failed" ? pickPerch(message.id) : null;
@@ -67,7 +58,9 @@ export default function MessageBubble({
           className={
             isUser
               ? "bubble-sunset min-w-0 px-4 py-2.5 text-base"
-              : "relative min-w-0 rounded-[var(--radius-ui)] border border-[var(--color-blush-deep)]/60 bg-[var(--color-cream-soft)] px-4 py-2.5 text-base text-[var(--color-ink)] shadow-sm"
+              : // Lola speaks straight onto the page, the way Claude does —
+                // only the user's turn keeps a bubble
+                "relative min-w-0 py-1 text-base text-[var(--color-ink)]"
           }
         >
           {perch && <BubbleCat pose={perch} />}
@@ -89,17 +82,6 @@ export default function MessageBubble({
       >
         {formatTime(message.createdAt)}
       </span>
-      {((message.chips?.length ?? 0) > 0 || (message.navChips?.length ?? 0) > 0) && (
-        <div className={isUser ? "mr-1" : "ml-9"}>
-          <PromptChips
-            chips={message.chips ?? []}
-            navChips={message.navChips}
-            onSelect={onChipSelect}
-            onNavigate={onNavigate}
-            disabled={inputDisabled}
-          />
-        </div>
-      )}
     </div>
   );
 }

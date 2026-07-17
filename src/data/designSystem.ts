@@ -6,7 +6,7 @@ export const gradientTokens = [
     name: "Sunset",
     varName: "--gradient-sunset",
     css: "soft coral → apricot → gold, 103°",
-    usage: "Primary actions, active states, the user's message",
+    usage: "Decorative light: the rule, washes, hero",
   },
   {
     name: "Sunset Soft",
@@ -23,19 +23,22 @@ export const gradientTokens = [
 ];
 
 export const colorTokens = [
-  { name: "Cream", varName: "--color-cream", light: "#FFF8F2", dark: "#060409", usage: "App background base" },
-  { name: "Cream Soft", varName: "--color-cream-soft", light: "#FFFDFB", dark: "#181014", usage: "Card surfaces" },
-  { name: "Blush", varName: "--color-blush", light: "#FEF3ED", dark: "#24191E", usage: "Hover states, subtle fills" },
-  { name: "Blush Deep", varName: "--color-blush-deep", light: "#F6E2D6", dark: "#35262F", usage: "Borders, dividers" },
+  { name: "Cream", varName: "--color-cream", light: "#FFF8F2", dark: "#191619", usage: "App background base" },
+  { name: "Cream Soft", varName: "--color-cream-soft", light: "#FFFDFB", dark: "#232023", usage: "Card surfaces" },
+  { name: "Panel", varName: "--color-panel", light: "#FFFDFB", dark: "#141114", usage: "Sidebar surface" },
+  { name: "Blush", varName: "--color-blush", light: "#FEF3ED", dark: "#2F2A2E", usage: "Hover states, subtle fills" },
+  { name: "Blush Deep", varName: "--color-blush-deep", light: "#F6E2D6", dark: "#413B3F", usage: "Borders, dividers" },
   { name: "Coral", varName: "--color-rose", light: "#F4B3A1", dark: "#F2916F", usage: "Primary accent" },
   { name: "Coral Deep", varName: "--color-rose-deep", light: "#EF9D84", dark: "#F6A686", usage: "Primary hover" },
   { name: "Coral Dark", varName: "--color-rose-dark", light: "#A54627", dark: "#F7BBA2", usage: "Emphasis text, links, focus" },
+  { name: "Button", varName: "--color-btn", light: "#FEF0E1", dark: "#3F3226", usage: "Primary button fill" },
+  { name: "Button Line", varName: "--color-btn-line", light: "#C96F35", dark: "#D8A578", usage: "Primary button outline & label" },
   { name: "Gold", varName: "--color-gold", light: "#F6D29A", dark: "#F2C069", usage: "Secondary accent" },
-  { name: "Gold Soft", varName: "--color-gold-soft", light: "#FBEBD0", dark: "#3D2E1E", usage: "Soft gold fills" },
+  { name: "Gold Soft", varName: "--color-gold-soft", light: "#FBEBD0", dark: "#3E3526", usage: "Soft gold fills" },
   { name: "Dusk", varName: "--color-dusk", light: "#BD95AD", dark: "#CB9EC0", usage: "Cool plum accent" },
-  { name: "Ink", varName: "--color-ink", light: "#3B2925", dark: "#FBEDE4", usage: "Primary text" },
-  { name: "Ink Soft", varName: "--color-ink-soft", light: "#7C5B52", dark: "#C7AB9F", usage: "Secondary text" },
-  { name: "Paw", varName: "--color-paw", light: "#FDEFE5", dark: "#1F1622", usage: "Tag backgrounds" },
+  { name: "Ink", varName: "--color-ink", light: "#3B2925", dark: "#F1E4DB", usage: "Primary text" },
+  { name: "Ink Soft", varName: "--color-ink-soft", light: "#7C5B52", dark: "#C9B1A5", usage: "Secondary text" },
+  { name: "Paw", varName: "--color-paw", light: "#FDEFE5", dark: "#282328", usage: "Tag backgrounds" },
 ];
 
 export const typeScale = [
@@ -57,10 +60,11 @@ export const spacingScale = [
   { token: "space-12", px: 48 },
 ];
 
-// one radius across every button and container; circles are the only exception
+// one radius across everything, pills and circles included; small elements
+// (20px or under) still render round because 10px covers half their box
 export const radiusScale = [
   { token: "radius-ui", px: 10 },
-  { token: "radius-full", px: 999 },
+  { token: "radius-full", px: 10 },
 ];
 
 export const elevationScale = [
@@ -74,7 +78,7 @@ export const principles = [
   {
     title: "One horizon, used with intent",
     detail:
-      "A single sunset gradient carries every primary action, active state, and the user's own voice. It earns attention precisely because nothing else competes for it.",
+      "The sunset gradient is reserved for decorative light (the rule, the washes, the hero) while actions wear a flat pastel orange with a darker rim. Each earns attention because nothing else competes for it.",
   },
   {
     title: "Warm all the way down",
@@ -89,7 +93,7 @@ export const principles = [
   {
     title: "Two-tier action hierarchy",
     detail:
-      "The gradient button leads; a soft ghost button follows. Never two primaries side by side. The eye should always know where to go first.",
+      "The pastel orange button leads; a soft ghost button follows. Never two primaries side by side. The eye should always know where to go first.",
   },
   {
     title: "Motion is a whisper",

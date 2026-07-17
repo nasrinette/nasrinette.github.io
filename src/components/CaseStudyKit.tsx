@@ -22,12 +22,12 @@ export function UserTurn({ children }: { children: ReactNode }) {
 }
 
 export function LolaTurn({ children }: { children: ReactNode }) {
+  // Lola's side has no bubble, matching the chat: her turns read straight
+  // off the page and only the user's turn keeps a container
   return (
     <div className="flex animate-pop-in items-start gap-2">
       <CatAvatar size={30} className="mt-0.5" />
-      <div className="min-w-0 max-w-full flex-1 space-y-3 rounded-[var(--radius-ui)] border border-[var(--color-blush-deep)]/60 bg-[var(--color-cream-soft)] px-4 py-3 text-base text-[var(--color-ink)] shadow-sm">
-        {children}
-      </div>
+      <div className="min-w-0 max-w-full flex-1 space-y-3 py-1 text-base text-[var(--color-ink)]">{children}</div>
     </div>
   );
 }

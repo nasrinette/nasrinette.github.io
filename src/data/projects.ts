@@ -41,7 +41,7 @@ export const projects: Project[] = [
     role: "Design Engineer",
     year: "2026",
     tags: ["AI", "Design Tools", "Chrome Extension"],
-    tools: ["Claude Code", "JavaScript (MV3)", "Chrome APIs", "SVG", "Python"],
+    tools: ["Claude Code", "JavaScript (MV3)", "Chrome APIs"],
     highlights: [
       "The insight: don't fix the model, fix the starting point. Hand the AI the real page, not a description of it",
       "Edit where you click: the snapshot behaves like a real page until you touch an element, then it's freely movable in place",

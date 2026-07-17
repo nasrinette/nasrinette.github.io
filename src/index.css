@@ -17,15 +17,17 @@
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
 
   /* — Radius ————————————————————————————————————————————
-     One radius for every button and container: 10px. The graded scale is
-     collapsed on purpose — the old names stay as aliases so nothing breaks,
-     but they all mean the same corner now. Only circles keep radius-full. */
+     One radius everywhere: 10px, no exceptions. The graded scale is
+     collapsed on purpose — the old names (radius-full included, which also
+     backs Tailwind's `rounded-full`) stay as aliases so nothing breaks,
+     but they all mean the same corner now. Elements 20px or smaller still
+     render as circles, since 10px covers half their box. */
   --radius-ui: 10px;
   --radius-sm: var(--radius-ui);
   --radius-md: var(--radius-ui);
   --radius-lg: var(--radius-ui);
   --radius-xl: var(--radius-ui);
-  --radius-full: 999px;
+  --radius-full: var(--radius-ui);
 
   /* — Signature sunset gradients (light = pale pastel) ———— */
   /* the through-line of the whole system: actions, active states, user voice */
@@ -39,6 +41,7 @@
   /* surfaces */
   --color-cream: #fff8f2;        /* app base — airy peachy cream */
   --color-cream-soft: #fffdfb;   /* raised card surface */
+  --color-panel: #fffdfb;        /* sidebar surface — light: same as cards */
   --color-blush: #fef3ed;        /* hover fills, pale peach */
   --color-blush-deep: #f6e2d6;   /* borders, dividers */
   --color-paw: #fdefe5;          /* tag / pill backgrounds */
@@ -47,6 +50,11 @@
   --color-rose: #f4b3a1;         /* primary accent — pale coral */
   --color-rose-deep: #ef9d84;    /* primary hover */
   --color-rose-dark: #a54627;    /* emphasis text, links, focus (AA on cream + paw) */
+
+  /* primary button — a whisper of pastel orange; the outline colour also
+     carries the label, so the pair reads as one drawn shape */
+  --color-btn: #fef0e1;
+  --color-btn-line: #c96f35;
 
   /* apricot / gold */
   --color-gold: #f6d29a;         /* secondary accent — pale gold */
@@ -103,34 +111,41 @@
   --gradient-sunset-soft: linear-gradient(103deg, #9c6a58 0%, #9e824f 50%, #9c8a52 100%);
   --gradient-dusk: linear-gradient(160deg, #b98aa6 0%, #e6a07e 60%, #f4c85f 100%);
 
-  /* The ground drops; everything stacked on it is re-solved to hold the same
-     contrast against the new base that it held against the old one — so the
-     dusk reads darker without the elevation flattening into it. */
-  --color-cream: #060409;        /* deep plum-black — the night sky */
-  --color-cream-soft: #181014;   /* raised card surface, a step above base */
-  --color-blush: #24191e;        /* hover fills */
-  --color-blush-deep: #35262f;   /* borders, dividers */
-  --color-paw: #1f1622;          /* tag backgrounds */
+  /* The ground sits a few steps above black on purpose: near-black under
+     near-white text glared, so the whole dark stack is lifted to a soft
+     plum-charcoal and the ink is warmed down a touch — less contrast,
+     easier to read. */
+  --color-cream: #191619;        /* near-neutral warm charcoal — the night sky */
+  --color-cream-soft: #232023;   /* raised card surface, a step above base */
+  --color-panel: #141114;        /* sidebar surface — dark: a step BELOW the
+                                    chat ground, so the panel recedes */
+  --color-blush: #2f2a2e;        /* hover fills */
+  --color-blush-deep: #413b3f;   /* borders, dividers */
+  --color-paw: #282328;          /* tag backgrounds */
 
   --color-rose: #f2916f;
   --color-rose-deep: #f6a686;
   --color-rose-dark: #f7bba2;
 
+  /* button flips in the dusk: muted brown fill, soft light-orange line+label */
+  --color-btn: #3f3226;
+  --color-btn-line: #d8a578;
+
   --color-gold: #f2c069;
-  --color-gold-soft: #3d2e1e;
+  --color-gold-soft: #3e3526;
 
   --color-dusk: #cb9ec0;
-  --color-dusk-soft: #1e161d;
+  --color-dusk-soft: #262226;
 
-  --color-ink: #fbede4;
-  --color-ink-soft: #c7ab9f;
+  --color-ink: #f1e4db;
+  --color-ink-soft: #c9b1a5;
 
-  --color-wash-1: #130c0b;
-  --color-wash-2: #13110b;
-  --color-wash-3: #0f0b11;
+  --color-wash-1: #221e1f;
+  --color-wash-2: #22201a;
+  --color-wash-3: #1d1a1e;
 
   /* keep the halo subtle against the night sky */
-  --color-halo: color-mix(in srgb, #f2c069 15%, transparent);
+  --color-halo: color-mix(in srgb, #f2c069 10%, transparent);
 
   --color-lily: #f2916f;
   --color-lily-deep: #f6a686;
@@ -220,17 +235,20 @@ body::before {
    COMPONENT PRIMITIVES
    ============================================================ */
 
-/* Primary action — the sunset itself. No stroke; the glow does the work. */
+/* Primary action — flat pastel light orange, hairline outline, and the label
+   in the same colour as the line so the button reads as one drawn shape.
+   The gradient stays reserved for decorative light (rule, washes, hero). */
 .btn-pastel {
-  border: none;
+  border: 1px solid var(--color-btn-line);
   border-radius: var(--radius-md);
-  color: var(--color-on-sunset);
-  background: var(--gradient-sunset);
+  color: var(--color-btn-line);
+  background: var(--color-btn);
   box-shadow: var(--shadow-soft);
   transition: filter 160ms ease, transform 120ms ease, box-shadow 200ms ease;
 }
+/* hover never shifts the colour — the resting pastel IS the button's colour;
+   only the glow announces the hover */
 .btn-pastel:hover:not(:disabled) {
-  filter: saturate(1.08) brightness(1.02);
   box-shadow: var(--shadow-glow);
 }
 .btn-pastel:active:not(:disabled) {
@@ -242,9 +260,8 @@ body::before {
   cursor: not-allowed;
   box-shadow: none;
 }
-/* active / selected — a warmer, stronger glow instead of a stroke */
+/* active / selected — the glow alone marks it; the colour stays put */
 .btn-pastel.is-active {
-  filter: saturate(1.14) brightness(1.03);
   box-shadow: var(--shadow-glow);
 }
 

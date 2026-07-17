@@ -38,7 +38,7 @@ export default function ThemeToggle({ mode, onChange, vertical = false }: ThemeT
             onClick={() => onChange(optionMode)}
             className={`flex h-7 w-7 items-center justify-center transition ${
               active
-                ? "btn-pastel is-active text-[var(--color-ink)]"
+                ? "btn-pastel is-active"
                 : "rounded-[var(--radius-md)] text-[var(--color-ink-soft)] hover:bg-[var(--color-blush)] hover:text-[var(--color-rose-dark)]"
             }`}
           >
