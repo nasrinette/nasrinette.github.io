@@ -313,13 +313,13 @@ export const projects: Project[] = [
     title: "AtmosUI",
     summary: "Physics-based weather effects that turn the UI into a window on the world outside.",
     description:
-      "**Huawei's brief: a UI effect nobody has seen before — and prove it runs.**\n\nAtmosUI treats the screen as a window. The weather happens on the outside of the glass — sun, rain, snow, fog — while your apps and your wallpaper stay exactly where you left them. Team MUGA's entry for Huawei Tech Arena, Challenge #2.",
+      "**Huawei's brief: a UI visual effect that's unique, works in multiple form factors, and runs efficiently.**\n\nAtmosUI treats the screen as a window. The weather happens on the outside of the glass — sun, rain, snow, fog — while your apps and your wallpaper stay exactly where you left them. Team MUGA took **2nd place among 40+ participants** at Huawei Tech Arena — and €4,000 with it.",
     role: "UX Designer · Team MUGA",
     year: "2025",
     tags: ["UI Design", "Motion", "Hackathon"],
     tools: ["Claude Code", "WebGL", "HTML5 & CSS3"],
     highlights: [
-      "Second place — the research the organizers handed out, that most teams skipped, is what pointed us at weather",
+      "2nd place among 40+ participants — the research the organizers handed out, that most teams skipped, is what pointed us at weather",
       "One metaphor does the work: the screen is a window, so the effect personalizes without ever covering an app",
       "Four kinds of weather, four form factors — phone, watch, automobile, desktop",
     ],
@@ -333,7 +333,7 @@ export const projects: Project[] = [
     linkLabel: "Live demo",
     embed: true,
     problem:
-      "**Huawei gave us the brief: design a UI effect that's unique, high quality, smooth, and works on every screen they ship.**\n\nThey also handed every team their own user research. Not everyone noticed it — we read it twice. It said:\n\n- Interaction is moving from flat 2D to 3D; people want to *play* with their phone\n- Light, texture, and physics are what users notice and remember\n- Personalization matters — but nothing should take over the screen\n\n**Meanwhile the weather on your device is a number in a corner, or a live wallpaper that overrides the look you chose.**",
+      "**Huawei's requirements: a UI visual effect that's unique, works in multiple form factors, and runs efficiently.**\n\nThey also presented their own user research. Not everyone noticed it — we read it twice. It said:\n\n- Interaction is moving from flat 2D to 3D; people want to *play* with their phone\n- Light, texture, and physics are what users notice and remember\n- Personalization matters — but nothing should take over the screen\n\n**Meanwhile the weather on your device is a number in a corner, or a live wallpaper that overrides the look you chose.**",
     goals: [
       "Unique — not a re-skin of a theme that already exists",
       "Physical and alive, not a canned animation on a loop",
@@ -341,7 +341,7 @@ export const projects: Project[] = [
       "One idea that holds from a watch to a car dashboard",
     ],
     process: [
-      "**Discover** — the organizers gave every team their user research and most teams walked past it. We read it: 2D is giving way to 3D, people want to play with their phone, and light, texture, and physics are what actually get noticed. That became our brief within the brief.",
+      "**Discover** — the organizers presented their user research and most teams walked past it. We read it: 2D is giving way to 3D, people want to play with their phone, and light, texture, and physics are what actually get noticed. That became our brief within the brief.",
       "**Ideate** — we brainstormed around *light and texture* and put every metaphor on the table. Weather won: it's physical, everyone already has a feeling about it, and it changes on its own — so the screen is never static.",
       "**Define** — one rule to hold it together: the screen is a window. Weather belongs outside the glass; your apps stay inside, untouched. That single idea answered the part of the brief about personalizing without taking over.",
       "**Design** — four kinds of weather, each with intensity, then the same scene rebuilt at four sizes. A watch face and a car dashboard forgive nothing, so they're what proved the concept — if the effect still reads at that scale, it reads anywhere.",
@@ -349,8 +349,8 @@ export const projects: Project[] = [
     solution:
       "**The screen is a window. The weather is on the other side of it.**\n\nFour kinds of weather, each with an intensity you set:\n\n- **Sunny** — the glass catches warm light and dust drifts through the beams\n- **Rainy** — drops gather along widget edges and slide down\n- **Snowy** — frost creeps across the glass as flakes settle\n- **Foggy** — volumetric smoke drifts past and adds depth\n\nAnd four form factors, one idea: **phone**, **watch**, **automobile**, **desktop**.\n\nWidgets sit in front of the weather, never on top of your apps — which is the whole point.",
     results: [
-      { label: "Huawei Tech Arena, Challenge #2", value: "2nd place" },
-      { label: "Weather modes, each with intensity", value: "4" },
+      { label: "Huawei Tech Arena — among 40+ participants", value: "2nd place" },
+      { label: "Prize money", value: "€4,000" },
       { label: "Form factors, one concept", value: "Phone · Watch · Auto · Desktop" },
     ],
     limitations:
