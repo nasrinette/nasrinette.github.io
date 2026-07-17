@@ -360,10 +360,10 @@ export const projects: Project[] = [
     gallery: [
       // the four modes, same phone and same scene, so the effect is the only
       // thing that changes between shots — captured from the live demo.
-      { caption: "Sunny — glass reflects warm light, dust particles float in sunbeams", gradient: ["#e8dcc0", "#d9c496"], icon: Sun, image: "/assets/atmos-ui/mobile-sunny.jpg", variant: "phone" },
-      { caption: "Rainy — physics-based drops gather on widget edges and slide down", gradient: ["#cdd8e8", "#b9c8de"], icon: CloudRain, image: "/assets/atmos-ui/mobile-rain.jpg", variant: "phone" },
-      { caption: "Snowy — glass widgets freeze over as snow settles on UI elements", gradient: ["#dbe4ee", "#b9c8de"], icon: Snowflake, image: "/assets/atmos-ui/mobile-snow.jpg", variant: "phone" },
-      { caption: "Foggy — volumetric smoke drifts across the screen for depth", gradient: ["#adbdd6", "#9db1cd"], icon: CloudFog, image: "/assets/atmos-ui/mobile-fog.jpg", variant: "phone" },
+      { caption: "Sunny — glass reflects warm light, dust particles float in sunbeams", gradient: ["#e8dcc0", "#d9c496"], icon: Sun, image: "/assets/atmos-ui/mobile-sunny.jpg", variant: "phone", device: "phone" },
+      { caption: "Rainy — physics-based drops gather on widget edges and slide down", gradient: ["#cdd8e8", "#b9c8de"], icon: CloudRain, image: "/assets/atmos-ui/mobile-rain.jpg", variant: "phone", device: "phone" },
+      { caption: "Snowy — glass widgets freeze over as snow settles on UI elements", gradient: ["#dbe4ee", "#b9c8de"], icon: Snowflake, image: "/assets/atmos-ui/mobile-snow.jpg", variant: "phone", device: "phone" },
+      { caption: "Foggy — volumetric smoke drifts across the screen for depth", gradient: ["#adbdd6", "#9db1cd"], icon: CloudFog, image: "/assets/atmos-ui/mobile-fog.jpg", variant: "phone", device: "phone" },
     ],
   },
   {
