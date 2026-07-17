@@ -77,10 +77,6 @@ export default function ChatInput({ onSend, disabled }: ChatInputProps) {
           <ArrowUp size={18} strokeWidth={2} aria-hidden="true" />
         </button>
       </div>
-      <p className="mx-auto mt-2 max-w-6xl text-center text-[10px] text-[var(--color-ink-soft)]/60">
-        {"Lola is a scripted guide, not a real AI — replies are pre-written by "}
-        Nazrin.
-      </p>
     </div>
   );
 }
