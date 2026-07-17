@@ -148,3 +148,9 @@ block beside it; photo-to-text gap 16→32px. Mobile unchanged.
 **Changed:** Added `DESIGN_LOG.md`, backfilled with all 27 iterations, and
 saved a persistent instruction so every future prompt that changes the
 product appends its entry in the same turn.
+
+### 28. Send button same height as input, centred beside it
+**Changed:** The send button moved back out of the input box: it now sits
+next to the field and stretches to exactly the input's height at every size
+(one line or grown), so the pair stays aligned as one row. Supersedes the
+inside-the-composer layout from #21.

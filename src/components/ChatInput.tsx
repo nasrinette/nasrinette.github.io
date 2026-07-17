@@ -41,10 +41,10 @@ export default function ChatInput({ onSend, disabled }: ChatInputProps) {
 
   return (
     <div className="border-t border-[var(--color-blush-deep)]/60 bg-[var(--color-cream-soft)]/70 px-3 py-3 backdrop-blur-sm sm:px-5">
-      {/* the send button lives inside the field, like Claude's composer: one
-          box, both ends bottom-anchored, so nothing drifts as the text grows */}
-      <div className="mx-auto flex max-w-6xl items-end gap-2 rounded-[var(--radius-ui)] border border-[var(--color-blush-deep)] bg-[var(--color-cream-soft)] px-3 py-2 focus-within:border-[var(--color-rose)]">
-        <div className="min-w-0 flex-1 py-1">
+      {/* items-stretch keeps the send button exactly the input's height at
+          every size, so the pair always reads as one centred row */}
+      <div className="mx-auto flex max-w-6xl items-stretch gap-2">
+        <div className="min-w-0 flex-1 rounded-[var(--radius-ui)] border border-[var(--color-blush-deep)] bg-[var(--color-cream-soft)] px-3.5 py-2.5 focus-within:border-[var(--color-rose)]">
           <textarea
             ref={textareaRef}
             value={value}
@@ -74,9 +74,9 @@ export default function ChatInput({ onSend, disabled }: ChatInputProps) {
           onClick={submit}
           disabled={disabled || isEmpty}
           aria-label="Send message"
-          className="btn-pastel flex h-8 w-8 shrink-0 items-center justify-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-rose-dark)]"
+          className="btn-pastel flex w-12 shrink-0 items-center justify-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-rose-dark)]"
         >
-          <ArrowUp size={16} strokeWidth={2} aria-hidden="true" />
+          <ArrowUp size={18} strokeWidth={2} aria-hidden="true" />
         </button>
       </div>
     </div>
