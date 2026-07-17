@@ -79,7 +79,7 @@ function DeviceMockup({ src, alt, device, url }: { src: string; alt: string; dev
           <span className="h-2 w-2 rounded-full bg-[var(--color-dusk)]" />
         </span>
         {host && (
-          <span className="min-w-0 flex-1 truncate rounded-full bg-[var(--color-cream-soft)]/80 px-2 py-0.5 text-center font-[var(--font-mono)] text-[10px] text-[var(--color-ink-soft)]">
+          <span className="min-w-0 flex-1 truncate rounded-full bg-[var(--color-cream-soft)]/80 px-2 py-0.5 text-center font-[var(--font-mono)] text-[12px] text-[var(--color-ink-soft)]">
             {host}
           </span>
         )}
@@ -144,10 +144,10 @@ export function ArtifactChip({
         )}
       </span>
       <span className="min-w-0 flex-1">
-        <span className="block truncate text-sm font-semibold text-[var(--color-ink)]">{title}</span>
-        <span className="block truncate text-[11px] text-[var(--color-ink-soft)]">{subtitle}</span>
+        <span className="block truncate text-base font-semibold text-[var(--color-ink)]">{title}</span>
+        <span className="block truncate text-[13px] text-[var(--color-ink-soft)]">{subtitle}</span>
       </span>
-      <span className="flex shrink-0 items-center gap-1.5 rounded-full border border-[var(--color-blush-deep)]/70 px-3 py-1.5 text-xs font-semibold text-[var(--color-rose-dark)] transition group-hover:bg-[var(--color-blush)]">
+      <span className="flex shrink-0 items-center gap-1.5 rounded-full border border-[var(--color-blush-deep)]/70 px-3 py-1.5 text-sm font-semibold text-[var(--color-rose-dark)] transition group-hover:bg-[var(--color-blush)]">
         <Maximize2 size={12} strokeWidth={2} aria-hidden="true" /> Open
       </span>
     </button>
@@ -185,7 +185,7 @@ export function ArtifactCollage({
           <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-gold)]" />
           <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-dusk)]" />
         </span>
-        <span className="min-w-0 truncate font-[var(--font-mono)] text-[10px] font-medium text-[var(--color-ink-soft)]">
+        <span className="min-w-0 truncate font-[var(--font-mono)] text-[12px] font-medium text-[var(--color-ink-soft)]">
           {block.caption}
         </span>
       </span>
@@ -364,7 +364,7 @@ export function ArtifactPanel({
               <button
                 type="button"
                 onClick={() => onTabChange("gallery")}
-                className={`flex items-center gap-1.5 rounded-[var(--radius-sm)] px-2 py-1 text-xs font-semibold transition ${
+                className={`flex items-center gap-1.5 rounded-[var(--radius-sm)] px-2 py-1 text-sm font-semibold transition ${
                   activeTab === "gallery"
                     ? "bg-[var(--color-cream-soft)] text-[var(--color-rose-dark)] shadow-sm"
                     : "text-[var(--color-ink-soft)] hover:text-[var(--color-rose-dark)]"
@@ -377,7 +377,7 @@ export function ArtifactPanel({
               <button
                 type="button"
                 onClick={() => onTabChange("live")}
-                className={`flex items-center gap-1.5 truncate rounded-[var(--radius-sm)] px-2 py-1 text-xs font-semibold transition ${
+                className={`flex items-center gap-1.5 truncate rounded-[var(--radius-sm)] px-2 py-1 text-sm font-semibold transition ${
                   activeTab === "live"
                     ? "bg-[var(--color-cream-soft)] text-[var(--color-rose-dark)] shadow-sm"
                     : "text-[var(--color-ink-soft)] hover:text-[var(--color-rose-dark)]"
@@ -388,14 +388,14 @@ export function ArtifactPanel({
               </button>
             ) : (
               // lone label, nothing to toggle — plain text, not a pill
-              <span className="flex min-w-0 items-center gap-1.5 truncate px-2 py-1 text-xs font-semibold text-[var(--color-rose-dark)]">
+              <span className="flex min-w-0 items-center gap-1.5 truncate px-2 py-1 text-sm font-semibold text-[var(--color-rose-dark)]">
                 <LiveTabIcon size={12} strokeWidth={2} className="shrink-0" aria-hidden="true" />
                 <span className="truncate">{liveTabLabel}</span>
               </span>
             )}
           </div>
         ) : (
-          <span className="min-w-0 flex-1 truncate font-[var(--font-mono)] text-[11px] font-medium text-[var(--color-ink-soft)]">
+          <span className="min-w-0 flex-1 truncate font-[var(--font-mono)] text-[13px] font-medium text-[var(--color-ink-soft)]">
             {subtitle}
           </span>
         )}
@@ -434,7 +434,7 @@ export function ArtifactPanel({
 
       {hasLiveTab && activeTab === "gallery" && current && (
         <div className="border-b border-[var(--color-blush-deep)]/60 px-3 py-1.5">
-          <p className="truncate font-[var(--font-mono)] text-[11px] text-[var(--color-ink-soft)]">{current.title}</p>
+          <p className="truncate font-[var(--font-mono)] text-[13px] text-[var(--color-ink-soft)]">{current.title}</p>
         </div>
       )}
 

@@ -54,9 +54,9 @@ function SidebarContent({
   // the overview grid — the parent item's own destination, as opposed to one of
   // the case studies nested under it
   const onOverview = caseStudiesActive && caseStudyId === null;
-  // the case studies are the point of the site — the list stays open by default
-  // from any view, so the work is always one click away rather than two
-  const [caseStudiesOpen, setCaseStudiesOpen] = useState(true);
+  // the list starts closed so the sidebar reads as a short menu; the effect
+  // below unfolds it the moment any case-study view becomes active
+  const [caseStudiesOpen, setCaseStudiesOpen] = useState(false);
 
   // keep the dropdown open while any case-study subtab (or the overview) is active
   useEffect(() => {
@@ -82,10 +82,10 @@ function SidebarContent({
       <div className="relative flex items-center gap-2 px-5 pb-5 pt-6">
         <CatAvatar size={32} />
         <div className="min-w-0 flex-1">
-          <p className="truncate font-[var(--font-display)] text-sm font-bold text-[var(--color-ink)]">
+          <p className="truncate font-[var(--font-display)] text-base font-bold text-[var(--color-ink)]">
             {catName} <span aria-hidden="true">🐾</span>
           </p>
-          <p className="truncate text-[11px] leading-snug text-[var(--color-ink-soft)]">{catTagline}</p>
+          <p className="truncate text-[13px] leading-snug text-[var(--color-ink-soft)]">{catTagline}</p>
         </div>
         {onCollapse && (
           <button
@@ -110,7 +110,7 @@ function SidebarContent({
               type="button"
               onClick={() => onNavigate(item.id)}
               aria-current={active ? "page" : undefined}
-              className={`flex w-full items-center gap-2.5 px-3 py-2 text-left font-[var(--font-display)] text-sm font-semibold transition ${
+              className={`flex w-full items-center gap-2.5 px-3 py-2 text-left font-[var(--font-display)] text-base font-semibold transition ${
                 active
                   ? "btn-pastel is-active text-[var(--color-ink)]"
                   : "rounded-[var(--radius-md)] text-[var(--color-ink-soft)] hover:bg-[var(--color-blush)] hover:text-[var(--color-rose-dark)]"
@@ -128,7 +128,7 @@ function SidebarContent({
             onClick={handleCaseStudiesToggle}
             aria-current={caseStudiesActive ? "page" : undefined}
             aria-expanded={caseStudiesOpen}
-            className={`flex w-full items-center gap-2.5 px-3 py-2 text-left font-[var(--font-display)] text-sm font-semibold transition ${
+            className={`flex w-full items-center gap-2.5 px-3 py-2 text-left font-[var(--font-display)] text-base font-semibold transition ${
               caseStudiesActive
                 ? "btn-pastel is-active text-[var(--color-ink)]"
                 : "rounded-[var(--radius-md)] text-[var(--color-ink-soft)] hover:bg-[var(--color-blush)] hover:text-[var(--color-rose-dark)]"
@@ -154,7 +154,7 @@ function SidebarContent({
                     type="button"
                     onClick={() => onOpenCaseStudy(project.id)}
                     aria-current={active ? "page" : undefined}
-                    className={`flex w-full items-center gap-2 rounded-[var(--radius-md)] px-2.5 py-1.5 text-left text-[13px] font-medium transition ${
+                    className={`flex w-full items-center gap-2 rounded-[var(--radius-md)] px-2.5 py-1.5 text-left text-[15px] font-medium transition ${
                       active
                         ? "bg-[var(--color-blush)] text-[var(--color-rose-dark)]"
                         : "text-[var(--color-ink-soft)] hover:bg-[var(--color-blush)] hover:text-[var(--color-rose-dark)]"
@@ -181,7 +181,7 @@ function SidebarContent({
           type="button"
           onClick={() => onNavigate("design-system")}
           aria-current={view === "design-system" ? "page" : undefined}
-          className={`flex w-full items-center gap-2.5 px-3 py-2 text-left font-[var(--font-display)] text-sm font-semibold transition ${
+          className={`flex w-full items-center gap-2.5 px-3 py-2 text-left font-[var(--font-display)] text-base font-semibold transition ${
             view === "design-system"
               ? "btn-pastel is-active text-[var(--color-ink)]"
               : "rounded-[var(--radius-md)] text-[var(--color-ink-soft)] hover:bg-[var(--color-blush)] hover:text-[var(--color-rose-dark)]"
@@ -195,7 +195,7 @@ function SidebarContent({
           type="button"
           onClick={() => onNavigate("profile")}
           aria-current={profileActive ? "page" : undefined}
-          className={`flex w-full items-center gap-2.5 px-3 py-2 text-left font-[var(--font-display)] text-sm font-semibold transition ${
+          className={`flex w-full items-center gap-2.5 px-3 py-2 text-left font-[var(--font-display)] text-base font-semibold transition ${
             profileActive
               ? "btn-pastel is-active text-[var(--color-ink)]"
               : "rounded-[var(--radius-md)] text-[var(--color-ink-soft)] hover:bg-[var(--color-blush)] hover:text-[var(--color-rose-dark)]"
@@ -210,15 +210,15 @@ function SidebarContent({
           again would nest a container in a container. Work info first, the
           theme switch closes the column. */}
       <div className="space-y-2 border-t border-[var(--color-blush-deep)]/60 px-5 pb-4 pt-4">
-        <p className="flex items-center gap-1.5 font-[var(--font-display)] text-xs font-bold text-[var(--color-ink)]">
+        <p className="flex items-center gap-1.5 font-[var(--font-display)] text-sm font-bold text-[var(--color-ink)]">
           <span className="animate-pulse-soft inline-block h-1.5 w-1.5 rounded-full bg-[var(--color-gold)]" aria-hidden="true" />
           Open to work
         </p>
-        <p className="text-[11px] leading-snug text-[var(--color-ink-soft)]">{profile.availabilityShort}</p>
+        <p className="text-[13px] leading-snug text-[var(--color-ink-soft)]">{profile.availabilityShort}</p>
         <ContactIcons size="sm" />
         {/* -mx cancels the block's padding so the stroke runs edge to edge */}
         <div className="-mx-5 mt-1 flex items-center justify-between gap-2 border-t border-[var(--color-blush-deep)]/60 px-5 pt-3">
-          <span className="text-[11px] font-medium uppercase tracking-wide text-[var(--color-ink-soft)]">
+          <span className="text-[13px] font-medium uppercase tracking-wide text-[var(--color-ink-soft)]">
             Theme
           </span>
           <ThemeToggle mode={themeMode} onChange={onThemeChange} />
@@ -259,7 +259,7 @@ export default function Sidebar({
             type="button"
             onClick={onToggleCollapse}
             aria-label="Open sidebar"
-            title={`${catName} — open sidebar`}
+            title={`${catName}: open sidebar`}
             className="focus-ring mt-2 rounded-full"
           >
             <CatAvatar size={28} />

@@ -16,7 +16,7 @@ import ToolLogo from "./ToolLogo";
 export function UserTurn({ children }: { children: ReactNode }) {
   return (
     <div className="flex animate-pop-in justify-end">
-      <div className="bubble-sunset max-w-[85%] px-4 py-2.5 text-sm sm:max-w-[75%]">{children}</div>
+      <div className="bubble-sunset max-w-[85%] px-4 py-2.5 text-base sm:max-w-[75%]">{children}</div>
     </div>
   );
 }
@@ -25,7 +25,7 @@ export function LolaTurn({ children }: { children: ReactNode }) {
   return (
     <div className="flex animate-pop-in items-start gap-2">
       <CatAvatar size={30} className="mt-0.5" />
-      <div className="min-w-0 max-w-full flex-1 space-y-3 rounded-[var(--radius-ui)] border border-[var(--color-blush-deep)]/60 bg-[var(--color-cream-soft)] px-4 py-3 text-sm text-[var(--color-ink)] shadow-sm">
+      <div className="min-w-0 max-w-full flex-1 space-y-3 rounded-[var(--radius-ui)] border border-[var(--color-blush-deep)]/60 bg-[var(--color-cream-soft)] px-4 py-3 text-base text-[var(--color-ink)] shadow-sm">
         {children}
       </div>
     </div>
@@ -35,7 +35,7 @@ export function LolaTurn({ children }: { children: ReactNode }) {
 /* — Eyebrow — a small mono label above a heading ——————————— */
 export function Eyebrow({ children }: { children: ReactNode }) {
   return (
-    <p className="font-[var(--font-mono)] text-[11px] font-medium uppercase tracking-[0.2em] text-[var(--color-rose-dark)]">
+    <p className="font-[var(--font-mono)] text-[13px] font-medium uppercase tracking-[0.2em] text-[var(--color-rose-dark)]">
       {children}
     </p>
   );
@@ -52,7 +52,7 @@ export function SectionHeading({ children, eyebrow }: { children: ReactNode; eye
           style={{ background: "var(--gradient-sunset)" }}
           aria-hidden="true"
         />
-        <h2 className="font-[var(--font-display)] text-lg font-bold text-[var(--color-ink)]">{children}</h2>
+        <h2 className="font-[var(--font-display)] text-xl font-bold text-[var(--color-ink)]">{children}</h2>
       </div>
     </div>
   );
@@ -67,10 +67,10 @@ export function MetricStat({ value, label }: { value: string; label: string }) {
         style={{ background: "var(--gradient-sunset)" }}
         aria-hidden="true"
       />
-      <p className="font-[var(--font-display)] text-xl font-bold leading-tight text-[var(--color-rose-dark)]">
+      <p className="font-[var(--font-display)] text-[22px] font-bold leading-tight text-[var(--color-rose-dark)]">
         {value}
       </p>
-      <p className="mt-1.5 text-[11px] leading-snug text-[var(--color-ink-soft)]">{label}</p>
+      <p className="mt-1.5 text-[13px] leading-snug text-[var(--color-ink-soft)]">{label}</p>
     </div>
   );
 }
@@ -105,14 +105,14 @@ export function ProcessTimeline({ steps }: { steps: string[] }) {
               />
             )}
             <span
-              className="relative z-10 flex h-[27px] w-[27px] shrink-0 items-center justify-center rounded-full font-[var(--font-mono)] text-xs font-bold text-[var(--color-on-sunset)] shadow-[var(--shadow-soft)]"
+              className="relative z-10 flex h-[27px] w-[27px] shrink-0 items-center justify-center rounded-full font-[var(--font-mono)] text-sm font-bold text-[var(--color-on-sunset)] shadow-[var(--shadow-soft)]"
               style={{ background: "var(--gradient-sunset)" }}
             >
               {i + 1}
             </span>
             {/* steps lead with a bolded phase name — Discover, Define… — so the
                 shape of the process reads before any of the prose does */}
-            <div className="pt-0.5 text-sm leading-relaxed text-[var(--color-ink-soft)]">
+            <div className="pt-0.5 text-base leading-relaxed text-[var(--color-ink-soft)]">
               <RichText text={step} />
             </div>
           </li>
@@ -133,26 +133,26 @@ export function PersonaCard({ persona }: { persona: Persona }) {
     <article className="card-warm flex h-full flex-col gap-3 p-4">
       <div className="flex items-center gap-3">
         <span
-          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full font-[var(--font-display)] text-sm font-bold text-[var(--color-on-sunset)] shadow-[var(--shadow-soft)]"
+          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full font-[var(--font-display)] text-base font-bold text-[var(--color-on-sunset)] shadow-[var(--shadow-soft)]"
           style={{ background: "var(--gradient-sunset)" }}
           aria-hidden="true"
         >
           {initials}
         </span>
         <div className="min-w-0">
-          <p className="font-[var(--font-display)] text-sm font-bold text-[var(--color-ink)]">{persona.name}</p>
-          <p className="text-xs leading-snug text-[var(--color-ink-soft)]">{persona.descriptor}</p>
+          <p className="font-[var(--font-display)] text-base font-bold text-[var(--color-ink)]">{persona.name}</p>
+          <p className="text-sm leading-snug text-[var(--color-ink-soft)]">{persona.descriptor}</p>
         </div>
       </div>
-      <blockquote className="border-l-2 border-[var(--color-rose)] pl-2.5 text-[13px] italic leading-relaxed text-[var(--color-ink)]">
+      <blockquote className="border-l-2 border-[var(--color-rose)] pl-2.5 text-[15px] italic leading-relaxed text-[var(--color-ink)]">
         “{persona.quote}”
       </blockquote>
       <div className="@container/persona space-y-3 @sm/persona:grid @sm/persona:grid-cols-2 @sm/persona:gap-4 @sm/persona:space-y-0">
         <div>
-          <p className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wide text-[var(--color-rose-dark)]">
+          <p className="flex items-center gap-1.5 text-[13px] font-bold uppercase tracking-wide text-[var(--color-rose-dark)]">
             <Target size={12} strokeWidth={2} aria-hidden="true" /> Goals
           </p>
-          <ul className="mt-1 space-y-1 text-xs leading-relaxed text-[var(--color-ink-soft)]">
+          <ul className="mt-1 space-y-1 text-sm leading-relaxed text-[var(--color-ink-soft)]">
             {persona.goals.map((g) => (
               <li key={g} className="flex gap-1.5">
                 <span aria-hidden="true" className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-[var(--color-gold)]" />
@@ -162,10 +162,10 @@ export function PersonaCard({ persona }: { persona: Persona }) {
           </ul>
         </div>
         <div>
-          <p className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wide text-[var(--color-dusk)]">
+          <p className="flex items-center gap-1.5 text-[13px] font-bold uppercase tracking-wide text-[var(--color-dusk)]">
             <Frown size={12} strokeWidth={2} aria-hidden="true" /> Frustrations
           </p>
-          <ul className="mt-1 space-y-1 text-xs leading-relaxed text-[var(--color-ink-soft)]">
+          <ul className="mt-1 space-y-1 text-sm leading-relaxed text-[var(--color-ink-soft)]">
             {persona.frustrations.map((f) => (
               <li key={f} className="flex gap-1.5">
                 <span aria-hidden="true" className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-[var(--color-dusk)]" />
@@ -193,9 +193,9 @@ export function PersonaGrid({ personas }: { personas: Persona[] }) {
 export function Testimonial({ quote, author, role }: { quote: string; author: string; role: string }) {
   return (
     <figure className="border-l-2 border-[var(--color-rose)] py-0.5 pl-4">
-      <blockquote className="text-[15px] italic leading-relaxed text-[var(--color-ink)]">“{quote}”</blockquote>
-      <figcaption className="mt-1.5 text-xs text-[var(--color-ink-soft)]">
-        — <span className="font-semibold text-[var(--color-ink)]">{author}</span> · {role}
+      <blockquote className="text-[17px] italic leading-relaxed text-[var(--color-ink)]">“{quote}”</blockquote>
+      <figcaption className="mt-1.5 text-sm text-[var(--color-ink-soft)]">
+        <span className="font-semibold text-[var(--color-ink)]">{author}</span> · {role}
       </figcaption>
     </figure>
   );
@@ -203,13 +203,13 @@ export function Testimonial({ quote, author, role }: { quote: string; author: st
 
 /* — TagPill — soft warm category pill —————————————————————————— */
 export function TagPill({ children }: { children: ReactNode }) {
-  return <span className="tag-warm px-2.5 py-0.5 text-[11px] font-medium">{children}</span>;
+  return <span className="tag-warm px-2.5 py-0.5 text-[13px] font-medium">{children}</span>;
 }
 
 /* — ToolChip — outlined tool token with its brand mark ————————— */
 export function ToolChip({ children }: { children: ReactNode }) {
   return (
-    <span className="inline-flex items-center gap-1.5 rounded-full border border-[var(--color-blush-deep)] px-3 py-1 text-xs font-medium text-[var(--color-ink)]">
+    <span className="inline-flex items-center gap-1.5 rounded-full border border-[var(--color-blush-deep)] px-3 py-1 text-sm font-medium text-[var(--color-ink)]">
       {typeof children === "string" && <ToolLogo name={children} size={13} className="text-[var(--color-rose-dark)]" />}
       {children}
     </span>

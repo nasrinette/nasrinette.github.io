@@ -17,7 +17,7 @@ function bulletList(items: string[]): string {
 export function aboutResponse(): ResponseContent {
   return {
     text: [
-      `**${profile.name}** — ${profile.role}, based in ${profile.location}.`,
+      `**${profile.name}**, ${profile.role}, based in ${profile.location}.`,
       profile.bio.slice(0, 2).join("\n\n"),
     ].join("\n\n"),
     chips: followUpChips.about,
@@ -28,7 +28,7 @@ export function aboutResponse(): ResponseContent {
 export function projectsResponse(): ResponseContent {
   if (projects.length === 0) {
     return {
-      text: "My project cabinet is empty right now — check back soon, or ask me something else.",
+      text: "My project cabinet is empty right now. Check back soon, or ask me something else.",
       chips: followUpChips.fallback,
     };
   }
@@ -44,14 +44,14 @@ export function projectDetailResponse(id: string): ResponseContent {
   const project = projects.find((p) => p.id === id);
   if (!project) {
     return {
-      text: `I couldn't dig up a project called "${id}" — here's everything I do have:`,
+      text: `I couldn't dig up a project called "${id}", but here's everything I do have:`,
       rich: { kind: "projects" },
       chips: followUpChips.projects,
     };
   }
   return {
     text: [
-      `**${project.title}** — ${project.role}, ${project.year}`,
+      `**${project.title}**, ${project.role}, ${project.year}`,
       project.description,
       `**Highlights:**\n\n${bulletList(project.highlights)}`,
       `**Tools:** ${project.tools.join(", ")}`,
@@ -63,7 +63,7 @@ export function projectDetailResponse(id: string): ResponseContent {
 
 export function processResponse(): ResponseContent {
   const steps = profile.process
-    .map((p, i) => `${i + 1}. **${p.step}** — ${p.detail}`)
+    .map((p, i) => `${i + 1}. **${p.step}**: ${p.detail}`)
     .join("\n");
   return {
     text: `Here's roughly how a project flows, start to finish:\n\n${steps}`,
@@ -85,7 +85,7 @@ export function skillsResponse(): ResponseContent {
 export function designSystemResponse(): ResponseContent {
   return {
     text: [
-      `This whole interface is built on a small design system: a deep rose-gold color palette, a tight type scale, and a handful of reusable components — bubbles, chips, cards — each defined for both light and dark.`,
+      `This whole interface is built on a small design system: a deep rose-gold color palette, a tight type scale, and a handful of reusable components (bubbles, chips, cards), each defined for both light and dark.`,
       `Open the full tab to see the color tokens, type scale, spacing, and the principles behind them.`,
     ].join("\n\n"),
     chips: followUpChips["design-system"],
@@ -104,7 +104,7 @@ export function contactResponse(): ResponseContent {
 export function funResponse(): ResponseContent {
   const fact = profile.funFacts[Math.floor(Math.random() * profile.funFacts.length)];
   return {
-    text: `${fact}\n\n(also, I'm named ${catName} — nice to meet you.)`,
+    text: `${fact}\n\n(also, I'm named ${catName}, nice to meet you.)`,
     chips: followUpChips.fun,
   };
 }
@@ -125,7 +125,7 @@ export function thanksResponse(): ResponseContent {
 
 export function identityResponse(): ResponseContent {
   return {
-    text: `Full disclosure: I'm not a real AI — just a friendly scripted guide built for this portfolio so you can explore hands-free. All the info I share is genuinely accurate about ${profile.name}, though!`,
+    text: `Full disclosure: I'm not a real AI, just a friendly scripted guide built for this portfolio so you can explore hands-free. All the info I share is genuinely accurate about ${profile.name}, though!`,
     chips: followUpChips.fallback,
   };
 }
@@ -139,7 +139,7 @@ export function meowResponse(): ResponseContent {
 
 export function fallbackResponse(): ResponseContent {
   const openers = [
-    "I'm just a portfolio kitty — I don't have paws for that one yet.",
+    "I'm just a portfolio kitty, I don't have paws for that one yet.",
     "Hmm, that's outside my litter box of knowledge.",
     "I only know my human's work, not the whole internet, sorry!",
   ];
@@ -152,7 +152,7 @@ export function fallbackResponse(): ResponseContent {
 
 export function errorEasterEgg(): ResponseContent {
   return {
-    text: "Uh oh — I got distracted chasing a laser pointer and lost my train of thought. Mind trying that again?",
+    text: "Uh oh, I got distracted chasing a laser pointer and lost my train of thought. Mind trying that again?",
     chips: followUpChips.fallback,
   };
 }

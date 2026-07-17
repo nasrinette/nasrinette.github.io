@@ -56,10 +56,10 @@ export default function ConfirmDialog({
         <div className="flex items-start gap-3">
           <CatAvatar size={36} />
           <div className="min-w-0 flex-1">
-            <h2 id="confirm-dialog-title" className="font-[var(--font-display)] text-base font-bold text-[var(--color-ink)]">
+            <h2 id="confirm-dialog-title" className="font-[var(--font-display)] text-lg font-bold text-[var(--color-ink)]">
               {title}
             </h2>
-            <p id="confirm-dialog-message" className="mt-1 text-sm leading-relaxed text-[var(--color-ink-soft)]">
+            <p id="confirm-dialog-message" className="mt-1 text-base leading-relaxed text-[var(--color-ink-soft)]">
               {message}
             </p>
           </div>
@@ -69,14 +69,14 @@ export default function ConfirmDialog({
             ref={cancelRef}
             type="button"
             onClick={onCancel}
-            className="focus-ring rounded-full border border-[var(--color-blush-deep)]/70 px-4 py-1.5 font-[var(--font-display)] text-sm font-semibold text-[var(--color-ink-soft)] transition hover:bg-[var(--color-blush)] hover:text-[var(--color-rose-dark)]"
+            className="focus-ring rounded-full border border-[var(--color-blush-deep)]/70 px-4 py-1.5 font-[var(--font-display)] text-base font-semibold text-[var(--color-ink-soft)] transition hover:bg-[var(--color-blush)] hover:text-[var(--color-rose-dark)]"
           >
             {cancelLabel}
           </button>
           <button
             type="button"
             onClick={onConfirm}
-            className="btn-pastel focus-ring px-4 py-1.5 font-[var(--font-display)] text-sm font-semibold"
+            className="btn-pastel focus-ring px-4 py-1.5 font-[var(--font-display)] text-base font-semibold"
           >
             {confirmLabel}
           </button>

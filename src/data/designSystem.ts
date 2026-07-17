@@ -18,7 +18,7 @@ export const gradientTokens = [
     name: "Dusk",
     varName: "--gradient-dusk",
     css: "plum → coral → gold, 160°",
-    usage: "The cool counterweight — accents & mascot pond",
+    usage: "The cool counterweight: accents & mascot pond",
   },
 ];
 
@@ -39,12 +39,12 @@ export const colorTokens = [
 ];
 
 export const typeScale = [
-  { name: "Display", sample: "Aa", size: "30px / 1.15", weight: "700", family: "Quicksand" },
-  { name: "Heading", sample: "Aa", size: "18px / 1.3", weight: "700", family: "Quicksand" },
-  { name: "Body", sample: "Aa", size: "14px / 1.6", weight: "400", family: "Nunito" },
-  { name: "Body strong", sample: "Aa", size: "14px / 1.6", weight: "600", family: "Nunito" },
-  { name: "Caption", sample: "Aa", size: "12px / 1.4", weight: "500", family: "Nunito" },
-  { name: "Mono", sample: "Aa", size: "11px / 1.4", weight: "400", family: "JetBrains Mono" },
+  { name: "Display", sample: "Aa", size: "32px / 1.15", weight: "700", family: "Quicksand" },
+  { name: "Heading", sample: "Aa", size: "20px / 1.3", weight: "700", family: "Quicksand" },
+  { name: "Body", sample: "Aa", size: "16px / 1.6", weight: "400", family: "Nunito" },
+  { name: "Body strong", sample: "Aa", size: "16px / 1.6", weight: "600", family: "Nunito" },
+  { name: "Caption", sample: "Aa", size: "14px / 1.4", weight: "500", family: "Nunito" },
+  { name: "Mono", sample: "Aa", size: "13px / 1.4", weight: "400", family: "JetBrains Mono" },
 ];
 
 export const spacingScale = [
@@ -79,7 +79,7 @@ export const principles = [
   {
     title: "Warm all the way down",
     detail:
-      "No neutral grays. Text is a plum-brown ink, surfaces are peachy creams, shadows are tinted coral — so light and interface read as one continuous warm light.",
+      "No neutral grays. Text is a plum-brown ink, surfaces are peachy creams, shadows are tinted coral, so light and interface read as one continuous warm light.",
   },
   {
     title: "Cute in shape, elegant in finish",
@@ -89,15 +89,15 @@ export const principles = [
   {
     title: "Two-tier action hierarchy",
     detail:
-      "The gradient button leads; a soft ghost button follows. Never two primaries side by side — the eye should always know where to go first.",
+      "The gradient button leads; a soft ghost button follows. Never two primaries side by side. The eye should always know where to go first.",
   },
   {
     title: "Motion is a whisper",
-    detail: "Transitions run 120–220ms with no bounce or overshoot. Reduced-motion preferences are fully respected.",
+    detail: "Transitions run 120-220ms with no bounce or overshoot. Reduced-motion preferences are fully respected.",
   },
   {
     title: "Dual-theme by default",
     detail:
-      "Every token is defined for both the day sky and the dusk from the start — dark mode is a second painting of the same scene, not an afterthought skin.",
+      "Every token is defined for both the day sky and the dusk from the start. Dark mode is a second painting of the same scene, not an afterthought skin.",
   },
 ];

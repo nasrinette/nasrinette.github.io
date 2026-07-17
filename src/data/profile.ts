@@ -21,7 +21,7 @@ export const profile = {
   bio: [
     "Nazrin is a product designer with hands-on experience across the full design cycle: user research, wireframing, high-fidelity prototyping, and usability testing.",
     "She's currently at Wiremind in Paris, turning user insights into validated designs through rapid Gen AI-aided iteration, while finishing her MSc in Interaction, Graphics & Design at Institut Polytechnique de Paris.",
-    "Her frontend background (React, Tailwind) means she designs with implementation in mind — she's shipped the components, so she knows what a handoff actually costs.",
+    "Her frontend background (React, Tailwind) means she designs with implementation in mind. She's shipped the components, so she knows what a handoff actually costs.",
     "She combines research methods like interviews, personas, and competitive analysis with iterative prototyping, and doesn't call a design done until it's been validated with real users.",
   ],
   focusAreas: [
@@ -42,15 +42,15 @@ export const profile = {
     "GitHub",
   ],
   process: [
-    { step: "Research", detail: "Interviews, surveys, and competitive analysis before any pixels — the problem defines the design." },
+    { step: "Research", detail: "Interviews, surveys, and competitive analysis before any pixels. The problem defines the design." },
     { step: "Define", detail: "Personas, pain points, and goals-signals-metrics so success is measurable from day one." },
     { step: "Prototype", detail: "Sketches to hi-fi fast, with Gen AI tooling to iterate in hours instead of weeks." },
-    { step: "Test", detail: "Task-based usability sessions with think-aloud protocol — then iterate on what actually failed." },
+    { step: "Test", detail: "Task-based usability sessions with think-aloud protocol, then iterate on what actually failed." },
     { step: "Ship", detail: "Designs specced with implementation in mind, because I've been on the frontend side of the handoff." },
   ],
   funFacts: [
-    "She's the eldest daughter of four — which she reckons is why she turned out so responsible.",
-    "She moved to France two years ago on the TotalEnergies international scholarship programme; without it, she wouldn't have been able to.",
+    "She's the eldest daughter of four, which she reckons is why she turned out so responsible.",
+    "She moved to France two years ago on the TotalEnergies international scholarship programme.",
     "She's improving her French right now, one individual class at a time.",
     "She likes building whatever project wanders into her head, using gen AI to get it real.",
   ],
@@ -58,7 +58,7 @@ export const profile = {
     {
       company: "Wiremind",
       role: "Product Owner UX (Internship)",
-      period: "March 2026 — Present",
+      period: "March 2026 - Present",
       summary: "Turning user insights into validated designs through rapid Gen AI-aided iteration, in Paris.",
       highlights: [
         "Created 20+ interactive prototypes and design iterations using Gen AI tooling",
@@ -69,7 +69,7 @@ export const profile = {
     {
       company: "Polygraf AI",
       role: "Frontend Engineer",
-      period: "Jan 2024 — Aug 2024",
+      period: "Jan 2024 - Aug 2024",
       summary: "Translated technical logic into interface elements for web, browser extension, and desktop apps in Baku.",
       highlights: [
         "Implemented a library of reusable, responsive React components",
@@ -80,7 +80,7 @@ export const profile = {
     {
       company: "KTLab, Cybersecurity Lab",
       role: "UI/UX Designer",
-      period: "May 2023 — Sept 2023",
+      period: "May 2023 - Sept 2023",
       summary: "Designed and tested prototypes for a cybersecurity learning app in Baku.",
       highlights: [
         "Created and tested prototypes for a cybersecurity learning app",
@@ -93,12 +93,12 @@ export const profile = {
     {
       school: "Institut Polytechnique de Paris",
       credential: "MSc in Computer Science: Interaction, Graphics & Design · CGPA 16.5/20",
-      period: "2024 — 2026",
+      period: "2024 - 2026",
     },
     {
       school: "Université de Strasbourg (UFAZ)",
       credential: "BSc in Computer Science · CGPA 14.5/20",
-      period: "2020 — 2024",
+      period: "2020 - 2024",
     },
   ] satisfies EducationEntry[],
   skillGroups: [

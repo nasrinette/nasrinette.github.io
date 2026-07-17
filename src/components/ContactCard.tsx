@@ -13,13 +13,13 @@ export function ContactIcons({ size = "md" }: { size?: "sm" | "md" }) {
 
   const items = [
     {
-      label: `Email — ${profile.contact.email}`,
+      label: `Email: ${profile.contact.email}`,
       href: `mailto:${profile.contact.email}`,
       external: false,
       icon: <Mail size={glyph} strokeWidth={1.75} aria-hidden="true" />,
     },
     ...profile.contact.links.map((link) => ({
-      label: /cv|pdf|resume/i.test(link.label) ? "CV (PDF) — opens in a new tab" : `${link.label} — ${link.url.replace(/^https?:\/\/(www\.)?/, "")}`,
+      label: /cv|pdf|resume/i.test(link.label) ? "CV (PDF): opens in a new tab" : `${link.label}: ${link.url.replace(/^https?:\/\/(www\.)?/, "")}`,
       href: link.url,
       external: true,
       icon: /cv|pdf|resume/i.test(link.label) ? (

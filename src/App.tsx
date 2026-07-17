@@ -157,7 +157,7 @@ export default function App() {
       <ConfirmDialog
         open={confirmClearOpen}
         title="Start a new conversation?"
-        message="This clears your chat history with Lola — the case studies and profile stay right where they are."
+        message="This clears your chat history with Lola. The case studies and profile stay right where they are."
         confirmLabel="Restart chat"
         onConfirm={handleConfirmClear}
         onCancel={() => setConfirmClearOpen(false)}

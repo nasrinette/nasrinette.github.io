@@ -24,12 +24,12 @@ export default function Header({ onClear, onOpenMenu }: HeaderProps) {
             <CatAvatar size={36} />
           </span>
           <div className="min-w-0">
-            <h1 className="truncate font-[var(--font-display)] text-sm font-bold text-[var(--color-ink)] sm:text-base">
+            <h1 className="truncate font-[var(--font-display)] text-base font-bold text-[var(--color-ink)] sm:text-lg">
               {profile.name} <span className="text-[var(--color-ink-soft)]">· {profile.role}</span>
             </h1>
-            <p className="flex items-center gap-1.5 truncate text-[11px] text-[var(--color-ink-soft)]">
+            <p className="flex items-center gap-1.5 truncate text-[13px] text-[var(--color-ink-soft)]">
               <span className="inline-block h-1.5 w-1.5 rounded-full bg-[var(--color-gold)]" aria-hidden="true" />
-              {catName} is online — ask her anything
+              {catName} is online, ask her anything
             </p>
           </div>
         </div>
@@ -37,7 +37,7 @@ export default function Header({ onClear, onOpenMenu }: HeaderProps) {
       <button
         type="button"
         onClick={onClear}
-        className="btn-pastel flex shrink-0 items-center gap-1.5 px-3 py-1.5 font-[var(--font-display)] text-xs font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-rose-dark)]"
+        className="btn-pastel flex shrink-0 items-center gap-1.5 px-3 py-1.5 font-[var(--font-display)] text-sm font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-rose-dark)]"
         aria-label="Clear conversation and start over"
       >
         <RotateCcw size={13} strokeWidth={1.75} aria-hidden="true" />

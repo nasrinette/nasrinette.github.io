@@ -92,7 +92,7 @@ export default function CaseStudyView({ project, onBack, onPrev, onNext }: CaseS
     if (project.heroImage) {
       add({
         src: project.heroImage,
-        title: `${project.title} — overview`,
+        title: `${project.title}: overview`,
         fit: project.heroFit,
         device: project.heroDevice,
       });
@@ -204,7 +204,7 @@ export default function CaseStudyView({ project, onBack, onPrev, onNext }: CaseS
                 type="button"
                 onClick={() => jumpTo(s.id)}
                 aria-current={activeSection === s.id ? "true" : undefined}
-                className={`focus-ring whitespace-nowrap rounded-full px-3 py-1 text-xs font-semibold transition ${
+                className={`focus-ring whitespace-nowrap rounded-full px-3 py-1 text-sm font-semibold transition ${
                   activeSection === s.id
                     ? "bg-[var(--color-paw)] text-[var(--color-rose-dark)] shadow-sm"
                     : "text-[var(--color-ink-soft)] hover:text-[var(--color-rose-dark)]"
@@ -219,7 +219,7 @@ export default function CaseStudyView({ project, onBack, onPrev, onNext }: CaseS
           <button
             type="button"
             onClick={onBack}
-            className="focus-ring mb-4 flex items-center gap-1.5 rounded-[var(--radius-md)] px-2 py-1 text-sm font-medium text-[var(--color-ink-soft)] transition hover:bg-[var(--color-blush)] hover:text-[var(--color-rose-dark)]"
+            className="focus-ring mb-4 flex items-center gap-1.5 rounded-[var(--radius-md)] px-2 py-1 text-base font-medium text-[var(--color-ink-soft)] transition hover:bg-[var(--color-blush)] hover:text-[var(--color-rose-dark)]"
           >
             <ArrowLeft size={15} strokeWidth={2} aria-hidden="true" /> All case studies
           </button>
@@ -236,11 +236,11 @@ export default function CaseStudyView({ project, onBack, onPrev, onNext }: CaseS
                   <TagPill key={t}>{t}</TagPill>
                 ))}
               </div>
-              <h1 className="font-[var(--font-display)] text-xl font-bold text-[var(--color-ink)] sm:text-2xl">
+              <h1 className="font-[var(--font-display)] text-[22px] font-bold text-[var(--color-ink)] sm:text-[26px]">
                 {project.title}
               </h1>
               <div className="flex flex-wrap items-center gap-2">
-                <p className="font-[var(--font-mono)] text-xs text-[var(--color-ink-soft)]">
+                <p className="font-[var(--font-mono)] text-sm text-[var(--color-ink-soft)]">
                   {project.role} · {project.year}
                 </p>
                 {project.link && (
@@ -248,7 +248,7 @@ export default function CaseStudyView({ project, onBack, onPrev, onNext }: CaseS
                     href={project.link}
                     target="_blank"
                     rel="noreferrer"
-                    className="focus-ring inline-flex w-fit items-center gap-1.5 rounded-full border border-[var(--color-blush-deep)]/70 bg-[var(--color-cream-soft)] px-3 py-1 text-xs font-semibold text-[var(--color-rose-dark)] transition hover:border-[var(--color-rose)] hover:bg-[var(--color-blush)]"
+                    className="focus-ring inline-flex w-fit items-center gap-1.5 rounded-full border border-[var(--color-blush-deep)]/70 bg-[var(--color-cream-soft)] px-3 py-1 text-sm font-semibold text-[var(--color-rose-dark)] transition hover:border-[var(--color-rose)] hover:bg-[var(--color-blush)]"
                   >
                     <ExternalLink size={12} strokeWidth={2} aria-hidden="true" />
                     {project.linkLabel ?? "Live"}
@@ -266,7 +266,12 @@ export default function CaseStudyView({ project, onBack, onPrev, onNext }: CaseS
                   gradient={project.gradient}
                   icon={project.icon}
                   active={openIndex === 0}
-                  onOpen={() => setOpenIndex(0)}
+                  // the Open pill promises the full view, so it opens the
+                  // panel already fullscreen; the collage keeps split mode
+                  onOpen={() => {
+                    setOpenIndex(0);
+                    setFullscreen(true);
+                  }}
                 />
               ) : (
                 <div
@@ -277,7 +282,7 @@ export default function CaseStudyView({ project, onBack, onPrev, onNext }: CaseS
                   <project.icon size={40} strokeWidth={1.5} style={{ color: "var(--color-on-sunset)" }} className="opacity-80" />
                 </div>
               )}
-              <div className="text-[15px] text-[var(--color-ink)]">
+              <div className="text-[17px] text-[var(--color-ink)]">
                 <RichText text={project.description} />
               </div>
               <div className="flex flex-wrap gap-2">
@@ -291,13 +296,13 @@ export default function CaseStudyView({ project, onBack, onPrev, onNext }: CaseS
             <section id="cs-problem" className="scroll-mt-16">
             <LolaTurn>
               <SectionHeading eyebrow="01">The problem</SectionHeading>
-              <div className="text-sm text-[var(--color-ink-soft)]">
+              <div className="text-base text-[var(--color-ink-soft)]">
                 <RichText text={project.problem} />
               </div>
-              <p className="pt-1 text-xs font-semibold uppercase tracking-wide text-[var(--color-ink-soft)]/80">
+              <p className="pt-1 text-sm font-semibold uppercase tracking-wide text-[var(--color-ink-soft)]/80">
                 What success looked like
               </p>
-              <ul className="list-disc space-y-1.5 pl-5 text-sm leading-relaxed text-[var(--color-ink-soft)] marker:text-[var(--color-rose)]">
+              <ul className="list-disc space-y-1.5 pl-5 text-base leading-relaxed text-[var(--color-ink-soft)] marker:text-[var(--color-rose)]">
                 {project.goals.map((goal) => (
                   <li key={goal}>{goal}</li>
                 ))}
@@ -311,7 +316,7 @@ export default function CaseStudyView({ project, onBack, onPrev, onNext }: CaseS
               <ProcessTimeline steps={project.process} />
               {project.personas && project.personas.length > 0 && (
                 <>
-                  <p className="pt-1 text-xs font-semibold uppercase tracking-wide text-[var(--color-ink-soft)]/80">
+                  <p className="pt-1 text-sm font-semibold uppercase tracking-wide text-[var(--color-ink-soft)]/80">
                     Who we designed for
                   </p>
                   <PersonaGrid personas={project.personas} />
@@ -332,7 +337,7 @@ export default function CaseStudyView({ project, onBack, onPrev, onNext }: CaseS
               <SectionHeading eyebrow="03">Solution</SectionHeading>
               {/* the section is already titled Solution — a "The solution"
                   callout inside it would just box the same label twice */}
-              <div className="text-sm text-[var(--color-ink-soft)]">
+              <div className="text-base text-[var(--color-ink-soft)]">
                 <RichText text={project.solution} />
               </div>
               {(solutionImages.length > 0 || hasLivePreview) && (
@@ -344,9 +349,11 @@ export default function CaseStudyView({ project, onBack, onPrev, onNext }: CaseS
                   gradient={project.gradient}
                   icon={solutionShots[0]?.icon ?? project.icon}
                   active={solutionImages.some((b) => b.image === activeSrc)}
-                  onOpen={() =>
-                    solutionImages[0]?.image ? openArtifact(solutionImages[0].image!) : setOpenIndex(0)
-                  }
+                  onOpen={() => {
+                    if (solutionImages[0]?.image) openArtifact(solutionImages[0].image!);
+                    else setOpenIndex(0);
+                    setFullscreen(true);
+                  }}
                 />
               )}
             </LolaTurn>
@@ -365,20 +372,20 @@ export default function CaseStudyView({ project, onBack, onPrev, onNext }: CaseS
               )}
               {project.limitations && (
                 <>
-                  <p className="pt-1 text-xs font-semibold uppercase tracking-wide text-[var(--color-ink-soft)]/80">
+                  <p className="pt-1 text-sm font-semibold uppercase tracking-wide text-[var(--color-ink-soft)]/80">
                     Limitations
                   </p>
-                  <div className="text-sm text-[var(--color-ink-soft)]">
+                  <div className="text-base text-[var(--color-ink-soft)]">
                     <RichText text={project.limitations} />
                   </div>
                 </>
               )}
               {project.futureWork && (
                 <>
-                  <p className="pt-1 text-xs font-semibold uppercase tracking-wide text-[var(--color-ink-soft)]/80">
+                  <p className="pt-1 text-sm font-semibold uppercase tracking-wide text-[var(--color-ink-soft)]/80">
                     What&apos;s next
                   </p>
-                  <div className="text-sm text-[var(--color-ink-soft)]">
+                  <div className="text-base text-[var(--color-ink-soft)]">
                     <RichText text={project.futureWork} />
                   </div>
                 </>
@@ -392,14 +399,14 @@ export default function CaseStudyView({ project, onBack, onPrev, onNext }: CaseS
             <button
               type="button"
               onClick={onPrev}
-              className="focus-ring flex items-center gap-1.5 rounded-[var(--radius-md)] px-2 py-1 text-sm font-medium text-[var(--color-ink-soft)] transition hover:text-[var(--color-rose-dark)]"
+              className="focus-ring flex items-center gap-1.5 rounded-[var(--radius-md)] px-2 py-1 text-base font-medium text-[var(--color-ink-soft)] transition hover:text-[var(--color-rose-dark)]"
             >
               <ArrowLeft size={14} strokeWidth={2} aria-hidden="true" /> Previous
             </button>
             <button
               type="button"
               onClick={onNext}
-              className="focus-ring flex items-center gap-1.5 rounded-[var(--radius-md)] px-2 py-1 text-sm font-medium text-[var(--color-ink-soft)] transition hover:text-[var(--color-rose-dark)]"
+              className="focus-ring flex items-center gap-1.5 rounded-[var(--radius-md)] px-2 py-1 text-base font-medium text-[var(--color-ink-soft)] transition hover:text-[var(--color-rose-dark)]"
             >
               Next <ArrowRight size={14} strokeWidth={2} aria-hidden="true" />
             </button>

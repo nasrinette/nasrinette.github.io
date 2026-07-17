@@ -54,7 +54,7 @@ export function HeartBurst({ hearts }: { hearts: number[] }) {
       {hearts.map((id) => (
         <span
           key={id}
-          className="animate-lola-heart absolute font-[var(--font-display)] text-[11px] leading-none"
+          className="animate-lola-heart absolute font-[var(--font-display)] text-[13px] leading-none"
           style={{
             left: `${18 + (id % 3) * 28}%`,
             animationDelay: `${(id % 3) * 110}ms`,

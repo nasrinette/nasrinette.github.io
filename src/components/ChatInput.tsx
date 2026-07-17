@@ -56,11 +56,11 @@ export default function ChatInput({ onSend, disabled }: ChatInputProps) {
             maxLength={MAX_MESSAGE_LENGTH}
             placeholder={disabled ? "Lola is typing…" : "Ask about projects, process, contact…"}
             aria-label="Message"
-            className="max-h-[120px] w-full resize-none bg-transparent text-sm text-[var(--color-ink)] placeholder:text-[var(--color-ink-soft)]/60 focus:outline-none disabled:cursor-not-allowed"
+            className="max-h-[120px] w-full resize-none bg-transparent text-base text-[var(--color-ink)] placeholder:text-[var(--color-ink-soft)]/60 focus:outline-none disabled:cursor-not-allowed"
           />
           {nearLimit && (
             <div
-              className={`mt-1 text-right text-[10px] ${atLimit ? "text-red-500" : "text-[var(--color-ink-soft)]"}`}
+              className={`mt-1 text-right text-[12px] ${atLimit ? "text-red-500" : "text-[var(--color-ink-soft)]"}`}
               aria-live="polite"
             >
               {value.length}/{MAX_MESSAGE_LENGTH}

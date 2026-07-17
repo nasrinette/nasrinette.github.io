@@ -10,7 +10,7 @@ interface PromptChipsProps {
 }
 
 const chipClass =
-  "btn-pastel px-3.5 py-1.5 font-[var(--font-display)] text-xs font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-rose-dark)]";
+  "btn-pastel px-3.5 py-1.5 font-[var(--font-display)] text-sm font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-rose-dark)]";
 
 export default function PromptChips({ chips, onSelect, navChips = [], onNavigate, disabled }: PromptChipsProps) {
   if (chips.length === 0 && navChips.length === 0) return null;

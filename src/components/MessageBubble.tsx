@@ -40,12 +40,12 @@ export default function MessageBubble({
     return (
       <div className="flex animate-pop-in items-end gap-2">
         <CatAvatar size={30} />
-        <div className="max-w-[80%] space-y-2 rounded-[var(--radius-ui)] border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800 dark:border-red-900/60 dark:bg-red-950/40 dark:text-red-200">
+        <div className="max-w-[80%] space-y-2 rounded-[var(--radius-ui)] border border-red-200 bg-red-50 px-4 py-3 text-base text-red-800 dark:border-red-900/60 dark:bg-red-950/40 dark:text-red-200">
           <p>{message.text}</p>
           <button
             type="button"
             onClick={() => onRetry(message.id)}
-            className="btn-pastel flex items-center gap-1.5 px-2.5 py-1 text-xs font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-400"
+            className="btn-pastel flex items-center gap-1.5 px-2.5 py-1 text-sm font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-400"
           >
             <RotateCcw size={12} strokeWidth={2} aria-hidden="true" />
             Retry
@@ -66,8 +66,8 @@ export default function MessageBubble({
         <div
           className={
             isUser
-              ? "bubble-sunset min-w-0 px-4 py-2.5 text-sm"
-              : "relative min-w-0 rounded-[var(--radius-ui)] border border-[var(--color-blush-deep)]/60 bg-[var(--color-cream-soft)] px-4 py-2.5 text-sm text-[var(--color-ink)] shadow-sm"
+              ? "bubble-sunset min-w-0 px-4 py-2.5 text-base"
+              : "relative min-w-0 rounded-[var(--radius-ui)] border border-[var(--color-blush-deep)]/60 bg-[var(--color-cream-soft)] px-4 py-2.5 text-base text-[var(--color-ink)] shadow-sm"
           }
         >
           {perch && <BubbleCat pose={perch} />}
@@ -85,7 +85,7 @@ export default function MessageBubble({
         </div>
       </div>
       <span
-        className={`px-1 font-[var(--font-mono)] text-[10px] text-[var(--color-ink-soft)]/70 ${isUser ? "mr-1" : "ml-9"}`}
+        className={`px-1 font-[var(--font-mono)] text-[12px] text-[var(--color-ink-soft)]/70 ${isUser ? "mr-1" : "ml-9"}`}
       >
         {formatTime(message.createdAt)}
       </span>

@@ -16,7 +16,7 @@ export default function SectionTopBar({ title, onOpenMenu }: SectionTopBarProps)
       >
         <Menu size={18} strokeWidth={1.75} aria-hidden="true" />
       </button>
-      <span className="truncate font-[var(--font-display)] text-sm font-bold text-[var(--color-ink)]">
+      <span className="truncate font-[var(--font-display)] text-base font-bold text-[var(--color-ink)]">
         {title}
       </span>
     </div>

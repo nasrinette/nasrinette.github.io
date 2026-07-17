@@ -44,7 +44,7 @@ export default function LolaMascot({ className = "" }: LolaMascotProps) {
             filter: "drop-shadow(0 6px 10px rgba(30, 45, 35, 0.18))",
             animationPlayState: petted ? "paused" : "running",
           }}
-          title="Pet me — I'm Lola, Nazrin's cat 🐾"
+          title="Pet me, I'm Lola, Nazrin's cat 🐾"
           onMouseEnter={onEnter}
           onMouseLeave={onLeave}
           onClick={burst}

@@ -29,19 +29,19 @@ export default function ProjectCard({ project, onLearnMore }: ProjectCardProps) 
       )}
       <div className="space-y-2 p-4">
         <div className="flex items-center justify-between gap-2">
-          <h3 className="font-[var(--font-display)] text-sm font-bold text-[var(--color-ink)]">
+          <h3 className="font-[var(--font-display)] text-base font-bold text-[var(--color-ink)]">
             {project.title}
           </h3>
-          <span className="shrink-0 font-[var(--font-mono)] text-[11px] text-[var(--color-ink-soft)]">
+          <span className="shrink-0 font-[var(--font-mono)] text-[13px] text-[var(--color-ink-soft)]">
             {project.year}
           </span>
         </div>
-        <p className="text-xs leading-snug text-[var(--color-ink-soft)]">{project.summary}</p>
+        <p className="text-sm leading-snug text-[var(--color-ink-soft)]">{project.summary}</p>
         <div className="flex flex-wrap gap-1 pt-1">
           {project.tags.map((tag) => (
             <span
               key={tag}
-              className="rounded-[var(--radius-ui)] bg-[var(--color-paw)] px-2 py-0.5 text-[10px] font-medium text-[var(--color-rose-dark)]"
+              className="rounded-[var(--radius-ui)] bg-[var(--color-paw)] px-2 py-0.5 text-[12px] font-medium text-[var(--color-rose-dark)]"
             >
               {tag}
             </span>
@@ -50,7 +50,7 @@ export default function ProjectCard({ project, onLearnMore }: ProjectCardProps) 
         <button
           type="button"
           onClick={() => onLearnMore(project)}
-          className="btn-pastel mt-2 w-full px-3 py-1.5 font-[var(--font-display)] text-xs font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-rose-dark)]"
+          className="btn-pastel mt-2 w-full px-3 py-1.5 font-[var(--font-display)] text-sm font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-rose-dark)]"
         >
           Tell me more
         </button>
