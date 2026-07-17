@@ -29,15 +29,9 @@
   --radius-xl: var(--radius-ui);
   --radius-full: var(--radius-ui);
 
-  /* — Signature sunset gradients (light = pale pastel) ———— */
-  /* the through-line of the whole system: actions, active states, user voice */
-  --gradient-sunset: linear-gradient(103deg, #fac6b5 0%, #fad9ac 48%, #f9e6ad 100%);
-  /* airy wash for large decorative fills */
-  --gradient-sunset-soft: linear-gradient(103deg, #fde1d6 0%, #fdecca 50%, #fcf1cd 100%);
-  /* dusk band — the cool counterweight that keeps warmth from cloying */
-  --gradient-dusk: linear-gradient(160deg, #dcb8d1 0%, #f6c8b0 60%, #f9e6ad 100%);
-
-  /* — Palette (light — pale soft sunset) ———————————————— */
+  /* — Palette (light — pale soft sunset) ————————————————
+     Flat fills only: the system retired its gradients; the ambient body
+     washes below are the one place light still blends. */
   /* surfaces */
   --color-cream: #fff8f2;        /* app base — airy peachy cream */
   --color-cream-soft: #fffdfb;   /* raised card surface */
@@ -105,11 +99,6 @@
 /* dark keeps the richer, more saturated sunset; softness is a light-mode choice */
 :root.dark {
   color-scheme: dark;
-
-  /* muted dusty sunset — gentler against the deep plum-black ground */
-  --gradient-sunset: linear-gradient(103deg, #cf8a72 0%, #cf9c6a 48%, #cfae70 100%);
-  --gradient-sunset-soft: linear-gradient(103deg, #9c6a58 0%, #9e824f 50%, #9c8a52 100%);
-  --gradient-dusk: linear-gradient(160deg, #b98aa6 0%, #e6a07e 60%, #f4c85f 100%);
 
   /* The ground sits a few steps above black on purpose: near-black under
      near-white text glared, so the whole dark stack is lifted to a soft
@@ -236,8 +225,7 @@ body::before {
    ============================================================ */
 
 /* Primary action — flat pastel light orange, hairline outline, and the label
-   in the same colour as the line so the button reads as one drawn shape.
-   The gradient stays reserved for decorative light (rule, washes, hero). */
+   in the same colour as the line so the button reads as one drawn shape. */
 .btn-pastel {
   border: 1px solid var(--color-btn-line);
   border-radius: var(--radius-md);
@@ -325,11 +313,11 @@ body::before {
   outline-offset: 2px;
 }
 
-/* A thin sunset rule — decorative divider / underline. */
+/* A thin coral rule — decorative divider / underline. */
 .sunset-rule {
   height: 3px;
   border-radius: var(--radius-full);
-  background: var(--gradient-sunset);
+  background: var(--color-rose);
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -124,7 +124,9 @@ export function ArtifactChip({
     <button
       type="button"
       onClick={onOpen}
-      className={`focus-ring group flex w-full items-center gap-3 rounded-[var(--radius-ui)] border bg-[var(--color-cream-soft)] px-3 py-2.5 text-left shadow-sm transition hover:border-[var(--color-rose)] hover:shadow-[var(--shadow-card)] ${
+      // capped width: on a wide page a full-bleed bar strands the Open
+      // affordance far from the label it belongs to
+      className={`focus-ring group flex w-full max-w-xl items-center gap-3 rounded-[var(--radius-ui)] border bg-[var(--color-cream-soft)] px-3 py-2.5 text-left shadow-sm transition hover:border-[var(--color-rose)] hover:shadow-[var(--shadow-card)] ${
         active ? "border-[var(--color-rose)] ring-1 ring-[var(--color-rose)]" : "border-[var(--color-blush-deep)]/60"
       }`}
     >
@@ -366,7 +368,7 @@ export function ArtifactPanel({
                 onClick={() => onTabChange("gallery")}
                 className={`flex items-center gap-1.5 rounded-[var(--radius-sm)] px-2 py-1 text-sm font-semibold transition ${
                   activeTab === "gallery"
-                    ? "bg-[var(--color-cream-soft)] text-[var(--color-rose-dark)] shadow-sm"
+                    ? "bg-[var(--color-blush)] text-[var(--color-rose-dark)]"
                     : "text-[var(--color-ink-soft)] hover:text-[var(--color-rose-dark)]"
                 }`}
               >
@@ -379,7 +381,7 @@ export function ArtifactPanel({
                 onClick={() => onTabChange("live")}
                 className={`flex items-center gap-1.5 truncate rounded-[var(--radius-sm)] px-2 py-1 text-sm font-semibold transition ${
                   activeTab === "live"
-                    ? "bg-[var(--color-cream-soft)] text-[var(--color-rose-dark)] shadow-sm"
+                    ? "bg-[var(--color-blush)] text-[var(--color-rose-dark)]"
                     : "text-[var(--color-ink-soft)] hover:text-[var(--color-rose-dark)]"
                 }`}
               >

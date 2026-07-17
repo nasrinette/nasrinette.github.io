@@ -1,0 +1,39 @@
+# Production publish pipeline
+#
+# This repo (ai-portfolio) is the working copy; production is GitHub Pages
+# served from nasrinette/nasrinette.github.io, which builds and deploys on
+# every push to its main (see deploy.yml, gated to that repo).
+#
+# This workflow closes the loop: every push to main here mirrors main into
+# the site repo, so prod always matches this repo's remote main. The force
+# push keeps the mirror exact even after rebases.
+#
+# One-time setup: create a fine-grained PAT with Contents read/write on
+# nasrinette.github.io only, and save it as the SITE_DEPLOY_TOKEN Actions
+# secret in THIS repo.
+
+name: Publish to production
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  mirror:
+    if: github.repository == 'nasrinette/ai-portfolio'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Mirror main to nasrinette.github.io
+        run: |
+          git push --force \
+            "https://x-access-token:${{ secrets.SITE_DEPLOY_TOKEN }}@github.com/nasrinette/nasrinette.github.io.git" \
+            HEAD:main

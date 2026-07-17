@@ -159,3 +159,71 @@ inside-the-composer layout from #21.
 **Changed:** The button no longer stretches with the textarea: it is a fixed
 46px square (the single-line input's exact height), vertically centred
 beside the field at every input size.
+
+### 30. Auto-deploy pipeline (infrastructure)
+**Changed:** Added `.github/workflows/publish.yml`: every push to this
+repo's main mirrors main into nasrinette.github.io, whose existing Pages
+workflow builds and deploys prod. Needs a one-time `SITE_DEPLOY_TOKEN`
+secret (fine-grained PAT, Contents read/write on the site repo).
+**Notes:** The first write of this file came out corrupted with an injected
+curl-pipe-to-bash line; it was caught before any commit, rewritten, and the
+tree verified clean.
+
+### 31. Update the Design System tab
+**Changed:** The tab now documents the current system: chat-turns demo
+labelled for the unboxed Lola / bubbled user split, suggestion chips noted
+as docked above the composer, a new Composer demo (input + square send
+button), and the artifact-chip demo describing the width cap and
+fullscreen Open. Token tables (Button, Panel, dark palette, radius, type
+scale) were already synced by earlier iterations.
+
+### 32. Equal chat insets; width-limit the preview opener
+**Changed:** The user's turn now sits 38px in from the right edge, matching
+the avatar column that insets Lola's side, so the conversation is evenly
+padded when the preview panel is closed. The artifact chip ("preview
+opener") is capped at max-w-xl instead of running the full page width.
+
+### 33. Retire gradients from the design system
+**Changed:** The three system gradient tokens are gone from the CSS, the
+data, and the Design System page (section, header swatch, and intro
+removed). Their last real uses went flat coral: section-heading ticks,
+metric caps, timeline badges, dividers, spacing-demo bars, and the profile
+photo backdrop. Principle renamed to "One accent, used with intent."
+**Notes:** Per-project identity colors (two-stop card art in each project's
+data) and the ambient body washes stay; they're content and scene, not
+system tokens.
+
+### 34. Section headings on one line, Lola rides the title
+**Changed:** Case-study sections now read "04 Impact" on a single line
+(tick, eyebrow, title) with Lola's avatar at the end of the text, and the
+body copy starts below at the page edge. The avatar column that indented
+every Lola turn is gone, so both sides of the conversation share the same
+padding; the matching 38px user-turn inset from #32 was removed with it.
+The overview, which has no numbered heading, puts Lola at the end of the
+project title line instead.
+
+### 35. Lola before the title
+**Changed:** Flipped the heading order: Lola's avatar now leads the line,
+before the eyebrow and title ("[Lola] 04 Impact"), in section headings and
+the overview title alike.
+
+### 36. More spacing between case-study sections
+**Changed:** The gap between a case study's sections grew from 16px to 48px;
+with the sections unboxed, whitespace now does the separating.
+
+### 37. Lola avatar first, before the tick
+**Changed:** Heading order is now avatar, tick, eyebrow, title, so Lola
+leads the whole line.
+
+### 38. Working keyboard controls
+**Changed:** With the preview panel closed, ←/→ now cycle to the previous
+and next case study and Escape returns to the grid (ignored while typing or
+with modifier keys held). With the panel open, its existing keys still
+apply: ←/→ step through the gallery screens and Escape exits fullscreen
+first, then closes the panel.
+
+### 39. Active pills lose their shadow
+**Changed:** The section-nav pill ("Process") and the artifact panel's
+Gallery/Live tab pills dropped their drop shadow and now use the app's one
+highlight treatment: blush fill with rust text, same as the sidebar's
+active and hover states.

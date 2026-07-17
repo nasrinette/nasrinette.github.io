@@ -4,6 +4,7 @@ import { ArrowLeft, ArrowRight, ExternalLink } from "lucide-react";
 import type { Project } from "../types";
 import { useMediaQuery } from "../hooks/useMediaQuery";
 import { ArtifactChip, ArtifactCollage, ArtifactPanel, type ArtifactImage, type ArtifactTab } from "./Artifact";
+import CatAvatar from "./CatAvatar";
 import RichText from "./RichText";
 import {
   LolaTurn,
@@ -152,6 +153,23 @@ export default function CaseStudyView({ project, onBack, onPrev, onNext }: CaseS
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [project.id]);
 
+  // page-level keyboard controls, active only while the artifact panel is
+  // closed (the panel owns the keys when open): ←/→ cycle case studies,
+  // Escape returns to the grid
+  useEffect(() => {
+    if (openIndex !== null) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.metaKey || e.ctrlKey || e.altKey) return;
+      const t = e.target as HTMLElement | null;
+      if (t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.isContentEditable)) return;
+      if (e.key === "ArrowRight") onNext();
+      else if (e.key === "ArrowLeft") onPrev();
+      else if (e.key === "Escape") onBack();
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [openIndex, onNext, onPrev, onBack]);
+
   // asking for a specific screen means the gallery, even if the live
   // preview is what's currently on screen.
   const openArtifact = (src: string) => {
@@ -206,7 +224,7 @@ export default function CaseStudyView({ project, onBack, onPrev, onNext }: CaseS
                 aria-current={activeSection === s.id ? "true" : undefined}
                 className={`focus-ring whitespace-nowrap rounded-full px-3 py-1 text-sm font-semibold transition ${
                   activeSection === s.id
-                    ? "bg-[var(--color-paw)] text-[var(--color-rose-dark)] shadow-sm"
+                    ? "bg-[var(--color-blush)] text-[var(--color-rose-dark)]"
                     : "text-[var(--color-ink-soft)] hover:text-[var(--color-rose-dark)]"
                 }`}
               >
@@ -224,7 +242,9 @@ export default function CaseStudyView({ project, onBack, onPrev, onNext }: CaseS
             <ArrowLeft size={15} strokeWidth={2} aria-hidden="true" /> All case studies
           </button>
 
-          <div className="flex flex-col gap-4">
+          {/* generous gaps: the sections are unboxed prose now, so the
+              whitespace is what separates one chapter from the next */}
+          <div className="flex flex-col gap-12">
             <UserTurn>
               Tell me about the <strong>{project.title}</strong> case study.
             </UserTurn>
@@ -236,7 +256,10 @@ export default function CaseStudyView({ project, onBack, onPrev, onNext }: CaseS
                   <TagPill key={t}>{t}</TagPill>
                 ))}
               </div>
-              <h1 className="font-[var(--font-display)] text-[22px] font-bold text-[var(--color-ink)] sm:text-[26px]">
+              {/* the overview has no numbered heading, so Lola rides the
+                  title line here, same as she does on section headings */}
+              <h1 className="flex items-center gap-2.5 font-[var(--font-display)] text-[22px] font-bold text-[var(--color-ink)] sm:text-[26px]">
+                <CatAvatar size={24} />
                 {project.title}
               </h1>
               <div className="flex flex-wrap items-center gap-2">

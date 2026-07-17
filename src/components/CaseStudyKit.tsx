@@ -22,14 +22,10 @@ export function UserTurn({ children }: { children: ReactNode }) {
 }
 
 export function LolaTurn({ children }: { children: ReactNode }) {
-  // Lola's side has no bubble, matching the chat: her turns read straight
-  // off the page and only the user's turn keeps a container
-  return (
-    <div className="flex animate-pop-in items-start gap-2">
-      <CatAvatar size={30} className="mt-0.5" />
-      <div className="min-w-0 max-w-full flex-1 space-y-3 py-1 text-base text-[var(--color-ink)]">{children}</div>
-    </div>
-  );
+  // no avatar column: Lola appears inline at the end of each section's
+  // heading (see SectionHeading), so body copy aligns flush with the page
+  // and both sides of the conversation share the same edges
+  return <div className="animate-pop-in space-y-3 py-1 text-base text-[var(--color-ink)]">{children}</div>;
 }
 
 /* — Eyebrow — a small mono label above a heading ——————————— */
@@ -41,19 +37,20 @@ export function Eyebrow({ children }: { children: ReactNode }) {
   );
 }
 
-/* — SectionHeading — gradient tick + display title ———————————— */
+/* — SectionHeading — one line: tick, eyebrow, title, then Lola at the end.
+   She rides the heading instead of owning a column, so the copy below
+   starts flush at the page edge. —————————————————————————————————— */
 export function SectionHeading({ children, eyebrow }: { children: ReactNode; eyebrow?: ReactNode }) {
   return (
-    <div className="mb-3 space-y-1.5">
+    <div className="mb-3 flex items-center gap-2.5">
+      <CatAvatar size={24} />
+      <span
+        className="h-5 w-1.5 shrink-0 rounded-full"
+        style={{ background: "var(--color-rose)" }}
+        aria-hidden="true"
+      />
       {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
-      <div className="flex items-center gap-2.5">
-        <span
-          className="h-5 w-1.5 shrink-0 rounded-full"
-          style={{ background: "var(--gradient-sunset)" }}
-          aria-hidden="true"
-        />
-        <h2 className="font-[var(--font-display)] text-xl font-bold text-[var(--color-ink)]">{children}</h2>
-      </div>
+      <h2 className="font-[var(--font-display)] text-xl font-bold text-[var(--color-ink)]">{children}</h2>
     </div>
   );
 }
@@ -64,7 +61,7 @@ export function MetricStat({ value, label }: { value: string; label: string }) {
     <div className="card-warm relative overflow-hidden p-4 pt-5 text-center">
       <span
         className="absolute inset-x-0 top-0 h-1"
-        style={{ background: "var(--gradient-sunset)" }}
+        style={{ background: "var(--color-rose)" }}
         aria-hidden="true"
       />
       <p className="font-[var(--font-display)] text-[22px] font-bold leading-tight text-[var(--color-rose-dark)]">
@@ -106,7 +103,7 @@ export function ProcessTimeline({ steps }: { steps: string[] }) {
             )}
             <span
               className="relative z-10 flex h-[27px] w-[27px] shrink-0 items-center justify-center rounded-full font-[var(--font-mono)] text-sm font-bold text-[var(--color-on-sunset)] shadow-[var(--shadow-soft)]"
-              style={{ background: "var(--gradient-sunset)" }}
+              style={{ background: "var(--color-rose)" }}
             >
               {i + 1}
             </span>
@@ -134,7 +131,7 @@ export function PersonaCard({ persona }: { persona: Persona }) {
       <div className="flex items-center gap-3">
         <span
           className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full font-[var(--font-display)] text-base font-bold text-[var(--color-on-sunset)] shadow-[var(--shadow-soft)]"
-          style={{ background: "var(--gradient-sunset)" }}
+          style={{ background: "var(--color-rose)" }}
           aria-hidden="true"
         >
           {initials}

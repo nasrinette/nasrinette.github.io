@@ -3,7 +3,6 @@ import type { ReactNode } from "react";
 import {
   colorTokens,
   elevationScale,
-  gradientTokens,
   principles,
   radiusScale,
   spacingScale,
@@ -14,6 +13,7 @@ import { starterPrompts } from "../data/prompts";
 import type { ThemeMode } from "../hooks/useTheme";
 import { ArtifactChip, ArtifactCollage } from "./Artifact";
 import CatAvatar from "./CatAvatar";
+import ChatInput from "./ChatInput";
 import ConfirmDialog from "./ConfirmDialog";
 import { ContactIcons } from "./ContactCard";
 import ProjectCard from "./ProjectCard";
@@ -62,31 +62,14 @@ export default function DesignSystemView() {
           Sunset · design system
         </p>
         <h1 className="font-[var(--font-display)] text-[32px] font-bold text-[var(--color-ink)] sm:text-[38px]">
-          One horizon, used with intent
+          One accent, used with intent
         </h1>
         <p className="max-w-xl text-base leading-relaxed text-[var(--color-ink-soft)]">
-          This chat interface is itself a small design system: a warm coral-to-gold horizon over dusk
-          creams. Here's everything it's built from: gradients, color, type, space, elevation, and the
+          This chat interface is itself a small design system: warm sunset colors over dusk creams,
+          all flat fills. Here's everything it's built from: color, type, space, elevation, and the
           principles that hold them together.
         </p>
-        <div className="h-24 w-full max-w-md rounded-[var(--radius-lg)] shadow-[var(--shadow-card)]" style={{ background: "var(--gradient-sunset)" }} aria-hidden="true" />
       </header>
-
-      <section className="mb-12">
-        <SectionTitle>Gradients</SectionTitle>
-        <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
-          {gradientTokens.map((g) => (
-            <div key={g.varName} className="card-warm overflow-hidden">
-              <div className="h-20" style={{ background: `var(${g.varName})` }} aria-hidden="true" />
-              <div className="p-3">
-                <p className="text-sm font-bold text-[var(--color-ink)]">{g.name}</p>
-                <p className="font-[var(--font-mono)] text-[12px] text-[var(--color-ink-soft)]">{g.css}</p>
-                <p className="mt-1 text-[12px] leading-snug text-[var(--color-ink-soft)]">{g.usage}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
 
       <section className="mb-12">
         <SectionTitle>Color</SectionTitle>
@@ -148,7 +131,7 @@ export default function DesignSystemView() {
                 </span>
                 <span
                   className="block h-3 rounded-[var(--radius-sm)]"
-                  style={{ width: s.px, background: "var(--gradient-sunset)" }}
+                  style={{ width: s.px, background: "var(--color-rose)" }}
                   aria-hidden="true"
                 />
                 <span className="font-[var(--font-mono)] text-[13px] text-[var(--color-ink-soft)]">{s.px}px</span>
@@ -219,7 +202,7 @@ export default function DesignSystemView() {
 
           <div>
             <p className="mb-3 font-[var(--font-mono)] text-[12px] uppercase tracking-wide text-[var(--color-ink-soft)]">
-              Chat turns: with bold, italic, and bullets via RichText
+              Chat turns: the user keeps a bubble, Lola speaks straight on the page
             </p>
             <div className="space-y-3">
               <UserTurn>Tell me about the {demoProject.title} case study.</UserTurn>
@@ -233,7 +216,7 @@ export default function DesignSystemView() {
 
           <div>
             <p className="mb-3 font-[var(--font-mono)] text-[12px] uppercase tracking-wide text-[var(--color-ink-soft)]">
-              Suggestion chips: questions and navigation share one row
+              Suggestion chips: docked above the composer, questions and navigation in one row
             </p>
             <PromptChips
               chips={[starterPrompts[0].label, starterPrompts[2].label]}
@@ -241,6 +224,13 @@ export default function DesignSystemView() {
               onSelect={noop}
               onNavigate={noop}
             />
+          </div>
+
+          <div>
+            <p className="mb-3 font-[var(--font-mono)] text-[10px] uppercase tracking-wide text-[var(--color-ink-soft)]">
+              Composer: the input with its square send button, always the field's height
+            </p>
+            <ChatInput onSend={noop} disabled={false} />
           </div>
 
           <div>
@@ -252,7 +242,7 @@ export default function DesignSystemView() {
 
           <div>
             <p className="mb-3 font-[var(--font-mono)] text-[12px] uppercase tracking-wide text-[var(--color-ink-soft)]">
-              Artifact chip & collage: how visuals are referenced and showcased
+              Artifact chip & collage: width-capped chip whose Open jumps straight to fullscreen
             </p>
             <div className="space-y-4">
               <ArtifactChip

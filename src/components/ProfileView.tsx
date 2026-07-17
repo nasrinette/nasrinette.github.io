@@ -14,7 +14,7 @@ export default function ProfileView() {
           src="/assets/me.png"
           alt={profile.name}
           className="h-28 w-28 shrink-0 rounded-full object-cover shadow-[var(--shadow-glow)] sm:h-48 sm:w-48"
-          style={{ background: "var(--gradient-sunset)" }}
+          style={{ background: "var(--color-blush)" }}
         />
         <div>
           <p className="font-[var(--font-mono)] text-[13px] font-medium uppercase tracking-[0.2em] text-[var(--color-rose-dark)]">

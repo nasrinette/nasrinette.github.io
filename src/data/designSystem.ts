@@ -1,27 +1,8 @@
 // Sunset design system — the documented source of truth for the tokens
 // defined in index.css. Keep these values in sync with that file.
 
-export const gradientTokens = [
-  {
-    name: "Sunset",
-    varName: "--gradient-sunset",
-    css: "soft coral → apricot → gold, 103°",
-    usage: "Decorative light: the rule, washes, hero",
-  },
-  {
-    name: "Sunset Soft",
-    varName: "--gradient-sunset-soft",
-    css: "pale peach → gold, 103°",
-    usage: "Large decorative fills, hero light",
-  },
-  {
-    name: "Dusk",
-    varName: "--gradient-dusk",
-    css: "plum → coral → gold, 160°",
-    usage: "The cool counterweight: accents & mascot pond",
-  },
-];
-
+// no gradient tokens: the system is flat fills only. Per-project identity
+// colors (the two-stop card art) live in each project's data, not here.
 export const colorTokens = [
   { name: "Cream", varName: "--color-cream", light: "#FFF8F2", dark: "#191619", usage: "App background base" },
   { name: "Cream Soft", varName: "--color-cream-soft", light: "#FFFDFB", dark: "#232023", usage: "Card surfaces" },
@@ -76,9 +57,9 @@ export const elevationScale = [
 
 export const principles = [
   {
-    title: "One horizon, used with intent",
+    title: "One accent, used with intent",
     detail:
-      "The sunset gradient is reserved for decorative light (the rule, the washes, the hero) while actions wear a flat pastel orange with a darker rim. Each earns attention because nothing else competes for it.",
+      "Everything is a flat fill: coral carries the accents, pastel orange carries the actions, and the warm washes stay in the background. Each earns attention because nothing else competes for it.",
   },
   {
     title: "Warm all the way down",
