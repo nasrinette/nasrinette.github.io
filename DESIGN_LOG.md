@@ -227,3 +227,105 @@ first, then closes the panel.
 Gallery/Live tab pills dropped their drop shadow and now use the app's one
 highlight treatment: blush fill with rust text, same as the sidebar's
 active and hover states.
+
+## 2026-07-19
+
+### 40. Side-project shelf behind "Show more"
+**Changed:** Projects now split into case studies and side projects via a
+`sideProject` flag. The Case studies page shows the five main studies as
+cards (Protoca featured, then Nourish, Interactive Menu, LingoPro, AtmosUI)
+and a centered ghost "Show more · 4 side projects" button; clicking it
+reveals IllumiLend, the Goodreads study, Coffee Across the Globe, and
+Mister Garden as compact rows under a "Side projects" divider, replacing
+the always-visible "More studies" section. The chat carousel now pitches
+only the five case studies.
+**Notes:** Shelf decision came out of the portfolio audit: over the ~5
+project norm, the weakest studies were diluting the strongest. IllumiLend
+leads the shelf as its strongest entry. Side projects stay fully browsable,
+in prev/next cycling and in the sidebar, just no longer sold up front.
+
+### 41. Hide side projects in the sidebar too
+**Changed:** The sidebar's Case Studies list (expanded and the collapsed
+icon rail) now shows only the five main studies, matching the chat
+carousel. Side projects are reached solely through "Show more" on the Case
+studies page, and prev/next cycling still passes through them.
+**Notes:** Supersedes the #40 note about the sidebar; "Show more" is now
+the shelf's single doorway. While a side-project case study is open, no
+sidebar item is highlighted, which is the honest state for a page that
+list doesn't contain.
+
+### 42. App Store-style case studies page
+**Changed:** The bento grid (2×2 feature card + cover cards) is gone. The
+Case studies page is now an App Store-style list: compact rows with the
+gradient icon as the app tile, bold title over a one-line summary, a
+"Read" pastel pill with the year as its small caption, hairline dividers,
+flowing column-first into two columns on desktop. Side projects became
+their own section header with a "Show all (4)" toggle where the App Store
+puts "See All", replacing the centered "Show more" button from #40. All
+five case studies plus the shelf header now fit one screen with no
+scrolling.
+**Notes:** Request started as "too much space, I want all projects visible
+without scrolling" and pivoted mid-flight to "make it look like App Store".
+Covers, tags, and card metrics left the page; the case study itself does
+the selling once a row is opened. The pill keeps the system's 10px radius
+rather than the App Store's full round, since every radius token collapses
+to 10px on purpose.
+
+### 43. Bigger rows, screenshots back
+**Changed:** Each App Store row grew: icon 56→64px (the real App Store
+size), title 18→20px, summary 14→16px wrapping to two lines instead of
+truncating to one, and the project's cover screenshot returned as a
+128×80 thumbnail between the text and the "Read" pill. Thumbnails hide on
+phone widths where the row has no room for them.
+**Notes:** Rows are ~112px tall, so the five studies in two columns plus
+the shelf header still fit one screen, keeping #42's no-scroll goal.
+
+### 44. Back to cards, "not readable" verdict on rows
+**Changed:** The App Store rows from #42-43 are gone; the page returned
+to the carousel-style card (icon + year header, 16:10 cover, title,
+summary, two tags, hover arrow), all five case studies as equal cards in
+a three-column grid with no 2×2 feature spot. The side-projects section
+keeps its #42 header with the "Show all (4)" toggle, revealing the
+compact rows from #40.
+**Notes:** Supersedes #42-43. Readability beat the no-scroll goal: the
+dense rows shrank titles and covers past legibility. The equal-card grid
+still cuts the old bento's height roughly in half since no card spans
+two rows, and covers are back at a size where the work is recognizable.
+
+### 45. Symmetric grid, shelf as the sixth card
+**Changed:** The side-project shelf moved into the grid itself as an
+iOS-folder-style sixth card: the four shelved projects' icon chips sit
+2×2 in the cover slot, with "Side projects", a one-liner, and a
+"Show all" toggle in the card's usual title and footer positions. The
+grid is now a full 3×2 with no empty cell; clicking the folder card
+unfolds the compact rows beneath the grid, and the separate section
+header from #42 is gone.
+**Notes:** Five case studies left a hole in the three-column grid. The
+folder card fills it with something that earns the space, and the shelf's
+doorway now reads at the same visual weight as the work it hides.
+
+### 46. Comparison template for iterations
+**Changed:** New case-study kit element, ComparisonFigure: a before/after
+decision pair generated from data. An `iterations` entry on a project
+(title, why-note, two screenshot paths, optional version labels) renders
+automatically as two framed 16:10 shots with label chips, an arrow
+between them, and the decision as a bold-led caption. It appears in the
+Process section under a "Design decisions" subheading; each side opens
+in the artifact preview panel, and the pair sits adjacent there so
+prev/next flips before against after. A side without a screenshot yet
+renders a gradient placeholder frame, so pairs can be authored before
+the images exist. Documented on the Design System page with Interactive
+Menu's real low-fi to hi-fi progression as the demo.
+**Notes:** Format follows the "decision pairs" recommendation: the
+caption carries the why, versions are labeled honestly, and the intended
+cap is 2-3 pairs per study. No project ships pairs yet; the template
+waits for the before/after exports.
+
+### 47. Artifact chip: body and Open split into two targets
+**Changed:** The artifact chip was one button, so its body and its Open
+pill both jumped to fullscreen. Now the chip body opens the preview
+docked (split panel) and only the Open pill goes straight to fullscreen.
+Structurally the body is a stretched button over the chip and the pill
+its own button above it, so the two targets never nest. Applies to both
+chips in a case study (overview and Final screens); the design-system
+demo caption now describes the split.

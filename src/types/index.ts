@@ -72,6 +72,20 @@ export interface Testimonial {
   role: string;
 }
 
+/** A design iteration told as a decision: before and after, with the why. */
+export interface Comparison {
+  /** The decision, a few words — e.g. "Ring instead of bars". */
+  title: string;
+  /** Why the after won. One or two sentences; this line is the artifact. */
+  note: string;
+  /** Screenshot paths (under /assets); a missing side renders a placeholder frame. */
+  before?: string;
+  after?: string;
+  /** Version chips over the frames; default "Before" / "After". */
+  beforeLabel?: string;
+  afterLabel?: string;
+}
+
 /** A research persona — who the project was designed for. */
 export interface Persona {
   name: string;
@@ -90,6 +104,8 @@ export interface Project {
   description: string;
   role: string;
   year: string;
+  /** Shelved as a side project: sits behind "Show more" on the Case studies page, out of the chat carousel and sidebar lists. */
+  sideProject?: boolean;
   tags: string[];
   tools: string[];
   highlights: string[];
@@ -113,6 +129,8 @@ export interface Project {
   process: string[];
   /** Research personas, shown in the Process section. */
   personas?: Persona[];
+  /** Design iterations, rendered as comparison figures in the Process section. */
+  iterations?: Comparison[];
   solution: string;
   results: Metric[];
   /** Where the design falls short — shown in the Impact section, before `futureWork`. */

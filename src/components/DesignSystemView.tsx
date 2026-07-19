@@ -22,6 +22,7 @@ import RichText from "./RichText";
 import ThemeToggle from "./ThemeToggle";
 import TypingIndicator from "./TypingIndicator";
 import {
+  ComparisonFigure,
   LolaTurn,
   MetricRow,
   PersonaCard,
@@ -242,7 +243,7 @@ export default function DesignSystemView() {
 
           <div>
             <p className="mb-3 font-[var(--font-mono)] text-[12px] uppercase tracking-wide text-[var(--color-ink-soft)]">
-              Artifact chip & collage: width-capped chip whose Open jumps straight to fullscreen
+              Artifact chip & collage: the chip body docks the preview, its Open pill jumps to fullscreen
             </p>
             <div className="space-y-4">
               <ArtifactChip
@@ -310,6 +311,23 @@ export default function DesignSystemView() {
             <div className="card-warm p-5">
               <ProcessTimeline steps={demoProject.process.slice(0, 3)} />
             </div>
+          </div>
+
+          <div>
+            <p className="mb-3 font-[var(--font-mono)] text-[12px] uppercase tracking-wide text-[var(--color-ink-soft)]">
+              Comparison: an iteration as a decision pair, before and after with the why
+            </p>
+            <ComparisonFigure
+              comparison={{
+                title: "Four sketches into one prototype",
+                note: "Each of us sketched separately; the strongest ideas merged into one low-fi prototype, and think-aloud testing shaped the hi-fi pass.",
+                before: "/assets/interactive-menu/low-fi-prototypes.webp",
+                after: "/assets/interactive-menu/hi-fi-menu.webp",
+                beforeLabel: "Low-fi",
+                afterLabel: "Hi-fi",
+              }}
+              gradient={demoProject.gradient}
+            />
           </div>
 
           <div>

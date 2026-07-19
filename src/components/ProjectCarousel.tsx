@@ -3,7 +3,10 @@ import type { Project } from "../types";
 import ProjectCard from "./ProjectCard";
 
 export default function ProjectCarousel({ onLearnMore }: { onLearnMore: (project: Project) => void }) {
-  if (projects.length === 0) {
+  // the chat pitches the selected work; the side-project shelf stays on the
+  // Case studies page, where "Show more" sets its expectations.
+  const caseStudies = projects.filter((p) => !p.sideProject);
+  if (caseStudies.length === 0) {
     return (
       <p className="text-base italic text-[var(--color-ink-soft)]">
         No projects to show yet, check back soon!
@@ -17,7 +20,7 @@ export default function ProjectCarousel({ onLearnMore }: { onLearnMore: (project
       role="list"
       aria-label="Projects"
     >
-      {projects.map((project) => (
+      {caseStudies.map((project) => (
         <div role="listitem" key={project.id}>
           <ProjectCard project={project} onLearnMore={onLearnMore} />
         </div>

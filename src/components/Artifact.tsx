@@ -109,6 +109,7 @@ export function ArtifactChip({
   video = false,
   active = false,
   onOpen,
+  onOpenFull,
 }: {
   title: string;
   subtitle: string;
@@ -118,15 +119,16 @@ export function ArtifactChip({
   /** Marks `image` as a video poster, so the thumbnail gets a play badge. */
   video?: boolean;
   active?: boolean;
+  /** Chip-body click: open the preview docked. */
   onOpen: () => void;
+  /** Open-pill click: jump straight to fullscreen. Falls back to `onOpen`. */
+  onOpenFull?: () => void;
 }) {
   return (
-    <button
-      type="button"
-      onClick={onOpen}
-      // capped width: on a wide page a full-bleed bar strands the Open
-      // affordance far from the label it belongs to
-      className={`focus-ring group flex w-full max-w-xl items-center gap-3 rounded-[var(--radius-ui)] border bg-[var(--color-cream-soft)] px-3 py-2.5 text-left shadow-sm transition hover:border-[var(--color-rose)] hover:shadow-[var(--shadow-card)] ${
+    // capped width: on a wide page a full-bleed bar strands the Open
+    // affordance far from the label it belongs to
+    <div
+      className={`group relative flex w-full max-w-xl items-center gap-3 rounded-[var(--radius-ui)] border bg-[var(--color-cream-soft)] px-3 py-2.5 text-left shadow-sm transition hover:border-[var(--color-rose)] hover:shadow-[var(--shadow-card)] ${
         active ? "border-[var(--color-rose)] ring-1 ring-[var(--color-rose)]" : "border-[var(--color-blush-deep)]/60"
       }`}
     >
@@ -149,10 +151,24 @@ export function ArtifactChip({
         <span className="block truncate text-base font-semibold text-[var(--color-ink)]">{title}</span>
         <span className="block truncate text-[13px] text-[var(--color-ink-soft)]">{subtitle}</span>
       </span>
-      <span className="flex shrink-0 items-center gap-1.5 rounded-full border border-[var(--color-blush-deep)]/70 px-3 py-1.5 text-sm font-semibold text-[var(--color-rose-dark)] transition group-hover:bg-[var(--color-blush)]">
+      {/* two targets, never nested: the body is one stretched button that
+          docks the preview; the pill is its own button for fullscreen and
+          sits above the stretch on z */}
+      <button
+        type="button"
+        onClick={onOpen}
+        aria-label={`Preview ${title}`}
+        className="focus-ring absolute inset-0 rounded-[var(--radius-ui)]"
+      />
+      <button
+        type="button"
+        onClick={onOpenFull ?? onOpen}
+        aria-label={`Open ${title} full screen`}
+        className="focus-ring relative z-10 flex shrink-0 items-center gap-1.5 rounded-full border border-[var(--color-blush-deep)]/70 px-3 py-1.5 text-sm font-semibold text-[var(--color-rose-dark)] transition group-hover:bg-[var(--color-blush)]"
+      >
         <Maximize2 size={12} strokeWidth={2} aria-hidden="true" /> Open
-      </span>
-    </button>
+      </button>
+    </div>
   );
 }
 

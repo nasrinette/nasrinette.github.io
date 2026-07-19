@@ -367,173 +367,6 @@ export const projects: Project[] = [
     ],
   },
   {
-    id: "goodreads-ux",
-    title: "UX Study: Goodreads",
-    summary: "A cursor-tracked usability study of the world's biggest book platform.",
-    description:
-      "**One of the world's biggest book platforms, and almost no public research on whether it works.**\n\nWe gave 16 people real tasks, tracked where their cursors went, and asked how it felt. The finding that mattered: the longer someone stayed, the less they liked it.",
-    role: "UX Researcher & Data Analyst",
-    year: "2025",
-    tags: ["UX Research", "Quantitative", "Data Analysis"],
-    tools: ["Cursor tracking", "Google Forms", "Python", "Canva"],
-    highlights: [
-      "Time on site went up as satisfaction went down. The engagement metric was measuring confusion",
-      "Cursor tracking plus surveys across 16 people, on three real tasks",
-      "Published on Télécom Paris's QuantUX site",
-    ],
-    gradient: ["#f7d49a", "#f3c079"],
-    icon: BookOpen,
-    cover: "/assets/goodreads-ux/goodreads.png",
-    heroImage: "/assets/goodreads-ux/goodreads-cover.png",
-    link: "https://quantux.telecom-paris.fr/2025/03/07/evaluating-the-usability-of-goodreads/",
-    linkLabel: "Read the write-up",
-    problem:
-      "**We were Goodreads users ourselves, and we'd all felt the friction.**\n\n- It's one of the largest book platforms in the world, and there's almost no public research on whether it's usable\n- Finding a recommendation, the thing it exists for, is exactly where we kept getting stuck\n\n**So we asked one question: how does Goodreads hold up when you're just trying to find your next book?**",
-    goals: [
-      "Find where discovery breaks, with data instead of opinion",
-      "Compare every route to a book: Similar Books, Genres, Explore, Lists, Community",
-      "Measure how it feels, not just how long it takes",
-    ],
-    process: [
-      "**Discover**: mapped the whole Goodreads journey and marked the emotional low points. Discovery, and whatever happens right after you interact, stood out.",
-      "**Define**: a three-task protocol (explore freely, find a feature, then find a recommendation through a friend's profile). Real jobs, not clicks.",
-      "**Measure**: 16 participants, cursors tracked, plus a survey after. Where a cursor hesitates is where the design does.",
-      "**Analyse**: the surprise was that time on site went *up* as satisfaction went *down*. On this site, time isn't engagement, it's confusion wearing engagement's clothes.",
-    ],
-    solution:
-      "**What the data asked for.**\n\n- **Rebuild Community**: participants compared it to Craigslist; it's where time goes to die\n- **Let people filter**: discovery without filters is browsing with your eyes closed\n- **Cut the density**: every page asks for too much attention at once\n- **Lead with Similar Books**: the most engaging thing on the site at 1.9 minutes and 2.2 books consulted, so it should anchor discovery instead of hiding behind it",
-    results: [
-      { label: "Average usability rating", value: "3.9/5" },
-      { label: "Found the site easy to use", value: "31%" },
-      { label: "Key insight", value: "Time ≠ engagement" },
-    ],
-    limitations:
-      "**A 16-person study is a signal, not a verdict.**\n\n- Sixteen participants is enough to find the pain points, not to size them across Goodreads' whole audience\n- A cursor tells you where attention probably went, not what someone was thinking when it went there\n- We measured the site as it stood that week; it keeps shipping changes we didn't control for",
-    futureWork:
-      "**Prototype the fixes, then test them the same way.**\n\nThe study says what hurts, not what cures it. Next is redesigning Community and the filtering flow, then re-running these same three tasks against the prototype with the same protocol and the same measures, so the before and after are actually comparable.",
-    gallery: [
-      { caption: "User journey map: emotional highs and lows", gradient: ["#fbe4bb", "#f7d49a"], icon: Search, image: "/assets/goodreads-ux/user-journey.png", fit: "contain", stage: "process" },
-      { caption: "Heatmap: users gravitate to Browse and My Books", gradient: ["#f7d49a", "#f3c079"], icon: MousePointer2, image: "/assets/goodreads-ux/heatmap.png", stage: "findings" },
-      { caption: "Correlation matrix: more time, lower satisfaction", gradient: ["#f5c88a", "#f3c079"], icon: BarChart3, image: "/assets/goodreads-ux/matrix.png", fit: "contain", stage: "findings" },
-      { caption: "Interaction frequency across site sections", gradient: ["#fbe4bb", "#f7d49a"], icon: BarChart3, image: "/assets/goodreads-ux/freq-barchart.png", fit: "contain", stage: "findings" },
-      { caption: "Average time per feature: Community lags", gradient: ["#f7d49a", "#f3c079"], icon: BarChart3, image: "/assets/goodreads-ux/avg-time.png", fit: "contain", stage: "findings" },
-      { caption: "Helpfulness ratings: Similar Books wins", gradient: ["#f5c88a", "#f3c079"], icon: BarChart3, image: "/assets/goodreads-ux/helpfullness.png", fit: "contain", stage: "findings" },
-      { caption: "Interactions by page type: Book Page and User Profile absorb most of them", gradient: ["#fbe4bb", "#f7d49a"], icon: BarChart3, image: "/assets/goodreads-ux/interactions-by-page.png", fit: "contain", stage: "findings" },
-      { caption: "Total time by page type: 14.1 minutes on Book Page alone", gradient: ["#f5c88a", "#f3c079"], icon: BarChart3, image: "/assets/goodreads-ux/time-by-page.png", fit: "contain", stage: "findings" },
-      { caption: "The Browse menu: seven destinations to cross before a genre", gradient: ["#f7d49a", "#f3c079"], icon: MonitorPlay, image: "/assets/goodreads-ux/goodreads-problem-poster.png", video: "/assets/goodreads-ux/goodreads-problem.mp4", fit: "contain", stage: "findings" },
-    ],
-    testimonial: {
-      quote: "This feels like it wasn't touched since 2009.",
-      author: "Study participant",
-      role: "On the Goodreads Community section",
-    },
-  },
-  {
-    id: "mister-garden",
-    title: "Mister Garden: Salad Builder",
-    summary: "Build your salad, watch nutrition facts and price update live.",
-    description:
-      "**You find out what your salad costs when it's already on your tray.**\n\nAn unofficial, fan-made builder for the Mister Garden menu: pick a base, stack what you want, and watch the calories and the price move as you go. In French or English.",
-    role: "Product Designer",
-    year: "2026",
-    tags: ["Web App", "Nutrition", "Bilingual"],
-    tools: ["Claude Code", "React"],
-    highlights: [
-      "The number never leaves the screen. Calories, macros, and price move with every ingredient you add",
-      "The flow mirrors the real counter: base, ingredients, bonus, sauce, bread",
-      "Fully bilingual, because the people ordering switch language mid-sentence",
-    ],
-    gradient: ["#cdd9a5", "#b3c383"],
-    icon: Salad,
-    cover: "/assets/mister-garden/builder.png",
-    heroImage: "/assets/mister-garden/builder.png",
-    link: "https://nasrinette.github.io/mister-garden-builder/",
-    linkLabel: "Live site",
-    embed: true,
-    problem:
-      "**Composing a salad at the counter is guesswork.**\n\n- No menu tells you what *your* combination adds up to, not in calories, not in price\n- You find out when it's already made, and by then you've committed\n\n**Everything you need to decide arrives after the decision.**",
-    goals: [
-      "Plan your exact salad before you're standing in the queue",
-      "Honest per-ingredient nutrition that adds up as you go",
-      "Fast, and in the language you're actually ordering in",
-    ],
-    process: [
-      "**Discover**: the menu is a list of parts with no way to add them up. The gap isn't information, it's arithmetic nobody wants to do standing in a queue.",
-      "**Design**: the builder walks the real counter's order (base, ingredients, bonus, sauce, bread). A fresh green palette pulled off the food itself, and a totals panel that never leaves the screen, because the number is the whole reason you're here.",
-      "**Localize**: French and English throughout, since the people ordering switch between them mid-sentence.",
-      "**Refine**: every choice moves the total instantly. A number that lags is a number you stop trusting.",
-    ],
-    solution:
-      "**One page, the same order as the real counter.**\n\n- **Base** → **ingredients** → **bonus toppings** → **sauce** → **bread**\n- A panel tracks calories, macros, and estimated price the whole way down\n- Add or remove anything and the total moves with you\n- Switch the whole interface between French and English\n\nDecide before you're at the counter, not after.",
-    results: [
-      { label: "Menu items to compose from", value: "80+" },
-      { label: "Languages", value: "FR · EN" },
-      { label: "Nutrition & price feedback", value: "Live" },
-    ],
-    limitations:
-      "**Fan-made, and the numbers admit it.**\n\n- Unofficial: the menu is compiled by hand, so it drifts the moment the real one changes\n- The price is an estimate, not a quote\n- Nutrition is per-ingredient arithmetic, close enough to choose with, not close enough to weigh against a kitchen scale",
-    futureWork:
-      "**Save what you build.**\n\nRight now every visit starts from an empty bowl, but people order the same salad over and over. Saved combinations, and a way to hand one to the person behind the counter, is the obvious next step.",
-    gallery: [
-      { caption: "Compose: base, ingredients, bonus, sauce, and bread", gradient: ["#dee6bf", "#cdd9a5"], icon: Salad, image: "/assets/mister-garden/builder.png" },
-      { caption: "Nutrition facts and price update with every ingredient", gradient: ["#cdd9a5", "#b3c383"], icon: BarChart3 },
-      { caption: "Switch the whole interface between French and English", gradient: ["#c3cf94", "#b3c383"], icon: Globe2 },
-    ],
-  },
-  {
-    id: "coffee-vis",
-    title: "Coffee Across the Globe",
-    summary: "11 interactive D3 visuals on global coffee trade, production, and consumption.",
-    description:
-      "**Everything about coffee is global. Everything about coffee data is siloed.**\n\nFive datasets, 94 countries, 60+ years, pulled into one place you can actually explore. Trade as a network you drag, production on a map with a year slider, consumption and quality side by side.",
-    role: "Data Visualization Designer",
-    year: "2025",
-    tags: ["Data Viz", "Interactive", "Storytelling"],
-    tools: ["D3.js"],
-    highlights: [
-      "Every visual matched to the shape of its data. A trade network is a graph you can pull apart, not a bar chart",
-      "Five datasets, 94 countries, 60+ years, one explorable story",
-      "Surfaced what the tables hid: Nordic countries top per-capita consumption while growing no coffee at all",
-    ],
-    gradient: ["#f8c3a0", "#f3a988"],
-    icon: Coffee,
-    cover: "/assets/coffee-vis/coffee-hero.png",
-    heroImage: "/assets/coffee-vis/coffee-main.png",
-    link: "https://data-vis-project.netlify.app/",
-    linkLabel: "Live site",
-    embed: true,
-    problem:
-      "**The story of coffee is a network, and networks don't fit in a bar chart.**\n\n- The data lives in five incompatible places: trade statistics, production reports, consumer surveys, product reviews\n- Static charts flatten the two things that matter most: who trades with whom, and how that shifted over sixty years\n\n**You can't see a system by looking at its pieces one at a time.**",
-    goals: [
-      "One place for the whole story: production, trade, consumption, quality",
-      "Match every visual to the shape of its data, not to what looks impressive",
-      "Make it explorable rather than just readable",
-    ],
-    process: [
-      "**Gather**: five datasets into one. Consumption and spending, production and trade across 94 countries, trends from 2000 to 2023, product reviews, and country-to-country trade flows.",
-      "**Match**: each question got the form that actually fits it. Trade is a web of relationships, so it's a network you can pull apart with your cursor. Production is geographic, so it's a map. Quality is three things at once (price, rating, volume), so it's a bubble chart.",
-      "**Design**: a palette taken from the product itself, roasted browns through to raw sienna. One rule holds the sections together: every view answers a hover and a filter, so no chart is a dead end.",
-      "**Explore**: the visuals earned their keep by surfacing what the tables hid. Brazil's ~35% share and how frost swings it, Nordic countries topping per-capita consumption while growing none at all, and trade that clusters hard by region.",
-    ],
-    solution:
-      "**Four sections, one rule: every chart answers back.**\n\n- **Trade**: a network you drag, colour-coded by importer and exporter, with a map toggle when you want geography instead of structure\n- **Production**: a year slider that runs sixty years of history under your thumb\n- **Consumption**: preference and spending, compared over time\n- **Quality**: price, rating, and review volume in a single view\n\nExploring beats reading: the patterns worth finding here are the ones you didn't know to ask for.",
-    results: [
-      { label: "Countries analyzed", value: "94" },
-      { label: "Years of data", value: "60+" },
-      { label: "Interactive visuals", value: "11" },
-    ],
-    limitations:
-      "**The data sets the ceiling.**\n\n- It ends in 2023, so this is history, not a live picture of the trade\n- Five sources means five different collection methods; country coverage is uneven and the seams show where they meet\n- Reviews skew to the people who write reviews, so the quality view reads specialty coffee better than it reads the everyday cup",
-    futureWork:
-      "**Make it a story, not just a tool.**\n\nEleven visuals ask a lot of a first-time visitor. They explore best if they already know what they're looking for. The next version leads: a guided path through the three or four findings that matter, with free exploration waiting at the end for anyone who wants it.",
-    gallery: [
-      { caption: "Force-directed global trade network", gradient: ["#fbd7bc", "#f8c3a0"], icon: Network, image: "/assets/coffee-vis/trade.png" },
-      { caption: "Production dashboard with year slider", gradient: ["#f8c3a0", "#f3a988"], icon: Globe2, image: "/assets/coffee-vis/coffee-prod.png" },
-      { caption: "Consumption patterns over time", gradient: ["#f6b596", "#f3a988"], icon: BarChart3, image: "/assets/coffee-vis/coffee-cons.png" },
-      { caption: "Quality metrics: price, rating, reviews", gradient: ["#fbd7bc", "#f8c3a0"], icon: BarChart3, image: "/assets/coffee-vis/coffee-qual.png" },
-    ],
-  },
-  {
     id: "illumilend",
     title: "IllumiLend: Augmented Storage Room",
     summary: "A storage room that guides you to your reservation with light.",
@@ -541,6 +374,7 @@ export const projects: Project[] = [
       "**Reservation systems are great at booking and useless for the last ten metres.**\n\nIllumiLend makes the room do the guiding. Badge in, get a colour, follow the arrow on the floor to the cubby lit in that same colour.",
     role: "UX Designer & Usability Tester",
     year: "2025",
+    sideProject: true,
     tags: ["Wayfinding", "Ambient UI", "HCI"],
     tools: ["Figma", "LED shelf lighting", "Projector"],
     highlights: [
@@ -600,5 +434,175 @@ export const projects: Project[] = [
       author: "Participant 3",
       role: "Usability testing session",
     },
+  },
+  {
+    id: "goodreads-ux",
+    title: "UX Study: Goodreads",
+    summary: "A cursor-tracked usability study of the world's biggest book platform.",
+    description:
+      "**One of the world's biggest book platforms, and almost no public research on whether it works.**\n\nWe gave 16 people real tasks, tracked where their cursors went, and asked how it felt. The finding that mattered: the longer someone stayed, the less they liked it.",
+    role: "UX Researcher & Data Analyst",
+    year: "2025",
+    sideProject: true,
+    tags: ["UX Research", "Quantitative", "Data Analysis"],
+    tools: ["Cursor tracking", "Google Forms", "Python", "Canva"],
+    highlights: [
+      "Time on site went up as satisfaction went down. The engagement metric was measuring confusion",
+      "Cursor tracking plus surveys across 16 people, on three real tasks",
+      "Published on Télécom Paris's QuantUX site",
+    ],
+    gradient: ["#f7d49a", "#f3c079"],
+    icon: BookOpen,
+    cover: "/assets/goodreads-ux/goodreads.png",
+    heroImage: "/assets/goodreads-ux/goodreads-cover.png",
+    link: "https://quantux.telecom-paris.fr/2025/03/07/evaluating-the-usability-of-goodreads/",
+    linkLabel: "Read the write-up",
+    problem:
+      "**We were Goodreads users ourselves, and we'd all felt the friction.**\n\n- It's one of the largest book platforms in the world, and there's almost no public research on whether it's usable\n- Finding a recommendation, the thing it exists for, is exactly where we kept getting stuck\n\n**So we asked one question: how does Goodreads hold up when you're just trying to find your next book?**",
+    goals: [
+      "Find where discovery breaks, with data instead of opinion",
+      "Compare every route to a book: Similar Books, Genres, Explore, Lists, Community",
+      "Measure how it feels, not just how long it takes",
+    ],
+    process: [
+      "**Discover**: mapped the whole Goodreads journey and marked the emotional low points. Discovery, and whatever happens right after you interact, stood out.",
+      "**Define**: a three-task protocol (explore freely, find a feature, then find a recommendation through a friend's profile). Real jobs, not clicks.",
+      "**Measure**: 16 participants, cursors tracked, plus a survey after. Where a cursor hesitates is where the design does.",
+      "**Analyse**: the surprise was that time on site went *up* as satisfaction went *down*. On this site, time isn't engagement, it's confusion wearing engagement's clothes.",
+    ],
+    solution:
+      "**What the data asked for.**\n\n- **Rebuild Community**: participants compared it to Craigslist; it's where time goes to die\n- **Let people filter**: discovery without filters is browsing with your eyes closed\n- **Cut the density**: every page asks for too much attention at once\n- **Lead with Similar Books**: the most engaging thing on the site at 1.9 minutes and 2.2 books consulted, so it should anchor discovery instead of hiding behind it",
+    results: [
+      { label: "Average usability rating", value: "3.9/5" },
+      { label: "Found the site easy to use", value: "31%" },
+      { label: "Key insight", value: "Time ≠ engagement" },
+    ],
+    limitations:
+      "**A 16-person study is a signal, not a verdict.**\n\n- Sixteen participants is enough to find the pain points, not to size them across Goodreads' whole audience\n- A cursor tells you where attention probably went, not what someone was thinking when it went there\n- We measured the site as it stood that week; it keeps shipping changes we didn't control for",
+    futureWork:
+      "**Prototype the fixes, then test them the same way.**\n\nThe study says what hurts, not what cures it. Next is redesigning Community and the filtering flow, then re-running these same three tasks against the prototype with the same protocol and the same measures, so the before and after are actually comparable.",
+    gallery: [
+      { caption: "User journey map: emotional highs and lows", gradient: ["#fbe4bb", "#f7d49a"], icon: Search, image: "/assets/goodreads-ux/user-journey.png", fit: "contain", stage: "process" },
+      { caption: "Heatmap: users gravitate to Browse and My Books", gradient: ["#f7d49a", "#f3c079"], icon: MousePointer2, image: "/assets/goodreads-ux/heatmap.png", stage: "findings" },
+      { caption: "Correlation matrix: more time, lower satisfaction", gradient: ["#f5c88a", "#f3c079"], icon: BarChart3, image: "/assets/goodreads-ux/matrix.png", fit: "contain", stage: "findings" },
+      { caption: "Interaction frequency across site sections", gradient: ["#fbe4bb", "#f7d49a"], icon: BarChart3, image: "/assets/goodreads-ux/freq-barchart.png", fit: "contain", stage: "findings" },
+      { caption: "Average time per feature: Community lags", gradient: ["#f7d49a", "#f3c079"], icon: BarChart3, image: "/assets/goodreads-ux/avg-time.png", fit: "contain", stage: "findings" },
+      { caption: "Helpfulness ratings: Similar Books wins", gradient: ["#f5c88a", "#f3c079"], icon: BarChart3, image: "/assets/goodreads-ux/helpfullness.png", fit: "contain", stage: "findings" },
+      { caption: "Interactions by page type: Book Page and User Profile absorb most of them", gradient: ["#fbe4bb", "#f7d49a"], icon: BarChart3, image: "/assets/goodreads-ux/interactions-by-page.png", fit: "contain", stage: "findings" },
+      { caption: "Total time by page type: 14.1 minutes on Book Page alone", gradient: ["#f5c88a", "#f3c079"], icon: BarChart3, image: "/assets/goodreads-ux/time-by-page.png", fit: "contain", stage: "findings" },
+      { caption: "The Browse menu: seven destinations to cross before a genre", gradient: ["#f7d49a", "#f3c079"], icon: MonitorPlay, image: "/assets/goodreads-ux/goodreads-problem-poster.png", video: "/assets/goodreads-ux/goodreads-problem.mp4", fit: "contain", stage: "findings" },
+    ],
+    testimonial: {
+      quote: "This feels like it wasn't touched since 2009.",
+      author: "Study participant",
+      role: "On the Goodreads Community section",
+    },
+  },
+  {
+    id: "coffee-vis",
+    title: "Coffee Across the Globe",
+    summary: "11 interactive D3 visuals on global coffee trade, production, and consumption.",
+    description:
+      "**Everything about coffee is global. Everything about coffee data is siloed.**\n\nFive datasets, 94 countries, 60+ years, pulled into one place you can actually explore. Trade as a network you drag, production on a map with a year slider, consumption and quality side by side.",
+    role: "Data Visualization Designer",
+    year: "2025",
+    sideProject: true,
+    tags: ["Data Viz", "Interactive", "Storytelling"],
+    tools: ["D3.js"],
+    highlights: [
+      "Every visual matched to the shape of its data. A trade network is a graph you can pull apart, not a bar chart",
+      "Five datasets, 94 countries, 60+ years, one explorable story",
+      "Surfaced what the tables hid: Nordic countries top per-capita consumption while growing no coffee at all",
+    ],
+    gradient: ["#f8c3a0", "#f3a988"],
+    icon: Coffee,
+    cover: "/assets/coffee-vis/coffee-hero.png",
+    heroImage: "/assets/coffee-vis/coffee-main.png",
+    link: "https://data-vis-project.netlify.app/",
+    linkLabel: "Live site",
+    embed: true,
+    problem:
+      "**The story of coffee is a network, and networks don't fit in a bar chart.**\n\n- The data lives in five incompatible places: trade statistics, production reports, consumer surveys, product reviews\n- Static charts flatten the two things that matter most: who trades with whom, and how that shifted over sixty years\n\n**You can't see a system by looking at its pieces one at a time.**",
+    goals: [
+      "One place for the whole story: production, trade, consumption, quality",
+      "Match every visual to the shape of its data, not to what looks impressive",
+      "Make it explorable rather than just readable",
+    ],
+    process: [
+      "**Gather**: five datasets into one. Consumption and spending, production and trade across 94 countries, trends from 2000 to 2023, product reviews, and country-to-country trade flows.",
+      "**Match**: each question got the form that actually fits it. Trade is a web of relationships, so it's a network you can pull apart with your cursor. Production is geographic, so it's a map. Quality is three things at once (price, rating, volume), so it's a bubble chart.",
+      "**Design**: a palette taken from the product itself, roasted browns through to raw sienna. One rule holds the sections together: every view answers a hover and a filter, so no chart is a dead end.",
+      "**Explore**: the visuals earned their keep by surfacing what the tables hid. Brazil's ~35% share and how frost swings it, Nordic countries topping per-capita consumption while growing none at all, and trade that clusters hard by region.",
+    ],
+    solution:
+      "**Four sections, one rule: every chart answers back.**\n\n- **Trade**: a network you drag, colour-coded by importer and exporter, with a map toggle when you want geography instead of structure\n- **Production**: a year slider that runs sixty years of history under your thumb\n- **Consumption**: preference and spending, compared over time\n- **Quality**: price, rating, and review volume in a single view\n\nExploring beats reading: the patterns worth finding here are the ones you didn't know to ask for.",
+    results: [
+      { label: "Countries analyzed", value: "94" },
+      { label: "Years of data", value: "60+" },
+      { label: "Interactive visuals", value: "11" },
+    ],
+    limitations:
+      "**The data sets the ceiling.**\n\n- It ends in 2023, so this is history, not a live picture of the trade\n- Five sources means five different collection methods; country coverage is uneven and the seams show where they meet\n- Reviews skew to the people who write reviews, so the quality view reads specialty coffee better than it reads the everyday cup",
+    futureWork:
+      "**Make it a story, not just a tool.**\n\nEleven visuals ask a lot of a first-time visitor. They explore best if they already know what they're looking for. The next version leads: a guided path through the three or four findings that matter, with free exploration waiting at the end for anyone who wants it.",
+    gallery: [
+      { caption: "Force-directed global trade network", gradient: ["#fbd7bc", "#f8c3a0"], icon: Network, image: "/assets/coffee-vis/trade.png" },
+      { caption: "Production dashboard with year slider", gradient: ["#f8c3a0", "#f3a988"], icon: Globe2, image: "/assets/coffee-vis/coffee-prod.png" },
+      { caption: "Consumption patterns over time", gradient: ["#f6b596", "#f3a988"], icon: BarChart3, image: "/assets/coffee-vis/coffee-cons.png" },
+      { caption: "Quality metrics: price, rating, reviews", gradient: ["#fbd7bc", "#f8c3a0"], icon: BarChart3, image: "/assets/coffee-vis/coffee-qual.png" },
+    ],
+  },
+  {
+    id: "mister-garden",
+    title: "Mister Garden: Salad Builder",
+    summary: "Build your salad, watch nutrition facts and price update live.",
+    description:
+      "**You find out what your salad costs when it's already on your tray.**\n\nAn unofficial, fan-made builder for the Mister Garden menu: pick a base, stack what you want, and watch the calories and the price move as you go. In French or English.",
+    role: "Product Designer",
+    year: "2026",
+    sideProject: true,
+    tags: ["Web App", "Nutrition", "Bilingual"],
+    tools: ["Claude Code", "React"],
+    highlights: [
+      "The number never leaves the screen. Calories, macros, and price move with every ingredient you add",
+      "The flow mirrors the real counter: base, ingredients, bonus, sauce, bread",
+      "Fully bilingual, because the people ordering switch language mid-sentence",
+    ],
+    gradient: ["#cdd9a5", "#b3c383"],
+    icon: Salad,
+    cover: "/assets/mister-garden/builder.png",
+    heroImage: "/assets/mister-garden/builder.png",
+    link: "https://nasrinette.github.io/mister-garden-builder/",
+    linkLabel: "Live site",
+    embed: true,
+    problem:
+      "**Composing a salad at the counter is guesswork.**\n\n- No menu tells you what *your* combination adds up to, not in calories, not in price\n- You find out when it's already made, and by then you've committed\n\n**Everything you need to decide arrives after the decision.**",
+    goals: [
+      "Plan your exact salad before you're standing in the queue",
+      "Honest per-ingredient nutrition that adds up as you go",
+      "Fast, and in the language you're actually ordering in",
+    ],
+    process: [
+      "**Discover**: the menu is a list of parts with no way to add them up. The gap isn't information, it's arithmetic nobody wants to do standing in a queue.",
+      "**Design**: the builder walks the real counter's order (base, ingredients, bonus, sauce, bread). A fresh green palette pulled off the food itself, and a totals panel that never leaves the screen, because the number is the whole reason you're here.",
+      "**Localize**: French and English throughout, since the people ordering switch between them mid-sentence.",
+      "**Refine**: every choice moves the total instantly. A number that lags is a number you stop trusting.",
+    ],
+    solution:
+      "**One page, the same order as the real counter.**\n\n- **Base** → **ingredients** → **bonus toppings** → **sauce** → **bread**\n- A panel tracks calories, macros, and estimated price the whole way down\n- Add or remove anything and the total moves with you\n- Switch the whole interface between French and English\n\nDecide before you're at the counter, not after.",
+    results: [
+      { label: "Menu items to compose from", value: "80+" },
+      { label: "Languages", value: "FR · EN" },
+      { label: "Nutrition & price feedback", value: "Live" },
+    ],
+    limitations:
+      "**Fan-made, and the numbers admit it.**\n\n- Unofficial: the menu is compiled by hand, so it drifts the moment the real one changes\n- The price is an estimate, not a quote\n- Nutrition is per-ingredient arithmetic, close enough to choose with, not close enough to weigh against a kitchen scale",
+    futureWork:
+      "**Save what you build.**\n\nRight now every visit starts from an empty bowl, but people order the same salad over and over. Saved combinations, and a way to hand one to the person behind the counter, is the obvious next step.",
+    gallery: [
+      { caption: "Compose: base, ingredients, bonus, sauce, and bread", gradient: ["#dee6bf", "#cdd9a5"], icon: Salad, image: "/assets/mister-garden/builder.png" },
+      { caption: "Nutrition facts and price update with every ingredient", gradient: ["#cdd9a5", "#b3c383"], icon: BarChart3 },
+      { caption: "Switch the whole interface between French and English", gradient: ["#c3cf94", "#b3c383"], icon: Globe2 },
+    ],
   },
 ];

@@ -7,6 +7,10 @@ import { projects } from "../data/projects";
 import type { ThemeMode } from "../hooks/useTheme";
 import type { AppView } from "../types";
 
+// the sidebar sells the selected work, same as the chat carousel; side
+// projects are reached through "Show more" on the Case studies page.
+const caseStudies = projects.filter((p) => !p.sideProject);
+
 interface NavItem {
   id: AppView;
   label: string;
@@ -145,7 +149,7 @@ function SidebarContent({
 
           {caseStudiesOpen && (
             <div className="mt-0.5 space-y-0.5 border-l border-[var(--color-blush-deep)]/70 pl-3.5">
-              {projects.map((project) => {
+              {caseStudies.map((project) => {
                 const active = caseStudiesActive && caseStudyId === project.id;
                 return (
                   <button
@@ -282,7 +286,7 @@ export default function Sidebar({
               </button>
             ))}
 
-            {projects.map((project) => {
+            {caseStudies.map((project) => {
               const active = view === "projects" && caseStudyId === project.id;
               return (
                 <button

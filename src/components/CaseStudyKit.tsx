@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
-import { Frown, Target } from "lucide-react";
-import type { Persona } from "../types";
+import { ArrowRight, Frown, ImageIcon, Target } from "lucide-react";
+import type { Comparison, Persona } from "../types";
 import CatAvatar from "./CatAvatar";
 import RichText from "./RichText";
 import ToolLogo from "./ToolLogo";
@@ -193,6 +193,101 @@ export function Testimonial({ quote, author, role }: { quote: string; author: st
       <blockquote className="text-[17px] italic leading-relaxed text-[var(--color-ink)]">“{quote}”</blockquote>
       <figcaption className="mt-1.5 text-sm text-[var(--color-ink-soft)]">
         <span className="font-semibold text-[var(--color-ink)]">{author}</span> · {role}
+      </figcaption>
+    </figure>
+  );
+}
+
+/* — ComparisonFigure — one design iteration as a decision pair: before and
+   after side by side, the why underneath as the caption. Sides with a
+   screenshot open in the artifact panel when a handler is passed; sides
+   without one render a placeholder frame until the shot exists, so the
+   template can be authored before the images are. ——————————————————— */
+export function ComparisonFigure({
+  comparison,
+  gradient,
+  activeSrc,
+  onOpenImage,
+}: {
+  comparison: Comparison;
+  /** Tint for placeholder frames — the project's own gradient. */
+  gradient: [string, string];
+  activeSrc?: string;
+  onOpenImage?: (src: string) => void;
+}) {
+  const sides = [
+    { label: comparison.beforeLabel ?? "Before", image: comparison.before },
+    { label: comparison.afterLabel ?? "After", image: comparison.after },
+  ];
+  const frame =
+    "relative block w-full overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-blush-deep)]/60";
+  return (
+    <figure>
+      <div className="relative grid grid-cols-2 gap-3">
+        {sides.map((side) => {
+          const labelChip = (
+            <span className="absolute left-2 top-2 z-10 rounded-[var(--radius-sm)] bg-[var(--color-cream-soft)]/90 px-2 py-0.5 font-[var(--font-mono)] text-[12px] font-medium text-[var(--color-ink-soft)] shadow-sm backdrop-blur-sm">
+              {side.label}
+            </span>
+          );
+          if (side.image && onOpenImage) {
+            const image = side.image;
+            return (
+              <button
+                key={side.label}
+                type="button"
+                onClick={() => onOpenImage(image)}
+                aria-label={`View ${comparison.title}, ${side.label}`}
+                className={`${frame} focus-ring transition hover:-translate-y-0.5 hover:shadow-[var(--shadow-card)] ${
+                  activeSrc === image ? "border-[var(--color-rose)] ring-1 ring-[var(--color-rose)]" : ""
+                }`}
+              >
+                {labelChip}
+                <img
+                  src={image}
+                  alt=""
+                  loading="lazy"
+                  className="aspect-[16/10] w-full bg-[var(--color-blush)] object-cover object-top"
+                />
+              </button>
+            );
+          }
+          return (
+            <span key={side.label} className={frame}>
+              {labelChip}
+              {side.image ? (
+                <img
+                  src={side.image}
+                  alt={`${comparison.title}, ${side.label}`}
+                  loading="lazy"
+                  className="aspect-[16/10] w-full bg-[var(--color-blush)] object-cover object-top"
+                />
+              ) : (
+                <span
+                  className="flex aspect-[16/10] w-full items-center justify-center"
+                  style={{ background: `linear-gradient(135deg, ${gradient[0]}, ${gradient[1]})` }}
+                >
+                  <ImageIcon
+                    size={24}
+                    strokeWidth={1.5}
+                    style={{ color: "var(--color-on-sunset)" }}
+                    className="opacity-70"
+                    aria-hidden="true"
+                  />
+                </span>
+              )}
+            </span>
+          );
+        })}
+        <span
+          className="pointer-events-none absolute left-1/2 top-1/2 flex h-7 w-7 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-[var(--color-blush-deep)]/60 bg-[var(--color-cream-soft)] text-[var(--color-rose-dark)] shadow-[var(--shadow-card)]"
+          aria-hidden="true"
+        >
+          <ArrowRight size={14} strokeWidth={2} />
+        </span>
+      </div>
+      <figcaption className="mt-2 text-base leading-relaxed text-[var(--color-ink-soft)]">
+        <span className="font-semibold text-[var(--color-ink)]">{comparison.title}.</span> {comparison.note}
       </figcaption>
     </figure>
   );

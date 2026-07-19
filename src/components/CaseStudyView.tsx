@@ -7,6 +7,7 @@ import { ArtifactChip, ArtifactCollage, ArtifactPanel, type ArtifactImage, type 
 import CatAvatar from "./CatAvatar";
 import RichText from "./RichText";
 import {
+  ComparisonFigure,
   LolaTurn,
   MetricRow,
   PersonaGrid,
@@ -97,6 +98,12 @@ export default function CaseStudyView({ project, onBack, onPrev, onNext }: CaseS
         fit: project.heroFit,
         device: project.heroDevice,
       });
+    }
+    // iteration pairs sit adjacent, so prev/next in the panel flips a
+    // comparison between its before and its after
+    for (const c of project.iterations ?? []) {
+      if (c.before) add({ src: c.before, title: `${c.title} · ${c.beforeLabel ?? "before"}` });
+      if (c.after) add({ src: c.after, title: `${c.title} · ${c.afterLabel ?? "after"}` });
     }
     for (const block of project.gallery) {
       if (block.image)
@@ -289,9 +296,13 @@ export default function CaseStudyView({ project, onBack, onPrev, onNext }: CaseS
                   gradient={project.gradient}
                   icon={project.icon}
                   active={openIndex === 0}
-                  // the Open pill promises the full view, so it opens the
-                  // panel already fullscreen; the collage keeps split mode
+                  // the chip body previews docked; the Open pill promises
+                  // the full view, so it opens the panel already fullscreen
                   onOpen={() => {
+                    setOpenIndex(0);
+                    setFullscreen(false);
+                  }}
+                  onOpenFull={() => {
                     setOpenIndex(0);
                     setFullscreen(true);
                   }}
@@ -337,6 +348,24 @@ export default function CaseStudyView({ project, onBack, onPrev, onNext }: CaseS
             <LolaTurn>
               <SectionHeading eyebrow="02">Process</SectionHeading>
               <ProcessTimeline steps={project.process} />
+              {project.iterations && project.iterations.length > 0 && (
+                <>
+                  <p className="pt-1 text-sm font-semibold uppercase tracking-wide text-[var(--color-ink-soft)]/80">
+                    Design decisions
+                  </p>
+                  <div className="space-y-5">
+                    {project.iterations.map((c) => (
+                      <ComparisonFigure
+                        key={c.title}
+                        comparison={c}
+                        gradient={project.gradient}
+                        activeSrc={activeSrc}
+                        onOpenImage={openArtifact}
+                      />
+                    ))}
+                  </div>
+                </>
+              )}
               {project.personas && project.personas.length > 0 && (
                 <>
                   <p className="pt-1 text-sm font-semibold uppercase tracking-wide text-[var(--color-ink-soft)]/80">
@@ -373,6 +402,11 @@ export default function CaseStudyView({ project, onBack, onPrev, onNext }: CaseS
                   icon={solutionShots[0]?.icon ?? project.icon}
                   active={solutionImages.some((b) => b.image === activeSrc)}
                   onOpen={() => {
+                    if (solutionImages[0]?.image) openArtifact(solutionImages[0].image!);
+                    else setOpenIndex(0);
+                    setFullscreen(false);
+                  }}
+                  onOpenFull={() => {
                     if (solutionImages[0]?.image) openArtifact(solutionImages[0].image!);
                     else setOpenIndex(0);
                     setFullscreen(true);
