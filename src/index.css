@@ -364,6 +364,143 @@ body::before {
   animation: pop-in 0.18s ease-out both;
 }
 
+/* ============================================================
+   SCROLL REVEAL — case study sections generate as you reach them
+   ============================================================ */
+
+/* Blocks start hidden and animate in once they scroll into view (the .reveal-in
+   class is added by the Reveal component / useInView). rise lifts, fade is
+   opacity only, gen sharpens an image out of a blur like it's being rendered. */
+.reveal {
+  opacity: 0;
+}
+.reveal-rise.reveal-in {
+  animation: reveal-rise 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.reveal-fade.reveal-in {
+  animation: reveal-fade 0.45s ease both;
+}
+@keyframes reveal-rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes reveal-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* gen = a diffusion-style resolve: the picture sharpens out of a soft blur,
+   like it's being generated. Blur only — no grain sheet or colour pump. Those
+   read as flashy (hard on the eyes) and force expensive compositing (janky
+   with many cards at once). A plain blur touches only the image's own pixels,
+   so it never spills a rectangle into empty space and the box can stay full
+   width without resizing the layout. */
+.reveal-gen {
+  position: relative;
+}
+.reveal-gen.reveal-in {
+  animation: reveal-fade 0.5s ease both;
+}
+.reveal-gen .gen-layer {
+  display: block;
+}
+.reveal-gen.reveal-in .gen-layer {
+  animation: gen-resolve 0.4s ease-out both;
+}
+/* a whisper of blur: animating filter re-rasterizes each frame (the one thing
+   that can tax the GPU on big showcase images), so keep the radius tiny and
+   the duration short — still reads as a resolve, costs almost nothing */
+@keyframes gen-resolve {
+  0% {
+    filter: blur(4px);
+  }
+  100% {
+    filter: blur(0);
+  }
+}
+
+/* Sidebar slides in when it opens or collapses (the two states swap). */
+@keyframes sidebar-in {
+  from {
+    opacity: 0;
+    transform: translateX(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.animate-sidebar-in {
+  animation: sidebar-in 0.28s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Disclosure list (case studies) unfolds when opened. */
+@keyframes accordion-down {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.animate-accordion-down {
+  animation: accordion-down 0.22s ease-out both;
+}
+
+/* Theme icon spins and pops the moment its mode becomes active. */
+@keyframes theme-pop {
+  0% {
+    transform: rotate(-40deg) scale(0.6);
+    opacity: 0.5;
+  }
+  100% {
+    transform: none;
+    opacity: 1;
+  }
+}
+.animate-theme-pop {
+  animation: theme-pop 0.32s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+/* Streaming prose: each word waits (inline animation-delay) then fades in, so
+   the paragraph types itself out. Words stay hidden until their block is in
+   view (.streaming), matching how Lola "generates" the answer. */
+.tok {
+  opacity: 0;
+}
+.streaming .tok {
+  animation: tok-in 0.32s ease both;
+}
+@keyframes tok-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Sticky notes land one after another when their group scrolls in. Opacity
+   only, so each note keeps its static tilt. */
+.note-reveal {
+  opacity: 0;
+}
+.note-in {
+  animation: reveal-fade 0.42s ease both;
+}
+
 @keyframes bounce-dot {
   0%,
   80%,

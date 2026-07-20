@@ -1389,3 +1389,142 @@ falls back to the case studies list.
 **Notes:** Hash-based on purpose: the site is a static GitHub Pages SPA with a
 404-to-root redirect, and hashes keep the path at "/", so shared links never
 hit the 404 fallback and no server routing is needed.
+
+### 102. Case study sections generate on the fly as you scroll
+**Changed:** Each case study now streams itself in like an AI answering. As a
+section scrolls into view its prose types out word by word (a brisk ~20ms
+token cadence), images resolve out of a blur like they're being rendered, and
+groups (stickies, metrics, personas, flow, comparisons) lift in. Built three
+reusable primitives: a `useInView` IntersectionObserver hook (reveals once,
+fires immediately for anything already on screen), a `Reveal` wrapper with
+rise / fade / gen(blur-resolve) variants, and `StreamingText` (RichText that
+fades its words in left-to-right once in view). Wired through the case study
+prose (overview, problem, research, V1/V2, solution, outcome, limitations,
+what's next, process steps) and the visual blocks in CaseStudyView and the
+CaseStudyKit. The body is keyed on project.id so switching case studies
+remounts and re-streams. Sticky notes stagger in one by one (opacity only, so
+they keep their tilt).
+**Notes:** Fully behind prefers-reduced-motion: that path renders plain,
+fully-visible RichText and static blocks, no hidden state. Word streaming is
+opacity-only (transforms don't apply to inline text) so wrapping stays natural.
+The kit components self-reveal, so the Design System catalogue animates too.
+
+### 103. Animate the rest: sidebar, theme toggle, design system, chat, diffusion images
+**Changed:** Extended the motion pass across the app. (1) Sidebar: the
+expanded aside and the collapsed rail slide in when you open or collapse it,
+and the Case Studies disclosure unfolds with an accordion. (2) Theme toggle:
+one pastel pill now slides between the sun and moon segments instead of each
+lighting on its own, and the active icon spins-and-pops; the app crossfades
+light/dark. (3) Design System: tier headings and section titles fade in,
+specimens rise in, as you scroll. (4) Chat: Lola's live replies now stream in
+word by word like the case studies (a fresh welcome and every reply);
+useChatEngine returns the set of restored-from-storage ids so a reloaded
+transcript renders statically instead of re-streaming. (5) Images: the case
+study "gen" reveal is now a diffusion-style resolve, the picture sharpens out
+of an 18px blur while a grain sheet (SVG turbulence, soft-light) dissolves off
+the top, so screenshots look like they're being generated.
+**Notes:** All of it respects prefers-reduced-motion (Reveal renders plain,
+StreamingText falls back to RichText). The `gen` variant grew an inner
+`.gen-layer` (blurred) plus a crisp `.gen-noise` overlay so the grain isn't
+itself blurred. Sidebar width still snaps between 12 and 60 (the panel slide
+softens it); a full width tween would need a persistent element and a
+crossfade, a bigger refactor. Verified all five in Chrome via Playwright: no
+console errors, streaming caught mid-flight, images caught mid-blur.
+
+### 104. Fix the comparison figure the diffusion reveal broke; retune it
+**Changed:** The gen (diffusion) variant wraps its children in an inner
+`.gen-layer`, which broke ComparisonFigure: its `grid grid-cols-2` had been
+put on the Reveal itself, so the two columns became [gen-layer holding both
+shots, gen-noise] and the before/after stacked vertically. Moved the grid onto
+an inner div inside the Reveal (same fix applied to the process-figure frame).
+Then two tuning asks: dropped the `scale(1.025)` from the resolve so the image
+stays its real size instead of shrinking into place, and slowed the resolve
+from 0.78s to 1.05s.
+**Notes:** Rule of thumb going forward: never pass grid/flex layout classes to
+a `gen` Reveal, wrap the laid-out element as a child instead (the plain rise /
+fade variants are fine since they don't add a wrapper). Verified LingoPro's
+iteration is side by side again and the slower resolve still reads as blurry
+mid-flight.
+
+### 105. Diffusion sized to the image; add it to project cards; side-projects copy
+**Changed:** Three things. (1) The diffusion box was rendering full column
+width while the image inside was narrower, so the grain sheet spilled over
+empty space (measured: a nourish showcase box was 1104x1102 around a 202px
+phone). Gave `.reveal-gen` `width: fit-content; max-width: 100%` so the effect
+hugs the picture (single images now match within 2px). (2) Added the diffusion
+reveal to the project card cover (ProjectCard), so the chat carousel and the
+case-studies grid resolve their covers in like everything else. fit-content
+collapsed those covers (window-chrome + a w-full img confuses intrinsic
+sizing), so added a `fill` opt-out on Reveal (`.gen-fill { width: auto }`) for
+stretch-to-fill covers. (3) Side-projects card copy: "Smaller builds and
+studies, kept off the selected list." -> "I love building things, so I made
+more than the recommended number of case studies. Discover more if you have
+time."
+**Notes:** Rule now: gen hugs content by default; pass `fill` when the content
+is a w-full cover meant to stretch. Verified by measuring every case study's
+gen box against its image (Δw down from 500-900px to ~2px) and screenshotting
+carousel + grid: covers full width, no console errors.
+
+### 106. Calm the diffusion down: drop the grain, soften the blur, fix a width regression
+**Changed:** The diffusion reveal was laggy and hard on the eyes, and it had
+resized the menu case study's hero. Root cause on both: the grain sheet (SVG
+turbulence + mix-blend-mode) forced expensive per-element compositing (jank
+with many cards at once) and flashed (the eye strain), and the fit-content
+sizing from #105 shrank the portrait hero to the phone's width. Removed the
+grain overlay entirely and the saturate/brightness colour pump, leaving a
+plain blur 12px -> 0 over 0.85s. Since a plain blur only touches the image's
+own pixels (never paints a rectangle over empty space), the "effect bigger
+than the image" problem is solved without fit-content, so reverted that too
+(and removed the now-moot `fill` prop). The hero fills its column again.
+**Notes:** Net: cheaper (no compositing layer, no blend mode), calmer (no
+grain flash, no colour pump), and correctly sized everywhere. Verified the
+menu hero is back to full column width (540px) and the blur reads soft
+mid-resolve with clean empty areas, no console errors.
+
+### 107. Lighten the diffusion further (still felt a bit laggy)
+**Changed:** Cut the resolve blur from 12px/0.85s to a whisper (4px/0.4s) and
+sped the text stream from 20ms to 11ms per word. Measured frame timing in
+Chrome first (Playwright, per-rAF scroll): full vs blur-disabled vs
+stream-disabled were identical at the automation's ~33ms cap with 0-1 frames
+over 40ms, i.e. no dropped frames from either effect on the main thread.
+Animating `filter: blur` is the one thing that can still tax the GPU compositor
+on large showcase images (which rAF timing can't see), so shrinking the radius
+and duration is the safe lever; a smaller blur over fewer frames is much less
+shader work.
+**Notes:** If it still feels heavy on a given machine it's GPU blur cost the
+harness can't reproduce — the next step would be dropping the blur for a plain
+opacity fade (zero GPU cost), at the price of the "resolve" look. Left the blur
+in for now since it's minimal.
+
+### 108. Add the contact icons under "Open to work" in the sidebar
+**Changed:** The sidebar footer now shows the contact row (email, LinkedIn,
+GitHub, CV) centered right under the "Open to work" status, above the divider,
+with the Theme row still below. Reused the existing `ContactIcons` component at
+size sm and its real profile links, so nothing new to maintain.
+**Notes:** Wrapped "Open to work" + the icons in one bordered group so the
+divider sits under both, then the theme controls. Only the expanded sidebar and
+the mobile drawer get it (they share SidebarContent); the collapsed icon rail
+has no status line to sit under.
+
+### 109. Bigger contact marks that span the sidebar; smaller status dot
+**Changed:** The sidebar contact row now uses a new `lg` ContactIcons size
+(44px marks) with a `spread` option that stretches the row full width and
+pushes the four marks to the edges, so they span the column instead of
+huddling in the middle. Shrank the green "Open to work" dot from 10px to 6px.
+**Notes:** `lg` and `spread` are additive props, so the chat contact card and
+the design-system specimen keep their tight md row.
+
+### 110. Contact marks a touch smaller
+**Changed:** The sidebar `lg` ContactIcons dropped from 44px to 40px marks
+(glyph 22 -> 19), still spread across the column.
+
+### 111. Remove the light background under the chat input bar
+**Changed:** Dropped `bg-[var(--color-cream-soft)]/70` and the `backdrop-blur`
+from the ChatInput bar, so the input sits flat on the page instead of on a
+frosted lighter band. The field's own box, the send button, and the hairline
+top divider stay.
+**Notes:** First mistargeted this as the app-root `/40` tint and removed that,
+but it wasn't the culprit (and my dev-server pkill meant the change never
+hot-reloaded for the user to see), so reverted it and left the root as it was.
+The header bar keeps its matching frosted surface; only the bottom input bar
+changed, per the ask.

@@ -140,7 +140,7 @@ function ShelfCard({ items, open, onToggle }: { items: Project[]; open: boolean;
         Side projects
       </h3>
       <p className="relative text-base leading-snug text-[var(--color-ink-soft)]">
-        Smaller builds and studies, kept off the selected list.
+        I love building things, so I made more than the recommended number of case studies. Discover more if you have time.
       </p>
       <div className="relative mt-auto flex items-center justify-between gap-2 pt-2">
         <span className="font-[var(--font-display)] text-sm font-semibold text-[var(--color-rose-dark)]">

@@ -35,7 +35,7 @@ function toHash(view: AppView, caseStudyId: string | null): string {
 }
 
 export default function App() {
-  const { messages, isTyping, sendMessage, retryMessage, clearChat } = useChatEngine();
+  const { messages, isTyping, sendMessage, retryMessage, clearChat, restoredIds } = useChatEngine();
   const { mode: themeMode, setMode: setThemeMode } = useTheme();
 
   const [view, setView] = useState<AppView>(() => parseHash().view);
@@ -168,6 +168,7 @@ export default function App() {
             <ChatWindow
               messages={messages}
               isTyping={isTyping}
+              restoredIds={restoredIds}
               onRetry={retryMessage}
               onProjectLearnMore={handleProjectLearnMore}
             />

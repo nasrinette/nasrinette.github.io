@@ -1,8 +1,11 @@
 import { Fragment, type ReactNode } from "react";
 import { ArrowRight, CalendarDays, Frown, ImageIcon, Sparkles, Target, UserRound } from "lucide-react";
 import type { Comparison, FlowStep, Persona, ProcessStep } from "../types";
+import { useInView } from "../hooks/useInView";
+import { useMediaQuery } from "../hooks/useMediaQuery";
 import CatAvatar from "./CatAvatar";
-import RichText from "./RichText";
+import Reveal from "./Reveal";
+import { StreamingText } from "./RichText";
 import ToolLogo from "./ToolLogo";
 
 /* ============================================================
@@ -44,7 +47,7 @@ export function Eyebrow({ children }: { children: ReactNode }) {
    starts flush at the page edge. —————————————————————————————————— */
 export function SectionHeading({ children, eyebrow }: { children: ReactNode; eyebrow?: ReactNode }) {
   return (
-    <div className="mb-3 flex items-center gap-2.5">
+    <Reveal variant="fade" className="mb-3 flex items-center gap-2.5">
       <CatAvatar size={30} />
       <span
         className="h-7 w-1.5 shrink-0 rounded-full"
@@ -58,7 +61,7 @@ export function SectionHeading({ children, eyebrow }: { children: ReactNode; eye
         {eyebrow && <>{eyebrow}{" "}</>}
         {children}
       </h2>
-    </div>
+    </Reveal>
   );
 }
 
@@ -67,7 +70,7 @@ export function SectionHeading({ children, eyebrow }: { children: ReactNode; eye
    and an optional example line. Stacks vertically on narrow screens. ————— */
 export function FlowDiagram({ steps }: { steps: FlowStep[] }) {
   return (
-    <div className="flex flex-col items-center gap-2 py-2 sm:flex-row sm:items-start sm:justify-start sm:gap-1">
+    <Reveal className="flex flex-col items-center gap-2 py-2 sm:flex-row sm:items-start sm:justify-start sm:gap-1">
       {steps.map((step, i) => (
         <Fragment key={step.label}>
           {i > 0 && (
@@ -90,7 +93,7 @@ export function FlowDiagram({ steps }: { steps: FlowStep[] }) {
           </div>
         </Fragment>
       ))}
-    </div>
+    </Reveal>
   );
 }
 
@@ -102,16 +105,24 @@ export function StickyNotes({ notes }: { notes: string[] }) {
   // object, so it keeps its colour in both themes (like the phone bezel)
   const papers = ["#fbe9c0", "#f9dcd4", "#ecdfec", "#dcebd9"];
   const tilts = ["-1.5deg", "1.2deg", "-0.8deg", "1.6deg"];
+  // the notes land one after another when the group scrolls in; opacity only,
+  // so each keeps its static tilt (animating transform would fight the rotate)
+  const reduced = useMediaQuery("(prefers-reduced-motion: reduce)");
+  const [ref, inView] = useInView<HTMLUListElement>();
+  const play = reduced || inView;
   return (
-    <ul className="flex flex-wrap gap-4 py-2">
+    <ul ref={reduced ? undefined : ref} className="flex flex-wrap gap-4 py-2">
       {notes.map((note, i) => (
         <li
           key={note}
-          className="flex min-h-28 w-44 items-center rounded-[4px] p-3.5 text-[15px] font-semibold leading-snug shadow-[var(--shadow-card)]"
+          className={`flex min-h-28 w-44 items-center rounded-[4px] p-3.5 text-[15px] font-semibold leading-snug shadow-[var(--shadow-card)] ${
+            reduced ? "" : play ? "note-reveal note-in" : "note-reveal"
+          }`}
           style={{
             background: papers[i % papers.length],
             color: "#4a3a2b",
             transform: `rotate(${tilts[i % tilts.length]})`,
+            animationDelay: reduced ? undefined : `${i * 70}ms`,
           }}
         >
           {note}
@@ -191,13 +202,13 @@ export function MetricRow({ metrics }: { metrics: { value: string; label: string
   // column, so a wide window can still leave a narrow column. Sizing on the
   // viewport crams three cards into space that isn't there.
   return (
-    <div className="@container">
+    <Reveal className="@container">
       <div className="grid grid-cols-1 gap-3 @xs:grid-cols-2 @lg:grid-cols-3">
         {metrics.map((m) => (
           <MetricStat key={m.label} value={m.value} label={m.label} />
         ))}
       </div>
-    </div>
+    </Reveal>
   );
 }
 
@@ -281,20 +292,24 @@ export function ProcessStepBody({
     <>
       {/* steps lead with a bolded phase name — Discover, Define… — so the
           shape of the process reads before any of the prose does */}
-      <RichText text={step.text} />
+      <StreamingText text={step.text} />
       {step.notes && step.notes.length > 0 && <StickyNotes notes={step.notes} />}
       {step.image &&
         (onOpenImage ? (
-          <button
-            type="button"
-            onClick={() => onOpenImage(step.image!)}
-            aria-label={`View: ${step.imageCaption ?? "process board"}`}
-            className={`${figureFrame(activeSrc === step.image)} focus-ring text-left transition hover:-translate-y-0.5 hover:shadow-[var(--shadow-lift)]`}
-          >
-            {figure}
-          </button>
+          <Reveal variant="gen">
+            <button
+              type="button"
+              onClick={() => onOpenImage(step.image!)}
+              aria-label={`View: ${step.imageCaption ?? "process board"}`}
+              className={`${figureFrame(activeSrc === step.image)} focus-ring text-left transition hover:-translate-y-0.5 hover:shadow-[var(--shadow-lift)]`}
+            >
+              {figure}
+            </button>
+          </Reveal>
         ) : (
-          <div className={figureFrame(false)}>{figure}</div>
+          <Reveal variant="gen">
+            <div className={figureFrame(false)}>{figure}</div>
+          </Reveal>
         ))}
     </>
   );
@@ -379,23 +394,25 @@ export function PersonaCard({ persona }: { persona: Persona }) {
 
 export function PersonaGrid({ personas }: { personas: Persona[] }) {
   return (
-    <div className="grid max-w-4xl gap-4 md:grid-cols-2">
+    <Reveal className="grid max-w-4xl gap-4 md:grid-cols-2">
       {personas.map((p) => (
         <PersonaCard key={p.name} persona={p} />
       ))}
-    </div>
+    </Reveal>
   );
 }
 
 /* — Testimonial — the user's voice, set as plain text: just a quote ——— */
 export function Testimonial({ quote, author, role }: { quote: string; author: string; role: string }) {
   return (
-    <figure className="border-l-2 border-[var(--color-rose)] py-0.5 pl-4">
-      <blockquote className="text-[17px] italic leading-relaxed text-[var(--color-ink)]">“{quote}”</blockquote>
-      <figcaption className="mt-1.5 text-sm text-[var(--color-ink-soft)]">
-        <span className="font-semibold text-[var(--color-ink)]">{author}</span> · {role}
-      </figcaption>
-    </figure>
+    <Reveal>
+      <figure className="border-l-2 border-[var(--color-rose)] py-0.5 pl-4">
+        <blockquote className="text-[17px] italic leading-relaxed text-[var(--color-ink)]">“{quote}”</blockquote>
+        <figcaption className="mt-1.5 text-sm text-[var(--color-ink-soft)]">
+          <span className="font-semibold text-[var(--color-ink)]">{author}</span> · {role}
+        </figcaption>
+      </figure>
+    </Reveal>
   );
 }
 
@@ -424,8 +441,11 @@ export function ComparisonFigure({
     "relative block w-full overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-blush-deep)]/60";
   return (
     <figure>
-      <div className="relative grid grid-cols-2 gap-3">
-        {sides.map((side) => {
+      {/* the grid stays on an inner div: the gen variant wraps children in its
+          own layer, so grid-cols-2 must sit below that wrapper, not on it */}
+      <Reveal variant="gen">
+        <div className="relative grid grid-cols-2 gap-3">
+          {sides.map((side) => {
           const labelChip = (
             <span className="absolute left-2 top-2 z-10 rounded-[var(--radius-sm)] bg-[var(--color-cream-soft)]/90 px-2 py-0.5 font-[var(--font-mono)] text-[12px] font-medium text-[var(--color-ink-soft)] shadow-sm backdrop-blur-sm">
               {side.label}
@@ -486,7 +506,8 @@ export function ComparisonFigure({
         >
           <ArrowRight size={14} strokeWidth={2} />
         </span>
-      </div>
+        </div>
+      </Reveal>
       <figcaption className="mt-2 text-base leading-relaxed text-[var(--color-ink-soft)]">
         <span className="font-semibold text-[var(--color-ink)]">{comparison.title}.</span> {comparison.note}
       </figcaption>

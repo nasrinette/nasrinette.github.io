@@ -24,6 +24,7 @@ import ConfirmDialog from "./ConfirmDialog";
 import { ContactIcons } from "./ContactCard";
 import ProjectCard from "./ProjectCard";
 import PromptChips from "./PromptChips";
+import Reveal from "./Reveal";
 import RichText from "./RichText";
 import ThemeToggle from "./ThemeToggle";
 import ToolLogo from "./ToolLogo";
@@ -51,7 +52,7 @@ const noop = () => {};
    no prose. ————————————————————————————————————————————————————————————————— */
 function TierHeading({ index, title }: { index?: string; title: string }) {
   return (
-    <div className="mb-6 mt-16 border-t border-[var(--color-blush-deep)]/50 pt-8 first:mt-0 first:border-0 first:pt-0">
+    <Reveal variant="fade" className="mb-6 mt-16 border-t border-[var(--color-blush-deep)]/50 pt-8 first:mt-0 first:border-0 first:pt-0">
       {index && (
         <p className="font-[var(--font-mono)] text-[13px] font-medium uppercase tracking-[0.2em] text-[var(--color-rose-dark)]">
           {index}
@@ -60,17 +61,17 @@ function TierHeading({ index, title }: { index?: string; title: string }) {
       <h2 className="mt-1 font-[var(--font-display)] text-[26px] font-bold text-[var(--color-ink)] sm:text-[30px]">
         {title}
       </h2>
-    </div>
+    </Reveal>
   );
 }
 
 /* — SectionTitle — a sub-heading inside a tier, with a trailing rule. ————— */
 function SectionTitle({ children }: { children: ReactNode }) {
   return (
-    <div className="mb-4 flex items-center gap-3">
+    <Reveal variant="fade" className="mb-4 flex items-center gap-3">
       <h3 className="font-[var(--font-display)] text-xl font-bold text-[var(--color-ink)]">{children}</h3>
       <span className="sunset-rule flex-1 opacity-40" aria-hidden="true" />
-    </div>
+    </Reveal>
   );
 }
 
@@ -78,12 +79,12 @@ function SectionTitle({ children }: { children: ReactNode }) {
    carded component never sits inside a second card. ————————————————————————— */
 function Specimen({ label, children }: { label: string; children: ReactNode }) {
   return (
-    <div>
+    <Reveal>
       <p className="mb-3 font-[var(--font-mono)] text-[12px] uppercase tracking-wide text-[var(--color-ink-soft)]">
         {label}
       </p>
       {children}
-    </div>
+    </Reveal>
   );
 }
 

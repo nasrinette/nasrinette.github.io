@@ -5,11 +5,18 @@ import ToolLogo from "./ToolLogo";
 /* — ContactIcons — the contact surface is a row of round brand marks, like a
    site footer's social row: no labels, no rows, nothing button-shaped beyond
    the circle itself. The full address travels in the tooltip and aria-label. — */
-export function ContactIcons({ size = "md" }: { size?: "sm" | "md" }) {
+export function ContactIcons({
+  size = "md",
+  spread = false,
+}: {
+  size?: "sm" | "md" | "lg";
+  /** Stretch the row full width with the marks pushed to the edges (sidebar). */
+  spread?: boolean;
+}) {
   // the mark fills the ring (~55% of the diameter) — a small glyph in a big
   // circle reads as empty chrome, this reads as the brand in a frame
-  const circle = size === "md" ? "h-8 w-8" : "h-6 w-6";
-  const glyph = size === "md" ? 17 : 13;
+  const circle = size === "lg" ? "h-10 w-10" : size === "md" ? "h-8 w-8" : "h-6 w-6";
+  const glyph = size === "lg" ? 19 : size === "md" ? 17 : 13;
 
   const items = [
     {
@@ -31,7 +38,11 @@ export function ContactIcons({ size = "md" }: { size?: "sm" | "md" }) {
   ];
 
   return (
-    <div className="flex flex-wrap items-center gap-2" role="group" aria-label="Contact links">
+    <div
+      className={spread ? "flex w-full items-center justify-between" : "flex flex-wrap items-center gap-2"}
+      role="group"
+      aria-label="Contact links"
+    >
       {items.map((item) => (
         <a
           key={item.href}

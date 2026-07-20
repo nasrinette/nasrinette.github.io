@@ -8,13 +8,15 @@ import LolaMascot from "./LolaMascot";
 interface ChatWindowProps {
   messages: ChatMessage[];
   isTyping: boolean;
+  /** ids restored from a past visit; those render statically instead of streaming. */
+  restoredIds: Set<string>;
   onRetry: (id: string) => void;
   onProjectLearnMore: (project: Project) => void;
 }
 
 const BOTTOM_THRESHOLD = 96;
 
-export default function ChatWindow({ messages, isTyping, onRetry, onProjectLearnMore }: ChatWindowProps) {
+export default function ChatWindow({ messages, isTyping, restoredIds, onRetry, onProjectLearnMore }: ChatWindowProps) {
   const scrollRef = useRef<HTMLDivElement | null>(null);
   const [pinnedToBottom, setPinnedToBottom] = useState(true);
   const [unseenCount, setUnseenCount] = useState(0);
@@ -73,7 +75,14 @@ export default function ChatWindow({ messages, isTyping, onRetry, onProjectLearn
             </div>
           )}
           {messages.map((message) => (
-            <MessageBubble key={message.id} message={message} onRetry={onRetry} onProjectLearnMore={onProjectLearnMore} />
+            <MessageBubble
+              key={message.id}
+              message={message}
+              // Lola's live replies stream in; a restored transcript is already written
+              stream={message.sender === "cat" && !restoredIds.has(message.id)}
+              onRetry={onRetry}
+              onProjectLearnMore={onProjectLearnMore}
+            />
           ))}
           {isTyping && <TypingIndicator />}
         </div>

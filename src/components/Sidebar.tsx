@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { ChevronDown, Component, FolderKanban, MessageCircle, PanelLeftClose, PanelLeftOpen, User, X } from "lucide-react";
 import CatAvatar from "./CatAvatar";
+import { ContactIcons } from "./ContactCard";
 import ThemeToggle from "./ThemeToggle";
 import { catName, catTagline } from "../data/profile";
 import { projects } from "../data/projects";
@@ -148,7 +149,7 @@ function SidebarContent({
           </button>
 
           {caseStudiesOpen && (
-            <div className="mt-0.5 space-y-0.5 border-l border-[var(--color-blush-deep)]/70 pl-3.5">
+            <div className="animate-accordion-down mt-0.5 space-y-0.5 border-l border-[var(--color-blush-deep)]/70 pl-3.5">
               {caseStudies.map((project) => {
                 const active = caseStudiesActive && caseStudyId === project.id;
                 return (
@@ -213,13 +214,19 @@ function SidebarContent({
           again would nest a container in a container. Availability sits above
           the theme switch, which closes the column. */}
       <div className="px-5 pb-4 pt-3">
-        <p className="mb-3 flex items-center justify-center gap-2 border-b border-[var(--color-blush-deep)]/60 pb-3 text-base font-semibold text-[var(--color-rose-dark)]">
-          <span
-            className="inline-block h-2.5 w-2.5 rounded-full bg-[#34c759] ring-2 ring-[#34c759]/25"
-            aria-hidden="true"
-          />
-          Open to work
-        </p>
+        <div className="mb-3 border-b border-[var(--color-blush-deep)]/60 pb-3">
+          <p className="flex items-center justify-center gap-2 text-base font-semibold text-[var(--color-rose-dark)]">
+            <span
+              className="inline-block h-1.5 w-1.5 rounded-full bg-[#34c759] ring-2 ring-[#34c759]/25"
+              aria-hidden="true"
+            />
+            Open to work
+          </p>
+          {/* how to reach her, right under the status — sized to span the column */}
+          <div className="mt-3">
+            <ContactIcons size="lg" spread />
+          </div>
+        </div>
         <div className="flex items-center justify-between gap-2">
           <span className="text-[13px] font-medium uppercase tracking-wide text-[var(--color-ink-soft)]">
             Theme
@@ -248,7 +255,7 @@ export default function Sidebar({
       {collapsed ? (
         // the collapsed state is the same sidebar with the words removed:
         // every element keeps its place and its icon, tooltips carry the names
-        <div className="hidden w-12 shrink-0 flex-col items-center border-r border-[var(--color-blush-deep)]/60 bg-[var(--color-panel)]/70 pb-3 pt-4 backdrop-blur-sm md:flex">
+        <div className="animate-sidebar-in hidden w-12 shrink-0 flex-col items-center border-r border-[var(--color-blush-deep)]/60 bg-[var(--color-panel)]/70 pb-3 pt-4 backdrop-blur-sm md:flex">
           <button
             type="button"
             onClick={onToggleCollapse}
@@ -342,7 +349,7 @@ export default function Sidebar({
           <ThemeToggle vertical mode={themeMode} onChange={onThemeChange} />
         </div>
       ) : (
-        <aside className="hidden w-60 shrink-0 flex-col border-r border-[var(--color-blush-deep)]/60 bg-[var(--color-panel)]/70 backdrop-blur-sm md:flex">
+        <aside className="animate-sidebar-in hidden w-60 shrink-0 flex-col border-r border-[var(--color-blush-deep)]/60 bg-[var(--color-panel)]/70 backdrop-blur-sm md:flex">
           <SidebarContent
             view={view}
             caseStudyId={caseStudyId}

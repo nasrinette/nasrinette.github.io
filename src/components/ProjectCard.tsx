@@ -1,5 +1,6 @@
 import type { Project } from "../types";
 import { WindowChrome } from "./Artifact";
+import Reveal from "./Reveal";
 
 interface ProjectCardProps {
   project: Project;
@@ -19,15 +20,19 @@ export default function ProjectCard({ project, onLearnMore }: ProjectCardProps) 
       className="card-warm card-lift focus-ring group flex h-full w-64 shrink-0 snap-start flex-col overflow-hidden text-left"
     >
       {project.cover ? (
-        <div className="flex shrink-0 flex-col">
-          <WindowChrome />
-          <img
-            src={project.cover}
-            alt=""
-            loading="lazy"
-            className="h-28 w-full bg-[var(--color-blush)] object-cover object-top"
-          />
-        </div>
+        // the cover resolves out of a blur like the case study images do —
+        // grid/flex layout stays on the inner div, never on the gen Reveal
+        <Reveal variant="gen" className="shrink-0">
+          <div className="flex flex-col">
+            <WindowChrome />
+            <img
+              src={project.cover}
+              alt=""
+              loading="lazy"
+              className="h-28 w-full bg-[var(--color-blush)] object-cover object-top"
+            />
+          </div>
+        </Reveal>
       ) : (
         <div
           className="flex h-28 shrink-0 items-center justify-center"

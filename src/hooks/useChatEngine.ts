@@ -127,6 +127,9 @@ export function useChatEngine() {
   const [isTyping, setIsTyping] = useState(false);
   const [booted, setBooted] = useState(false);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  // ids restored from a past visit — these render statically. Anything Lola
+  // says live this session (a fresh welcome, a reply) streams in instead.
+  const restoredIdsRef = useRef<Set<string>>(new Set());
 
   const clearPendingTimeout = () => {
     if (timeoutRef.current) {
@@ -160,6 +163,8 @@ export function useChatEngine() {
   useEffect(() => {
     const restored = loadHistory();
     if (restored && restored.length > 0) {
+      // mark the whole restored transcript as already-generated
+      restoredIdsRef.current = new Set(restored.map((m) => m.id));
       // the opening message is always the welcome — its suggestion chips are
       // navigation, not conversation, so they follow today's copy, not the
       // copy that was live when this visitor's history was saved
@@ -307,5 +312,6 @@ export function useChatEngine() {
     requestProjectDetail,
     retryMessage,
     clearChat,
+    restoredIds: restoredIdsRef.current,
   };
 }

@@ -5,7 +5,8 @@ import type { Project } from "../types";
 import { useMediaQuery } from "../hooks/useMediaQuery";
 import { ArtifactChip, ArtifactCollage, ArtifactPanel, ArtifactShowcase, Lightbox, type ArtifactImage } from "./Artifact";
 import CatAvatar from "./CatAvatar";
-import RichText from "./RichText";
+import Reveal from "./Reveal";
+import { StreamingText } from "./RichText";
 import {
   ComparisonFigure,
   FactList,
@@ -276,8 +277,10 @@ export default function CaseStudyView({ project, onBack, onPrev, onNext }: CaseS
           </button>
 
           {/* generous gaps: the sections are unboxed prose now, so the
-              whitespace is what separates one chapter from the next */}
-          <div className="flex flex-col gap-12">
+              whitespace is what separates one chapter from the next.
+              Keyed on the project so switching case studies remounts the body
+              and every section streams in fresh, like a new answer. */}
+          <div key={project.id} className="flex flex-col gap-12">
             <UserTurn>
               Tell me about the <strong>{project.title}</strong> case study.
             </UserTurn>
@@ -303,7 +306,7 @@ export default function CaseStudyView({ project, onBack, onPrev, onNext }: CaseS
                     {project.title}
                   </h1>
                   <div className="text-[17px] text-[var(--color-ink)]">
-                    <RichText text={project.description} />
+                    <StreamingText text={project.description} />
                   </div>
                   {project.facts ? (
                     <FactList facts={project.facts} />
@@ -318,6 +321,7 @@ export default function CaseStudyView({ project, onBack, onPrev, onNext }: CaseS
                     ))}
                   </div>
                 </div>
+                <Reveal variant="gen">
                 {artifacts.length > 0 || hasLivePreview ? (
                   <ArtifactChip
                     title={project.title}
@@ -355,6 +359,7 @@ export default function CaseStudyView({ project, onBack, onPrev, onNext }: CaseS
                     <project.icon size={40} strokeWidth={1.5} style={{ color: "var(--color-on-sunset)" }} className="opacity-80" />
                   </div>
                 )}
+                </Reveal>
               </div>
             </LolaTurn>
             </section>
@@ -363,7 +368,7 @@ export default function CaseStudyView({ project, onBack, onPrev, onNext }: CaseS
             <LolaTurn>
               <SectionHeading eyebrow="01">Problem</SectionHeading>
               <div className="text-[17px] text-[var(--color-ink-soft)]">
-                <RichText text={project.problem} />
+                <StreamingText text={project.problem} />
               </div>
             </LolaTurn>
             </section>
@@ -381,7 +386,7 @@ export default function CaseStudyView({ project, onBack, onPrev, onNext }: CaseS
                   (project.research || (project.researchQuotes?.length ?? 0) > 0) && (
                     <>
                       <StepLead>Research</StepLead>
-                      {project.research && <RichText text={project.research} />}
+                      {project.research && <StreamingText text={project.research} />}
                       {project.researchNotes && project.researchNotes.length > 0 && (
                         <StickyNotes notes={project.researchNotes} />
                       )}
@@ -393,7 +398,9 @@ export default function CaseStudyView({ project, onBack, onPrev, onNext }: CaseS
                         </div>
                       )}
                       {findingShots.length > 0 && (
-                        <ArtifactCollage blocks={findingShots} activeSrc={activeSrc} onOpen={openArtifact} />
+                        <Reveal variant="gen">
+                          <ArtifactCollage blocks={findingShots} activeSrc={activeSrc} onOpen={openArtifact} />
+                        </Reveal>
                       )}
                     </>
                   ),
@@ -437,18 +444,22 @@ export default function CaseStudyView({ project, onBack, onPrev, onNext }: CaseS
                   processScreens.length > 0 && (
                     <>
                       <StepLead>{project.v1 ? "V1" : "The app today"}</StepLead>
-                      {project.v1 && <RichText text={project.v1} />}
+                      {project.v1 && <StreamingText text={project.v1} />}
                       {project.v1Notes && project.v1Notes.length > 0 && <StickyNotes notes={project.v1Notes} />}
-                      <ArtifactShowcase blocks={processScreens} />
+                      <Reveal variant="gen">
+                        <ArtifactShowcase blocks={processScreens} />
+                      </Reveal>
                     </>
                   ),
                   // V2: the switch that made the shipped app, and the build shot
                   (project.v2 || processLoose.length > 0) && (
                     <>
                       {project.v2 && <StepLead>V2</StepLead>}
-                      {project.v2 && <RichText text={project.v2} />}
+                      {project.v2 && <StreamingText text={project.v2} />}
                       {processLoose.length > 0 && (
-                        <ArtifactCollage blocks={processLoose} activeSrc={activeSrc} onOpen={openArtifact} />
+                        <Reveal variant="gen">
+                          <ArtifactCollage blocks={processLoose} activeSrc={activeSrc} onOpen={openArtifact} />
+                        </Reveal>
                       )}
                     </>
                   ),
@@ -489,16 +500,20 @@ export default function CaseStudyView({ project, onBack, onPrev, onNext }: CaseS
               {/* the section is already titled Solution — a "The solution"
                   callout inside it would just box the same label twice */}
               <div className="text-[17px] text-[var(--color-ink-soft)]">
-                <RichText text={project.solution} />
+                <StreamingText text={project.solution} />
               </div>
               {screenShots.length > 0 ? (
                 // one surface holds every final screen — desktop windows with
                 // their phone twins; each shot zooms in the lightbox on click
-                <ArtifactShowcase blocks={screenShots} />
+                <Reveal variant="gen">
+                  <ArtifactShowcase blocks={screenShots} />
+                </Reveal>
               ) : solutionImages.length > 0 ? (
                 // untagged final screens show inline as a collage, each zooming
                 // in the lightbox; the live preview is reached from the top Open
-                <ArtifactCollage blocks={solutionImages} activeSrc={activeSrc} onOpen={openArtifact} />
+                <Reveal variant="gen">
+                  <ArtifactCollage blocks={solutionImages} activeSrc={activeSrc} onOpen={openArtifact} />
+                </Reveal>
               ) : null}
             </LolaTurn>
             </section>
@@ -509,7 +524,7 @@ export default function CaseStudyView({ project, onBack, onPrev, onNext }: CaseS
               {/* the honest claim first, the numbers after it */}
               {project.outcomeNote && (
                 <div className="text-[17px] text-[var(--color-ink-soft)]">
-                  <RichText text={project.outcomeNote} />
+                  <StreamingText text={project.outcomeNote} />
                 </div>
               )}
               <MetricRow metrics={project.results} />
@@ -526,7 +541,7 @@ export default function CaseStudyView({ project, onBack, onPrev, onNext }: CaseS
                     Limitations
                   </p>
                   <div className="text-[17px] text-[var(--color-ink-soft)]">
-                    <RichText text={project.limitations} />
+                    <StreamingText text={project.limitations} />
                   </div>
                 </>
               )}
@@ -536,7 +551,7 @@ export default function CaseStudyView({ project, onBack, onPrev, onNext }: CaseS
                     What&apos;s next
                   </p>
                   <div className="text-[17px] text-[var(--color-ink-soft)]">
-                    <RichText text={project.futureWork} />
+                    <StreamingText text={project.futureWork} />
                   </div>
                 </>
               )}

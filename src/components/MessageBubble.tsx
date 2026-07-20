@@ -2,7 +2,7 @@ import { RotateCcw } from "lucide-react";
 import type { ChatMessage, Project } from "../types";
 import BubbleCat, { PERCH_CLEARANCE, pickPerch } from "./BubbleCat";
 import CatAvatar from "./CatAvatar";
-import RichText from "./RichText";
+import RichText, { StreamingText } from "./RichText";
 import ProjectCarousel from "./ProjectCarousel";
 import ContactCard from "./ContactCard";
 
@@ -10,6 +10,8 @@ import ContactCard from "./ContactCard";
 // (see App), the way Claude offers suggested replies
 interface MessageBubbleProps {
   message: ChatMessage;
+  /** Stream the text in word by word, like Lola is generating it live. */
+  stream?: boolean;
   onRetry: (id: string) => void;
   onProjectLearnMore: (project: Project) => void;
 }
@@ -22,7 +24,7 @@ function formatTime(ts: number): string {
   }
 }
 
-export default function MessageBubble({ message, onRetry, onProjectLearnMore }: MessageBubbleProps) {
+export default function MessageBubble({ message, stream = false, onRetry, onProjectLearnMore }: MessageBubbleProps) {
   const isUser = message.sender === "user";
   // Sometimes Lola climbs onto one of her own bubbles; stable per message.
   const perch = !isUser && message.status !== "failed" ? pickPerch(message.id) : null;
@@ -64,7 +66,7 @@ export default function MessageBubble({ message, onRetry, onProjectLearnMore }: 
           }
         >
           {perch && <BubbleCat pose={perch} />}
-          {message.text && <RichText text={message.text} />}
+          {message.text && (stream ? <StreamingText text={message.text} /> : <RichText text={message.text} />)}
           {message.rich?.kind === "projects" && (
             <div className="mt-3">
               <ProjectCarousel onLearnMore={onProjectLearnMore} />

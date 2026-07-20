@@ -17,14 +17,27 @@ const OPTIONS: { mode: ThemeMode; label: string; icon: typeof Sun }[] = [
 ];
 
 export default function ThemeToggle({ mode, onChange, vertical = false }: ThemeToggleProps) {
+  // one pill slides between the two segments instead of each lighting on its
+  // own, so switching theme reads as a single moving control. 28px segment +
+  // 2px gap = 30px per slot.
+  const activeIndex = Math.max(0, OPTIONS.findIndex((o) => o.mode === mode));
+  const slide = `${activeIndex * 30}px`;
   return (
     <div
       role="radiogroup"
       aria-label="Theme"
-      className={`flex items-center gap-0.5 rounded-[var(--radius-md)] border border-[var(--color-blush-deep)] bg-[var(--color-cream)] p-0.5 ${
+      className={`relative flex gap-0.5 rounded-[var(--radius-md)] border border-[var(--color-blush-deep)] bg-[var(--color-cream)] p-0.5 ${
         vertical ? "flex-col" : ""
       }`}
     >
+      <span
+        aria-hidden="true"
+        className="btn-pastel is-active pointer-events-none absolute left-0.5 top-0.5 h-7 w-7"
+        style={{
+          transform: vertical ? `translateY(${slide})` : `translateX(${slide})`,
+          transition: "transform 300ms cubic-bezier(0.34, 1.4, 0.64, 1)",
+        }}
+      />
       {OPTIONS.map(({ mode: optionMode, label, icon: Icon }) => {
         const active = mode === optionMode;
         return (
@@ -36,13 +49,13 @@ export default function ThemeToggle({ mode, onChange, vertical = false }: ThemeT
             aria-label={label}
             title={label}
             onClick={() => onChange(optionMode)}
-            className={`flex h-7 w-7 items-center justify-center transition ${
+            className={`relative z-10 flex h-7 w-7 items-center justify-center rounded-[var(--radius-md)] transition-colors ${
               active
-                ? "btn-pastel is-active"
-                : "rounded-[var(--radius-md)] text-[var(--color-ink-soft)] hover:bg-[var(--color-blush)] hover:text-[var(--color-rose-dark)]"
+                ? "text-[var(--color-btn-line)]"
+                : "text-[var(--color-ink-soft)] hover:text-[var(--color-rose-dark)]"
             }`}
           >
-            <Icon size={14} strokeWidth={2} aria-hidden="true" />
+            <Icon size={14} strokeWidth={2} aria-hidden="true" className={active ? "animate-theme-pop" : ""} />
           </button>
         );
       })}

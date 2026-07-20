@@ -40,7 +40,7 @@ export default function ChatInput({ onSend, disabled }: ChatInputProps) {
   };
 
   return (
-    <div className="border-t border-[var(--color-blush-deep)]/60 bg-[var(--color-cream-soft)]/70 px-3 py-3 backdrop-blur-sm sm:px-5">
+    <div className="px-3 py-3 sm:px-5">
       {/* the send button is a fixed 46px square: exactly the single-line
           input's height (24px line + 20px padding + 2px border), centred
           beside the field even when the textarea grows */}
