@@ -490,6 +490,7 @@ export function ComparisonFigure({
       <figcaption className="mt-2 text-base leading-relaxed text-[var(--color-ink-soft)]">
         <span className="font-semibold text-[var(--color-ink)]">{comparison.title}.</span> {comparison.note}
       </figcaption>
+      {comparison.notes && comparison.notes.length > 0 && <StickyNotes notes={comparison.notes} />}
     </figure>
   );
 }

@@ -199,6 +199,21 @@ export const projects: Project[] = [
       "No day by day view",
     ],
     v2: "**I switched to VS Code with Claude Code, for better iteration.** This is where the app became the real product.",
+    iterations: [
+      {
+        title: "Goals grew from a form into a plan",
+        note: "At first it was four target fields and a save button, nothing else on the page.",
+        before: "/assets/nourish-mcp/goals-v2-desktop.png",
+        after: "/assets/nourish-mcp/goals-desktop.png",
+        beforeLabel: "First pass",
+        afterLabel: "Now",
+        notes: [
+          "Daily targets gained a Your plan section",
+          "The AI fills your plan from what you tell it",
+          "Body, goal, training, and diet, all in view",
+        ],
+      },
+    ],
     flow: [
       { label: "You eat", icon: Salad },
       { label: "Tell your AI", note: "\"a chicken salad and an espresso\"", icon: MessageSquare },

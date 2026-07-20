@@ -1,17 +1,23 @@
 import { useState } from "react";
 import type { ReactNode } from "react";
+import { ArrowUp, ImageIcon } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 import {
+  brandMarks,
   colorTokens,
+  contentIcons,
+  demo,
+  demoProject,
   elevationScale,
+  interfaceIcons,
+  motionTokens,
   principles,
   radiusScale,
   spacingScale,
   typeScale,
 } from "../data/designSystem";
-import { projects } from "../data/projects";
-import { starterPrompts } from "../data/prompts";
 import type { ThemeMode } from "../hooks/useTheme";
-import { ArtifactChip, ArtifactCollage, ArtifactShowcase } from "./Artifact";
+import { ArtifactChip, ArtifactShowcase, Lightbox, WindowChrome } from "./Artifact";
 import CatAvatar from "./CatAvatar";
 import ChatInput from "./ChatInput";
 import ConfirmDialog from "./ConfirmDialog";
@@ -20,12 +26,15 @@ import ProjectCard from "./ProjectCard";
 import PromptChips from "./PromptChips";
 import RichText from "./RichText";
 import ThemeToggle from "./ThemeToggle";
+import ToolLogo from "./ToolLogo";
 import TypingIndicator from "./TypingIndicator";
 import {
   ComparisonFigure,
+  Eyebrow,
+  FactList,
   FlowDiagram,
   LolaTurn,
-  MetricRow,
+  MetricStat,
   PersonaCard,
   ProcessTimeline,
   SectionHeading,
@@ -36,48 +45,96 @@ import {
   UserTurn,
 } from "./CaseStudyKit";
 
-/* Demos use real portfolio content — Protoca's metrics, personas, and gallery,
-   the real starter prompts — never invented stand-ins: the system is shown
-   doing its actual job. */
-const demoProject = projects.find((p) => p.id === "interactive-menu") ?? projects[0];
-const demoTestimonial = projects.map((p) => p.testimonial).find(Boolean);
-const demoClips = demoProject.gallery.filter((b) => b.video).length;
-const demoScreens = demoProject.gallery.filter((b) => b.image).length - demoClips;
-// the showcase pairs by `screen` tags — Nourish is the project that has them
-const showcaseBlocks =
-  projects.find((p) => p.gallery.some((b) => b.screen))?.gallery.filter((b) => b.screen && b.image).slice(0, 4) ?? [];
-// flow + sticky note demos borrow the project that authored them
-const flowProject = projects.find((p) => p.flow && p.flow.length > 0);
 const noop = () => {};
 
+/* — TierHeading — the four atomic layers, plus Principles. Eyebrow + title,
+   no prose. ————————————————————————————————————————————————————————————————— */
+function TierHeading({ index, title }: { index?: string; title: string }) {
+  return (
+    <div className="mb-6 mt-16 border-t border-[var(--color-blush-deep)]/50 pt-8 first:mt-0 first:border-0 first:pt-0">
+      {index && (
+        <p className="font-[var(--font-mono)] text-[13px] font-medium uppercase tracking-[0.2em] text-[var(--color-rose-dark)]">
+          {index}
+        </p>
+      )}
+      <h2 className="mt-1 font-[var(--font-display)] text-[26px] font-bold text-[var(--color-ink)] sm:text-[30px]">
+        {title}
+      </h2>
+    </div>
+  );
+}
+
+/* — SectionTitle — a sub-heading inside a tier, with a trailing rule. ————— */
 function SectionTitle({ children }: { children: ReactNode }) {
   return (
     <div className="mb-4 flex items-center gap-3">
-      <h2 className="font-[var(--font-display)] text-xl font-bold text-[var(--color-ink)]">{children}</h2>
+      <h3 className="font-[var(--font-display)] text-xl font-bold text-[var(--color-ink)]">{children}</h3>
       <span className="sunset-rule flex-1 opacity-40" aria-hidden="true" />
     </div>
   );
 }
 
+/* — Specimen — a mono label above one live component. No box of its own, so a
+   carded component never sits inside a second card. ————————————————————————— */
+function Specimen({ label, children }: { label: string; children: ReactNode }) {
+  return (
+    <div>
+      <p className="mb-3 font-[var(--font-mono)] text-[12px] uppercase tracking-wide text-[var(--color-ink-soft)]">
+        {label}
+      </p>
+      {children}
+    </div>
+  );
+}
+
+/* — AtomCell — one small atom with a caption under it, laid out in a wrap. — */
+function AtomCell({ label, children }: { label: string; children: ReactNode }) {
+  return (
+    <div className="flex flex-col items-start gap-2">
+      <div className="flex min-h-[44px] items-center">{children}</div>
+      <span className="font-[var(--font-mono)] text-[11px] uppercase tracking-wide text-[var(--color-ink-soft)]">
+        {label}
+      </span>
+    </div>
+  );
+}
+
+/* — IconCell — one glyph over its name, for the icon inventory grids. —————— */
+function IconCell({ name, Icon }: { name: string; Icon: LucideIcon }) {
+  return (
+    <div className="flex flex-col items-center gap-1.5 py-2 text-center">
+      <Icon size={20} strokeWidth={1.75} className="text-[var(--color-ink)]" aria-hidden="true" />
+      <span className="w-full truncate font-[var(--font-mono)] text-[11px] text-[var(--color-ink-soft)]">{name}</span>
+    </div>
+  );
+}
+
+const iconGrid = "grid grid-cols-3 gap-1 sm:grid-cols-5 md:grid-cols-6";
+
 export default function DesignSystemView() {
   const [dialogOpen, setDialogOpen] = useState(false);
-  // local, cosmetic mode so the doc shows the cycle without touching the app theme
+  const [artifactOpen, setArtifactOpen] = useState(false);
+  // local, cosmetic mode so the doc shows the toggle without touching the app theme
   const [demoTheme, setDemoTheme] = useState<ThemeMode>("light");
+
   return (
-    <div className="mx-auto max-w-5xl px-4 py-8 sm:px-8 sm:py-12">
+    <div className="mx-auto max-w-6xl px-3 py-8 sm:px-6 sm:py-12">
       <header className="mb-12 space-y-3">
         <p className="font-[var(--font-mono)] text-[13px] font-medium uppercase tracking-[0.2em] text-[var(--color-rose-dark)]">
           Sunset · design system
         </p>
         <h1 className="font-[var(--font-display)] text-[32px] font-bold text-[var(--color-ink)] sm:text-[38px]">
-          One accent, used with intent
+          Built up in four layers
         </h1>
         <p className="max-w-xl text-base leading-relaxed text-[var(--color-ink-soft)]">
-          This chat interface is itself a small design system: warm sunset colors over dusk creams,
-          all flat fills. Here's everything it's built from: color, type, space, elevation, and the
-          principles that hold them together.
+          The parts this chat interface is built from, smallest to largest. Every demo uses placeholder content.
         </p>
       </header>
+
+      {/* ============================================================
+          LAYER 01 — FOUNDATIONS
+          ============================================================ */}
+      <TierHeading index="Layer 01" title="Foundations" />
 
       <section className="mb-12">
         <SectionTitle>Color</SectionTitle>
@@ -187,208 +244,243 @@ export default function DesignSystemView() {
       </section>
 
       <section className="mb-12">
-        <SectionTitle>Components</SectionTitle>
-        <div className="space-y-8">
-          <div>
-            <p className="mb-3 font-[var(--font-mono)] text-[12px] uppercase tracking-wide text-[var(--color-ink-soft)]">
-              Essentials: buttons, tag, avatar, typing, theme, contact
-            </p>
-            <div className="card-warm flex flex-wrap items-center gap-3 p-5">
-              <button type="button" className="btn-pastel px-4 py-2 font-[var(--font-display)] text-base font-semibold">
-                Primary button
-              </button>
-              <button type="button" className="btn-ghost px-4 py-2 font-[var(--font-display)] text-base font-semibold">
-                Secondary button
-              </button>
-              <TagPill>AI</TagPill>
-              <CatAvatar size={30} />
-              <TypingIndicator />
-              <ThemeToggle mode={demoTheme} onChange={setDemoTheme} />
-              <ContactIcons size="sm" />
+        <SectionTitle>Motion</SectionTitle>
+        <div className="card-warm divide-y divide-[var(--color-blush-deep)]/50">
+          {motionTokens.map((m) => (
+            <div key={m.name} className="flex items-center gap-4 px-4 py-3">
+              <span className="w-20 shrink-0 font-[var(--font-mono)] text-[13px] text-[var(--color-rose-dark)]">
+                {m.value}
+              </span>
+              <div className="min-w-0 flex-1">
+                <p className="text-sm font-bold text-[var(--color-ink)]">{m.name}</p>
+                <p className="text-[13px] leading-snug text-[var(--color-ink-soft)]">{m.usage}</p>
+              </div>
             </div>
-          </div>
+          ))}
+        </div>
+      </section>
 
-          <div>
-            <p className="mb-3 font-[var(--font-mono)] text-[12px] uppercase tracking-wide text-[var(--color-ink-soft)]">
-              Chat turns: the user keeps a bubble, Lola speaks straight on the page
-            </p>
-            <div className="space-y-3">
-              <UserTurn>Tell me about the {demoProject.title} case study.</UserTurn>
-              <LolaTurn>
-                <div className="text-base">
-                  <RichText text={"**A bold lead carries the idea**, with *stress* where it matters.\n\n- Bullets for flows\n- One move per line"} />
+      <section className="mb-4">
+        <SectionTitle>Icons</SectionTitle>
+        <div className="space-y-6">
+          <Specimen label="Interface">
+            <div className={iconGrid}>
+              {interfaceIcons.map((i) => (
+                <IconCell key={i.name} name={i.name} Icon={i.Icon} />
+              ))}
+            </div>
+          </Specimen>
+          <Specimen label="Content">
+            <div className={iconGrid}>
+              {contentIcons.map((i) => (
+                <IconCell key={i.name} name={i.name} Icon={i.Icon} />
+              ))}
+            </div>
+          </Specimen>
+          <Specimen label="Brand marks">
+            <div className={iconGrid}>
+              {brandMarks.map((name) => (
+                <div key={name} className="flex flex-col items-center gap-1.5 py-2 text-center">
+                  <ToolLogo name={name} size={20} className="text-[var(--color-ink)]" />
+                  <span className="w-full truncate font-[var(--font-mono)] text-[11px] text-[var(--color-ink-soft)]">
+                    {name}
+                  </span>
                 </div>
-              </LolaTurn>
+              ))}
             </div>
-          </div>
+          </Specimen>
+        </div>
+      </section>
 
-          <div>
-            <p className="mb-3 font-[var(--font-mono)] text-[12px] uppercase tracking-wide text-[var(--color-ink-soft)]">
-              Suggestion chips: docked above the composer, questions and navigation in one row
-            </p>
-            <PromptChips
-              chips={[starterPrompts[0].label, starterPrompts[2].label]}
-              navChips={[{ label: "View full profile →", view: "profile" }]}
-              onSelect={noop}
-              onNavigate={noop}
-            />
-          </div>
+      {/* ============================================================
+          LAYER 02 — ATOMS
+          ============================================================ */}
+      <TierHeading index="Layer 02" title="Atoms" />
 
-          <div>
-            <p className="mb-3 font-[var(--font-mono)] text-[10px] uppercase tracking-wide text-[var(--color-ink-soft)]">
-              Composer: the input with its square send button, always the field's height
-            </p>
-            <ChatInput onSend={noop} disabled={false} />
-          </div>
-
-          <div>
-            <p className="mb-3 font-[var(--font-mono)] text-[12px] uppercase tracking-wide text-[var(--color-ink-soft)]">
-              Project card: the chat carousel unit
-            </p>
-            <ProjectCard project={demoProject} onLearnMore={noop} />
-          </div>
-
-          <div>
-            <p className="mb-3 font-[var(--font-mono)] text-[12px] uppercase tracking-wide text-[var(--color-ink-soft)]">
-              Artifact chip, collage & showcase: the chip docks the preview, the collage grids process shots in upright window frames, the showcase pairs each final screen with its phone twin
-            </p>
-            <div className="space-y-4">
-              <ArtifactChip
-                title={demoProject.title}
-                subtitle={[demoClips > 0 ? "demo" : null, `${demoScreens} screens`].filter(Boolean).join(" · ")}
-                image={demoProject.cover}
-                video={demoClips > 0}
-                gradient={demoProject.gradient}
-                icon={demoProject.icon}
-                onOpen={noop}
-              />
-              <ArtifactCollage blocks={demoProject.gallery.slice(0, 4)} onOpen={noop} />
-              {showcaseBlocks.length > 0 && <ArtifactShowcase blocks={showcaseBlocks} />}
-            </div>
-          </div>
-
-          <div>
-            <p className="mb-3 font-[var(--font-mono)] text-[12px] uppercase tracking-wide text-[var(--color-ink-soft)]">
-              Confirm dialog: the app's own voice for destructive actions
-            </p>
-            <button
-              type="button"
-              onClick={() => setDialogOpen(true)}
-              className="btn-ghost px-4 py-2 font-[var(--font-display)] text-base font-semibold"
-            >
-              Preview the confirm dialog
+      <section className="mb-4">
+        <div className="flex flex-wrap gap-x-10 gap-y-7">
+          <AtomCell label="Primary button">
+            <button type="button" className="btn-pastel px-4 py-2 font-[var(--font-display)] text-base font-semibold">
+              Primary
             </button>
-            <ConfirmDialog
-              open={dialogOpen}
-              title="Start a new conversation?"
-              message="This clears your chat history with Lola. The case studies and profile stay right where they are."
-              confirmLabel="Restart chat"
-              onConfirm={() => setDialogOpen(false)}
-              onCancel={() => setDialogOpen(false)}
-            />
-          </div>
+          </AtomCell>
+          <AtomCell label="Secondary button">
+            <button type="button" className="btn-ghost px-4 py-2 font-[var(--font-display)] text-base font-semibold">
+              Secondary
+            </button>
+          </AtomCell>
+          <AtomCell label="Send button">
+            <span className="btn-pastel flex h-11 w-11 items-center justify-center" aria-hidden="true">
+              <ArrowUp size={18} strokeWidth={2} />
+            </span>
+          </AtomCell>
+          <AtomCell label="Suggestion chip">
+            <button type="button" className="btn-pastel px-3.5 py-1.5 font-[var(--font-display)] text-sm font-semibold">
+              Suggestion
+            </button>
+          </AtomCell>
+          <AtomCell label="Tag">
+            <TagPill>Sample</TagPill>
+          </AtomCell>
+          <AtomCell label="Tool chip">
+            <ToolChip>Figma</ToolChip>
+          </AtomCell>
+          <AtomCell label="Eyebrow label">
+            <Eyebrow>Section label</Eyebrow>
+          </AtomCell>
+          <AtomCell label="Theme toggle">
+            <ThemeToggle mode={demoTheme} onChange={setDemoTheme} />
+          </AtomCell>
+          <AtomCell label="Lola avatar">
+            <CatAvatar size={36} />
+          </AtomCell>
+          <AtomCell label="Typing indicator">
+            <TypingIndicator />
+          </AtomCell>
+          <AtomCell label="Contact icons">
+            <ContactIcons size="sm" />
+          </AtomCell>
         </div>
       </section>
 
-      <section className="mb-12">
-        <SectionTitle>Case study elements</SectionTitle>
-        <p className="mb-5 max-w-xl text-base leading-relaxed text-[var(--color-ink-soft)]">
-          The composable blocks a case study is built from, each one owned here and reused verbatim in
-          every write-up, so the story always looks like the system.
-        </p>
+      {/* ============================================================
+          LAYER 03 — MOLECULES
+          ============================================================ */}
+      <TierHeading index="Layer 03" title="Molecules" />
 
-        <div className="space-y-8">
-          <div className="card-warm p-5">
-            <p className="mb-3 font-[var(--font-mono)] text-[12px] uppercase tracking-wide text-[var(--color-ink-soft)]">
-              Section heading
-            </p>
-            <SectionHeading eyebrow="03">Process</SectionHeading>
+      <section className="mb-4 space-y-8">
+        <Specimen label="Chat turns">
+          <div className="space-y-3">
+            <UserTurn>A short question from the visitor.</UserTurn>
+            <LolaTurn>
+              <div className="text-base">
+                <RichText text={demo.richText} />
+              </div>
+            </LolaTurn>
           </div>
+        </Specimen>
 
-          <div>
-            <p className="mb-3 font-[var(--font-mono)] text-[12px] uppercase tracking-wide text-[var(--color-ink-soft)]">
-              Metric row: {demoProject.title}'s real results
-            </p>
-            <MetricRow metrics={demoProject.results} />
+        <Specimen label="Prompt chips">
+          <PromptChips
+            chips={demo.chips}
+            navChips={[{ label: `${demo.navLabel} →`, view: "profile" }]}
+            onSelect={noop}
+            onNavigate={noop}
+          />
+        </Specimen>
+
+        <Specimen label="Section heading">
+          <SectionHeading eyebrow="03">Process</SectionHeading>
+        </Specimen>
+
+        <Specimen label="Window frame">
+          <div className="flex w-full max-w-md flex-col overflow-hidden rounded-[var(--radius-md)] border border-[var(--color-blush-deep)]/70 bg-[var(--color-cream-soft)] shadow-[var(--shadow-card)]">
+            <WindowChrome caption="Placeholder caption" />
+            <span
+              className="flex aspect-[16/10] w-full items-center justify-center"
+              style={{ background: `linear-gradient(135deg, ${demo.gradient[0]}, ${demo.gradient[1]})` }}
+            >
+              <ImageIcon size={22} strokeWidth={1.5} style={{ color: "var(--color-on-sunset)" }} className="opacity-70" aria-hidden="true" />
+            </span>
           </div>
+        </Specimen>
 
-          <div>
-            <p className="mb-3 font-[var(--font-mono)] text-[12px] uppercase tracking-wide text-[var(--color-ink-soft)]">
-              Process timeline: bold phase leads, from {demoProject.title}
-            </p>
-            <div className="card-warm p-5">
-              <ProcessTimeline steps={demoProject.process.slice(0, 3)} />
-            </div>
+        <Specimen label="Metric stat">
+          <div className="w-40">
+            <MetricStat value={demo.metric.value} label={demo.metric.label} />
           </div>
+        </Specimen>
 
-          <div>
-            <p className="mb-3 font-[var(--font-mono)] text-[12px] uppercase tracking-wide text-[var(--color-ink-soft)]">
-              Comparison: an iteration as a decision pair, before and after with the why
-            </p>
-            <ComparisonFigure
-              comparison={{
-                title: "Four sketches into one prototype",
-                note: "Each of us sketched separately; the strongest ideas merged into one low-fi prototype, and think-aloud testing shaped the hi-fi pass.",
-                before: "/assets/interactive-menu/low-fi-prototypes.webp",
-                after: "/assets/interactive-menu/hi-fi-menu.webp",
-                beforeLabel: "Low-fi",
-                afterLabel: "Hi-fi",
-              }}
-              gradient={demoProject.gradient}
-            />
-          </div>
+        <Specimen label="Fact list">
+          <FactList facts={demo.facts} />
+        </Specimen>
 
-          <div>
-            <p className="mb-3 font-[var(--font-mono)] text-[12px] uppercase tracking-wide text-[var(--color-ink-soft)]">
-              Flow diagram: how the product is used, one row of steps instead of a paragraph
-            </p>
-            {flowProject?.flow && <FlowDiagram steps={flowProject.flow} />}
-          </div>
+        <Specimen label="Sticky notes">
+          <StickyNotes notes={demo.notes} />
+        </Specimen>
 
-          <div>
-            <p className="mb-3 font-[var(--font-mono)] text-[12px] uppercase tracking-wide text-[var(--color-ink-soft)]">
-              Sticky notes: short list items as tilted pastel notes, one thought each
-            </p>
-            <StickyNotes notes={flowProject?.researchNotes ?? ["One thought", "Per note"]} />
-          </div>
+        <Specimen label="Flow diagram">
+          <FlowDiagram steps={demo.flow} />
+        </Specimen>
 
-          <div>
-            <p className="mb-3 font-[var(--font-mono)] text-[12px] uppercase tracking-wide text-[var(--color-ink-soft)]">
-              Persona card: a real research persona
-            </p>
-            {demoProject.personas?.[0] && <PersonaCard persona={demoProject.personas[0]} />}
-          </div>
+        <Specimen label="Persona card">
+          <PersonaCard persona={demo.persona} />
+        </Specimen>
 
-          {demoTestimonial && (
-            <div>
-              <p className="mb-3 font-[var(--font-mono)] text-[12px] uppercase tracking-wide text-[var(--color-ink-soft)]">
-                Testimonial
-              </p>
-              <Testimonial {...demoTestimonial} />
-            </div>
+        <Specimen label="Testimonial">
+          <Testimonial {...demo.testimonial} />
+        </Specimen>
+
+        <Specimen label="Comparison figure">
+          <ComparisonFigure comparison={demo.comparison} gradient={demo.gradient} />
+        </Specimen>
+
+        <Specimen label="Process timeline">
+          <ProcessTimeline steps={demo.process} />
+        </Specimen>
+      </section>
+
+      {/* ============================================================
+          LAYER 04 — ORGANISMS
+          ============================================================ */}
+      <TierHeading index="Layer 04" title="Organisms" />
+
+      <section className="mb-4 space-y-8">
+        <Specimen label="Composer">
+          <ChatInput onSend={noop} disabled={false} />
+        </Specimen>
+
+        <Specimen label="Project card">
+          <ProjectCard project={demoProject} onLearnMore={noop} />
+        </Specimen>
+
+        <Specimen label="Artifact cover">
+          {/* the case-study cover: click it or Open to zoom the artifact */}
+          <ArtifactChip
+            title="Sample Project"
+            subtitle="3 screens · live preview"
+            image={demo.placeholderImage}
+            large
+            gradient={demo.gradient}
+            icon={demo.icon}
+            active={artifactOpen}
+            onOpen={() => setArtifactOpen(true)}
+            onOpenFull={() => setArtifactOpen(true)}
+            openLabel="Open"
+          />
+          {artifactOpen && (
+            <Lightbox src={demo.placeholderImage} title="Sample Project" onClose={() => setArtifactOpen(false)} />
           )}
+        </Specimen>
 
-          <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
-            <div className="flex items-center gap-2">
-              <span className="font-[var(--font-mono)] text-[12px] uppercase tracking-wide text-[var(--color-ink-soft)]">
-                Tags
-              </span>
-              <TagPill>Fintech</TagPill>
-              <TagPill>0→1</TagPill>
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="font-[var(--font-mono)] text-[12px] uppercase tracking-wide text-[var(--color-ink-soft)]">
-                Tools
-              </span>
-              <ToolChip>Figma</ToolChip>
-              <ToolChip>Maze</ToolChip>
-            </div>
-          </div>
-        </div>
+        <Specimen label="Artifact showcase">
+          <ArtifactShowcase blocks={demo.showcaseBlocks} />
+        </Specimen>
+
+        <Specimen label="Confirm dialog">
+          <button
+            type="button"
+            onClick={() => setDialogOpen(true)}
+            className="btn-ghost px-4 py-2 font-[var(--font-display)] text-base font-semibold"
+          >
+            Preview the confirm dialog
+          </button>
+          <ConfirmDialog
+            open={dialogOpen}
+            title="Start a new conversation?"
+            message="This clears your chat history with Lola. The case studies and profile stay right where they are."
+            confirmLabel="Restart chat"
+            onConfirm={() => setDialogOpen(false)}
+            onCancel={() => setDialogOpen(false)}
+          />
+        </Specimen>
       </section>
 
+      {/* ============================================================
+          PRINCIPLES
+          ============================================================ */}
+      <TierHeading title="Principles" />
       <section>
-        <SectionTitle>Principles</SectionTitle>
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
           {principles.map((p) => (
             <div key={p.title} className="card-warm p-4">

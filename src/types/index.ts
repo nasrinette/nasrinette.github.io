@@ -90,6 +90,8 @@ export interface Comparison {
   /** Version chips over the frames; default "Before" / "After". */
   beforeLabel?: string;
   afterLabel?: string;
+  /** What changed, as sticky notes under the figure. */
+  notes?: string[];
 }
 
 /** One node of the interaction flow diagram. */

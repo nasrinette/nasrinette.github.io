@@ -1289,3 +1289,103 @@ row.
 **Changed:** Dropped the footer's top border so the only rule sits
 between "Open to work" and the Theme row (top of Theme). "Open to work"
 now has no line above it.
+
+### 91. Nourish Connect iteration: before/after + what-changed stickies
+**Changed:** Added an Iteration to Nourish's Process section showing the
+Connect page before/after: the first version exposed one shared MCP URL to
+every visitor; the current one gives each account its own connector and
+points the demo to "Create your space". Recovered the "before" screenshot
+from git history (commit ac30e53) as connect-v1-desktop.png. Added a `notes`
+field to the Comparison type and rendered it as sticky notes under the
+ComparisonFigure, listing what changed (shared URL -> per account, demo stops
+handing out a live connector, "Copy the URL" -> "Create your space"). Guarded
+the "Design" sub-label so it only shows when a project has phase steps
+(Nourish's process is empty, told through V1/V2 instead).
+**Notes:** The Iteration renders in Process before the V1/V2 blocks (that's
+the section order); chronologically the Connect change came late, so say the
+word if you want it moved after V2.
+
+### 96. Rebuild the Design System page in atomic order, on placeholder data
+**Changed:** Reorganised the whole Design System view into the four atomic
+layers, smallest piece to largest, each under a rose-eyebrowed tier heading:
+Foundations (color, type, space, radius, elevation, motion, icons), Atoms,
+Molecules, Organisms, then Principles. Every component now appears exactly
+once. Swapped all the real-case-study demos (Protoca's metrics, real
+personas, gallery shots, starter prompts) for generic placeholder content
+held in a new `demo` object and a minimal `demoProject` in designSystem.ts,
+so the gallery reads as templates, not the portfolio. Component figures with
+no image fall back to the system's own gradient + icon "no shot yet" frame,
+which serves as the placeholder image. Added components that weren't
+documented before: Motion tokens, an Icons inventory (every lucide glyph the
+app uses, split into Interface and Content marks, plus the ToolLogo brand
+marks), the Window frame primitive, the Fact list, the single Metric stat,
+and the Eyebrow label. Rewrote Principles from six wordy paragraphs into five
+short plain-language rules (One accent; All warm, no grey; Round but tidy;
+One clear action; Two themes, one system), moving the old "motion is a
+whisper" copy into the Motion token instead.
+**Notes:** Placeholder metrics/persona/testimonial are deliberately generic
+(no invented stats or research) since this is a parts catalogue, not a case
+study. Specimens sit directly on the page with a mono label, never wrapped in
+a second card, to keep the no-nested-containers rule. The theme toggle in
+Atoms drives a local cosmetic state only, it doesn't touch the app theme.
+
+### 97. Swap the Connect iteration for the goals page; move it after V1/V2
+**Changed:** Replaced Nourish's Connect before/after with a goals-page one:
+the first dark Goals page, just four target fields and a save button, versus
+the current one where those targets sit above a full "Your plan" (body, goal,
+training, diet) the AI fills in from chat. Recovered the "before" from git
+(the earlier goals-desktop.png at commit ac30e53, overwritten in 8a14a85) and
+saved it as goals-v2-desktop.png; the "after" is the current goals-desktop.png.
+Labels First pass/Now, with what-changed stickies. Restructured the Process
+rail so iterations render *after* the V1 and V2 nodes as "More iterations"
+(Nourish now reads 1 Research, 2 Who I designed for, 3 V1, 4 V2, 5 More
+iterations), and dropped the empty "Design" node that a project with no phase
+steps was leaving behind as a stray number.
+**Notes:** First tried v1-goals.png (the light "Panel" V1) as the before, but
+that's the V1, not the middle version, so I pulled the early-V2 goals shot
+from history instead. The label stays "Iteration" (not "More iterations") when
+a project has no V1/V2 before it, so LingoPro's single iteration reads
+unchanged: Research, Who I designed for, Design, Iteration. connect-v1-desktop.png
+is now unused but left in place. Answers the open question logged in #91 (move
+the iteration after V2).
+
+### 98. Fix the artifact demo and cut the cheesy captions
+**Changed:** The Design System's artifact chip was showing the old small
+thumbnail-and-pill form, which the product no longer uses. Swapped it for the
+real large cover form (browser-window frame over the shot) under an "Artifact
+cover" label in Organisms, and wired its Open button (and a click on the
+cover) to actually open the artifact in the shared Lightbox, matching the
+case study. Added a placeholder screenshot (a skeleton-UI SVG data URI) so the
+cover, collage, and showcase render a real image instead of an empty gradient
+frame. Cut the flavour text everywhere: tier headings lost their prose notes
+(just the eyebrow + title now), the header intro dropped to one line, and
+every component specimen label is now just the component name (Chat turns,
+Persona card, Composer…) instead of a sentence describing it.
+
+### 99. One artifact gallery, not two that look the same
+**Changed:** In the Design System, the Artifact collage and Artifact showcase
+demos rendered as near-identical grids of browser windows, so the collage was
+dropped and only the Artifact showcase remains (its placeholder blocks and the
+now-unused `demo.blocks` went with it). Kept the showcase to desktop windows,
+no phone twins, since the phone-shot presentation read as weird.
+**Notes:** The snowy phone screenshot that surfaced this was a real atmos-ui
+case-study shot in the Lightbox, not the Design System (which is placeholder
+only). The showcase still owns its own Lightbox zoom.
+
+### 100. Widen the Design System page to match the content width
+**Changed:** The Design System body was max-w-5xl px-4 sm:px-8, narrower than
+the Chat and Case Study pages (max-w-6xl px-3 sm:px-6), which read as extra
+left/right padding. Matched it to the wide content width.
+**Notes:** Profile and the Case Studies list still use max-w-5xl; say the word
+if you want those widened too.
+
+### 101. Persist the open case study (and every view) across refresh
+**Changed:** The current view and open case study now live in the URL hash
+(#/case-studies/<id>, #/design-system, #/profile, #/ for chat), read on load
+and kept in sync as you navigate, so a refresh restores where you were instead
+of dropping back to chat. Back/forward buttons follow it too, and a case study
+is now a shareable link. A hash pointing at a project that no longer exists
+falls back to the case studies list.
+**Notes:** Hash-based on purpose: the site is a static GitHub Pages SPA with a
+404-to-root redirect, and hashes keep the path at "/", so shared links never
+hit the 404 fallback and no server routing is needed.

@@ -8,9 +8,16 @@
 # the site repo, so prod always matches this repo's remote main. The force
 # push keeps the mirror exact even after rebases.
 #
-# One-time setup: create a fine-grained PAT with Contents read/write on
-# nasrinette.github.io only, and save it as the SITE_DEPLOY_TOKEN Actions
-# secret in THIS repo.
+# Auth: a write-scoped DEPLOY KEY on nasrinette.github.io. Its private half is
+# stored in THIS repo as the base64 Actions secret SITE_DEPLOY_KEY_B64. The
+# old default github-actions[bot] token could not push to a different repo,
+# which is the 403 that made every mirror fail.
+#
+# One-time setup (run once, authenticated as the repo owner):
+#   ssh-keygen -t ed25519 -f deploykey -N "" -C "ai-portfolio-auto-deploy"
+#   gh repo deploy-key add deploykey.pub \
+#     --repo nasrinette/nasrinette.github.io --title "ai-portfolio auto-deploy" --allow-write
+#   base64 < deploykey | gh secret set SITE_DEPLOY_KEY_B64 --repo nasrinette/ai-portfolio
 
 name: Publish to production
 
@@ -33,7 +40,11 @@ jobs:
           fetch-depth: 0
 
       - name: Mirror main to nasrinette.github.io
+        env:
+          DEPLOY_KEY_B64: ${{ secrets.SITE_DEPLOY_KEY_B64 }}
+          GIT_SSH_COMMAND: ssh -i ~/.ssh/id_ed25519 -o IdentitiesOnly=yes -o StrictHostKeyChecking=accept-new
         run: |
-          git push --force \
-            "https://x-access-token:${{ secrets.SITE_DEPLOY_TOKEN }}@github.com/nasrinette/nasrinette.github.io.git" \
-            HEAD:main
+          mkdir -p ~/.ssh
+          printf '%s' "$DEPLOY_KEY_B64" | base64 -d > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          git push --force git@github.com:nasrinette/nasrinette.github.io.git HEAD:main

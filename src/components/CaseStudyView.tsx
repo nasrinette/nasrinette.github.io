@@ -404,38 +404,27 @@ export default function CaseStudyView({ project, onBack, onPrev, onNext }: CaseS
                       <PersonaGrid personas={project.personas} />
                     </>
                   ),
-                  // Design, then the iteration that followed: when the project
-                  // has before/after decisions, the phase steps sit under a
-                  // "Design" sub-section and the comparisons under "Iteration"
-                  // right after it; otherwise each phase step is its own node
+                  // Design: the phase steps under one "Design" node when the
+                  // project also has iterations (so "Iteration" can stand as
+                  // its own later step); otherwise each phase is its own node.
+                  // A project that tells its process through V1/V2 has no phase
+                  // steps, so this node drops out entirely — no stray number.
                   ...((project.iterations?.length ?? 0) > 0
-                    ? [
-                        <>
-                          <StepLead>Design</StepLead>
-                          {project.process.map((raw, i) => (
-                            <ProcessStepBody
-                              key={i}
-                              step={typeof raw === "string" ? { text: raw } : raw}
-                              activeSrc={activeSrc}
-                              onOpenImage={openArtifact}
-                            />
-                          ))}
-                        </>,
-                        <>
-                          <StepLead>Iteration</StepLead>
-                          <div className="space-y-5">
-                            {(project.iterations ?? []).map((c) => (
-                              <ComparisonFigure
-                                key={c.title}
-                                comparison={c}
-                                gradient={project.gradient}
+                    ? project.process.length > 0
+                      ? [
+                          <>
+                            <StepLead>Design</StepLead>
+                            {project.process.map((raw, i) => (
+                              <ProcessStepBody
+                                key={i}
+                                step={typeof raw === "string" ? { text: raw } : raw}
                                 activeSrc={activeSrc}
                                 onOpenImage={openArtifact}
                               />
                             ))}
-                          </div>
-                        </>,
-                      ]
+                          </>,
+                        ]
+                      : []
                     : project.process.map((raw) => (
                         <ProcessStepBody
                           step={typeof raw === "string" ? { text: raw } : raw}
@@ -461,6 +450,29 @@ export default function CaseStudyView({ project, onBack, onPrev, onNext }: CaseS
                       {processLoose.length > 0 && (
                         <ArtifactCollage blocks={processLoose} activeSrc={activeSrc} onOpen={openArtifact} />
                       )}
+                    </>
+                  ),
+                  // Iteration: the before/after decisions, now after V1/V2.
+                  // Reads as "More iterations" when it follows a V1/V2 pass, and
+                  // stands alone as "Iteration" for a project with neither.
+                  (project.iterations?.length ?? 0) > 0 && (
+                    <>
+                      <StepLead>
+                        {processScreens.length > 0 || project.v2 || processLoose.length > 0
+                          ? "More iterations"
+                          : "Iteration"}
+                      </StepLead>
+                      <div className="space-y-5">
+                        {(project.iterations ?? []).map((c) => (
+                          <ComparisonFigure
+                            key={c.title}
+                            comparison={c}
+                            gradient={project.gradient}
+                            activeSrc={activeSrc}
+                            onOpenImage={openArtifact}
+                          />
+                        ))}
+                      </div>
                     </>
                   ),
                 ]}

@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
 import SectionTopBar from "./components/SectionTopBar";
@@ -16,12 +16,35 @@ import { projects } from "./data/projects";
 import { welcomeChips } from "./data/welcome";
 import type { AppView, NavChip, Project } from "./types";
 
+/* The current view (and the open case study) lives in the URL hash, so a
+   refresh restores where you were instead of dropping back to chat, and a
+   case study is a shareable link. Hash-based, so it needs no server routing. */
+function parseHash(): { view: AppView; caseStudyId: string | null } {
+  const [seg, id] = window.location.hash.replace(/^#\/?/, "").split("/");
+  if (seg === "case-studies") return { view: "projects", caseStudyId: id ? decodeURIComponent(id) : null };
+  if (seg === "design-system") return { view: "design-system", caseStudyId: null };
+  if (seg === "profile") return { view: "profile", caseStudyId: null };
+  return { view: "chat", caseStudyId: null };
+}
+
+function toHash(view: AppView, caseStudyId: string | null): string {
+  if (view === "projects") return caseStudyId ? `#/case-studies/${encodeURIComponent(caseStudyId)}` : "#/case-studies";
+  if (view === "design-system") return "#/design-system";
+  if (view === "profile") return "#/profile";
+  return "#/";
+}
+
 export default function App() {
   const { messages, isTyping, sendMessage, retryMessage, clearChat } = useChatEngine();
   const { mode: themeMode, setMode: setThemeMode } = useTheme();
 
-  const [view, setView] = useState<AppView>("chat");
-  const [caseStudyId, setCaseStudyId] = useState<string | null>(null);
+  const [view, setView] = useState<AppView>(() => parseHash().view);
+  const [caseStudyId, setCaseStudyId] = useState<string | null>(() => {
+    // only restore an id that names a real project; a stale hash falls back to
+    // the case studies list, never a broken empty view
+    const id = parseHash().caseStudyId;
+    return id && projects.some((p) => p.id === id) ? id : null;
+  });
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
@@ -29,6 +52,23 @@ export default function App() {
     () => (caseStudyId ? projects.find((p) => p.id === caseStudyId) ?? null : null),
     [caseStudyId]
   );
+
+  // keep the URL hash in step with the view, and follow the hash back when the
+  // browser's back/forward buttons change it
+  useEffect(() => {
+    const target = toHash(view, caseStudyId);
+    if ((window.location.hash || "#/") !== target) window.location.hash = target;
+  }, [view, caseStudyId]);
+
+  useEffect(() => {
+    const onHashChange = () => {
+      const next = parseHash();
+      setView(next.view);
+      setCaseStudyId(next.caseStudyId && projects.some((p) => p.id === next.caseStudyId) ? next.caseStudyId : null);
+    };
+    window.addEventListener("hashchange", onHashChange);
+    return () => window.removeEventListener("hashchange", onHashChange);
+  }, []);
 
   // a card in the chat is a doorway to the case study, not a prompt for a
   // summary of it — clicking through goes straight to the real thing.
