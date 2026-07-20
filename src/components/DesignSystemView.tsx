@@ -11,7 +11,7 @@ import {
 import { projects } from "../data/projects";
 import { starterPrompts } from "../data/prompts";
 import type { ThemeMode } from "../hooks/useTheme";
-import { ArtifactChip, ArtifactCollage } from "./Artifact";
+import { ArtifactChip, ArtifactCollage, ArtifactShowcase } from "./Artifact";
 import CatAvatar from "./CatAvatar";
 import ChatInput from "./ChatInput";
 import ConfirmDialog from "./ConfirmDialog";
@@ -23,11 +23,13 @@ import ThemeToggle from "./ThemeToggle";
 import TypingIndicator from "./TypingIndicator";
 import {
   ComparisonFigure,
+  FlowDiagram,
   LolaTurn,
   MetricRow,
   PersonaCard,
   ProcessTimeline,
   SectionHeading,
+  StickyNotes,
   TagPill,
   Testimonial,
   ToolChip,
@@ -41,6 +43,11 @@ const demoProject = projects.find((p) => p.id === "interactive-menu") ?? project
 const demoTestimonial = projects.map((p) => p.testimonial).find(Boolean);
 const demoClips = demoProject.gallery.filter((b) => b.video).length;
 const demoScreens = demoProject.gallery.filter((b) => b.image).length - demoClips;
+// the showcase pairs by `screen` tags — Nourish is the project that has them
+const showcaseBlocks =
+  projects.find((p) => p.gallery.some((b) => b.screen))?.gallery.filter((b) => b.screen && b.image).slice(0, 4) ?? [];
+// flow + sticky note demos borrow the project that authored them
+const flowProject = projects.find((p) => p.flow && p.flow.length > 0);
 const noop = () => {};
 
 function SectionTitle({ children }: { children: ReactNode }) {
@@ -243,7 +250,7 @@ export default function DesignSystemView() {
 
           <div>
             <p className="mb-3 font-[var(--font-mono)] text-[12px] uppercase tracking-wide text-[var(--color-ink-soft)]">
-              Artifact chip & collage: the chip body docks the preview, its Open pill jumps to fullscreen
+              Artifact chip, collage & showcase: the chip docks the preview, the collage grids process shots in upright window frames, the showcase pairs each final screen with its phone twin
             </p>
             <div className="space-y-4">
               <ArtifactChip
@@ -256,6 +263,7 @@ export default function DesignSystemView() {
                 onOpen={noop}
               />
               <ArtifactCollage blocks={demoProject.gallery.slice(0, 4)} onOpen={noop} />
+              {showcaseBlocks.length > 0 && <ArtifactShowcase blocks={showcaseBlocks} />}
             </div>
           </div>
 
@@ -328,6 +336,20 @@ export default function DesignSystemView() {
               }}
               gradient={demoProject.gradient}
             />
+          </div>
+
+          <div>
+            <p className="mb-3 font-[var(--font-mono)] text-[12px] uppercase tracking-wide text-[var(--color-ink-soft)]">
+              Flow diagram: how the product is used, one row of steps instead of a paragraph
+            </p>
+            {flowProject?.flow && <FlowDiagram steps={flowProject.flow} />}
+          </div>
+
+          <div>
+            <p className="mb-3 font-[var(--font-mono)] text-[12px] uppercase tracking-wide text-[var(--color-ink-soft)]">
+              Sticky notes: short list items as tilted pastel notes, one thought each
+            </p>
+            <StickyNotes notes={flowProject?.researchNotes ?? ["One thought", "Per note"]} />
           </div>
 
           <div>

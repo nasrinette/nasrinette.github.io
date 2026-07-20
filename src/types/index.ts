@@ -64,6 +64,12 @@ export interface GalleryBlock {
    * or "solution" (the shipped design — the default).
    */
   stage?: "process" | "findings" | "solution";
+  /**
+   * Names the app screen this shot shows (e.g. "Today"). Shots sharing a
+   * name pair up in the solution showcase: the desktop shot as the window,
+   * the phone shot standing in front of it. Untagged shots stay out.
+   */
+  screen?: string;
 }
 
 export interface Testimonial {
@@ -86,6 +92,14 @@ export interface Comparison {
   afterLabel?: string;
 }
 
+/** One node of the interaction flow diagram. */
+export interface FlowStep {
+  label: string;
+  /** Small line under the label, e.g. the example sentence spoken to the AI. */
+  note?: string;
+  icon: LucideIcon;
+}
+
 /** A research persona — who the project was designed for. */
 export interface Persona {
   name: string;
@@ -95,6 +109,17 @@ export interface Persona {
   quote: string;
   goals: string[];
   frustrations: string[];
+}
+
+/** A process step that carries its own evidence under the text. */
+export interface ProcessStep {
+  text: string;
+  /** Sticky notes rendered under the text. */
+  notes?: string[];
+  /** A board or screenshot rendered under the notes, full width (path under /assets). */
+  image?: string;
+  /** Caption on the image's window bar; also its title in the artifact panel. */
+  imageCaption?: string;
 }
 
 export interface Project {
@@ -124,18 +149,46 @@ export interface Project {
   linkLabel?: string;
   /** Render `link` as a live iframe preview in the artifact panel (the site must allow framing). */
   embed?: boolean;
+  /**
+   * The shortest viewport (px) the embedded site lays out for. A panel
+   * shorter than this renders the iframe at this height and scales it down
+   * to fit, instead of letting the site clip.
+   */
+  embedMinHeight?: number;
   problem: string;
   goals: string[];
-  process: string[];
+  /**
+   * Compact overview facts (Role / Timeline / Outcome…). When present they
+   * replace the plain "role · year" line in the case study overview.
+   */
+  facts?: Metric[];
+  /** Timeline steps; an empty list skips the timeline (projects using grouped Process blocks instead). A step can be a plain string or a `ProcessStep` with stickies and a board shot of its own. */
+  process: (string | ProcessStep)[];
+  /** Research findings, shown under a "Research" heading at the top of Process; quotes follow it. */
+  research?: string;
+  /** Research pain points as sticky notes, shown after `research`. */
+  researchNotes?: string[];
+  /** Evidence from research (e.g. store reviews of existing apps), shown with `research`. */
+  researchQuotes?: Testimonial[];
+  /** What the first version was and where it fell short, shown beside the V1 screens. */
+  v1?: string;
+  /** The first version's limits as sticky notes, shown after `v1`. */
+  v1Notes?: string[];
+  /** The second pass: what changed and why, shown under a "V2" heading above the build shots. */
+  v2?: string;
+  /** How the product is used, drawn as a step-by-step flow diagram at the top of Solution. */
+  flow?: FlowStep[];
   /** Research personas, shown in the Process section. */
   personas?: Persona[];
   /** Design iterations, rendered as comparison figures in the Process section. */
   iterations?: Comparison[];
   solution: string;
+  /** Honest one-liner opening Outcomes: what the project actually did for whom. */
+  outcomeNote?: string;
   results: Metric[];
-  /** Where the design falls short — shown in the Impact section, before `futureWork`. */
+  /** Where the design falls short — shown in the Outcomes section, before `futureWork`. */
   limitations?: string;
-  /** Where the project goes next — shown at the end of the Impact section. */
+  /** Where the project goes next — shown at the end of the Outcomes section. */
   futureWork?: string;
   gallery: GalleryBlock[];
   testimonial?: Testimonial;

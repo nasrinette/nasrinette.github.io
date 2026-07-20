@@ -1,19 +1,23 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { PointerEvent as ReactPointerEvent } from "react";
-import { ArrowLeft, ArrowRight, ExternalLink } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import type { Project } from "../types";
 import { useMediaQuery } from "../hooks/useMediaQuery";
-import { ArtifactChip, ArtifactCollage, ArtifactPanel, type ArtifactImage, type ArtifactTab } from "./Artifact";
+import { ArtifactChip, ArtifactCollage, ArtifactPanel, ArtifactShowcase, Lightbox, type ArtifactImage } from "./Artifact";
 import CatAvatar from "./CatAvatar";
 import RichText from "./RichText";
 import {
   ComparisonFigure,
+  FactList,
+  FlowDiagram,
   LolaTurn,
   MetricRow,
   PersonaGrid,
-  ProcessTimeline,
+  ProcessRail,
+  ProcessStepBody,
   SectionHeading,
-  TagPill,
+  StepLead,
+  StickyNotes,
   Testimonial,
   ToolChip,
   UserTurn,
@@ -32,12 +36,14 @@ const DEFAULT_PANEL_WIDTH = 400;
     preview takes the smaller half and the writing keeps the room to be read. */
 const PANEL_WIDTH_RATIO = 0.32;
 
+// chronological order: the overview already carries the outcome up top, so
+// the body can tell the story in the order it happened
 const SECTIONS = [
   { id: "overview", label: "Overview" },
   { id: "problem", label: "Problem" },
   { id: "process", label: "Process" },
   { id: "solution", label: "Solution" },
-  { id: "impact", label: "Impact" },
+  { id: "impact", label: "Outcomes" },
 ] as const;
 
 type SectionId = (typeof SECTIONS)[number]["id"];
@@ -64,12 +70,21 @@ export default function CaseStudyView({ project, onBack, onPrev, onNext }: CaseS
   const findingShots = project.gallery.filter((b) => b.stage === "findings");
   const solutionShots = project.gallery.filter((b) => !b.stage || b.stage === "solution");
   const solutionImages = solutionShots.filter((b) => b.image);
+  // screen-tagged shots pair into a showcase; without tags the sections fall
+  // back to the collage and the compact Final screens chip. Screens without
+  // an image render as placeholder frames, so finals can be authored before
+  // they're shot.
+  const screenShots = solutionShots.filter((b) => b.screen);
+  const processScreens = processShots.filter((b) => b.screen);
+  const processLoose = processShots.filter((b) => !b.screen);
 
   // every real image in this case study, in reading order — the set the
-  // artifact panel steps through with prev/next.
+  // artifact panel steps through with prev/next. Shots the showcase presents
+  // stay out: they zoom in place, and the panel keeps the live preview.
   const artifacts = useMemo<ArtifactImage[]>(() => {
     const list: ArtifactImage[] = [];
     const indexBySrc = new Map<string, number>();
+    const showcased = new Set(project.gallery.filter((b) => b.screen && b.image).map((b) => b.image!));
 
     // a project whose hero is its only screenshot names that file twice — once
     // as the hero, once as the gallery block that captions it in the body. One
@@ -91,12 +106,13 @@ export default function CaseStudyView({ project, onBack, onPrev, onNext }: CaseS
       };
     };
 
-    if (project.heroImage) {
+    if (project.heroImage && !showcased.has(project.heroImage)) {
       add({
         src: project.heroImage,
         title: `${project.title}: overview`,
         fit: project.heroFit,
         device: project.heroDevice,
+        isPhone: project.heroDevice === "phone",
       });
     }
     // iteration pairs sit adjacent, so prev/next in the panel flips a
@@ -105,19 +121,32 @@ export default function CaseStudyView({ project, onBack, onPrev, onNext }: CaseS
       if (c.before) add({ src: c.before, title: `${c.title} · ${c.beforeLabel ?? "before"}` });
       if (c.after) add({ src: c.after, title: `${c.title} · ${c.afterLabel ?? "after"}` });
     }
+    // boards attached to process steps open in the panel when clicked
+    for (const step of project.process) {
+      if (typeof step !== "string" && step.image)
+        add({ src: step.image, title: step.imageCaption ?? `${project.title}: process` });
+    }
     for (const block of project.gallery) {
-      if (block.image)
-        add({ src: block.image, title: block.caption, fit: block.fit, device: block.device, video: block.video });
+      if (block.image && !showcased.has(block.image))
+        add({
+          src: block.image,
+          title: block.caption,
+          fit: block.fit,
+          device: block.device,
+          isPhone: block.variant === "phone" || block.device === "phone",
+          video: block.video,
+        });
     }
     return list;
   }, [project]);
 
   const hasLivePreview = Boolean(project.link && project.embed);
 
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
-  // a live, responsive app fills the panel at any width — better than a
-  // letterboxed screenshot, so it leads when there's one to show.
-  const [tab, setTab] = useState<ArtifactTab>(hasLivePreview ? "live" : "gallery");
+  // one shot zoomed in the lightbox, the only way images open now
+  const [zoomed, setZoomed] = useState<ArtifactImage | null>(null);
+  // the docked panel is the live preview and nothing else, opened only from
+  // the overview's Open button
+  const [liveOpen, setLiveOpen] = useState(false);
   // default the panel to a real share of the window, not a fixed sliver
   const [panelWidth, setPanelWidth] = useState(() => {
     if (typeof window === "undefined") return DEFAULT_PANEL_WIDTH;
@@ -148,12 +177,11 @@ export default function CaseStudyView({ project, onBack, onPrev, onNext }: CaseS
     setActiveSection(current);
   };
 
-  // opening a new case study starts fresh — auto-surface the hero artifact (or
-  // the live preview when there are no shots) on desktop, the way Claude opens
-  // the panel as soon as there's something to show.
+  // opening a new case study starts fresh. The panel stays closed until
+  // asked for — auto-opening it stole half the page from the writing.
   useEffect(() => {
-    setOpenIndex(isDesktop && (artifacts.length > 0 || hasLivePreview) ? 0 : null);
-    setTab(hasLivePreview ? "live" : "gallery");
+    setZoomed(null);
+    setLiveOpen(false);
     setFullscreen(false);
     setActiveSection("overview");
     scrollRef.current?.scrollTo({ top: 0 });
@@ -164,7 +192,8 @@ export default function CaseStudyView({ project, onBack, onPrev, onNext }: CaseS
   // closed (the panel owns the keys when open): ←/→ cycle case studies,
   // Escape returns to the grid
   useEffect(() => {
-    if (openIndex !== null) return;
+    // the lightbox and the live panel own the keys while open
+    if (liveOpen || zoomed) return;
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.metaKey || e.ctrlKey || e.altKey) return;
       const t = e.target as HTMLElement | null;
@@ -175,15 +204,12 @@ export default function CaseStudyView({ project, onBack, onPrev, onNext }: CaseS
     };
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [openIndex, onNext, onPrev, onBack]);
+  }, [liveOpen, zoomed, onNext, onPrev, onBack]);
 
-  // asking for a specific screen means the gallery, even if the live
-  // preview is what's currently on screen.
+  // every in-page image opens the same way: zoomed in the lightbox
   const openArtifact = (src: string) => {
-    const i = artifacts.findIndex((a) => a.src === src);
-    if (i === -1) return;
-    setOpenIndex(i);
-    setTab("gallery");
+    const target = artifacts.find((a) => a.src === src);
+    if (target) setZoomed(target);
   };
 
   const handleResizeStart = (e: ReactPointerEvent) => {
@@ -213,7 +239,7 @@ export default function CaseStudyView({ project, onBack, onPrev, onNext }: CaseS
     };
   }, [resizing]);
 
-  const activeSrc = openIndex !== null && tab === "gallery" ? artifacts[openIndex]?.src : undefined;
+  const activeSrc = zoomed?.src;
 
   return (
     <div className={`flex h-full min-h-0 ${resizing ? "select-none" : ""}`}>
@@ -258,167 +284,222 @@ export default function CaseStudyView({ project, onBack, onPrev, onNext }: CaseS
 
             <section id="cs-overview" className="scroll-mt-16">
             <LolaTurn>
-              <div className="flex flex-wrap gap-1.5">
-                {project.tags.map((t) => (
-                  <TagPill key={t}>{t}</TagPill>
-                ))}
-              </div>
-              {/* the overview has no numbered heading, so Lola rides the
-                  title line here, same as she does on section headings */}
-              <h1 className="flex items-center gap-2.5 font-[var(--font-display)] text-[22px] font-bold text-[var(--color-ink)] sm:text-[26px]">
-                <CatAvatar size={24} />
-                {project.title}
-              </h1>
-              <div className="flex flex-wrap items-center gap-2">
-                <p className="font-[var(--font-mono)] text-sm text-[var(--color-ink-soft)]">
-                  {project.role} · {project.year}
-                </p>
-                {project.link && (
-                  <a
-                    href={project.link}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="focus-ring inline-flex w-fit items-center gap-1.5 rounded-full border border-[var(--color-blush-deep)]/70 bg-[var(--color-cream-soft)] px-3 py-1 text-sm font-semibold text-[var(--color-rose-dark)] transition hover:border-[var(--color-rose)] hover:bg-[var(--color-blush)]"
-                  >
-                    <ExternalLink size={12} strokeWidth={2} aria-hidden="true" />
-                    {project.linkLabel ?? "Live"}
-                  </a>
-                )}
-              </div>
-              {artifacts.length > 0 || hasLivePreview ? (
-                <ArtifactChip
-                  title={project.title}
-                  subtitle={artifactSubtitle(artifacts, hasLivePreview)}
-                  image={project.heroImage ?? artifacts[0]?.src}
-                  // a hero still of its own wins the thumbnail; without one the
-                  // first artifact fills it, and a badge only fits if that's a clip.
-                  video={!project.heroImage && Boolean(artifacts[0]?.video)}
-                  gradient={project.gradient}
-                  icon={project.icon}
-                  active={openIndex === 0}
-                  // the chip body previews docked; the Open pill promises
-                  // the full view, so it opens the panel already fullscreen
-                  onOpen={() => {
-                    setOpenIndex(0);
-                    setFullscreen(false);
-                  }}
-                  onOpenFull={() => {
-                    setOpenIndex(0);
-                    setFullscreen(true);
-                  }}
-                />
-              ) : (
-                <div
-                  className="flex h-32 items-center justify-center rounded-[var(--radius-lg)]"
-                  style={{ background: `linear-gradient(135deg, ${project.gradient[0]}, ${project.gradient[1]})` }}
-                  aria-hidden="true"
-                >
-                  <project.icon size={40} strokeWidth={1.5} style={{ color: "var(--color-on-sunset)" }} className="opacity-80" />
+              {/* two columns: everything written on the left, the cover on
+                  the right; below md they stack, text first. The title lives
+                  inside the text column so it sits right on its copy instead
+                  of floating above the whole grid. */}
+              <div className="grid gap-6 md:grid-cols-2 md:items-center">
+                <div className="space-y-4">
+                  {/* the overview has no numbered heading, so Lola rides the
+                      title line here, same as she does on section headings —
+                      with the same rose tick the numbered titles wear */}
+                  <h1 className="flex items-center gap-2.5 font-[var(--font-display)] text-[24px] font-bold text-[var(--color-ink)] sm:text-[28px]">
+                    <CatAvatar size={24} />
+                    <span
+                      className="h-5 w-1.5 shrink-0 rounded-full"
+                      style={{ background: "var(--color-rose)" }}
+                      aria-hidden="true"
+                    />
+                    {project.title}
+                  </h1>
+                  <div className="text-[17px] text-[var(--color-ink)]">
+                    <RichText text={project.description} />
+                  </div>
+                  {project.facts ? (
+                    <FactList facts={project.facts} />
+                  ) : (
+                    <p className="font-[var(--font-mono)] text-sm text-[var(--color-ink-soft)]">
+                      {project.role} · {project.year}
+                    </p>
+                  )}
+                  <div className="flex flex-wrap gap-2">
+                    {project.tools.map((tool) => (
+                      <ToolChip key={tool}>{tool}</ToolChip>
+                    ))}
+                  </div>
                 </div>
-              )}
-              <div className="text-[17px] text-[var(--color-ink)]">
-                <RichText text={project.description} />
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {project.tools.map((tool) => (
-                  <ToolChip key={tool}>{tool}</ToolChip>
-                ))}
+                {artifacts.length > 0 || hasLivePreview ? (
+                  <ArtifactChip
+                    title={project.title}
+                    subtitle={artifactSubtitle(artifacts, hasLivePreview)}
+                    image={project.heroImage ?? artifacts[0]?.src}
+                    // the cover column: hero presentation whenever there's an
+                    // image to lead with
+                    large
+                    // a portrait hero (a phone GIF) shows whole instead of
+                    // cropping to the wide cover box
+                    fit={project.heroImage ? project.heroFit : undefined}
+                    // a hero still of its own wins the thumbnail; without one the
+                    // first artifact fills it, and a badge only fits if that's a clip.
+                    video={!project.heroImage && Boolean(artifacts[0]?.video)}
+                    gradient={project.gradient}
+                    icon={project.icon}
+                    active={Boolean(zoomed && zoomed.src === (project.heroImage ?? artifacts[0]?.src))}
+                    // clicking the hero zooms it; the one Open button opens the
+                    // live preview when there is one, otherwise links out (the
+                    // Chrome store, a Figma prototype, a write-up)
+                    onOpen={() => {
+                      const src = project.heroImage ?? artifacts[0]?.src;
+                      if (src) openArtifact(src);
+                    }}
+                    onOpenFull={hasLivePreview ? () => setLiveOpen(true) : undefined}
+                    openHref={hasLivePreview ? undefined : project.link}
+                    openLabel={hasLivePreview ? "Open" : project.linkLabel}
+                  />
+                ) : (
+                  <div
+                    className="flex h-32 items-center justify-center rounded-[var(--radius-lg)]"
+                    style={{ background: `linear-gradient(135deg, ${project.gradient[0]}, ${project.gradient[1]})` }}
+                    aria-hidden="true"
+                  >
+                    <project.icon size={40} strokeWidth={1.5} style={{ color: "var(--color-on-sunset)" }} className="opacity-80" />
+                  </div>
+                )}
               </div>
             </LolaTurn>
             </section>
 
             <section id="cs-problem" className="scroll-mt-16">
             <LolaTurn>
-              <SectionHeading eyebrow="01">The problem</SectionHeading>
-              <div className="text-base text-[var(--color-ink-soft)]">
+              <SectionHeading eyebrow="01">Problem</SectionHeading>
+              <div className="text-[17px] text-[var(--color-ink-soft)]">
                 <RichText text={project.problem} />
               </div>
-              <p className="pt-1 text-sm font-semibold uppercase tracking-wide text-[var(--color-ink-soft)]/80">
-                What success looked like
-              </p>
-              <ul className="list-disc space-y-1.5 pl-5 text-base leading-relaxed text-[var(--color-ink-soft)] marker:text-[var(--color-rose)]">
-                {project.goals.map((goal) => (
-                  <li key={goal}>{goal}</li>
-                ))}
-              </ul>
             </LolaTurn>
             </section>
 
             <section id="cs-process" className="scroll-mt-16">
             <LolaTurn>
               <SectionHeading eyebrow="02">Process</SectionHeading>
-              <ProcessTimeline steps={project.process} />
-              {project.iterations && project.iterations.length > 0 && (
-                <>
-                  <p className="pt-1 text-sm font-semibold uppercase tracking-wide text-[var(--color-ink-soft)]/80">
-                    Design decisions
-                  </p>
-                  <div className="space-y-5">
-                    {project.iterations.map((c) => (
-                      <ComparisonFigure
-                        key={c.title}
-                        comparison={c}
-                        gradient={project.gradient}
-                        activeSrc={activeSrc}
-                        onOpenImage={openArtifact}
-                      />
-                    ))}
-                  </div>
-                </>
-              )}
-              {project.personas && project.personas.length > 0 && (
-                <>
-                  <p className="pt-1 text-sm font-semibold uppercase tracking-wide text-[var(--color-ink-soft)]/80">
-                    Who we designed for
-                  </p>
-                  <PersonaGrid personas={project.personas} />
-                </>
-              )}
-              {(processShots.length > 0 || findingShots.length > 0) && (
-                <ArtifactCollage
-                  blocks={[...processShots, ...findingShots]}
-                  activeSrc={activeSrc}
-                  onOpen={openArtifact}
-                />
-              )}
+              {/* one numbered rail threads every subsection — research, each
+                  phase, design decisions, V1, V2 — into a single connected
+                  sequence, the way the phase timeline already reads */}
+              <ProcessRail
+                items={[
+                  // Research: findings, the pains as sticky notes, the review
+                  // quotes that back them, then who it all points to
+                  (project.research || (project.researchQuotes?.length ?? 0) > 0) && (
+                    <>
+                      <StepLead>Research</StepLead>
+                      {project.research && <RichText text={project.research} />}
+                      {project.researchNotes && project.researchNotes.length > 0 && (
+                        <StickyNotes notes={project.researchNotes} />
+                      )}
+                      {project.researchQuotes && project.researchQuotes.length > 0 && (
+                        <div className="space-y-5">
+                          {project.researchQuotes.map((q) => (
+                            <Testimonial key={q.quote} quote={q.quote} author={q.author} role={q.role} />
+                          ))}
+                        </div>
+                      )}
+                      {findingShots.length > 0 && (
+                        <ArtifactCollage blocks={findingShots} activeSrc={activeSrc} onOpen={openArtifact} />
+                      )}
+                    </>
+                  ),
+                  // Who we designed for
+                  project.personas && project.personas.length > 0 && (
+                    <>
+                      <StepLead>Who I designed for</StepLead>
+                      <PersonaGrid personas={project.personas} />
+                    </>
+                  ),
+                  // Design, then the iteration that followed: when the project
+                  // has before/after decisions, the phase steps sit under a
+                  // "Design" sub-section and the comparisons under "Iteration"
+                  // right after it; otherwise each phase step is its own node
+                  ...((project.iterations?.length ?? 0) > 0
+                    ? [
+                        <>
+                          <StepLead>Design</StepLead>
+                          {project.process.map((raw, i) => (
+                            <ProcessStepBody
+                              key={i}
+                              step={typeof raw === "string" ? { text: raw } : raw}
+                              activeSrc={activeSrc}
+                              onOpenImage={openArtifact}
+                            />
+                          ))}
+                        </>,
+                        <>
+                          <StepLead>Iteration</StepLead>
+                          <div className="space-y-5">
+                            {(project.iterations ?? []).map((c) => (
+                              <ComparisonFigure
+                                key={c.title}
+                                comparison={c}
+                                gradient={project.gradient}
+                                activeSrc={activeSrc}
+                                onOpenImage={openArtifact}
+                              />
+                            ))}
+                          </div>
+                        </>,
+                      ]
+                    : project.process.map((raw) => (
+                        <ProcessStepBody
+                          step={typeof raw === "string" ? { text: raw } : raw}
+                          activeSrc={activeSrc}
+                          onOpenImage={openArtifact}
+                        />
+                      ))),
+                  // V1: its limits sit right beside its screens, not in the
+                  // final product's Limitations
+                  processScreens.length > 0 && (
+                    <>
+                      <StepLead>{project.v1 ? "V1" : "The app today"}</StepLead>
+                      {project.v1 && <RichText text={project.v1} />}
+                      {project.v1Notes && project.v1Notes.length > 0 && <StickyNotes notes={project.v1Notes} />}
+                      <ArtifactShowcase blocks={processScreens} />
+                    </>
+                  ),
+                  // V2: the switch that made the shipped app, and the build shot
+                  (project.v2 || processLoose.length > 0) && (
+                    <>
+                      {project.v2 && <StepLead>V2</StepLead>}
+                      {project.v2 && <RichText text={project.v2} />}
+                      {processLoose.length > 0 && (
+                        <ArtifactCollage blocks={processLoose} activeSrc={activeSrc} onOpen={openArtifact} />
+                      )}
+                    </>
+                  ),
+                ]}
+              />
             </LolaTurn>
             </section>
 
             <section id="cs-solution" className="scroll-mt-16">
             <LolaTurn>
               <SectionHeading eyebrow="03">Solution</SectionHeading>
+              {/* the interaction drawn before it's described: one row of
+                  steps says what a paragraph of bullets was saying */}
+              {project.flow && project.flow.length > 0 && <FlowDiagram steps={project.flow} />}
               {/* the section is already titled Solution — a "The solution"
                   callout inside it would just box the same label twice */}
-              <div className="text-base text-[var(--color-ink-soft)]">
+              <div className="text-[17px] text-[var(--color-ink-soft)]">
                 <RichText text={project.solution} />
               </div>
-              {(solutionImages.length > 0 || hasLivePreview) && (
-                <ArtifactChip
-                  title="Final screens"
-                  subtitle={artifactSubtitle(solutionImages, hasLivePreview)}
-                  image={solutionImages[0]?.image}
-                  video={Boolean(solutionImages[0]?.video)}
-                  gradient={project.gradient}
-                  icon={solutionShots[0]?.icon ?? project.icon}
-                  active={solutionImages.some((b) => b.image === activeSrc)}
-                  onOpen={() => {
-                    if (solutionImages[0]?.image) openArtifact(solutionImages[0].image!);
-                    else setOpenIndex(0);
-                    setFullscreen(false);
-                  }}
-                  onOpenFull={() => {
-                    if (solutionImages[0]?.image) openArtifact(solutionImages[0].image!);
-                    else setOpenIndex(0);
-                    setFullscreen(true);
-                  }}
-                />
-              )}
+              {screenShots.length > 0 ? (
+                // one surface holds every final screen — desktop windows with
+                // their phone twins; each shot zooms in the lightbox on click
+                <ArtifactShowcase blocks={screenShots} />
+              ) : solutionImages.length > 0 ? (
+                // untagged final screens show inline as a collage, each zooming
+                // in the lightbox; the live preview is reached from the top Open
+                <ArtifactCollage blocks={solutionImages} activeSrc={activeSrc} onOpen={openArtifact} />
+              ) : null}
             </LolaTurn>
             </section>
 
             <section id="cs-impact" className="scroll-mt-16">
             <LolaTurn>
-              <SectionHeading eyebrow="04">Impact</SectionHeading>
+              <SectionHeading eyebrow="04">Outcomes</SectionHeading>
+              {/* the honest claim first, the numbers after it */}
+              {project.outcomeNote && (
+                <div className="text-[17px] text-[var(--color-ink-soft)]">
+                  <RichText text={project.outcomeNote} />
+                </div>
+              )}
               <MetricRow metrics={project.results} />
               {project.testimonial && (
                 <Testimonial
@@ -429,20 +510,20 @@ export default function CaseStudyView({ project, onBack, onPrev, onNext }: CaseS
               )}
               {project.limitations && (
                 <>
-                  <p className="pt-1 text-sm font-semibold uppercase tracking-wide text-[var(--color-ink-soft)]/80">
+                  <p className="pt-4 text-[15px] font-semibold uppercase tracking-wide text-[var(--color-ink-soft)]/80">
                     Limitations
                   </p>
-                  <div className="text-base text-[var(--color-ink-soft)]">
+                  <div className="text-[17px] text-[var(--color-ink-soft)]">
                     <RichText text={project.limitations} />
                   </div>
                 </>
               )}
               {project.futureWork && (
                 <>
-                  <p className="pt-1 text-sm font-semibold uppercase tracking-wide text-[var(--color-ink-soft)]/80">
+                  <p className="pt-4 text-[15px] font-semibold uppercase tracking-wide text-[var(--color-ink-soft)]/80">
                     What&apos;s next
                   </p>
-                  <div className="text-base text-[var(--color-ink-soft)]">
+                  <div className="text-[17px] text-[var(--color-ink-soft)]">
                     <RichText text={project.futureWork} />
                   </div>
                 </>
@@ -471,26 +552,41 @@ export default function CaseStudyView({ project, onBack, onPrev, onNext }: CaseS
         </div>
       </div>
 
-      {openIndex !== null && (
+      {/* the panel is the live preview only now — no gallery, no prev/next.
+          Empty images makes the panel render live-only. */}
+      {liveOpen && hasLivePreview && (
         <ArtifactPanel
-          images={artifacts}
-          index={openIndex}
+          images={[]}
+          index={0}
           liveUrl={project.link}
           liveTabLabel={project.linkLabel}
-          liveEmbeddable={Boolean(project.embed)}
-          tab={tab}
-          onTabChange={setTab}
+          liveEmbeddable
+          liveMinHeight={project.embedMinHeight}
+          tab="live"
+          onTabChange={() => {}}
           onClose={() => {
-            setOpenIndex(null);
+            setLiveOpen(false);
             setFullscreen(false);
           }}
-          onNavigate={setOpenIndex}
+          onNavigate={() => {}}
           width={panelWidth}
           onResizeStart={handleResizeStart}
           resizing={resizing}
           layout={isDesktop && !fullscreen ? "split" : "overlay"}
           fullscreen={fullscreen}
           onToggleFullscreen={isDesktop ? () => setFullscreen((f) => !f) : undefined}
+        />
+      )}
+
+      {/* every image in the case study zooms here, the same way Nourish's
+          showcase already did */}
+      {zoomed && (
+        <Lightbox
+          src={zoomed.src}
+          title={zoomed.title}
+          isPhone={zoomed.isPhone}
+          video={zoomed.video}
+          onClose={() => setZoomed(null)}
         />
       )}
     </div>

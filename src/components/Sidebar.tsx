@@ -210,13 +210,22 @@ function SidebarContent({
       </nav>
 
       {/* flat on the sidebar surface — the stroke separates it, so boxing it
-          again would nest a container in a container. The theme switch
-          closes the column. */}
-      <div className="flex items-center justify-between gap-2 border-t border-[var(--color-blush-deep)]/60 px-5 pb-4 pt-3">
-        <span className="text-[13px] font-medium uppercase tracking-wide text-[var(--color-ink-soft)]">
-          Theme
-        </span>
-        <ThemeToggle mode={themeMode} onChange={onThemeChange} />
+          again would nest a container in a container. Availability sits above
+          the theme switch, which closes the column. */}
+      <div className="px-5 pb-4 pt-3">
+        <p className="mb-3 flex items-center justify-center gap-2 border-b border-[var(--color-blush-deep)]/60 pb-3 text-base font-semibold text-[var(--color-rose-dark)]">
+          <span
+            className="inline-block h-2.5 w-2.5 rounded-full bg-[#34c759] ring-2 ring-[#34c759]/25"
+            aria-hidden="true"
+          />
+          Open to work
+        </p>
+        <div className="flex items-center justify-between gap-2">
+          <span className="text-[13px] font-medium uppercase tracking-wide text-[var(--color-ink-soft)]">
+            Theme
+          </span>
+          <ThemeToggle mode={themeMode} onChange={onThemeChange} />
+        </div>
       </div>
     </>
   );
@@ -296,12 +305,13 @@ export default function Sidebar({
                   aria-label={project.title}
                   title={project.title}
                   aria-current={active ? "page" : undefined}
-                  className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-[var(--radius-ui)] shadow-sm transition hover:scale-110 ${
-                    active ? "ring-2 ring-[var(--color-rose)]" : "opacity-80 hover:opacity-100"
+                  // no chip behind the glyph: the icon itself carries the
+                  // project's colour (the gradient's darker stop, for contrast)
+                  className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-[var(--radius-ui)] transition hover:scale-110 hover:bg-[var(--color-blush)] ${
+                    active ? "bg-[var(--color-blush)]" : "opacity-80 hover:opacity-100"
                   }`}
-                  style={{ background: `linear-gradient(135deg, ${project.gradient[0]}, ${project.gradient[1]})` }}
                 >
-                  <project.icon size={13} strokeWidth={2} style={{ color: "var(--color-on-sunset)" }} aria-hidden="true" />
+                  <project.icon size={16} strokeWidth={2} style={{ color: project.gradient[1] }} aria-hidden="true" />
                 </button>
               );
             })}

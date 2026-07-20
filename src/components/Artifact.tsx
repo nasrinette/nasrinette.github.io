@@ -1,4 +1,5 @@
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import {
   ChevronLeft,
   ChevronRight,
@@ -27,6 +28,8 @@ export interface ArtifactImage {
   title: string;
   fit?: "cover" | "contain";
   device?: DeviceKind;
+  /** Zoom the shot inside a phone bezel instead of a browser window frame. */
+  isPhone?: boolean;
   /** A clip to play in place of `src`; `src` is its poster. */
   video?: string;
 }
@@ -46,6 +49,27 @@ function PlayBadge({ size = 34 }: { size?: number }) {
         {/* the glyph's own bearing sits left of centre — nudge it back */}
         <Play size={Math.round(size * 0.42)} fill="currentColor" strokeWidth={0} className="translate-x-[6%]" aria-hidden="true" />
       </span>
+    </span>
+  );
+}
+
+/* — WindowChrome — the browser-window top bar (three traffic-light dots and
+   an optional caption) that fronts every framed shot in the case studies.
+   Shared so covers wear the exact same frame as process boards and gallery
+   windows. Sits as the first child of a flex-col, border-wrapped surface. — */
+export function WindowChrome({ caption }: { caption?: string }) {
+  return (
+    <span className="flex items-center gap-1.5 border-b border-[var(--color-blush-deep)]/60 bg-[var(--color-blush)]/70 px-2.5 py-1.5">
+      <span className="flex shrink-0 gap-1" aria-hidden="true">
+        <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-rose)]" />
+        <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-gold)]" />
+        <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-dusk)]" />
+      </span>
+      {caption && (
+        <span className="min-w-0 truncate font-[var(--font-mono)] text-[12px] font-medium text-[var(--color-ink-soft)]">
+          {caption}
+        </span>
+      )}
     </span>
   );
 }
@@ -108,8 +132,12 @@ export function ArtifactChip({
   icon: Icon,
   video = false,
   active = false,
+  large = false,
+  fit = "cover",
   onOpen,
   onOpenFull,
+  openHref,
+  openLabel = "Open",
 }: {
   title: string;
   subtitle: string;
@@ -119,11 +147,71 @@ export function ArtifactChip({
   /** Marks `image` as a video poster, so the thumbnail gets a play badge. */
   video?: boolean;
   active?: boolean;
-  /** Chip-body click: open the preview docked. */
+  /** Hero presentation: the image runs full width above the title row instead of sitting as a thumbnail. */
+  large?: boolean;
+  /** "contain" shows the whole shot (portrait phones, tall art) letterboxed over the blush; default "cover" fills and crops. */
+  fit?: "cover" | "contain";
+  /** Chip-body click: zoom the shot. */
   onOpen: () => void;
-  /** Open-pill click: jump straight to fullscreen. Falls back to `onOpen`. */
+  /** Open-pill click (e.g. open the live preview). Omit to hide the pill unless `openHref` is set. */
   onOpenFull?: () => void;
+  /** When set, the Open pill is an external link (Chrome store, Figma, write-up) instead of a button. */
+  openHref?: string;
+  /** Label on the Open pill. */
+  openLabel?: string;
 }) {
+  if (large && image) {
+    // hero presentation: a browser-window frame over the picture, same chrome
+    // the process boards wear. The image is the docked-preview target; a
+    // floating pill goes fullscreen.
+    return (
+      <div
+        className={`group relative flex w-full max-w-2xl flex-col overflow-hidden rounded-[var(--radius-lg)] border bg-[var(--color-cream-soft)] shadow-[var(--shadow-card)] transition hover:shadow-[var(--shadow-lift)] ${
+          active ? "border-[var(--color-rose)] ring-1 ring-[var(--color-rose)]" : "border-[var(--color-blush-deep)]/60 hover:border-[var(--color-rose)]"
+        }`}
+      >
+        <WindowChrome />
+        <div className="relative">
+          {fit === "contain" ? (
+            // portrait phones and tall art show whole, centred over the blush,
+            // instead of being cropped to the 16:10 cover box
+            <div className="flex items-center justify-center bg-[var(--color-blush)] py-3">
+              <img src={image} alt={title} loading="lazy" className="max-h-[360px] w-auto max-w-full object-contain" />
+            </div>
+          ) : (
+            <img src={image} alt={title} loading="lazy" className="aspect-[16/10] w-full bg-[var(--color-blush)] object-cover" />
+          )}
+          {video && <PlayBadge />}
+          <button
+            type="button"
+            onClick={onOpen}
+            aria-label={`Zoom ${title}`}
+            className="focus-ring absolute inset-0"
+          />
+          {openHref ? (
+            <a
+              href={openHref}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={`${openLabel}: ${title}`}
+              className="focus-ring absolute right-2.5 top-2.5 z-10 flex items-center gap-1.5 rounded-full bg-[var(--color-cream-soft)]/90 px-3 py-1.5 text-sm font-semibold text-[var(--color-rose-dark)] shadow-sm backdrop-blur transition hover:bg-[var(--color-blush)]"
+            >
+              <ExternalLink size={12} strokeWidth={2} aria-hidden="true" /> {openLabel}
+            </a>
+          ) : onOpenFull ? (
+            <button
+              type="button"
+              onClick={onOpenFull}
+              aria-label={`${openLabel}: ${title}`}
+              className="focus-ring absolute right-2.5 top-2.5 z-10 flex items-center gap-1.5 rounded-full bg-[var(--color-cream-soft)]/90 px-3 py-1.5 text-sm font-semibold text-[var(--color-rose-dark)] shadow-sm backdrop-blur transition hover:bg-[var(--color-blush)]"
+            >
+              <Maximize2 size={12} strokeWidth={2} aria-hidden="true" /> {openLabel}
+            </button>
+          ) : null}
+        </div>
+      </div>
+    );
+  }
   return (
     // capped width: on a wide page a full-bleed bar strands the Open
     // affordance far from the label it belongs to
@@ -172,9 +260,9 @@ export function ArtifactChip({
   );
 }
 
-/* — ArtifactCollage — gallery shots as an angled showcase: window-framed
-   screenshots on one rotated plane, staggered per column, cropped by the
-   frame. Click a window to inspect it in the artifact panel. ————————————— */
+/* — ArtifactCollage — gallery shots as an upright grid of window-framed
+   screenshots, each in its own browser frame. Click a window to inspect it
+   in the artifact panel. A lone shot sits full width on its own. ————————— */
 export function ArtifactCollage({
   blocks,
   activeSrc,
@@ -187,14 +275,6 @@ export function ArtifactCollage({
   /** Used for image-less tiles (e.g. opens the live preview). */
   onOpenFallback?: () => void;
 }) {
-  const colCount = blocks.length >= 5 ? 3 : blocks.length >= 2 ? 2 : 1;
-  const columns = Array.from({ length: colCount }, (_, c) =>
-    blocks.filter((_, i) => i % colCount === c)
-  );
-  const columnOffsets = ["-2.5rem", "-0.25rem", "-3.5rem"];
-  const heightClass =
-    blocks.length <= 2 ? "h-[220px] sm:h-[280px]" : blocks.length <= 4 ? "h-[280px] sm:h-[360px]" : "h-[340px] sm:h-[440px]";
-
   const renderWindow = (block: GalleryBlock) => (
     <>
       <span className="flex items-center gap-1.5 border-b border-[var(--color-blush-deep)]/60 bg-[var(--color-blush)]/70 px-2.5 py-1.5">
@@ -213,9 +293,11 @@ export function ArtifactCollage({
             src={block.image}
             alt={block.caption}
             loading="lazy"
-            className={`w-full bg-[var(--color-blush)] object-cover object-top ${
+            // one object-fit only: cover + contain together resolves to cover
+            // in Tailwind, so a `contain` shot would crop. Pick exactly one.
+            className={`w-full bg-[var(--color-blush)] ${
               block.variant === "phone" ? "aspect-[9/16]" : "aspect-[16/10]"
-            } ${block.fit === "contain" ? "object-contain p-1.5" : ""}`}
+            } ${block.fit === "contain" ? "object-contain p-2" : "object-cover object-top"}`}
           />
           {block.video && <PlayBadge size={30} />}
         </span>
@@ -232,48 +314,327 @@ export function ArtifactCollage({
     </>
   );
 
-  return (
-    <div
-      className={`relative overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-blush-deep)]/60 bg-[var(--color-blush)]/40 ${heightClass}`}
-      style={{
-        backgroundImage: "radial-gradient(color-mix(in srgb, var(--color-blush-deep) 55%, transparent) 1px, transparent 1px)",
-        backgroundSize: "18px 18px",
-      }}
-    >
-      <div
-        className="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 rotate-[-12deg] gap-4"
-        style={{ width: "140%" }}
+  // a lone shot has no collage to be part of: angling and cropping it would
+  // only hide what it shows, so it sits upright and whole, width-capped like
+  // the showcase, its window following the image's own ratio edge to edge
+  if (blocks.length === 1) {
+    const block = blocks[0];
+    const open = block.image ? () => onOpen(block.image!) : onOpenFallback;
+    const windowClass = `flex w-full max-w-4xl flex-col overflow-hidden rounded-[var(--radius-md)] border border-[var(--color-blush-deep)]/70 bg-[var(--color-cream-soft)] shadow-[var(--shadow-card)] ${
+      activeSrc && activeSrc === block.image ? "border-[var(--color-rose)] ring-1 ring-[var(--color-rose)]" : ""
+    }`;
+    const windowBody = block.image ? (
+      <>
+        <span className="flex items-center gap-1.5 border-b border-[var(--color-blush-deep)]/60 bg-[var(--color-blush)]/70 px-2.5 py-1.5">
+          <span className="flex shrink-0 gap-1" aria-hidden="true">
+            <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-rose)]" />
+            <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-gold)]" />
+            <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-dusk)]" />
+          </span>
+          <span className="min-w-0 truncate font-[var(--font-mono)] text-[12px] font-medium text-[var(--color-ink-soft)]">
+            {block.caption}
+          </span>
+        </span>
+        <img src={block.image} alt={block.caption} loading="lazy" className="h-auto w-full" />
+      </>
+    ) : (
+      renderWindow(block)
+    );
+    return open ? (
+      <button
+        type="button"
+        onClick={open}
+        aria-label={`View: ${block.caption}`}
+        className={`${windowClass} focus-ring text-left transition hover:-translate-y-1 hover:shadow-[var(--shadow-lift)]`}
       >
-        {columns.map((col, c) => (
-          <div
-            key={c}
-            className="flex min-w-0 flex-1 flex-col gap-4"
-            style={{ transform: `translateY(${columnOffsets[c % columnOffsets.length]})` }}
+        {windowBody}
+      </button>
+    ) : (
+      <div className={windowClass}>{windowBody}</div>
+    );
+  }
+
+  // an all-phone set (final screens with no desktop twin): the shots are
+  // already phone mockups with the bezel in the image, so no window chrome on
+  // top — that double-frames them and truncates the caption. Just a clean row
+  // of small phones, each following its own ratio, uncropped.
+  if (blocks.length > 1 && blocks.every((b) => b.variant === "phone" && b.image)) {
+    return (
+      <div className="flex flex-wrap items-start gap-5">
+        {blocks.map((block) => (
+          <button
+            key={block.caption}
+            type="button"
+            onClick={() => onOpen(block.image!)}
+            aria-label={`View: ${block.caption}`}
+            className={`focus-ring relative block w-36 shrink-0 rounded-[1.5rem] transition hover:-translate-y-0.5 ${
+              activeSrc === block.image ? "ring-2 ring-[var(--color-rose)] ring-offset-2 ring-offset-[var(--color-cream)]" : ""
+            }`}
           >
-            {col.map((block) => {
-              const open = block.image ? () => onOpen(block.image!) : onOpenFallback;
-              const windowClass = `flex w-full flex-col overflow-hidden rounded-[var(--radius-md)] border border-[var(--color-blush-deep)]/70 bg-[var(--color-cream-soft)] shadow-[var(--shadow-card)] ${
-                activeSrc && activeSrc === block.image ? "border-[var(--color-rose)] ring-1 ring-[var(--color-rose)]" : ""
-              }`;
-              return open ? (
-                <button
-                  key={block.caption}
-                  type="button"
-                  onClick={open}
-                  aria-label={`View: ${block.caption}`}
-                  className={`${windowClass} focus-ring text-left transition hover:-translate-y-1 hover:shadow-[var(--shadow-lift)]`}
+            <img src={block.image} alt={block.caption} loading="lazy" className="w-full rounded-[1.5rem]" />
+            {block.video && <PlayBadge size={26} />}
+          </button>
+        ))}
+      </div>
+    );
+  }
+
+  // upright grid, no angle: every shot in its own window frame, the same
+  // frame the process figures and the showcase use. Two up on desktop,
+  // width-capped so the windows don't balloon on a full column.
+  return (
+    <div className="grid max-w-5xl gap-5 sm:grid-cols-2">
+      {blocks.map((block) => {
+        const open = block.image ? () => onOpen(block.image!) : onOpenFallback;
+        const windowClass = `flex w-full flex-col overflow-hidden rounded-[var(--radius-md)] border bg-[var(--color-cream-soft)] shadow-[var(--shadow-card)] ${
+          activeSrc && activeSrc === block.image
+            ? "border-[var(--color-rose)] ring-1 ring-[var(--color-rose)]"
+            : "border-[var(--color-blush-deep)]/70"
+        }`;
+        return open ? (
+          <button
+            key={block.caption}
+            type="button"
+            onClick={open}
+            aria-label={`View: ${block.caption}`}
+            className={`${windowClass} focus-ring text-left transition hover:-translate-y-0.5 hover:shadow-[var(--shadow-lift)]`}
+          >
+            {renderWindow(block)}
+          </button>
+        ) : (
+          <div key={block.caption} className={windowClass}>
+            {renderWindow(block)}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+/* — Lightbox — the one way every case-study image opens now: a full-screen
+   zoom over a dimmed backdrop, the same for a collage shot, a showcase screen,
+   a process board, or the overview hero. No docked gallery, no prev/next: one
+   image, click-out or Escape to dismiss. Phones wear a bezel, everything else
+   a browser window; a clip plays in place. Portaled to body so the pop-in
+   animation's transformed ancestors can't trap `fixed` positioning. ———————— */
+export function Lightbox({
+  src,
+  title,
+  isPhone = false,
+  video,
+  screen,
+  onClose,
+}: {
+  src: string;
+  title: string;
+  isPhone?: boolean;
+  video?: string;
+  screen?: string;
+  onClose: () => void;
+}) {
+  const closeRef = useRef<HTMLButtonElement | null>(null);
+  useEffect(() => {
+    closeRef.current?.focus();
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [onClose]);
+
+  return createPortal(
+    <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 sm:p-8">
+      <button
+        type="button"
+        aria-label="Close zoom"
+        onClick={onClose}
+        className="absolute inset-0 bg-black/40 backdrop-blur-[2px]"
+      />
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-label={title}
+        className="animate-pop-in pointer-events-none relative flex max-h-full max-w-full flex-col items-center gap-3"
+      >
+        {video ? (
+          <video
+            src={video}
+            poster={src}
+            controls
+            autoPlay
+            playsInline
+            className="pointer-events-auto w-auto max-w-full rounded-[var(--radius-md)] object-contain shadow-[var(--shadow-lift)]"
+            style={{ maxHeight: "80vh" }}
+          />
+        ) : isPhone ? (
+          // the phone shots are already device mockups with the bezel in the
+          // image, so the lightbox adds no frame of its own — just the picture
+          <img
+            src={src}
+            alt={title}
+            className="min-h-0 w-auto max-w-full flex-1 rounded-[var(--radius-md)] object-contain shadow-[var(--shadow-lift)]"
+            style={{ maxHeight: "80vh" }}
+          />
+        ) : (
+          <div className="flex min-h-0 flex-col overflow-hidden rounded-[var(--radius-md)] border border-[var(--color-blush-deep)]/70 bg-[var(--color-cream-soft)] shadow-[var(--shadow-lift)]">
+            <WindowChrome caption={screen} />
+            <img
+              src={src}
+              alt={title}
+              className="h-auto max-h-[78vh] w-auto max-w-full bg-[var(--color-blush)] object-contain"
+            />
+          </div>
+        )}
+        <p className="rounded-[var(--radius-ui)] bg-[var(--color-cream-soft)]/90 px-3 py-1.5 text-center font-[var(--font-mono)] text-[13px] text-[var(--color-ink-soft)] shadow-sm backdrop-blur">
+          {title}
+        </p>
+      </div>
+      <button
+        ref={closeRef}
+        type="button"
+        onClick={onClose}
+        aria-label="Close zoom"
+        className="focus-ring absolute right-4 top-4 rounded-full bg-[var(--color-cream-soft)]/90 p-2 text-[var(--color-ink-soft)] shadow-[var(--shadow-card)] backdrop-blur transition hover:text-[var(--color-rose-dark)]"
+      >
+        <X size={16} strokeWidth={2} />
+      </button>
+    </div>,
+    document.body
+  );
+}
+
+/* — ArtifactShowcase — every final screen in one calm surface. Shots pair up
+   by their `screen` tag: the desktop shot as a browser window, its phone
+   twin standing in front of the bottom-right corner. The collage scatters
+   process shots on an angle; this is its opposite — the shipped design,
+   ordered and upright. The showcase owns its screenshots end to end: click
+   a shot and it zooms in the shared Lightbox, so the artifact panel stays
+   free for the live preview. ————————————————————————————————————————————— */
+export function ArtifactShowcase({ blocks }: { blocks: GalleryBlock[] }) {
+  const [zoom, setZoom] = useState<GalleryBlock | null>(null);
+
+  // group by screen name in first-appearance order; the phone shot rides
+  // whichever window shares its tag. A screen without an image yet still
+  // gets a window — a placeholder frame, so the set can be authored before
+  // the shots exist (same promise the comparison figure makes).
+  const screens: { name: string; desktop?: GalleryBlock; phone?: GalleryBlock }[] = [];
+  for (const block of blocks) {
+    if (!block.screen) continue;
+    let entry = screens.find((s) => s.name === block.screen);
+    if (!entry) {
+      entry = { name: block.screen };
+      screens.push(entry);
+    }
+    if (block.image && (block.device === "phone" || block.variant === "phone")) entry.phone = block;
+    else entry.desktop = block;
+  }
+  if (screens.length === 0) return null;
+
+  return (
+    // no surface of its own: the framed windows sit directly on the page,
+    // the way every other case-study figure does. Width is capped: on a
+    // full-width column, uncapped windows balloon into a wall of image.
+    <div role="group" aria-label="Final screens">
+      <div className="grid max-w-5xl gap-5 sm:grid-cols-2 sm:gap-6">
+        {screens.map((screen) => (
+          // reserved right/bottom sliver keeps the overhanging phone inside
+          // the surface instead of clipping at the grid cell
+          <div key={screen.name} className={screen.desktop ? "relative pb-3 pr-2" : ""}>
+            {screen.desktop && screen.desktop.image && (
+              <button
+                type="button"
+                onClick={() => setZoom(screen.desktop!)}
+                aria-label={`Zoom: ${screen.desktop.caption}`}
+                className="focus-ring flex w-full cursor-zoom-in flex-col overflow-hidden rounded-[var(--radius-md)] border border-[var(--color-blush-deep)]/70 bg-[var(--color-cream-soft)] text-left shadow-[var(--shadow-card)] transition hover:shadow-[var(--shadow-lift)]"
+              >
+                <span className="flex items-center gap-1.5 border-b border-[var(--color-blush-deep)]/60 bg-[var(--color-blush)]/70 px-2.5 py-1.5">
+                  <span className="flex shrink-0 gap-1" aria-hidden="true">
+                    <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-rose)]" />
+                    <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-gold)]" />
+                    <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-dusk)]" />
+                  </span>
+                  <span className="min-w-0 truncate font-[var(--font-mono)] text-[12px] font-medium text-[var(--color-ink-soft)]">
+                    {screen.name}
+                  </span>
+                </span>
+                <img
+                  src={screen.desktop.image}
+                  alt=""
+                  loading="lazy"
+                  className="aspect-[16/10] w-full bg-[var(--color-blush)] object-cover object-top"
+                />
+              </button>
+            )}
+            {screen.desktop && !screen.desktop.image && (
+              // no shot yet: the window frame holds the screen's place
+              <div className="flex w-full flex-col overflow-hidden rounded-[var(--radius-md)] border border-[var(--color-blush-deep)]/70 bg-[var(--color-cream-soft)] shadow-[var(--shadow-card)]">
+                <span className="flex items-center gap-1.5 border-b border-[var(--color-blush-deep)]/60 bg-[var(--color-blush)]/70 px-2.5 py-1.5">
+                  <span className="flex shrink-0 gap-1" aria-hidden="true">
+                    <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-rose)]" />
+                    <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-gold)]" />
+                    <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-dusk)]" />
+                  </span>
+                  <span className="min-w-0 truncate font-[var(--font-mono)] text-[12px] font-medium text-[var(--color-ink-soft)]">
+                    {screen.name}
+                  </span>
+                </span>
+                <span
+                  className="flex aspect-[16/10] w-full items-center justify-center"
+                  style={{
+                    background: `linear-gradient(135deg, ${screen.desktop.gradient[0]}, ${screen.desktop.gradient[1]})`,
+                  }}
                 >
-                  {renderWindow(block)}
-                </button>
-              ) : (
-                <div key={block.caption} className={windowClass}>
-                  {renderWindow(block)}
-                </div>
-              );
-            })}
+                  <screen.desktop.icon
+                    size={28}
+                    strokeWidth={1.5}
+                    style={{ color: "var(--color-on-sunset)" }}
+                    className="opacity-80"
+                    aria-hidden="true"
+                  />
+                </span>
+              </div>
+            )}
+            {screen.phone && screen.desktop && (
+              <button
+                type="button"
+                onClick={() => setZoom(screen.phone!)}
+                aria-label={`Zoom: ${screen.phone.caption}`}
+                className="focus-ring absolute bottom-0 right-0 z-10 w-[24%] max-w-[104px] cursor-zoom-in overflow-hidden rounded-[0.9rem] border-4 border-[#17130f] shadow-[var(--shadow-lift)] ring-1 ring-[var(--color-blush-deep)]/60 transition hover:-translate-y-0.5"
+              >
+                <img
+                  src={screen.phone.image}
+                  alt=""
+                  loading="lazy"
+                  className="aspect-[9/19] w-full bg-[var(--color-blush)] object-cover object-top"
+                />
+              </button>
+            )}
+            {screen.phone && !screen.desktop && (
+              // a screen that only exists on phone stands alone, centered, at
+              // its own ratio: a lone shot has no grid twin to match, and
+              // cropping it (a chat, a feed) would cut the story it tells
+              <button
+                type="button"
+                onClick={() => setZoom(screen.phone!)}
+                aria-label={`Zoom: ${screen.phone.caption}`}
+                className="focus-ring mx-auto block w-[52%] max-w-[210px] cursor-zoom-in overflow-hidden rounded-[1.1rem] border-4 border-[#17130f] shadow-[var(--shadow-lift)] ring-1 ring-[var(--color-blush-deep)]/60 transition hover:-translate-y-0.5"
+              >
+                <img src={screen.phone.image} alt="" loading="lazy" className="h-auto w-full bg-[var(--color-blush)]" />
+              </button>
+            )}
           </div>
         ))}
       </div>
+
+      {zoom?.image && (
+        <Lightbox
+          src={zoom.image}
+          title={zoom.caption}
+          isPhone={zoom.device === "phone" || zoom.variant === "phone"}
+          screen={zoom.screen}
+          onClose={() => setZoom(null)}
+        />
+      )}
     </div>
   );
 }
@@ -295,6 +656,7 @@ export function ArtifactPanel({
   layout,
   fullscreen = false,
   onToggleFullscreen,
+  liveMinHeight,
 }: {
   images: ArtifactImage[];
   index: number;
@@ -312,6 +674,8 @@ export function ArtifactPanel({
   fullscreen?: boolean;
   /** When provided, shows a maximize/restore toggle in the header. */
   onToggleFullscreen?: () => void;
+  /** The embedded site's shortest workable viewport; shorter panels scale the frame down to fit. */
+  liveMinHeight?: number;
 }) {
   const count = images.length;
   // a link that can't be framed gets no tab of its own — just the
@@ -344,6 +708,25 @@ export function ArtifactPanel({
   }, [index, count, activeTab, onClose, onNavigate, fullscreen, onToggleFullscreen]);
 
   const subtitle = activeTab === "live" ? liveUrl ?? "" : current?.title ?? "";
+
+  // a fixed-size embed (a phone centred in a viewport that hides overflow)
+  // clips in a panel shorter than it lays out for. Below liveMinHeight the
+  // iframe keeps that height and the whole frame shrinks as one piece.
+  const liveBoxRef = useRef<HTMLDivElement | null>(null);
+  const [liveBox, setLiveBox] = useState<{ width: number; height: number } | null>(null);
+  useEffect(() => {
+    if (activeTab !== "live" || !liveMinHeight) return;
+    const el = liveBoxRef.current;
+    if (!el) return;
+    const observer = new ResizeObserver(([entry]) => {
+      const { width, height } = entry.contentRect;
+      setLiveBox({ width, height });
+    });
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [activeTab, liveMinHeight]);
+  const liveScale =
+    liveMinHeight && liveBox && liveBox.height < liveMinHeight ? liveBox.height / liveMinHeight : 1;
 
   return (
     <div
@@ -482,12 +865,17 @@ export function ArtifactPanel({
                   controls
                   playsInline
                   preload="metadata"
-                  className="max-h-full w-auto max-w-full object-contain"
+                  className="max-h-full w-auto max-w-full rounded-[var(--radius-md)] object-contain"
                 />
               ) : current.device ? (
                 <DeviceMockup src={current.src} alt={current.title} device={current.device} url={liveUrl} />
               ) : (
-                <img src={current.src} alt={current.title} className="max-h-full w-auto max-w-full object-contain" />
+                // an undressed shot still gets the app's corner radius
+                <img
+                  src={current.src}
+                  alt={current.title}
+                  className="max-h-full w-auto max-w-full rounded-[var(--radius-md)] object-contain"
+                />
               ))}
           </div>
           {count > 1 && (
@@ -542,11 +930,26 @@ export function ArtifactPanel({
           )}
         </>
       ) : (
-        <div className={`relative min-h-0 flex-1 bg-[var(--color-blush)] ${resizing ? "pointer-events-none" : ""}`}>
+        <div
+          ref={liveBoxRef}
+          className={`relative min-h-0 flex-1 overflow-hidden bg-[var(--color-blush)] ${resizing ? "pointer-events-none" : ""}`}
+        >
           <iframe
             src={liveUrl}
             title={liveTabLabel}
             className="h-full w-full border-0"
+            // scaling divides the visible box by liveScale, so the iframe is
+            // laid out that much larger to land back on the panel exactly
+            style={
+              liveScale < 1 && liveBox
+                ? {
+                    width: Math.round(liveBox.width / liveScale),
+                    height: liveMinHeight,
+                    transform: `scale(${liveScale})`,
+                    transformOrigin: "top left",
+                  }
+                : undefined
+            }
             sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
           />
         </div>

@@ -28,7 +28,7 @@ export default function Header({ onClear, onOpenMenu }: HeaderProps) {
               {profile.name} <span className="text-[var(--color-ink-soft)]">· {profile.role}</span>
             </h1>
             <p className="flex items-center gap-1.5 truncate text-[13px] text-[var(--color-ink-soft)]">
-              <span className="inline-block h-1.5 w-1.5 rounded-full bg-[var(--color-gold)]" aria-hidden="true" />
+              <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#34c759]" aria-hidden="true" />
               {catName} is online, ask her anything
             </p>
           </div>

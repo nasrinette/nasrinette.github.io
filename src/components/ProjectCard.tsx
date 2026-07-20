@@ -1,4 +1,5 @@
 import type { Project } from "../types";
+import { WindowChrome } from "./Artifact";
 
 interface ProjectCardProps {
   project: Project;
@@ -8,16 +9,25 @@ interface ProjectCardProps {
 export default function ProjectCard({ project, onLearnMore }: ProjectCardProps) {
   const Icon = project.icon;
   return (
-    // h-full + the pinned button keep every card in the row the same height,
-    // however many lines its tags wrap to
-    <div className="card-warm card-lift flex h-full w-64 shrink-0 snap-start flex-col overflow-hidden">
+    // the whole card is the click target, not just the pill. h-full + the
+    // pinned pill keep every card in the row the same height, however many
+    // lines its tags wrap to
+    <button
+      type="button"
+      onClick={() => onLearnMore(project)}
+      aria-label={`Open the ${project.title} case study`}
+      className="card-warm card-lift focus-ring group flex h-full w-64 shrink-0 snap-start flex-col overflow-hidden text-left"
+    >
       {project.cover ? (
-        <img
-          src={project.cover}
-          alt=""
-          loading="lazy"
-          className="h-28 w-full shrink-0 bg-[var(--color-blush)] object-cover object-top"
-        />
+        <div className="flex shrink-0 flex-col">
+          <WindowChrome />
+          <img
+            src={project.cover}
+            alt=""
+            loading="lazy"
+            className="h-28 w-full bg-[var(--color-blush)] object-cover object-top"
+          />
+        </div>
       ) : (
         <div
           className="flex h-28 shrink-0 items-center justify-center"
@@ -51,14 +61,12 @@ export default function ProjectCard({ project, onLearnMore }: ProjectCardProps) 
             ))}
           </div>
         </div>
-        <button
-          type="button"
-          onClick={() => onLearnMore(project)}
-          className="btn-pastel mt-auto w-full px-3 py-1.5 font-[var(--font-display)] text-sm font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-rose-dark)]"
-        >
+        {/* visual pill only: the card itself is the button, so a real button
+            here would nest inside one. Glows on card hover via group-hover. */}
+        <span className="btn-pastel mt-auto block w-full px-3 py-1.5 text-center font-[var(--font-display)] text-sm font-semibold group-hover:shadow-[var(--shadow-glow)]">
           Tell me more
-        </button>
+        </span>
       </div>
-    </div>
+    </button>
   );
 }
