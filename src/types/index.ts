@@ -221,4 +221,4 @@ export interface SkillGroup {
   items: string[];
 }
 
-export type AppView = "chat" | "projects" | "design-system" | "profile";
+export type AppView = "chat" | "projects" | "design-system" | "profile" | "cv";

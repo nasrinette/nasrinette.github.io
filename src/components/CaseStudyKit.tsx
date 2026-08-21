@@ -48,7 +48,7 @@ export function Eyebrow({ children }: { children: ReactNode }) {
 export function SectionHeading({ children, eyebrow }: { children: ReactNode; eyebrow?: ReactNode }) {
   return (
     <Reveal variant="fade" className="mb-3 flex items-center gap-2.5">
-      <CatAvatar size={30} />
+      <CatAvatar size={34} />
       <span
         className="h-7 w-1.5 shrink-0 rounded-full"
         style={{ background: "var(--color-rose)" }}

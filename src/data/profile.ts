@@ -137,4 +137,4 @@ export const profile = {
 };
 
 export const catName = "Lola";
-export const catTagline = "Nazrin's guide · resident cat";
+export const catTagline = "Nazrin's guide";

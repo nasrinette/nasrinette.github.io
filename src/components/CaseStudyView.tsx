@@ -297,7 +297,7 @@ export default function CaseStudyView({ project, onBack, onPrev, onNext }: CaseS
                       title line here, same as she does on section headings —
                       with the same rose tick the numbered titles wear */}
                   <h1 className="flex items-center gap-2.5 font-[var(--font-display)] text-[24px] font-bold text-[var(--color-ink)] sm:text-[28px]">
-                    <CatAvatar size={24} />
+                    <CatAvatar size={28} />
                     <span
                       className="h-5 w-1.5 shrink-0 rounded-full"
                       style={{ background: "var(--color-rose)" }}

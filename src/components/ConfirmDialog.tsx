@@ -54,7 +54,7 @@ export default function ConfirmDialog({
         className="animate-pop-in relative w-full max-w-sm rounded-[var(--radius-lg)] border border-[var(--color-blush-deep)]/60 bg-[var(--color-cream-soft)] p-5 shadow-[var(--shadow-lift)]"
       >
         <div className="flex items-start gap-3">
-          <CatAvatar size={36} />
+          <CatAvatar size={48} variant="sitting" />
           <div className="min-w-0 flex-1">
             <h2 id="confirm-dialog-title" className="font-[var(--font-display)] text-lg font-bold text-[var(--color-ink)]">
               {title}

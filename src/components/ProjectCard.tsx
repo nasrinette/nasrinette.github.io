@@ -1,5 +1,5 @@
 import type { Project } from "../types";
-import { WindowChrome } from "./Artifact";
+import { GifCover, WindowChrome } from "./Artifact";
 import Reveal from "./Reveal";
 
 interface ProjectCardProps {
@@ -25,10 +25,8 @@ export default function ProjectCard({ project, onLearnMore }: ProjectCardProps) 
         <Reveal variant="gen" className="shrink-0">
           <div className="flex flex-col">
             <WindowChrome />
-            <img
+            <GifCover
               src={project.cover}
-              alt=""
-              loading="lazy"
               className="h-28 w-full bg-[var(--color-blush)] object-cover object-top"
             />
           </div>

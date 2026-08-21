@@ -61,7 +61,9 @@ export default function ChatWindow({ messages, isTyping, restoredIds, onRetry, o
   const latestMessage = messages[messages.length - 1];
 
   return (
-    <div className="relative flex-1 min-h-0">
+    // overflow-hidden keeps the pond's float-in clipped to the chat while
+    // the mascot layer itself is mid-drift
+    <div className="relative flex-1 min-h-0 overflow-hidden">
       <LolaMascot />
       <div
         ref={scrollRef}
@@ -74,12 +76,15 @@ export default function ChatWindow({ messages, isTyping, restoredIds, onRetry, o
               <p className="text-base">Lola is paddling over…</p>
             </div>
           )}
-          {messages.map((message) => (
+          {messages.map((message, index) => (
             <MessageBubble
               key={message.id}
               message={message}
               // Lola's live replies stream in; a restored transcript is already written
               stream={message.sender === "cat" && !restoredIds.has(message.id)}
+              // the opening message never gets a bubble perch; Lola greets
+              // plainly from her avatar spot
+              opening={index === 0}
               onRetry={onRetry}
               onProjectLearnMore={onProjectLearnMore}
             />

@@ -21,7 +21,7 @@ export default function Header({ onClear, onOpenMenu }: HeaderProps) {
         </button>
         <div className="flex min-w-0 items-center gap-3">
           <span className="md:hidden">
-            <CatAvatar size={36} />
+            <CatAvatar size={42} />
           </span>
           <div className="min-w-0">
             <h1 className="truncate font-[var(--font-display)] text-base font-bold text-[var(--color-ink)] sm:text-lg">

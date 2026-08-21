@@ -82,9 +82,10 @@ function SidebarContent({
   return (
     <>
       {/* the collapse control floats over the name line with minimal padding,
-          off the text's row entirely — the tagline keeps one full line */}
+          off the text's row entirely; the tagline copy is kept short enough
+          to hold one full row beside the cat */}
       <div className="relative flex items-center gap-2 px-5 pb-5 pt-6">
-        <CatAvatar size={32} />
+        <CatAvatar size={48} variant="sitting" />
         <div className="min-w-0 flex-1">
           <p className="truncate font-[var(--font-display)] text-base font-bold text-[var(--color-ink)]">
             {catName} <span aria-hidden="true">🐾</span>
@@ -272,7 +273,7 @@ export default function Sidebar({
             title={`${catName}: open sidebar`}
             className="focus-ring mt-2 rounded-full"
           >
-            <CatAvatar size={28} />
+            <CatAvatar size={32} />
           </button>
 
           <span className="my-3 h-px w-6 shrink-0 bg-[var(--color-blush-deep)]/70" aria-hidden="true" />
@@ -349,7 +350,7 @@ export default function Sidebar({
           <ThemeToggle vertical mode={themeMode} onChange={onThemeChange} />
         </div>
       ) : (
-        <aside className="animate-sidebar-in hidden w-60 shrink-0 flex-col border-r border-[var(--color-blush-deep)]/60 bg-[var(--color-panel)]/70 backdrop-blur-sm md:flex">
+        <aside className="animate-sidebar-in hidden w-60 shrink-0 flex-col border-r border-[var(--color-blush-deep)]/60 bg-[var(--color-panel)]/70 backdrop-blur-sm md:flex print:hidden">
           <SidebarContent
             view={view}
             caseStudyId={caseStudyId}
@@ -370,7 +371,7 @@ export default function Sidebar({
             onClick={onCloseMobile}
             className="absolute inset-0 bg-black/30 backdrop-blur-[1px]"
           />
-          <aside className="relative z-10 flex w-72 max-w-[85vw] animate-pop-in flex-col bg-[var(--color-panel)] shadow-xl">
+          <aside className="relative z-10 flex w-72 max-w-[85vw] animate-pop-in flex-col bg-[var(--color-panel)] shadow-xl print:hidden">
             <button
               type="button"
               onClick={onCloseMobile}

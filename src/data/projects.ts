@@ -109,7 +109,7 @@ export const projects: Project[] = [
     limitations:
       "- Hand editing works, but it isn't as smooth as Figma yet.\n- Complex pages don't always capture cleanly. When one hits a limit, it says so instead of faking it.",
     futureWork:
-      "**Fix what the team ran into, and keep watching.**\n\nMake hand editing feel closer to a real design tool, and harden capture so complex pages come through clean. Designer workflows are shifting fast right now, so I stay curious about the next one before building for it.",
+      "**Fix what the team ran into, and keep watching.**\n\nMake hand editing feel closer to a real design tool, and harden capture so complex pages come through clean. Designer workflows are resettling around AI right now. I build for the workflow in front of me and let the next one prove itself before designing for it.",
     gallery: [
       {
         caption: "Full walkthrough",
@@ -127,7 +127,7 @@ export const projects: Project[] = [
   {
     id: "nourish-mcp",
     title: "Nourish MCP",
-    summary: "A calorie tracker you update by just telling Claude what you ate.",
+    summary: "A calorie tracker you update by telling Claude what you ate.",
     description:
       "Eating better starts with knowing what you eat, and every app I tried made that a chore. Nourish is a nutrition tracker you update by telling an AI what you ate. It ships with an MCP server, so the assistant you already talk to becomes the input, and the dashboard fills in behind it.",
     role: "Solo, AI product builder",
@@ -151,7 +151,7 @@ export const projects: Project[] = [
     // LingoPro and AtmosUI; the panel frames it in browser chrome.
     heroImage: "/assets/nourish-mcp/nourish-demo.gif",
     heroDevice: "browser",
-    link: "https://ui-production-41e1.up.railway.app/",
+    link: "https://ui-production-ee78.up.railway.app/login",
     linkLabel: "Live site",
     embed: true,
     problem:
@@ -159,7 +159,7 @@ export const projects: Project[] = [
     goals: [],
     process: [],
     research:
-      "**Every tracker had the same problems.** I tried the popular ones and read Play Store reviews of the most used one.",
+      "**Every tracker failed the same way.** I audited the popular ones and read the Play Store reviews of the market leader.",
     researchNotes: [
       "Cluttered UI",
       "Adding food by hand takes too long",
@@ -198,7 +198,7 @@ export const projects: Project[] = [
       "No dark mode",
       "No day by day view",
     ],
-    v2: "**I switched to VS Code with Claude Code, for better iteration.** This is where the app became the real product.",
+    v2: "**Once the direction held, I rebuilt it in Claude Code.** Artifacts are for exploring; a codebase is for shipping. This is where the app became the real product.",
     iterations: [
       {
         title: "Goals grew from a form into a plan",
@@ -221,9 +221,9 @@ export const projects: Project[] = [
       { label: "Dashboard updates", note: "calories and macros", icon: BarChart3 },
     ],
     solution:
-      "**Tell any AI what you ate. Open Nourish to see what it means.**\n\n- **Chat only**: you log by telling the AI what you ate. After testing, any form was a no\n- **Connect**: one tab links the tracker to your AI and helps you get started\n- **Goals**: the AI can create and change your daily targets\n- **Day by day**: see any day, not just today, in dark mode\n- **Accounts**: sign in, and your data is yours\n\nThe AI takes the input. The dashboard shows you the pattern.",
+      "**Tell any AI what you ate. Open Nourish to see what it means.**\n\n- **Chat only**: you log by telling the AI what you ate. The form was the chore, so no form exists\n- **Connect**: one tab links the tracker to your AI and helps you get started\n- **Goals**: the AI can create and change your daily targets\n- **Day by day**: see any day, not just today, in dark mode\n- **Accounts**: sign in, and your data is yours\n\nThe AI takes the input. The dashboard shows you the pattern.",
     outcomeNote:
-      "**I built Nourish for my own problem, and it solved it perfectly.** Logging stopped being a chore, so I finally see what I eat.",
+      "**I built Nourish for my own problem, and the problem is gone.** Logging stopped being a chore, so I finally see what I eat.",
     results: [
       { label: "Idea to live app, built solo", value: "One month" },
       { label: "Effort to log a meal", value: "One sentence" },
@@ -284,7 +284,7 @@ export const projects: Project[] = [
     linkLabel: "Live site",
     embed: true,
     problem:
-      "**The benefits of a digital menu are obvious, so why do most restaurants still hand you paper?** We surveyed diners to find out, and 68% still preferred paper, because going digital doesn't fix what actually hurts, the wait for a waiter, the guessing at ingredients, the fight over the group bill.",
+      "**Digital menus should have won by now, yet most restaurants still hand you paper.** We surveyed diners to learn why. 68% preferred paper, because going digital fixes none of what actually hurts: the wait for a waiter, the guessing at ingredients, the fight over the group bill.",
     goals: [
       "Order and pay without waiting for a waiter",
       "Every ingredient, allergen, and option shown upfront",
@@ -311,7 +311,7 @@ export const projects: Project[] = [
         imageCaption: "Classic Paris bouillon restaurants, the reference for the look",
       },
       {
-        text: "**Test**: think-aloud sessions with 8 diners across three real tasks, including a group bill. That is where the paper fans came around, 8.8/10 said they would use it for real.",
+        text: "**Test**: think-aloud sessions with 8 diners across three real tasks, including a group bill. That is where the paper fans came around: 8.8/10 said they would use it for real.",
         image: "/assets/interactive-menu/hi-fi-menu.webp",
         imageCaption: "The high-fidelity prototype we tested, browse to payment",
       },
@@ -388,7 +388,7 @@ export const projects: Project[] = [
     cover: "/assets/lingopro/demo.gif",
     heroImage: "/assets/lingopro/demo.gif",
     heroDevice: "browser",
-    link: "https://lingopro-production.up.railway.app/",
+    link: "https://lingopro-production-0947.up.railway.app/",
     linkLabel: "Live site",
     embed: true,
     problem:
@@ -463,7 +463,7 @@ export const projects: Project[] = [
     title: "AtmosUI",
     summary: "Physics-based weather effects on the home screen that never cover your apps.",
     description:
-      "Live weather on your home screen. Rain slides down, snow piles up on widgets, apps never get blocked. It won 2nd place among 40+ teams at Huawei Tech Arena, €4,000.",
+      "Live weather on your home screen. Rain slides down, snow piles up on widgets, apps never get blocked. It took 2nd place among 40+ teams at Huawei Tech Arena, with a €4,000 prize.",
     role: "UX Designer · Team MUGA",
     year: "2025",
     facts: [
@@ -680,7 +680,7 @@ export const projects: Project[] = [
       "**Analyse**: the surprise was that time on site went *up* as satisfaction went *down*. On this site, time isn't engagement, it's confusion wearing engagement's clothes.",
     ],
     solution:
-      "**What the data asked for.**\n\n- **Rebuild Community**: participants compared it to Craigslist; it's where time goes to die\n- **Let people filter**: discovery without filters is browsing with your eyes closed\n- **Cut the density**: every page asks for too much attention at once\n- **Lead with Similar Books**: the most engaging thing on the site at 1.9 minutes and 2.2 books consulted, so it should anchor discovery instead of hiding behind it",
+      "**What the data asked for.**\n\n- **Rebuild Community**: participants compared it to Craigslist, and it held their attention the least of any section\n- **Let people filter**: discovery without filters is browsing with your eyes closed\n- **Cut the density**: every page asks for too much attention at once\n- **Lead with Similar Books**: the most engaging thing on the site at 1.9 minutes and 2.2 books consulted, so it should anchor discovery instead of hiding behind it",
     results: [
       { label: "Average usability rating", value: "3.9/5" },
       { label: "Found the site easy to use", value: "31%" },
@@ -766,7 +766,7 @@ export const projects: Project[] = [
     title: "Mister Garden: Salad Builder",
     summary: "Build your salad, watch nutrition facts and price update live.",
     description:
-      "You find out what your salad costs when it's already on your tray. This is an unofficial, fan-made builder for the Mister Garden menu, pick a base, stack what you want, and watch the calories and the price move as you go. In French or English.",
+      "You find out what your salad costs when it's already on your tray. This is an unofficial, fan-made builder for the Mister Garden menu. Pick a base, stack what you want, and watch the calories and the price move as you go. In French or English.",
     role: "Product Designer",
     year: "2026",
     sideProject: true,

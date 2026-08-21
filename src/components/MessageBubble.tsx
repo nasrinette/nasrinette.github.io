@@ -4,7 +4,7 @@ import BubbleCat, { PERCH_CLEARANCE, pickPerch } from "./BubbleCat";
 import CatAvatar from "./CatAvatar";
 import RichText, { StreamingText } from "./RichText";
 import ProjectCarousel from "./ProjectCarousel";
-import ContactCard from "./ContactCard";
+import { ContactIcons } from "./ContactCard";
 
 // suggestion chips are not rendered here: they dock above the chat input
 // (see App), the way Claude offers suggested replies
@@ -12,6 +12,9 @@ interface MessageBubbleProps {
   message: ChatMessage;
   /** Stream the text in word by word, like Lola is generating it live. */
   stream?: boolean;
+  /** The chat's opening message never gets a bubble perch: Lola greets
+      from her avatar spot. */
+  opening?: boolean;
   onRetry: (id: string) => void;
   onProjectLearnMore: (project: Project) => void;
 }
@@ -24,15 +27,16 @@ function formatTime(ts: number): string {
   }
 }
 
-export default function MessageBubble({ message, stream = false, onRetry, onProjectLearnMore }: MessageBubbleProps) {
+export default function MessageBubble({ message, stream = false, opening = false, onRetry, onProjectLearnMore }: MessageBubbleProps) {
   const isUser = message.sender === "user";
   // Sometimes Lola climbs onto one of her own bubbles; stable per message.
-  const perch = !isUser && message.status !== "failed" ? pickPerch(message.id) : null;
+  // Never on the opening message: there she greets from her avatar spot.
+  const perch = !isUser && message.status !== "failed" && !opening ? pickPerch(message.id) : null;
 
   if (message.status === "failed") {
     return (
-      <div className="flex animate-pop-in items-end gap-2">
-        <CatAvatar size={30} />
+      <div className="flex animate-pop-in items-end gap-1">
+        <CatAvatar size={45} variant="sitting" />
         <div className="max-w-[80%] space-y-2 rounded-[var(--radius-ui)] border border-red-200 bg-red-50 px-4 py-3 text-base text-red-800 dark:border-red-900/60 dark:bg-red-950/40 dark:text-red-200">
           <p>{message.text}</p>
           <button
@@ -53,9 +57,14 @@ export default function MessageBubble({ message, stream = false, onRetry, onProj
       className={`flex animate-pop-in flex-col gap-1.5 ${isUser ? "items-end" : "items-start"}`}
       style={perch ? { marginTop: PERCH_CLEARANCE[perch] } : undefined}
     >
-      <div className={`flex min-w-0 max-w-[85%] items-end gap-2 sm:max-w-[75%] ${isUser ? "flex-row-reverse" : ""}`}>
-        {/* when Lola has climbed onto the bubble she leaves her avatar spot */}
-        {!isUser && (perch ? <div className="w-[30px] shrink-0" aria-hidden="true" /> : <CatAvatar size={30} />)}
+      {/* gap-1 only: the sitting art carries transparent canvas padding of
+          its own, so a wider flex gap reads as a hole between cat and text */}
+      <div className={`flex min-w-0 max-w-[85%] items-end gap-1 sm:max-w-[75%] ${isUser ? "flex-row-reverse" : ""}`}>
+        {/* the avatar column is always reserved so message content lines up
+            across turns; when Lola climbs onto a bubble her spot stays as
+            an empty spacer */}
+        {!isUser &&
+          (perch ? <div className="w-[45px] shrink-0" aria-hidden="true" /> : <CatAvatar size={45} variant="sitting" />)}
         <div
           className={
             isUser
@@ -74,13 +83,15 @@ export default function MessageBubble({ message, stream = false, onRetry, onProj
           )}
           {message.rich?.kind === "contact" && (
             <div className="mt-3">
-              <ContactCard />
+              <ContactIcons size="lg" />
             </div>
           )}
         </div>
       </div>
+      {/* 45px + the span's own px-1 lands the timestamp exactly on the
+          content edge (45px avatar column + 4px gap), perch or not */}
       <span
-        className={`px-1 font-[var(--font-mono)] text-[12px] text-[var(--color-ink-soft)]/70 ${isUser ? "mr-1" : "ml-9"}`}
+        className={`px-1 font-[var(--font-mono)] text-[12px] text-[var(--color-ink-soft)]/70 ${isUser ? "mr-1" : "ml-[45px]"}`}
       >
         {formatTime(message.createdAt)}
       </span>

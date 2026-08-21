@@ -53,6 +53,91 @@ function PlayBadge({ size = 34 }: { size?: number }) {
   );
 }
 
+/* — useGifStill — a GIF cover animates forever, which turns the overview into
+   a flicker while someone is trying to read. This freezes it: the first frame
+   is drawn to a canvas and returned as a data URL, so the cover can rest as a
+   still and only play once the pointer says "show me". Non-GIF sources return
+   null and render untouched. ————————————————————————————————————————————— */
+function useGifStill(src?: string) {
+  const [still, setStill] = useState<string | null>(null);
+  useEffect(() => {
+    setStill(null);
+    if (!src || !src.toLowerCase().endsWith(".gif")) return;
+    let cancelled = false;
+    const img = new Image();
+    img.onload = () => {
+      if (cancelled) return;
+      const canvas = document.createElement("canvas");
+      canvas.width = img.naturalWidth;
+      canvas.height = img.naturalHeight;
+      const ctx = canvas.getContext("2d");
+      if (!ctx) return;
+      ctx.drawImage(img, 0, 0);
+      try {
+        setStill(canvas.toDataURL("image/png"));
+      } catch {
+        // a cross-origin GIF taints the canvas — leave it animating
+      }
+    };
+    img.src = src;
+    return () => {
+      cancelled = true;
+    };
+  }, [src]);
+  return still;
+}
+
+/* — GifCover — the one way an animated cover renders anywhere: frozen on its
+   first frame at rest, playing only while the card it sits in is hovered or
+   focused. It finds its card by the `group` class every card surface already
+   wears, so call sites just swap <img> for <GifCover> — no wiring. A non-GIF
+   source renders as a plain image, untouched. No badge over the still: the
+   covers should read as calm screenshots, and motion is the hover's reward. */
+export function GifCover({
+  src,
+  alt = "",
+  className = "",
+  eager = false,
+}: {
+  src: string;
+  alt?: string;
+  className?: string;
+  /** Skip lazy-loading (above-the-fold heroes). */
+  eager?: boolean;
+}) {
+  const still = useGifStill(src);
+  const [playing, setPlaying] = useState(false);
+  const imgRef = useRef<HTMLImageElement | null>(null);
+  useEffect(() => {
+    if (!still) return;
+    const el = imgRef.current;
+    if (!el) return;
+    // the hover surface is the whole card, not just the picture
+    const host: HTMLElement = el.closest(".group") ?? el;
+    const play = () => setPlaying(true);
+    const rest = () => setPlaying(false);
+    host.addEventListener("mouseenter", play);
+    host.addEventListener("mouseleave", rest);
+    host.addEventListener("focusin", play);
+    host.addEventListener("focusout", rest);
+    return () => {
+      host.removeEventListener("mouseenter", play);
+      host.removeEventListener("mouseleave", rest);
+      host.removeEventListener("focusin", play);
+      host.removeEventListener("focusout", rest);
+    };
+  }, [still]);
+  return (
+    <img
+      ref={imgRef}
+      src={still && !playing ? still : src}
+      alt={alt}
+      loading={eager ? undefined : "lazy"}
+      className={className}
+    />
+  );
+}
+
 /* — WindowChrome — the browser-window top bar (three traffic-light dots and
    an optional caption) that fronts every framed shot in the case studies.
    Shared so covers wear the exact same frame as process boards and gallery
@@ -176,10 +261,10 @@ export function ArtifactChip({
             // portrait phones and tall art show whole, centred over the blush,
             // instead of being cropped to the 16:10 cover box
             <div className="flex items-center justify-center bg-[var(--color-blush)] py-3">
-              <img src={image} alt={title} loading="lazy" className="max-h-[360px] w-auto max-w-full object-contain" />
+              <GifCover src={image} alt={title} eager className="max-h-[360px] w-auto max-w-full object-contain" />
             </div>
           ) : (
-            <img src={image} alt={title} loading="lazy" className="aspect-[16/10] w-full bg-[var(--color-blush)] object-cover" />
+            <GifCover src={image} alt={title} eager className="aspect-[16/10] w-full bg-[var(--color-blush)] object-cover" />
           )}
           {video && <PlayBadge />}
           <button
@@ -223,7 +308,7 @@ export function ArtifactChip({
       <span className="relative h-11 w-11 shrink-0 overflow-hidden rounded-[var(--radius-md)] border border-[var(--color-blush-deep)]/50">
         {image ? (
           <>
-            <img src={image} alt="" loading="lazy" className="h-full w-full object-cover object-top" />
+            <GifCover src={image} className="h-full w-full object-cover object-top" />
             {video && <PlayBadge size={20} />}
           </>
         ) : (

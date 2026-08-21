@@ -7,7 +7,7 @@ interface SectionTopBarProps {
 
 export default function SectionTopBar({ title, onOpenMenu }: SectionTopBarProps) {
   return (
-    <div className="flex items-center gap-3 border-b border-[var(--color-blush-deep)]/60 bg-[var(--color-cream-soft)]/70 px-4 py-3 backdrop-blur-sm md:hidden">
+    <div className="flex items-center gap-3 border-b border-[var(--color-blush-deep)]/60 bg-[var(--color-cream-soft)]/70 px-4 py-3 backdrop-blur-sm md:hidden print:hidden">
       <button
         type="button"
         onClick={onOpenMenu}

@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { FileText, Mail } from "lucide-react";
 import { profile } from "../data/profile";
 import ToolLogo from "./ToolLogo";
@@ -18,23 +19,35 @@ export function ContactIcons({
   const circle = size === "lg" ? "h-10 w-10" : size === "md" ? "h-8 w-8" : "h-6 w-6";
   const glyph = size === "lg" ? 19 : size === "md" ? 17 : 13;
 
-  const items = [
+  const items: {
+    label: string;
+    href: string;
+    external: boolean;
+    icon: ReactNode;
+  }[] = [
     {
       label: `Email: ${profile.contact.email}`,
       href: `mailto:${profile.contact.email}`,
       external: false,
       icon: <Mail size={glyph} strokeWidth={1.75} aria-hidden="true" />,
     },
-    ...profile.contact.links.map((link) => ({
-      label: /cv|pdf|resume/i.test(link.label) ? "CV (PDF): opens in a new tab" : `${link.label}: ${link.url.replace(/^https?:\/\/(www\.)?/, "")}`,
-      href: link.url,
-      external: true,
-      icon: /cv|pdf|resume/i.test(link.label) ? (
-        <FileText size={glyph} strokeWidth={1.75} aria-hidden="true" />
-      ) : (
-        <ToolLogo name={link.label} size={glyph} />
-      ),
-    })),
+    ...profile.contact.links.map((link) =>
+      /cv|pdf|resume/i.test(link.label)
+        ? {
+            // the CV mark only opens the in-portfolio page; saving the PDF is
+            // the Download button's job on that page
+            label: "CV: opens it here",
+            href: "#/cv",
+            external: false,
+            icon: <FileText size={glyph} strokeWidth={1.75} aria-hidden="true" />,
+          }
+        : {
+            label: `${link.label}: ${link.url.replace(/^https?:\/\/(www\.)?/, "")}`,
+            href: link.url,
+            external: true,
+            icon: <ToolLogo name={link.label} size={glyph} />,
+          }
+    ),
   ];
 
   return (

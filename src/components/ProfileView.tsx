@@ -11,7 +11,7 @@ export default function ProfileView() {
           it, so the header reads as one row rather than a small badge */}
       <header className="mb-8 flex flex-col items-center gap-4 text-center sm:flex-row sm:items-center sm:gap-8 sm:text-left">
         <img
-          src="/assets/me.png"
+          src="/assets/me.jpg"
           alt={profile.name}
           className="h-28 w-28 shrink-0 rounded-full object-cover shadow-[var(--shadow-glow)] sm:h-48 sm:w-48"
           style={{ background: "var(--color-blush)" }}
@@ -132,7 +132,7 @@ export default function ProfileView() {
         <ul className="space-y-2">
           {profile.funFacts.map((fact) => (
             <li key={fact} className="flex items-start gap-2 text-base text-[var(--color-ink-soft)]">
-              <CatAvatar size={20} />
+              <CatAvatar size={24} />
               <span>{fact}</span>
             </li>
           ))}

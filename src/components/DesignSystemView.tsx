@@ -333,7 +333,7 @@ export default function DesignSystemView() {
             <ThemeToggle mode={demoTheme} onChange={setDemoTheme} />
           </AtomCell>
           <AtomCell label="Lola avatar">
-            <CatAvatar size={36} />
+            <CatAvatar size={42} />
           </AtomCell>
           <AtomCell label="Typing indicator">
             <TypingIndicator />

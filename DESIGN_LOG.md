@@ -1528,3 +1528,233 @@ but it wasn't the culprit (and my dev-server pkill meant the change never
 hot-reloaded for the user to see), so reverted it and left the root as it was.
 The header bar keeps its matching frosted surface; only the bottom input bar
 changed, per the ask.
+
+### 112. Swap Lola's artwork for the painted cat illustrations
+**Changed:** Replaced the hand-drawn line-art mascot everywhere (avatar,
+chat-bubble perches, sleeping pond mascot) with a new set of painted cat
+illustrations, blink-swapped between eyes-open/eyes-closed frames to fake
+blinking and a happy petted look. The chat-bubble "loaf" and "peek" perches
+kept their spots; the third "hang" pose (draped over the corner, dangling
+paws) was dropped since no matching illustration exists for it. Purring on
+hover and the heart burst on click still work the same as before.
+**Notes:** Traded away the old mascot's fine motion (tail sway, ear twitch,
+idle breathing morph) and its light/dark colour swap, since the new art is
+flat painted images rather than parts that can be individually animated or
+recoloured — a cream cat on a dark background still reads fine, just doesn't
+shift tone. Had to resize the bubble perches independently by width and
+height (rather than assuming the old flat, wide aspect ratio) since the new
+portrait-shaped art was sinking into the message text above it. Checked all
+the spots — header, sidebar, chat bubbles, the sleeping pond mascot, profile,
+design-system catalogue — in both light and dark mode before calling it done.
+Follow-up on feedback: dropped an experimental rosy-cheek "petted" tell on
+the sleeping pond cat, its position was guessed and didn't land on her actual
+painted cheeks, so a real purr and hearts carry that state alone now. Every
+cat instance across the app sized up a step (roughly +15%: avatars 20-36px
+became 24-42px, bubble perches 56/46px became 64/52px, the pond cat's own
+art 46px became 56px within a slightly bigger pond scene) after the first
+pass read too small and dainty next to the illustrations' detail. The pond
+cat also came out blurry/pixelated, unlike every other mascot spot: it was
+the one place using an SVG `<image>` reference nested inside another SVG,
+which browsers rasterize at a fixed low resolution, instead of a plain `img`
+tag like everywhere else, which scales as true vector. Split the pond scene
+into a pad layer, a plain `img` for the cat, and a Zzz-text layer stacked via
+CSS so the cat reads crisp again at any size. Finally swapped all five
+illustrations from SVG to PNG (the designer supplied matching-resolution
+PNG exports); every component already referenced them as plain `img` tags,
+so it was a source-file swap only, no markup changes. The PNGs still looked
+pixelated at avatar size even though the source art itself is clean: they're
+1254-1643px exports being downscaled 30x+ at runtime to a 24-42px avatar,
+an aggressive enough ratio to alias on some displays/browsers even where it
+happened to render fine here. Generated a second, properly-antialiased set
+sized for actual on-screen use (~320px, roughly 3x the largest current
+use for retina headroom) via canvas high-quality resampling, and pointed
+every component at those instead of asking the browser to downscale the
+full export live. Lighter to load too (32-48KB vs. 52-131KB per image). On feedback, the
+sidebar header avatar and the chat-message avatar both sized up to match
+at 40px, and the "peek" chat-bubble perch shrank to 34px (it was reading
+too large next to the message it perches on). The sleeping pond cat no
+longer drifts side to side across the chat background: she's now pinned
+to the bottom-right corner, still bobbing gently in place; the horizontal
+drift keyframe is gone since nothing uses it anymore. Deleted the ten
+unused source files left in the illustrations folder (the original
+full-resolution PNGs and the SVGs from before the PNG swap) once confirmed
+nothing in the code referenced them, keeping only the five `-sm.png`
+files actually in use.
+
+### 113. Text sat oddly indented on chat bubble perches
+**Changed:** When Lola perches on a message's bubble corner instead of
+showing inline, her turn's text used to still reserve her usual avatar's
+width as blank empty space before the text, for no visible reason (the cat
+already relocated up onto the bubble). That reserved gap is gone for
+perched turns specifically: the text and its timestamp now start flush at
+the same left edge as a normal turn's avatar would. Non-perched turns are
+unchanged.
+**Why:** The empty gutter read as text mysteriously not aligning with the
+suggestion chips and the input box below it.
+
+### 114. Both bubble-perch poses match at 36px
+**Changed:** The "loaf" (full sitting cat) and "peek" (head only) perches
+now render at the same 36px, instead of loaf being noticeably bigger than
+peek. Each keeps its own headroom above the message text, sized to its own
+shape.
+
+### 115. Live-site links repointed to the new Railway deployments
+**Changed:** Nourish MCP's "Live site" link (and its in-case-study embed)
+now points to ui-production-ee78.up.railway.app/login instead of the old
+ui-production-41e1 URL, and LingoPro's points to
+lingopro-production-0947.up.railway.app instead of lingopro-production.
+**Why:** The apps were redeployed under new Railway subdomains, so the old
+links and embeds no longer reached the live apps. Both new URLs verified
+live and iframe-embeddable.
+
+### 116. Contact icons in the chat bubble sized up
+**Changed:** The contact row inside Lola's chat reply (email, LinkedIn,
+GitHub, CV) now renders at the large size, a 40px circle with a 19px glyph,
+instead of the medium 32px circle. This is the same size the sidebar
+already uses, so no new size was introduced. The profile view keeps medium.
+**Why:** At 32px the row read too small next to the message text above it;
+matching the sidebar's 40px makes the marks legible and keeps one shared
+scale across surfaces.
+
+### 118. The tab icon is the real Lola now
+**Changed:** The favicon swapped from the hand-drawn simplified SVG head to
+the designer's head-peek illustration (eyes open), embedded as a PNG inside
+the same favicon.svg file, centred on a square transparent canvas.
+**Why:** The old tab icon was a geometric approximation drawn before the
+illustration set existed; now the tab matches the art used everywhere else.
+
+### 119. Chat avatar up to 45px
+**Changed:** Lola's avatar beside chat messages grew from 40px to 45px
+(the failed-message state too), and the timestamp indent under her turns
+moved from 36px to 40px to stay visually tied to the wider avatar.
+**Why:** At 40px she still read slightly small next to the message text.
+
+### 120. Color tokens renamed by role, not light-mode looks
+**Changed:** On the Design System page, tokens whose value flips between
+themes now carry role names: Cream is Background, Cream Soft is Surface,
+Blush is Hover Fill, Blush Deep is Border, Ink is Text, Ink Soft is Text
+Soft, Coral Dark is Coral Text, Gold Soft is Gold Fill. Hue-stable accents
+(Coral, Coral Deep, Gold, Dusk) and no-claim names (Panel, Button, Button
+Line, Paw) keep their names. CSS variable names are unchanged.
+**Why:** In dark mode a swatch labelled "Cream" rendered near-black, which
+reads as a bug on the very page meant to demonstrate rigor. Naming tokens
+after their light-mode appearance is a known anti-pattern; role names stay
+true in both themes.
+
+### 122. Animated covers hold still until hovered, everywhere
+**Changed:** Animated GIF covers no longer loop on their own anywhere they
+appear: the case study hero, the case-studies grid cards, the chat carousel
+cards, and the small artifact chip thumbnails. Each rests as a frozen first
+frame and plays only while its card is hovered (or keyboard-focused);
+leaving the card freezes it again. No play badge over the still. The frozen
+frame reads as a plain screenshot, same as the static covers beside it.
+**Why:** A cover looping forever competes with the text next to it; on the
+grid, five loops run at once and the page never settles. Resting still
+keeps every surface calm, motion becomes the hover's reward, and skipping
+the badge keeps animated and static covers visually equal.
+
+### 123. Senior-voice editorial pass over all nine case studies
+**Changed:** A targeted edit of the case study copy in projects.ts, not a
+rewrite. Overclaims came down ("solved it perfectly" is now "the problem is
+gone"), fluff came out ("I stay curious" became a concrete stance on when
+to build), comma splices got proper sentences (Interactive Menu problem and
+Mister Garden description), the one rhetorical question became a claim
+("Digital menus should have won by now"), and the Goodreads "where time
+goes to die" quip, which contradicted the study's own time-on-section data,
+now states what the data shows. Nourish's research, v2, and chat-only lines
+tightened into decisions rather than diary ("Artifacts are for exploring;
+a codebase is for shipping"). AtmosUI's prize line reads as a result, not
+a fragment. Facts, numbers, personas, and quotes untouched.
+**Why:** Senior voice is calm claims, named decisions, and evidence that
+matches the copy. Most of the writing already did this; the pass removed
+the places where it slipped. Verified zero em or en dashes in any copy
+field across all data files.
+
+### 123. The full-body cat appears once; everywhere else Lola is a head
+**Changed:** The full sitting cat is now reserved for the chat's opening
+greeting, which also never gets a bubble perch so the greeting cat always
+shows. Every other appearance (message avatars, sidebar, header, typing
+indicator, dialogs, profile, case-study kit) uses the head-peek
+illustration, bottom-aligned in its box so she peeks up instead of
+floating letterboxed. Bubble perches lost the full-body "loaf" pose; Lola
+now only peeks over bubbles, from the right or left corner. The sleeping
+pond cat is untouched.
+**Why:** One full-body cat at the top reads as a greeting; repeating the
+whole cat beside every message read as clutter. A head peeking in carries
+the same personality at a fraction of the visual weight.
+
+## 2026-08-21
+
+### 125. Full body at the left of chat, head everywhere else
+**Changed:** The avatar column at the left of chat messages (including the
+typing indicator and failed-message retries) now always shows the full
+sitting cat, not just on the opening greeting. The head-peek illustration
+is reserved for every other spot: bubble perches, header, sidebar,
+profile, dialogs, case-study kit. Bubble perches and the head-only spots
+are untouched; the opening message still never gets a perch. This
+reverses the message-avatar half of the earlier "full-body cat appears
+once" decision.
+**Why:** Mixing poses inside the same avatar column made the chat read as
+inconsistent, the greeting showed a whole cat and the next reply only a
+head in the same spot. One pose per role keeps it legible: full body
+means "Lola speaking here", the peeking head is her visiting everywhere
+else.
+
+### 126. Chat content lines up no matter where the cat is
+**Changed:** Lola's avatar column is now always reserved on her messages.
+When she climbs onto a bubble her spot stays as an empty spacer instead
+of collapsing, so text, project cards, and contact icons start at the
+same left edge on every turn. Timestamps sit exactly on that edge too,
+perched or not.
+**Why:** Perched messages used to shift flush left while avatar messages
+were indented, so identical content landed at two different x positions
+and the transcript looked ragged.
+
+### 127. Full body wherever Lola speaks; sidebar tagline reads in full
+**Changed:** The sidebar's Lola card and the confirm dialog now show the
+full sitting cat (slightly larger), joining the chat's avatar column. The
+"Nazrin's guide · resident cat" tagline wraps instead of truncating to
+"resident…". The rule settled into: full body wherever Lola is the
+speaker (chat column, sidebar card, dialogs), head-peek where she is an
+accent (bubble perches, header, profile, case-study kit, collapsed
+rail).
+**Why:** These spots are Lola addressing the visitor directly, so she
+appears whole, and a tagline cut off mid-word was unreadable.
+
+### 128. Cat sits closer to her messages
+**Changed:** The space between Lola's avatar and her message content
+(text, contact icons, cards) tightened from 8px to 4px, in the typing
+indicator too; timestamps follow the new content edge.
+**Why:** The sitting illustration carries transparent canvas padding of
+its own, so the old flex gap stacked on top of it and read as a hole
+between cat and text.
+
+### 129. Sidebar tagline shortened to hold one row
+**Changed:** The tagline copy shortened from "Nazrin's guide · resident
+cat" to "Nazrin's guide" so it fits on a single row beside the cat, in
+the card's original cat-plus-text layout. A first attempt that moved the
+full tagline onto its own line under the cat was rejected for breaking
+the layout.
+**Why:** Next to the larger sitting cat the full tagline had too little
+width for one readable line, and the fix had to come from the copy, not
+the layout. "Resident cat" was carrying what the illustration already
+shows.
+
+### 130. The pond paddles in on first load
+**Changed:** The sleeping pond cat now floats in from the chat's left
+edge to her bottom-right spot when the page first opens, then stays put.
+The pace and easing match the retired always-on pond drift (about 3vw
+per second, 24s across the chat), the float the product used to have.
+The travel spans exactly the chat's width, so she is visibly drifting
+from the first frame. Earlier cuts started her a full screen off-canvas
+and ran at 1.8 to 10 seconds: the off-screen stretch read as a delay and
+the visible sweep as running. The entrance plays once per page load;
+switching views and back does not replay it. Reduced-motion users skip
+it via the global guard.
+**Why:** An arrival beat gives the mascot a moment of life on first
+open, and it pays off the empty-state line "Lola is paddling over…".
+
+### 131. The Profile photo is the new headshot
+**Changed:** The site's portrait on the Profile page was replaced with
+the new headshot, now a 79KB 512px JPEG instead of a 2.9MB PNG.
+**Why:** One current photo of the owner, light enough to load instantly.

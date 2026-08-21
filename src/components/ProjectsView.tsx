@@ -4,7 +4,7 @@ import { projects } from "../data/projects";
 import { profile } from "../data/profile";
 import type { Project } from "../types";
 import { Eyebrow, TagPill } from "./CaseStudyKit";
-import { WindowChrome } from "./Artifact";
+import { GifCover, WindowChrome } from "./Artifact";
 
 /* soft blurred blob of the project's gradient — colour without hurting text */
 function ColorBlob({ gradient, className = "" }: { gradient: [string, string]; className?: string }) {
@@ -47,10 +47,8 @@ function ProjectCard({ project, onOpen }: { project: Project; onOpen: (id: strin
       {project.cover && (
         <div className="relative mt-1 flex w-full flex-col overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-blush-deep)]/50">
           <WindowChrome />
-          <img
+          <GifCover
             src={project.cover}
-            alt=""
-            loading="lazy"
             className="aspect-[16/10] w-full bg-[var(--color-blush)] object-cover object-top"
           />
         </div>

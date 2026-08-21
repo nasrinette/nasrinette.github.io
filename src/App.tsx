@@ -9,6 +9,7 @@ import ProjectsView from "./components/ProjectsView";
 import CaseStudyView from "./components/CaseStudyView";
 import DesignSystemView from "./components/DesignSystemView";
 import ProfileView from "./components/ProfileView";
+import CVView from "./components/CVView";
 import ConfirmDialog from "./components/ConfirmDialog";
 import { useChatEngine } from "./hooks/useChatEngine";
 import { useTheme } from "./hooks/useTheme";
@@ -24,6 +25,7 @@ function parseHash(): { view: AppView; caseStudyId: string | null } {
   if (seg === "case-studies") return { view: "projects", caseStudyId: id ? decodeURIComponent(id) : null };
   if (seg === "design-system") return { view: "design-system", caseStudyId: null };
   if (seg === "profile") return { view: "profile", caseStudyId: null };
+  if (seg === "cv") return { view: "cv", caseStudyId: null };
   return { view: "chat", caseStudyId: null };
 }
 
@@ -31,6 +33,7 @@ function toHash(view: AppView, caseStudyId: string | null): string {
   if (view === "projects") return caseStudyId ? `#/case-studies/${encodeURIComponent(caseStudyId)}` : "#/case-studies";
   if (view === "design-system") return "#/design-system";
   if (view === "profile") return "#/profile";
+  if (view === "cv") return "#/cv";
   return "#/";
 }
 
@@ -65,6 +68,9 @@ export default function App() {
       const next = parseHash();
       setView(next.view);
       setCaseStudyId(next.caseStudyId && projects.some((p) => p.id === next.caseStudyId) ? next.caseStudyId : null);
+      // hash navigation can start outside the sidebar (the CV contact icon),
+      // so the mobile drawer closes here instead of trusting its own handlers
+      setMobileNavOpen(false);
     };
     window.addEventListener("hashchange", onHashChange);
     return () => window.removeEventListener("hashchange", onHashChange);
@@ -147,7 +153,7 @@ export default function App() {
   }, [messages, isTyping]);
 
   return (
-    <div className="flex h-[100dvh] w-full overflow-hidden bg-[var(--color-cream-soft)]/40">
+    <div className="flex h-[100dvh] w-full overflow-hidden bg-[var(--color-cream-soft)]/40 print:h-auto print:overflow-visible">
       <Sidebar
         view={view}
         caseStudyId={caseStudyId}
@@ -216,6 +222,15 @@ export default function App() {
             <SectionTopBar title="Design System" onOpenMenu={openMobileNav} />
             <div className="scroll-warm min-h-0 flex-1 overflow-y-auto">
               <DesignSystemView />
+            </div>
+          </>
+        )}
+
+        {view === "cv" && (
+          <>
+            <SectionTopBar title="CV" onOpenMenu={openMobileNav} />
+            <div className="scroll-warm min-h-0 flex-1 overflow-y-auto print:overflow-visible">
+              <CVView />
             </div>
           </>
         )}

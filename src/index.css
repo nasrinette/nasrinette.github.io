@@ -560,20 +560,7 @@ body::before {
   animation: sun-breathe 7s ease-in-out infinite;
 }
 
-/* Lola the mascot: drifts across her pond, bobs on the current */
-@keyframes lola-drift {
-  0%,
-  100% {
-    transform: translateX(0);
-  }
-  50% {
-    transform: translateX(58vw);
-  }
-}
-.animate-lola-drift {
-  animation: lola-drift 38s cubic-bezier(0.45, 0, 0.55, 1) infinite;
-}
-
+/* Lola the mascot: bobs gently on the current, asleep in her corner */
 @keyframes lola-bob {
   0%,
   100% {
@@ -585,6 +572,25 @@ body::before {
 }
 .animate-lola-bob {
   animation: lola-bob 4.4s ease-in-out infinite;
+}
+
+/* the pond floats in from the chat's left edge on first page load, then
+   stays put. Lives on the mascot's full-width root so -100% equals the
+   chat width: she starts just off the left edge and is visibly drifting
+   from the first frame — no off-screen dead time that reads as a delay */
+@keyframes lola-paddle-in {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+.animate-lola-paddle-in {
+  /* paced to the retired lola-drift loop (58vw per 19s, ~3vw/s) so she
+     floats the chat's width the way she used to float her pond; same
+     easing curve as that loop, bob still undulating on the inner div */
+  animation: lola-paddle-in 24s cubic-bezier(0.45, 0, 0.55, 1) both;
 }
 
 @keyframes lola-ripple {
@@ -599,41 +605,6 @@ body::before {
 }
 .animate-lola-ripple {
   animation: lola-ripple 3.2s ease-out infinite;
-}
-
-/* Sitting Lola: tail metronome, slow when idle, quick when she's typing */
-@keyframes lola-tail-sway {
-  0%,
-  100% {
-    transform: rotate(0deg);
-  }
-  50% {
-    transform: rotate(-14deg);
-  }
-}
-.animate-lola-tail-sway {
-  animation: lola-tail-sway 3.4s ease-in-out infinite;
-}
-.animate-lola-tail-fast {
-  animation: lola-tail-sway 0.9s ease-in-out infinite;
-}
-
-/* an ear flicks now and then, like she heard something */
-@keyframes lola-ear-twitch {
-  0%,
-  88%,
-  100% {
-    transform: rotate(0deg);
-  }
-  91% {
-    transform: rotate(-9deg);
-  }
-  94% {
-    transform: rotate(4deg);
-  }
-}
-.animate-lola-ear-twitch {
-  animation: lola-ear-twitch 6.5s ease-in-out infinite;
 }
 
 /* barely-there breathing while she sits */
@@ -738,16 +709,39 @@ body::before {
   animation: lola-zzz 3.6s ease-out infinite;
 }
 
-/* dangling paws swing softly over the bubble edge */
-@keyframes lola-dangle {
-  0%,
-  100% {
-    transform: rotate(-4deg);
+/* — Print: the #/cv page prints as the A4 sheet itself. App chrome carries
+   print:hidden in JSX; here the paper takes the card's own surface so the
+   sheet has no stray page background around it. npm run cv:pdf captures
+   this exact rendering into the downloadable PDF. — */
+@media print {
+  @page {
+    size: A4;
+    margin: 0;
   }
-  50% {
-    transform: rotate(5deg);
+  html,
+  body {
+    background: var(--color-cream-soft);
   }
-}
-.animate-lola-dangle {
-  animation: lola-dangle 2.4s ease-in-out infinite;
+  /* the film grain blends over the page and forces the PDF to rasterize
+     the whole sheet into megabytes of bitmap; paper needs no grain */
+  body::before {
+    display: none;
+  }
+  /* the shell and the card's furniture, unlayered on purpose: utility
+     variants lose the ordering fight against sm:px-* here */
+  [data-cv-page] {
+    max-width: none;
+    padding: 0;
+  }
+  /* the on-screen preview scaler never touches print: the sheet prints 1:1
+     (!important so the rule beats the scaler's inline transform) */
+  [data-cv-scaler] {
+    height: auto !important;
+  }
+  [data-cv-sheet] {
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    transform: none !important;
+  }
 }
