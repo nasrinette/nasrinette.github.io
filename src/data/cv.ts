@@ -41,7 +41,7 @@ export const cv = {
     { label: "linkedin.com/in/nazrin-nasirova", url: "https://www.linkedin.com/in/nazrin-nasirova/" },
   ],
   profile:
-    "**AI Native Product Designer** specialised in the full design thinking process: **user research, wireframing, high-fidelity prototyping, and usability testing**. **3+ years** of experience in both **B2B and B2C** digital products; AI and product development enthusiast. Engineering background with a taste for design. Seeking a **CDD or CDI as Product Designer / Design Engineer / UX Product Owner**, starting October 2026 in France (open to relocation).",
+    "**AI Native Product Designer** specialized in the full design thinking process: **user research, wireframing, high-fidelity prototyping, and usability testing**. **3+ years** of experience in both **B2B and B2C** digital products; AI and product development enthusiast. Engineering background with a taste for design. Seeking a **CDD or CDI as Product Designer / Design Engineer / UX Product Owner**, starting October 2026 in France (open to relocation).",
   skills: [
     {
       // research first, then design, then prototyping: the process in order
@@ -68,7 +68,7 @@ export const cv = {
       org: "Wiremind",
       orgUrl: "https://www.wiremind.io/",
       location: "Paris, France",
-      period: "March 2026 · Present",
+      period: "Mar 2026 · Present",
       bullets: [
         "Created **20+ interactive prototypes** and design iterations using Figma and Claude Code.",
         "Conducted **user interviews with 6 participants** to help define AI-based prototyping workflows.",
@@ -85,7 +85,7 @@ export const cv = {
         "Implemented a library of **reusable, responsive React components**.",
         "Developed an [AI detector browser extension](https://chromewebstore.google.com/detail/polygraf-ai-content-detec/cbngnnhgfljncoliddifmkgklphlojnf) and organized a launch event that drove **150+ new installs**.",
         "Redesigned an e-commerce extension with a clean onboarding flow; uninstall rate decreased by **20%**.",
-        "Built a data-labeling competition in the company website, gathering **10K+ samples** from **100+ participants**.",
+        "Built a data-labeling competition on the company website, gathering **10K+ samples** from **100+ participants**.",
       ],
     },
     {
@@ -96,7 +96,7 @@ export const cv = {
       bullets: [
         "Designed the **logo, landing page, visual language**, and more for a local startup.",
         "Translated **20 technical CTF UIs** into user-friendly UIs that comply with brand guidelines.",
-        "Startup received recognition from **KOBIA Azerbaijan** and a **10K AZN investment**.",
+        "Earned recognition from **KOBIA Azerbaijan** and a **10K AZN investment** for the startup.",
       ],
     },
   ] satisfies CvExperience[],
