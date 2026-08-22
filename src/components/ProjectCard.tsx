@@ -27,7 +27,7 @@ export default function ProjectCard({ project, onLearnMore }: ProjectCardProps) 
             <WindowChrome />
             <GifCover
               src={project.cover}
-              className="h-28 w-full bg-[var(--color-blush)] object-cover object-top"
+              className="h-28 w-full bg-[var(--hover-fill)] object-cover object-top"
             />
           </div>
         </Reveal>
@@ -39,25 +39,25 @@ export default function ProjectCard({ project, onLearnMore }: ProjectCardProps) 
           }}
           aria-hidden="true"
         >
-          <Icon size={30} strokeWidth={1.75} style={{ color: "var(--color-on-sunset)" }} className="opacity-80" />
+          <Icon size={30} strokeWidth={1.75} style={{ color: "var(--text-on-primary)" }} className="opacity-80" />
         </div>
       )}
       <div className="flex flex-1 flex-col p-4">
         <div className="mb-4 space-y-2">
           <div className="flex items-center justify-between gap-2">
-            <h3 className="font-[var(--font-display)] text-base font-bold text-[var(--color-ink)]">
+            <h3 className="font-[var(--font-display)] text-base font-bold text-[var(--text)]">
               {project.title}
             </h3>
-            <span className="shrink-0 font-[var(--font-mono)] text-[13px] text-[var(--color-ink-soft)]">
+            <span className="shrink-0 font-[var(--font-mono)] text-[13px] text-[var(--text-secondary)]">
               {project.year}
             </span>
           </div>
-          <p className="text-sm leading-snug text-[var(--color-ink-soft)]">{project.summary}</p>
+          <p className="text-sm leading-snug text-[var(--text-secondary)]">{project.summary}</p>
           <div className="flex flex-wrap gap-1 pt-1">
             {project.tags.map((tag) => (
               <span
                 key={tag}
-                className="rounded-[var(--radius-ui)] bg-[var(--color-paw)] px-2 py-0.5 text-[12px] font-medium text-[var(--color-rose-dark)]"
+                className="rounded-[var(--radius-ui)] bg-[var(--tag-fill)] px-2 py-0.5 text-[12px] font-medium text-[var(--text-emphasis)]"
               >
                 {tag}
               </span>

@@ -13,8 +13,11 @@ function systemPrefersDark(): boolean {
 
 function applyTheme(mode: ThemeMode) {
   document.documentElement.classList.toggle("dark", mode === "dark");
+  // browser chrome mirrors the app ground: read the live --background token
+  // instead of repeating its hex here
   const meta = document.querySelector('meta[name="theme-color"]');
-  if (meta) meta.setAttribute("content", mode === "dark" ? "#17120f" : "#faf6f2");
+  const bg = getComputedStyle(document.documentElement).getPropertyValue("--background").trim();
+  if (meta && bg) meta.setAttribute("content", bg);
 }
 
 function loadStoredMode(): ThemeMode {

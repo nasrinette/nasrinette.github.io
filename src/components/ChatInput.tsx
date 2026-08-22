@@ -45,7 +45,7 @@ export default function ChatInput({ onSend, disabled }: ChatInputProps) {
           input's height (24px line + 20px padding + 2px border), centred
           beside the field even when the textarea grows */}
       <div className="mx-auto flex max-w-6xl items-center gap-2">
-        <div className="min-w-0 flex-1 rounded-[var(--radius-ui)] border border-[var(--color-blush-deep)] bg-[var(--color-cream-soft)] px-3.5 py-2.5 focus-within:border-[var(--color-rose)]">
+        <div className="min-w-0 flex-1 rounded-[var(--radius-ui)] border border-[var(--border)] bg-[var(--surface)] px-3.5 py-2.5 focus-within:border-[var(--primary)]">
           <textarea
             ref={textareaRef}
             value={value}
@@ -59,11 +59,11 @@ export default function ChatInput({ onSend, disabled }: ChatInputProps) {
             maxLength={MAX_MESSAGE_LENGTH}
             placeholder={disabled ? "Lola is typing…" : "Ask about projects, process, contact…"}
             aria-label="Message"
-            className="max-h-[120px] w-full resize-none bg-transparent text-base text-[var(--color-ink)] placeholder:text-[var(--color-ink-soft)]/60 focus:outline-none disabled:cursor-not-allowed"
+            className="max-h-[120px] w-full resize-none bg-transparent text-base text-[var(--text)] placeholder:text-[var(--text-secondary)]/60 focus:outline-none disabled:cursor-not-allowed"
           />
           {nearLimit && (
             <div
-              className={`mt-1 text-right text-[12px] ${atLimit ? "text-red-500" : "text-[var(--color-ink-soft)]"}`}
+              className={`mt-1 text-right text-[12px] ${atLimit ? "text-red-500" : "text-[var(--text-secondary)]"}`}
               aria-live="polite"
             >
               {value.length}/{MAX_MESSAGE_LENGTH}
@@ -75,7 +75,7 @@ export default function ChatInput({ onSend, disabled }: ChatInputProps) {
           onClick={submit}
           disabled={disabled || isEmpty}
           aria-label="Send message"
-          className="btn-pastel flex h-[46px] w-[46px] shrink-0 items-center justify-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-rose-dark)]"
+          className="btn-pastel flex h-[46px] w-[46px] shrink-0 items-center justify-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--text-emphasis)]"
         >
           <ArrowUp size={18} strokeWidth={2} aria-hidden="true" />
         </button>

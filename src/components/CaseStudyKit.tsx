@@ -30,13 +30,13 @@ export function LolaTurn({ children }: { children: ReactNode }) {
   // and both sides of the conversation share the same edges
   // roomy rhythm: the sections mix text with big visual blocks (stickies,
   // showcases, quotes), and those need air between them to read as groups
-  return <div className="animate-pop-in space-y-5 py-1 text-[17px] text-[var(--color-ink)]">{children}</div>;
+  return <div className="animate-pop-in space-y-5 py-1 text-[17px] text-[var(--text)]">{children}</div>;
 }
 
 /* — Eyebrow — a small mono label above a heading ——————————— */
 export function Eyebrow({ children }: { children: ReactNode }) {
   return (
-    <p className="font-[var(--font-mono)] text-[13px] font-medium uppercase tracking-[0.2em] text-[var(--color-rose-dark)]">
+    <p className="font-[var(--font-mono)] text-[13px] font-medium uppercase tracking-[0.2em] text-[var(--text-emphasis)]">
       {children}
     </p>
   );
@@ -51,13 +51,13 @@ export function SectionHeading({ children, eyebrow }: { children: ReactNode; eye
       <CatAvatar size={34} />
       <span
         className="h-7 w-1.5 shrink-0 rounded-full"
-        style={{ background: "var(--color-rose)" }}
+        style={{ background: "var(--primary)" }}
         aria-hidden="true"
       />
       {/* number merged into the title: one h2 in the same display font, size,
           and weight, so "01 Problem" reads as a single heading, not a small
           tag beside a big title */}
-      <h2 className="font-[var(--font-display)] text-[26px] font-bold text-[var(--color-ink)] sm:text-[30px]">
+      <h2 className="font-[var(--font-display)] text-[26px] font-bold text-[var(--text)] sm:text-[30px]">
         {eyebrow && <>{eyebrow}{" "}</>}
         {children}
       </h2>
@@ -78,18 +78,18 @@ export function FlowDiagram({ steps }: { steps: FlowStep[] }) {
               size={20}
               strokeWidth={2}
               aria-hidden="true"
-              className="shrink-0 rotate-90 text-[var(--color-rose)] sm:mt-3.5 sm:rotate-0"
+              className="shrink-0 rotate-90 text-[var(--primary)] sm:mt-3.5 sm:rotate-0"
             />
           )}
           <div className="flex w-40 flex-col items-center gap-1.5 text-center">
             <span
-              className="flex h-11 w-11 items-center justify-center rounded-full text-[var(--color-on-sunset)] shadow-[var(--shadow-soft)]"
-              style={{ background: "var(--color-rose)" }}
+              className="flex h-11 w-11 items-center justify-center rounded-full text-[var(--text-on-primary)] shadow-[var(--shadow-soft)]"
+              style={{ background: "var(--primary)" }}
             >
               <step.icon size={20} strokeWidth={1.75} aria-hidden="true" />
             </span>
-            <p className="text-base font-bold leading-snug text-[var(--color-ink)]">{step.label}</p>
-            {step.note && <p className="text-sm leading-snug text-[var(--color-ink-soft)]">{step.note}</p>}
+            <p className="text-base font-bold leading-snug text-[var(--text)]">{step.label}</p>
+            {step.note && <p className="text-sm leading-snug text-[var(--text-secondary)]">{step.note}</p>}
           </div>
         </Fragment>
       ))}
@@ -103,7 +103,7 @@ export function FlowDiagram({ steps }: { steps: FlowStep[] }) {
 export function StickyNotes({ notes }: { notes: string[] }) {
   // fixed pastel paper with fixed dark ink: a sticky note is a physical
   // object, so it keeps its colour in both themes (like the phone bezel)
-  const papers = ["#fbe9c0", "#f9dcd4", "#ecdfec", "#dcebd9"];
+  const papers = ["var(--note-1)", "var(--note-2)", "var(--note-3)", "var(--note-4)"];
   const tilts = ["-1.5deg", "1.2deg", "-0.8deg", "1.6deg"];
   // the notes land one after another when the group scrolls in; opacity only,
   // so each keeps its static tilt (animating transform would fight the rotate)
@@ -120,7 +120,7 @@ export function StickyNotes({ notes }: { notes: string[] }) {
           }`}
           style={{
             background: papers[i % papers.length],
-            color: "#4a3a2b",
+            color: "var(--note-ink)",
             transform: `rotate(${tilts[i % tilts.length]})`,
             animationDelay: reduced ? undefined : `${i * 70}ms`,
           }}
@@ -149,16 +149,16 @@ export function FactList({ facts }: { facts: { label: string; value: string }[] 
     return (
       <div key={f.label} className="flex items-center gap-2.5">
         <span
-          className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[var(--radius-md)] bg-[var(--color-blush)] text-[var(--color-rose-dark)]"
+          className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[var(--radius-md)] bg-[var(--hover-fill)] text-[var(--text-emphasis)]"
           aria-hidden="true"
         >
           <Icon size={16} strokeWidth={2} />
         </span>
         <div>
-          <dt className="font-[var(--font-mono)] text-[12px] font-medium uppercase tracking-[0.14em] text-[var(--color-ink-soft)]/80">
+          <dt className="font-[var(--font-mono)] text-[12px] font-medium uppercase tracking-[0.14em] text-[var(--text-secondary)]/80">
             {f.label}
           </dt>
-          <dd className="mt-0.5 text-[15px] font-semibold text-[var(--color-ink)]">{f.value}</dd>
+          <dd className="mt-0.5 text-[15px] font-semibold text-[var(--text)]">{f.value}</dd>
         </div>
       </div>
     );
@@ -186,13 +186,13 @@ export function MetricStat({ value, label }: { value: string; label: string }) {
     <div className="card-warm relative overflow-hidden p-4 pt-5 text-center">
       <span
         className="absolute inset-x-0 top-0 h-1"
-        style={{ background: "var(--color-rose)" }}
+        style={{ background: "var(--primary)" }}
         aria-hidden="true"
       />
-      <p className="font-[var(--font-display)] text-[22px] font-bold leading-tight text-[var(--color-rose-dark)]">
+      <p className="font-[var(--font-display)] text-[22px] font-bold leading-tight text-[var(--text-emphasis)]">
         {value}
       </p>
-      <p className="mt-1.5 text-[13px] leading-snug text-[var(--color-ink-soft)]">{label}</p>
+      <p className="mt-1.5 text-[13px] leading-snug text-[var(--text-secondary)]">{label}</p>
     </div>
   );
 }
@@ -224,17 +224,17 @@ export function ProcessRail({ items }: { items: ReactNode[] }) {
         <li key={i} className="relative flex gap-4 pb-7 last:pb-0">
           {i < nodes.length - 1 && (
             <span
-              className="absolute bottom-1 left-[13px] top-8 w-px bg-[var(--color-blush-deep)]"
+              className="absolute bottom-1 left-[13px] top-8 w-px bg-[var(--border)]"
               aria-hidden="true"
             />
           )}
           <span
-            className="relative z-10 flex h-[27px] w-[27px] shrink-0 items-center justify-center rounded-full font-[var(--font-mono)] text-sm font-bold text-[var(--color-on-sunset)] shadow-[var(--shadow-soft)]"
-            style={{ background: "var(--color-rose)" }}
+            className="relative z-10 flex h-[27px] w-[27px] shrink-0 items-center justify-center rounded-full font-[var(--font-mono)] text-sm font-bold text-[var(--text-on-primary)] shadow-[var(--shadow-soft)]"
+            style={{ background: "var(--primary)" }}
           >
             {i + 1}
           </span>
-          <div className="min-w-0 flex-1 space-y-3 pt-0.5 text-[17px] leading-relaxed text-[var(--color-ink-soft)]">
+          <div className="min-w-0 flex-1 space-y-3 pt-0.5 text-[17px] leading-relaxed text-[var(--text-secondary)]">
             {node}
           </div>
         </li>
@@ -247,7 +247,7 @@ export function ProcessRail({ items }: { items: ReactNode[] }) {
    number. Matches the rose mono labels used elsewhere. ————————————————————— */
 export function StepLead({ children }: { children: ReactNode }) {
   return (
-    <p className="font-[var(--font-mono)] text-[13px] font-semibold uppercase tracking-[0.14em] text-[var(--color-rose-dark)]">
+    <p className="font-[var(--font-mono)] text-[13px] font-semibold uppercase tracking-[0.14em] text-[var(--text-emphasis)]">
       {children}
     </p>
   );
@@ -268,24 +268,24 @@ export function ProcessStepBody({
   // compact window, whole board visible: the inline figure is a teaser (the
   // panel is where boards get read), so it stays small and never crops
   const figureFrame = (active: boolean) =>
-    `flex w-full max-w-2xl flex-col overflow-hidden rounded-[var(--radius-md)] border bg-[var(--color-cream-soft)] shadow-[var(--shadow-card)] ${
-      active ? "border-[var(--color-rose)] ring-1 ring-[var(--color-rose)]" : "border-[var(--color-blush-deep)]/70"
+    `flex w-full max-w-2xl flex-col overflow-hidden rounded-[var(--radius-md)] border bg-[var(--surface)] shadow-[var(--shadow-card)] ${
+      active ? "border-[var(--primary)] ring-1 ring-[var(--primary)]" : "border-[var(--border)]/70"
     }`;
   const figure = step.image && (
     <>
-      <span className="flex items-center gap-1.5 border-b border-[var(--color-blush-deep)]/60 bg-[var(--color-blush)]/70 px-2.5 py-1.5">
+      <span className="flex items-center gap-1.5 border-b border-[var(--border)]/60 bg-[var(--hover-fill)]/70 px-2.5 py-1.5">
         <span className="flex shrink-0 gap-1" aria-hidden="true">
-          <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-rose)]" />
-          <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-gold)]" />
-          <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-dusk)]" />
+          <span className="h-1.5 w-1.5 rounded-full bg-[var(--primary)]" />
+          <span className="h-1.5 w-1.5 rounded-full bg-[var(--accent-secondary)]" />
+          <span className="h-1.5 w-1.5 rounded-full bg-[var(--accent-tertiary)]" />
         </span>
         {step.imageCaption && (
-          <span className="min-w-0 truncate font-[var(--font-mono)] text-[12px] font-medium text-[var(--color-ink-soft)]">
+          <span className="min-w-0 truncate font-[var(--font-mono)] text-[12px] font-medium text-[var(--text-secondary)]">
             {step.imageCaption}
           </span>
         )}
       </span>
-      <img src={step.image} alt={step.imageCaption ?? ""} loading="lazy" className="aspect-[16/10] w-full bg-[var(--color-blush)] object-contain p-1.5" />
+      <img src={step.image} alt={step.imageCaption ?? ""} loading="lazy" className="aspect-[16/10] w-full bg-[var(--hover-fill)] object-contain p-1.5" />
     </>
   );
   return (
@@ -346,42 +346,42 @@ export function PersonaCard({ persona }: { persona: Persona }) {
     <article className="card-warm flex h-full flex-col gap-3 p-4">
       <div className="flex items-center gap-3">
         <span
-          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full font-[var(--font-display)] text-base font-bold text-[var(--color-on-sunset)] shadow-[var(--shadow-soft)]"
-          style={{ background: "var(--color-rose)" }}
+          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full font-[var(--font-display)] text-base font-bold text-[var(--text-on-primary)] shadow-[var(--shadow-soft)]"
+          style={{ background: "var(--primary)" }}
           aria-hidden="true"
         >
           {initials}
         </span>
         <div className="min-w-0">
-          <p className="font-[var(--font-display)] text-base font-bold text-[var(--color-ink)]">{persona.name}</p>
-          <p className="text-sm leading-snug text-[var(--color-ink-soft)]">{persona.descriptor}</p>
+          <p className="font-[var(--font-display)] text-base font-bold text-[var(--text)]">{persona.name}</p>
+          <p className="text-sm leading-snug text-[var(--text-secondary)]">{persona.descriptor}</p>
         </div>
       </div>
-      <blockquote className="border-l-2 border-[var(--color-rose)] pl-2.5 text-[15px] italic leading-relaxed text-[var(--color-ink)]">
+      <blockquote className="border-l-2 border-[var(--primary)] pl-2.5 text-[15px] italic leading-relaxed text-[var(--text)]">
         “{persona.quote}”
       </blockquote>
       <div className="@container/persona space-y-3 @sm/persona:grid @sm/persona:grid-cols-2 @sm/persona:gap-4 @sm/persona:space-y-0">
         <div>
-          <p className="flex items-center gap-1.5 text-[13px] font-bold uppercase tracking-wide text-[var(--color-rose-dark)]">
+          <p className="flex items-center gap-1.5 text-[13px] font-bold uppercase tracking-wide text-[var(--text-emphasis)]">
             <Target size={12} strokeWidth={2} aria-hidden="true" /> Goals
           </p>
-          <ul className="mt-1 space-y-1 text-sm leading-relaxed text-[var(--color-ink-soft)]">
+          <ul className="mt-1 space-y-1 text-sm leading-relaxed text-[var(--text-secondary)]">
             {persona.goals.map((g) => (
               <li key={g} className="flex gap-1.5">
-                <span aria-hidden="true" className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-[var(--color-gold)]" />
+                <span aria-hidden="true" className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-[var(--accent-secondary)]" />
                 {g}
               </li>
             ))}
           </ul>
         </div>
         <div>
-          <p className="flex items-center gap-1.5 text-[13px] font-bold uppercase tracking-wide text-[var(--color-dusk)]">
+          <p className="flex items-center gap-1.5 text-[13px] font-bold uppercase tracking-wide text-[var(--accent-tertiary)]">
             <Frown size={12} strokeWidth={2} aria-hidden="true" /> Frustrations
           </p>
-          <ul className="mt-1 space-y-1 text-sm leading-relaxed text-[var(--color-ink-soft)]">
+          <ul className="mt-1 space-y-1 text-sm leading-relaxed text-[var(--text-secondary)]">
             {persona.frustrations.map((f) => (
               <li key={f} className="flex gap-1.5">
-                <span aria-hidden="true" className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-[var(--color-dusk)]" />
+                <span aria-hidden="true" className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-[var(--accent-tertiary)]" />
                 {f}
               </li>
             ))}
@@ -406,10 +406,10 @@ export function PersonaGrid({ personas }: { personas: Persona[] }) {
 export function Testimonial({ quote, author, role }: { quote: string; author: string; role: string }) {
   return (
     <Reveal>
-      <figure className="border-l-2 border-[var(--color-rose)] py-0.5 pl-4">
-        <blockquote className="text-[17px] italic leading-relaxed text-[var(--color-ink)]">“{quote}”</blockquote>
-        <figcaption className="mt-1.5 text-sm text-[var(--color-ink-soft)]">
-          <span className="font-semibold text-[var(--color-ink)]">{author}</span> · {role}
+      <figure className="border-l-2 border-[var(--primary)] py-0.5 pl-4">
+        <blockquote className="text-[17px] italic leading-relaxed text-[var(--text)]">“{quote}”</blockquote>
+        <figcaption className="mt-1.5 text-sm text-[var(--text-secondary)]">
+          <span className="font-semibold text-[var(--text)]">{author}</span> · {role}
         </figcaption>
       </figure>
     </Reveal>
@@ -438,7 +438,7 @@ export function ComparisonFigure({
     { label: comparison.afterLabel ?? "After", image: comparison.after },
   ];
   const frame =
-    "relative block w-full overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-blush-deep)]/60";
+    "relative block w-full overflow-hidden rounded-[var(--radius-lg)] border border-[var(--border)]/60";
   return (
     <figure>
       {/* the grid stays on an inner div: the gen variant wraps children in its
@@ -447,7 +447,7 @@ export function ComparisonFigure({
         <div className="relative grid grid-cols-2 gap-3">
           {sides.map((side) => {
           const labelChip = (
-            <span className="absolute left-2 top-2 z-10 rounded-[var(--radius-sm)] bg-[var(--color-cream-soft)]/90 px-2 py-0.5 font-[var(--font-mono)] text-[12px] font-medium text-[var(--color-ink-soft)] shadow-sm backdrop-blur-sm">
+            <span className="absolute left-2 top-2 z-10 rounded-[var(--radius-sm)] bg-[var(--surface)]/90 px-2 py-0.5 font-[var(--font-mono)] text-[12px] font-medium text-[var(--text-secondary)] shadow-sm backdrop-blur-sm">
               {side.label}
             </span>
           );
@@ -460,7 +460,7 @@ export function ComparisonFigure({
                 onClick={() => onOpenImage(image)}
                 aria-label={`View ${comparison.title}, ${side.label}`}
                 className={`${frame} focus-ring transition hover:-translate-y-0.5 hover:shadow-[var(--shadow-card)] ${
-                  activeSrc === image ? "border-[var(--color-rose)] ring-1 ring-[var(--color-rose)]" : ""
+                  activeSrc === image ? "border-[var(--primary)] ring-1 ring-[var(--primary)]" : ""
                 }`}
               >
                 {labelChip}
@@ -468,7 +468,7 @@ export function ComparisonFigure({
                   src={image}
                   alt=""
                   loading="lazy"
-                  className="aspect-[16/10] w-full bg-[var(--color-blush)] object-cover object-top"
+                  className="aspect-[16/10] w-full bg-[var(--hover-fill)] object-cover object-top"
                 />
               </button>
             );
@@ -481,7 +481,7 @@ export function ComparisonFigure({
                   src={side.image}
                   alt={`${comparison.title}, ${side.label}`}
                   loading="lazy"
-                  className="aspect-[16/10] w-full bg-[var(--color-blush)] object-cover object-top"
+                  className="aspect-[16/10] w-full bg-[var(--hover-fill)] object-cover object-top"
                 />
               ) : (
                 <span
@@ -491,7 +491,7 @@ export function ComparisonFigure({
                   <ImageIcon
                     size={24}
                     strokeWidth={1.5}
-                    style={{ color: "var(--color-on-sunset)" }}
+                    style={{ color: "var(--text-on-primary)" }}
                     className="opacity-70"
                     aria-hidden="true"
                   />
@@ -501,15 +501,15 @@ export function ComparisonFigure({
           );
         })}
         <span
-          className="pointer-events-none absolute left-1/2 top-1/2 flex h-7 w-7 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-[var(--color-blush-deep)]/60 bg-[var(--color-cream-soft)] text-[var(--color-rose-dark)] shadow-[var(--shadow-card)]"
+          className="pointer-events-none absolute left-1/2 top-1/2 flex h-7 w-7 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-[var(--border)]/60 bg-[var(--surface)] text-[var(--text-emphasis)] shadow-[var(--shadow-card)]"
           aria-hidden="true"
         >
           <ArrowRight size={14} strokeWidth={2} />
         </span>
         </div>
       </Reveal>
-      <figcaption className="mt-2 text-base leading-relaxed text-[var(--color-ink-soft)]">
-        <span className="font-semibold text-[var(--color-ink)]">{comparison.title}.</span> {comparison.note}
+      <figcaption className="mt-2 text-base leading-relaxed text-[var(--text-secondary)]">
+        <span className="font-semibold text-[var(--text)]">{comparison.title}.</span> {comparison.note}
       </figcaption>
       {comparison.notes && comparison.notes.length > 0 && <StickyNotes notes={comparison.notes} />}
     </figure>
@@ -524,8 +524,8 @@ export function TagPill({ children }: { children: ReactNode }) {
 /* — ToolChip — outlined tool token with its brand mark ————————— */
 export function ToolChip({ children }: { children: ReactNode }) {
   return (
-    <span className="inline-flex items-center gap-1.5 rounded-full border border-[var(--color-blush-deep)] px-3 py-1 text-sm font-medium text-[var(--color-ink)]">
-      {typeof children === "string" && <ToolLogo name={children} size={13} className="text-[var(--color-rose-dark)]" />}
+    <span className="inline-flex items-center gap-1.5 rounded-full border border-[var(--border)] px-3 py-1 text-sm font-medium text-[var(--text)]">
+      {typeof children === "string" && <ToolLogo name={children} size={13} className="text-[var(--text-emphasis)]" />}
       {children}
     </span>
   );

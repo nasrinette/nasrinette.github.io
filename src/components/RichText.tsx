@@ -59,7 +59,7 @@ function renderInline(line: string, keyPrefix: string, ctx: StreamCtx | null) {
     // bold recurses, so a stressed word inside a bold lead still reads as one
     if (isWrapped(part, "**")) {
       return (
-        <strong key={key} className="font-semibold text-[var(--color-rose-dark)]">
+        <strong key={key} className="font-semibold text-[var(--text-emphasis)]">
           {renderItalics(part.slice(2, -2), key, ctx)}
         </strong>
       );
@@ -79,7 +79,7 @@ function renderBlocks(text: string, ctx: StreamCtx | null) {
 
     if (isList) {
       return (
-        <ul key={bi} className="list-disc space-y-1 pl-5 marker:text-[var(--color-rose)]">
+        <ul key={bi} className="list-disc space-y-1 pl-5 marker:text-[var(--primary)]">
           {lines.map((l, li) => (
             <li key={li} className="leading-snug">
               {renderInline(l.trim().slice(2), `${bi}-${li}`, ctx)}

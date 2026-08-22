@@ -52,13 +52,13 @@ const noop = () => {};
    no prose. ————————————————————————————————————————————————————————————————— */
 function TierHeading({ index, title }: { index?: string; title: string }) {
   return (
-    <Reveal variant="fade" className="mb-6 mt-16 border-t border-[var(--color-blush-deep)]/50 pt-8 first:mt-0 first:border-0 first:pt-0">
+    <Reveal variant="fade" className="mb-6 mt-16 border-t border-[var(--border)]/50 pt-8 first:mt-0 first:border-0 first:pt-0">
       {index && (
-        <p className="font-[var(--font-mono)] text-[13px] font-medium uppercase tracking-[0.2em] text-[var(--color-rose-dark)]">
+        <p className="font-[var(--font-mono)] text-[13px] font-medium uppercase tracking-[0.2em] text-[var(--text-emphasis)]">
           {index}
         </p>
       )}
-      <h2 className="mt-1 font-[var(--font-display)] text-[26px] font-bold text-[var(--color-ink)] sm:text-[30px]">
+      <h2 className="mt-1 font-[var(--font-display)] text-[26px] font-bold text-[var(--text)] sm:text-[30px]">
         {title}
       </h2>
     </Reveal>
@@ -69,7 +69,7 @@ function TierHeading({ index, title }: { index?: string; title: string }) {
 function SectionTitle({ children }: { children: ReactNode }) {
   return (
     <Reveal variant="fade" className="mb-4 flex items-center gap-3">
-      <h3 className="font-[var(--font-display)] text-xl font-bold text-[var(--color-ink)]">{children}</h3>
+      <h3 className="font-[var(--font-display)] text-xl font-bold text-[var(--text)]">{children}</h3>
       <span className="sunset-rule flex-1 opacity-40" aria-hidden="true" />
     </Reveal>
   );
@@ -80,7 +80,7 @@ function SectionTitle({ children }: { children: ReactNode }) {
 function Specimen({ label, children }: { label: string; children: ReactNode }) {
   return (
     <Reveal>
-      <p className="mb-3 font-[var(--font-mono)] text-[12px] uppercase tracking-wide text-[var(--color-ink-soft)]">
+      <p className="mb-3 font-[var(--font-mono)] text-[12px] uppercase tracking-wide text-[var(--text-secondary)]">
         {label}
       </p>
       {children}
@@ -93,7 +93,7 @@ function AtomCell({ label, children }: { label: string; children: ReactNode }) {
   return (
     <div className="flex flex-col items-start gap-2">
       <div className="flex min-h-[44px] items-center">{children}</div>
-      <span className="font-[var(--font-mono)] text-[11px] uppercase tracking-wide text-[var(--color-ink-soft)]">
+      <span className="font-[var(--font-mono)] text-[11px] uppercase tracking-wide text-[var(--text-secondary)]">
         {label}
       </span>
     </div>
@@ -104,15 +104,15 @@ function AtomCell({ label, children }: { label: string; children: ReactNode }) {
 function IconCell({ name, Icon }: { name: string; Icon: LucideIcon }) {
   return (
     <div className="flex flex-col items-center gap-1.5 py-2 text-center">
-      <Icon size={20} strokeWidth={1.75} className="text-[var(--color-ink)]" aria-hidden="true" />
-      <span className="w-full truncate font-[var(--font-mono)] text-[11px] text-[var(--color-ink-soft)]">{name}</span>
+      <Icon size={20} strokeWidth={1.75} className="text-[var(--text)]" aria-hidden="true" />
+      <span className="w-full truncate font-[var(--font-mono)] text-[11px] text-[var(--text-secondary)]">{name}</span>
     </div>
   );
 }
 
 const iconGrid = "grid grid-cols-3 gap-1 sm:grid-cols-5 md:grid-cols-6";
 
-export default function DesignSystemView() {
+export default function DesignSystemView({ themeMode }: { themeMode: ThemeMode }) {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [artifactOpen, setArtifactOpen] = useState(false);
   // local, cosmetic mode so the doc shows the toggle without touching the app theme
@@ -121,13 +121,13 @@ export default function DesignSystemView() {
   return (
     <div className="mx-auto max-w-6xl px-3 py-8 sm:px-6 sm:py-12">
       <header className="mb-12 space-y-3">
-        <p className="font-[var(--font-mono)] text-[13px] font-medium uppercase tracking-[0.2em] text-[var(--color-rose-dark)]">
+        <p className="font-[var(--font-mono)] text-[13px] font-medium uppercase tracking-[0.2em] text-[var(--text-emphasis)]">
           Sunset · design system
         </p>
-        <h1 className="font-[var(--font-display)] text-[32px] font-bold text-[var(--color-ink)] sm:text-[38px]">
+        <h1 className="font-[var(--font-display)] text-[32px] font-bold text-[var(--text)] sm:text-[38px]">
           Built up in four layers
         </h1>
-        <p className="max-w-xl text-base leading-relaxed text-[var(--color-ink-soft)]">
+        <p className="max-w-xl text-base leading-relaxed text-[var(--text-secondary)]">
           The parts this chat interface is built from, smallest to largest. Every demo uses placeholder content.
         </p>
       </header>
@@ -144,11 +144,11 @@ export default function DesignSystemView() {
             <div key={c.varName} className="card-warm overflow-hidden">
               <div className="h-16" style={{ background: `var(${c.varName})` }} aria-hidden="true" />
               <div className="p-3">
-                <p className="text-sm font-bold text-[var(--color-ink)]">{c.name}</p>
-                <p className="font-[var(--font-mono)] text-[12px] text-[var(--color-ink-soft)]">
-                  {c.light} <span className="opacity-50">/</span> {c.dark}
+                <p className="text-sm font-bold text-[var(--text)]">{c.name}</p>
+                <p className="font-[var(--font-mono)] text-[12px] text-[var(--text-secondary)]">
+                  {themeMode === "dark" ? c.dark : c.light}
                 </p>
-                <p className="mt-1 text-[12px] leading-snug text-[var(--color-ink-soft)]">{c.usage}</p>
+                <p className="mt-1 text-[12px] leading-snug text-[var(--text-secondary)]">{c.usage}</p>
               </div>
             </div>
           ))}
@@ -157,11 +157,11 @@ export default function DesignSystemView() {
 
       <section className="mb-12">
         <SectionTitle>Typography</SectionTitle>
-        <div className="card-warm divide-y divide-[var(--color-blush-deep)]/50">
+        <div className="card-warm divide-y divide-[var(--border)]/50">
           {typeScale.map((t) => (
             <div key={t.name} className="flex items-center gap-4 px-4 py-3">
               <span
-                className="w-10 shrink-0 text-[var(--color-ink)]"
+                className="w-10 shrink-0 text-[var(--text)]"
                 style={{
                   fontFamily:
                     t.family === "Quicksand"
@@ -176,8 +176,8 @@ export default function DesignSystemView() {
                 {t.sample}
               </span>
               <div className="min-w-0 flex-1">
-                <p className="text-sm font-bold text-[var(--color-ink)]">{t.name}</p>
-                <p className="font-[var(--font-mono)] text-[13px] text-[var(--color-ink-soft)]">
+                <p className="text-sm font-bold text-[var(--text)]">{t.name}</p>
+                <p className="font-[var(--font-mono)] text-[13px] text-[var(--text-secondary)]">
                   {t.family} · {t.weight} · {t.size}
                 </p>
               </div>
@@ -192,15 +192,15 @@ export default function DesignSystemView() {
           <div className="card-warm space-y-2 p-4">
             {spacingScale.map((s) => (
               <div key={s.token} className="flex items-center gap-3">
-                <span className="w-16 shrink-0 font-[var(--font-mono)] text-[13px] text-[var(--color-ink-soft)]">
+                <span className="w-16 shrink-0 font-[var(--font-mono)] text-[13px] text-[var(--text-secondary)]">
                   {s.token}
                 </span>
                 <span
                   className="block h-3 rounded-[var(--radius-sm)]"
-                  style={{ width: s.px, background: "var(--color-rose)" }}
+                  style={{ width: s.px, background: "var(--primary)" }}
                   aria-hidden="true"
                 />
-                <span className="font-[var(--font-mono)] text-[13px] text-[var(--color-ink-soft)]">{s.px}px</span>
+                <span className="font-[var(--font-mono)] text-[13px] text-[var(--text-secondary)]">{s.px}px</span>
               </div>
             ))}
           </div>
@@ -210,15 +210,15 @@ export default function DesignSystemView() {
           <div className="card-warm space-y-2 p-4">
             {radiusScale.map((r) => (
               <div key={r.token} className="flex items-center gap-3">
-                <span className="w-20 shrink-0 font-[var(--font-mono)] text-[13px] text-[var(--color-ink-soft)]">
+                <span className="w-20 shrink-0 font-[var(--font-mono)] text-[13px] text-[var(--text-secondary)]">
                   {r.token}
                 </span>
                 <span
-                  className="block h-6 w-10 border-2 border-[var(--color-rose)]"
+                  className="block h-6 w-10 border-2 border-[var(--primary)]"
                   style={{ borderRadius: Math.min(r.px, 20) }}
                   aria-hidden="true"
                 />
-                <span className="font-[var(--font-mono)] text-[13px] text-[var(--color-ink-soft)]">
+                <span className="font-[var(--font-mono)] text-[13px] text-[var(--text-secondary)]">
                   {r.px === 999 ? "full" : `${r.px}px`}
                 </span>
               </div>
@@ -233,12 +233,12 @@ export default function DesignSystemView() {
           {elevationScale.map((e) => (
             <div key={e.token} className="text-center">
               <div
-                className="mb-3 h-16 rounded-[var(--radius-lg)] bg-[var(--color-cream-soft)]"
+                className="mb-3 h-16 rounded-[var(--radius-lg)] bg-[var(--surface)]"
                 style={{ boxShadow: `var(--${e.token})` }}
                 aria-hidden="true"
               />
-              <p className="text-sm font-bold text-[var(--color-ink)]">{e.label}</p>
-              <p className="mt-0.5 text-[12px] leading-snug text-[var(--color-ink-soft)]">{e.usage}</p>
+              <p className="text-sm font-bold text-[var(--text)]">{e.label}</p>
+              <p className="mt-0.5 text-[12px] leading-snug text-[var(--text-secondary)]">{e.usage}</p>
             </div>
           ))}
         </div>
@@ -246,15 +246,15 @@ export default function DesignSystemView() {
 
       <section className="mb-12">
         <SectionTitle>Motion</SectionTitle>
-        <div className="card-warm divide-y divide-[var(--color-blush-deep)]/50">
+        <div className="card-warm divide-y divide-[var(--border)]/50">
           {motionTokens.map((m) => (
             <div key={m.name} className="flex items-center gap-4 px-4 py-3">
-              <span className="w-20 shrink-0 font-[var(--font-mono)] text-[13px] text-[var(--color-rose-dark)]">
+              <span className="w-20 shrink-0 font-[var(--font-mono)] text-[13px] text-[var(--text-emphasis)]">
                 {m.value}
               </span>
               <div className="min-w-0 flex-1">
-                <p className="text-sm font-bold text-[var(--color-ink)]">{m.name}</p>
-                <p className="text-[13px] leading-snug text-[var(--color-ink-soft)]">{m.usage}</p>
+                <p className="text-sm font-bold text-[var(--text)]">{m.name}</p>
+                <p className="text-[13px] leading-snug text-[var(--text-secondary)]">{m.usage}</p>
               </div>
             </div>
           ))}
@@ -282,8 +282,8 @@ export default function DesignSystemView() {
             <div className={iconGrid}>
               {brandMarks.map((name) => (
                 <div key={name} className="flex flex-col items-center gap-1.5 py-2 text-center">
-                  <ToolLogo name={name} size={20} className="text-[var(--color-ink)]" />
-                  <span className="w-full truncate font-[var(--font-mono)] text-[11px] text-[var(--color-ink-soft)]">
+                  <ToolLogo name={name} size={20} className="text-[var(--text)]" />
+                  <span className="w-full truncate font-[var(--font-mono)] text-[11px] text-[var(--text-secondary)]">
                     {name}
                   </span>
                 </div>
@@ -375,13 +375,13 @@ export default function DesignSystemView() {
         </Specimen>
 
         <Specimen label="Window frame">
-          <div className="flex w-full max-w-md flex-col overflow-hidden rounded-[var(--radius-md)] border border-[var(--color-blush-deep)]/70 bg-[var(--color-cream-soft)] shadow-[var(--shadow-card)]">
+          <div className="flex w-full max-w-md flex-col overflow-hidden rounded-[var(--radius-md)] border border-[var(--border)]/70 bg-[var(--surface)] shadow-[var(--shadow-card)]">
             <WindowChrome caption="Placeholder caption" />
             <span
               className="flex aspect-[16/10] w-full items-center justify-center"
               style={{ background: `linear-gradient(135deg, ${demo.gradient[0]}, ${demo.gradient[1]})` }}
             >
-              <ImageIcon size={22} strokeWidth={1.5} style={{ color: "var(--color-on-sunset)" }} className="opacity-70" aria-hidden="true" />
+              <ImageIcon size={22} strokeWidth={1.5} style={{ color: "var(--text-on-primary)" }} className="opacity-70" aria-hidden="true" />
             </span>
           </div>
         </Specimen>
@@ -485,8 +485,8 @@ export default function DesignSystemView() {
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
           {principles.map((p) => (
             <div key={p.title} className="card-warm p-4">
-              <p className="text-base font-bold text-[var(--color-ink)]">{p.title}</p>
-              <p className="mt-1 text-sm leading-relaxed text-[var(--color-ink-soft)]">{p.detail}</p>
+              <p className="text-base font-bold text-[var(--text)]">{p.title}</p>
+              <p className="mt-1 text-sm leading-relaxed text-[var(--text-secondary)]">{p.detail}</p>
             </div>
           ))}
         </div>

@@ -82,7 +82,7 @@ export default function BubbleCat({ pose }: BubbleCatProps) {
       onMouseEnter={onEnter}
       onMouseLeave={onLeave}
       onClick={burst}
-      style={{ top: -size, width: size, height: size, ...inset, filter: "drop-shadow(0 3px 5px rgba(60, 35, 25, 0.14))" }}
+      style={{ top: -size, width: size, height: size, ...inset, filter: "var(--drop-shadow-mascot-sm)" }}
     >
       <HeartBurst hearts={hearts} />
       <img

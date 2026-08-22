@@ -26,7 +26,7 @@ export default function ThemeToggle({ mode, onChange, vertical = false }: ThemeT
     <div
       role="radiogroup"
       aria-label="Theme"
-      className={`relative flex gap-0.5 rounded-[var(--radius-md)] border border-[var(--color-blush-deep)] bg-[var(--color-cream)] p-0.5 ${
+      className={`relative flex gap-0.5 rounded-[var(--radius-md)] border border-[var(--border)] bg-[var(--background)] p-0.5 ${
         vertical ? "flex-col" : ""
       }`}
     >
@@ -51,8 +51,8 @@ export default function ThemeToggle({ mode, onChange, vertical = false }: ThemeT
             onClick={() => onChange(optionMode)}
             className={`relative z-10 flex h-7 w-7 items-center justify-center rounded-[var(--radius-md)] transition-colors ${
               active
-                ? "text-[var(--color-btn-line)]"
-                : "text-[var(--color-ink-soft)] hover:text-[var(--color-rose-dark)]"
+                ? "text-[var(--button-line)]"
+                : "text-[var(--text-secondary)] hover:text-[var(--text-emphasis)]"
             }`}
           >
             <Icon size={14} strokeWidth={2} aria-hidden="true" className={active ? "animate-theme-pop" : ""} />

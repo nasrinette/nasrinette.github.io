@@ -247,7 +247,7 @@ export default function CaseStudyView({ project, onBack, onPrev, onNext }: CaseS
       <div ref={scrollRef} onScroll={handleSectionScroll} className="scroll-warm min-h-0 flex-1 overflow-y-auto">
         <nav
           aria-label="Case study sections"
-          className="sticky top-0 z-20 border-b border-[var(--color-blush-deep)]/50 bg-[var(--color-cream)]/85 backdrop-blur"
+          className="sticky top-0 z-20 border-b border-[var(--border)]/50 bg-[var(--background)]/85 backdrop-blur"
         >
           <div className="mx-auto flex max-w-6xl gap-1 overflow-x-auto px-3 py-2 sm:px-6">
             {SECTIONS.map((s) => (
@@ -258,8 +258,8 @@ export default function CaseStudyView({ project, onBack, onPrev, onNext }: CaseS
                 aria-current={activeSection === s.id ? "true" : undefined}
                 className={`focus-ring whitespace-nowrap rounded-full px-3 py-1 text-sm font-semibold transition ${
                   activeSection === s.id
-                    ? "bg-[var(--color-blush)] text-[var(--color-rose-dark)]"
-                    : "text-[var(--color-ink-soft)] hover:text-[var(--color-rose-dark)]"
+                    ? "bg-[var(--hover-fill)] text-[var(--text-emphasis)]"
+                    : "text-[var(--text-secondary)] hover:text-[var(--text-emphasis)]"
                 }`}
               >
                 {s.label}
@@ -271,7 +271,7 @@ export default function CaseStudyView({ project, onBack, onPrev, onNext }: CaseS
           <button
             type="button"
             onClick={onBack}
-            className="focus-ring mb-4 flex items-center gap-1.5 rounded-[var(--radius-md)] px-2 py-1 text-base font-medium text-[var(--color-ink-soft)] transition hover:bg-[var(--color-blush)] hover:text-[var(--color-rose-dark)]"
+            className="focus-ring mb-4 flex items-center gap-1.5 rounded-[var(--radius-md)] px-2 py-1 text-base font-medium text-[var(--text-secondary)] transition hover:bg-[var(--hover-fill)] hover:text-[var(--text-emphasis)]"
           >
             <ArrowLeft size={15} strokeWidth={2} aria-hidden="true" /> All case studies
           </button>
@@ -296,22 +296,22 @@ export default function CaseStudyView({ project, onBack, onPrev, onNext }: CaseS
                   {/* the overview has no numbered heading, so Lola rides the
                       title line here, same as she does on section headings —
                       with the same rose tick the numbered titles wear */}
-                  <h1 className="flex items-center gap-2.5 font-[var(--font-display)] text-[24px] font-bold text-[var(--color-ink)] sm:text-[28px]">
+                  <h1 className="flex items-center gap-2.5 font-[var(--font-display)] text-[24px] font-bold text-[var(--text)] sm:text-[28px]">
                     <CatAvatar size={28} />
                     <span
                       className="h-5 w-1.5 shrink-0 rounded-full"
-                      style={{ background: "var(--color-rose)" }}
+                      style={{ background: "var(--primary)" }}
                       aria-hidden="true"
                     />
                     {project.title}
                   </h1>
-                  <div className="text-[17px] text-[var(--color-ink)]">
+                  <div className="text-[17px] text-[var(--text)]">
                     <StreamingText text={project.description} />
                   </div>
                   {project.facts ? (
                     <FactList facts={project.facts} />
                   ) : (
-                    <p className="font-[var(--font-mono)] text-sm text-[var(--color-ink-soft)]">
+                    <p className="font-[var(--font-mono)] text-sm text-[var(--text-secondary)]">
                       {project.role} · {project.year}
                     </p>
                   )}
@@ -356,7 +356,7 @@ export default function CaseStudyView({ project, onBack, onPrev, onNext }: CaseS
                     style={{ background: `linear-gradient(135deg, ${project.gradient[0]}, ${project.gradient[1]})` }}
                     aria-hidden="true"
                   >
-                    <project.icon size={40} strokeWidth={1.5} style={{ color: "var(--color-on-sunset)" }} className="opacity-80" />
+                    <project.icon size={40} strokeWidth={1.5} style={{ color: "var(--text-on-primary)" }} className="opacity-80" />
                   </div>
                 )}
                 </Reveal>
@@ -367,7 +367,7 @@ export default function CaseStudyView({ project, onBack, onPrev, onNext }: CaseS
             <section id="cs-problem" className="scroll-mt-16">
             <LolaTurn>
               <SectionHeading eyebrow="01">Problem</SectionHeading>
-              <div className="text-[17px] text-[var(--color-ink-soft)]">
+              <div className="text-[17px] text-[var(--text-secondary)]">
                 <StreamingText text={project.problem} />
               </div>
             </LolaTurn>
@@ -499,7 +499,7 @@ export default function CaseStudyView({ project, onBack, onPrev, onNext }: CaseS
               {project.flow && project.flow.length > 0 && <FlowDiagram steps={project.flow} />}
               {/* the section is already titled Solution — a "The solution"
                   callout inside it would just box the same label twice */}
-              <div className="text-[17px] text-[var(--color-ink-soft)]">
+              <div className="text-[17px] text-[var(--text-secondary)]">
                 <StreamingText text={project.solution} />
               </div>
               {screenShots.length > 0 ? (
@@ -523,7 +523,7 @@ export default function CaseStudyView({ project, onBack, onPrev, onNext }: CaseS
               <SectionHeading eyebrow="04">Outcomes</SectionHeading>
               {/* the honest claim first, the numbers after it */}
               {project.outcomeNote && (
-                <div className="text-[17px] text-[var(--color-ink-soft)]">
+                <div className="text-[17px] text-[var(--text-secondary)]">
                   <StreamingText text={project.outcomeNote} />
                 </div>
               )}
@@ -537,20 +537,20 @@ export default function CaseStudyView({ project, onBack, onPrev, onNext }: CaseS
               )}
               {project.limitations && (
                 <>
-                  <p className="pt-4 text-[15px] font-semibold uppercase tracking-wide text-[var(--color-ink-soft)]/80">
+                  <p className="pt-4 text-[15px] font-semibold uppercase tracking-wide text-[var(--text-secondary)]/80">
                     Limitations
                   </p>
-                  <div className="text-[17px] text-[var(--color-ink-soft)]">
+                  <div className="text-[17px] text-[var(--text-secondary)]">
                     <StreamingText text={project.limitations} />
                   </div>
                 </>
               )}
               {project.futureWork && (
                 <>
-                  <p className="pt-4 text-[15px] font-semibold uppercase tracking-wide text-[var(--color-ink-soft)]/80">
+                  <p className="pt-4 text-[15px] font-semibold uppercase tracking-wide text-[var(--text-secondary)]/80">
                     What&apos;s next
                   </p>
-                  <div className="text-[17px] text-[var(--color-ink-soft)]">
+                  <div className="text-[17px] text-[var(--text-secondary)]">
                     <StreamingText text={project.futureWork} />
                   </div>
                 </>
@@ -560,18 +560,18 @@ export default function CaseStudyView({ project, onBack, onPrev, onNext }: CaseS
 
           </div>
 
-          <div className="mt-10 flex items-center justify-between border-t border-[var(--color-blush-deep)]/50 pt-4">
+          <div className="mt-10 flex items-center justify-between border-t border-[var(--border)]/50 pt-4">
             <button
               type="button"
               onClick={onPrev}
-              className="focus-ring flex items-center gap-1.5 rounded-[var(--radius-md)] px-2 py-1 text-base font-medium text-[var(--color-ink-soft)] transition hover:text-[var(--color-rose-dark)]"
+              className="focus-ring flex items-center gap-1.5 rounded-[var(--radius-md)] px-2 py-1 text-base font-medium text-[var(--text-secondary)] transition hover:text-[var(--text-emphasis)]"
             >
               <ArrowLeft size={14} strokeWidth={2} aria-hidden="true" /> Previous
             </button>
             <button
               type="button"
               onClick={onNext}
-              className="focus-ring flex items-center gap-1.5 rounded-[var(--radius-md)] px-2 py-1 text-base font-medium text-[var(--color-ink-soft)] transition hover:text-[var(--color-rose-dark)]"
+              className="focus-ring flex items-center gap-1.5 rounded-[var(--radius-md)] px-2 py-1 text-base font-medium text-[var(--text-secondary)] transition hover:text-[var(--text-emphasis)]"
             >
               Next <ArrowRight size={14} strokeWidth={2} aria-hidden="true" />
             </button>

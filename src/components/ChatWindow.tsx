@@ -72,7 +72,7 @@ export default function ChatWindow({ messages, isTyping, restoredIds, onRetry, o
       >
         <div className="mx-auto flex max-w-6xl flex-col gap-4">
           {messages.length === 0 && !isTyping && (
-            <div className="flex flex-1 flex-col items-center justify-center gap-2 py-16 text-center text-[var(--color-ink-soft)]">
+            <div className="flex flex-1 flex-col items-center justify-center gap-2 py-16 text-center text-[var(--text-secondary)]">
               <p className="text-base">Lola is paddling over…</p>
             </div>
           )}
@@ -105,7 +105,7 @@ export default function ChatWindow({ messages, isTyping, restoredIds, onRetry, o
         <button
           type="button"
           onClick={() => scrollToBottom()}
-          className="btn-pastel absolute bottom-3 left-1/2 z-20 flex -translate-x-1/2 items-center gap-1.5 px-4 py-1.5 font-[var(--font-display)] text-sm font-semibold shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-rose-dark)]"
+          className="btn-pastel absolute bottom-3 left-1/2 z-20 flex -translate-x-1/2 items-center gap-1.5 px-4 py-1.5 font-[var(--font-display)] text-sm font-semibold shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--text-emphasis)]"
         >
           {unseenCount > 0 ? `${unseenCount} new message${unseenCount > 1 ? "s" : ""}` : "Jump to latest"}
           <ArrowDown size={13} strokeWidth={2} aria-hidden="true" />

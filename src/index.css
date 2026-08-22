@@ -33,50 +33,71 @@
      Flat fills only: the system retired its gradients; the ambient body
      washes below are the one place light still blends. */
   /* surfaces */
-  --color-cream: #fff8f2;        /* app base — airy peachy cream */
-  --color-cream-soft: #fffdfb;   /* raised card surface */
-  --color-panel: #fffdfb;        /* sidebar surface — light: same as cards */
-  --color-blush: #fef3ed;        /* hover fills, pale peach */
-  --color-blush-deep: #f6e2d6;   /* borders, dividers */
-  --color-paw: #fdefe5;          /* tag / pill backgrounds */
+  --background: #fff8f2;        /* app base — airy peachy cream */
+  --surface: #fffdfb;           /* raised card surface, sidebar included */
+  --hover-fill: #fef3ed;        /* hover fills, pale peach */
+  --selected: var(--hover-fill); /* active nav / chosen row — shares the hover
+                                    value today, its own role so it can diverge */
+  --border: #f6e2d6;            /* borders, dividers */
+  --tag-fill: #fdefe5;          /* tag / pill backgrounds */
+  --scrim: rgb(0 0 0 / 0.32);   /* dim layer behind dialogs and drawers */
 
-  /* sunset accent (kept under the "rose" var names for compatibility) */
-  --color-rose: #f4b3a1;         /* primary accent — pale coral */
-  --color-rose-deep: #ef9d84;    /* primary hover */
-  --color-rose-dark: #a54627;    /* emphasis text, links, focus (AA on cream + paw) */
+  /* the coral accent — one hue owns clickability */
+  --primary: #f4b3a1;           /* primary accent — pale coral */
+  --primary-hover: #ef9d84;     /* primary hover */
+  --text-emphasis: #a54627;     /* emphasis text, links (AA on background + tag fill) */
+  --focus-ring: var(--text-emphasis); /* keyboard focus outline — equals the
+                                         emphasis colour today, a role of its own */
 
   /* primary button — a whisper of pastel orange; the outline colour also
      carries the label, so the pair reads as one drawn shape */
-  --color-btn: #fef0e1;
-  --color-btn-line: #c96f35;
+  --button-fill: #fef0e1;
+  --button-line: #c96f35;
 
   /* apricot / gold */
-  --color-gold: #f6d29a;         /* secondary accent — pale gold */
-  --color-gold-soft: #fbebd0;    /* soft gold fill */
+  --accent-secondary: #f6d29a;         /* secondary accent — pale gold */
+  --accent-secondary-soft: #fbebd0;    /* soft gold fill */
 
   /* dusk — elegant cool accent */
-  --color-dusk: #bd95ad;
-  --color-dusk-soft: #f5eaf2;
+  --accent-tertiary: #bd95ad;
+  --accent-tertiary-soft: #f5eaf2;
+
+  /* feedback — the one semantic colour this product needs. A dusty sage,
+     not a stock system green: it signals "online" while staying inside the
+     palette's muted warmth */
+  --success: #82ab7a;           /* "online" / "open to work" status dots */
 
   /* ink */
-  --color-ink: #3b2925;          /* primary text — warm plum-brown */
-  --color-ink-soft: #7c5b52;     /* secondary text (AA on cream) */
+  --text: #3b2925;              /* primary text — warm plum-brown */
+  --text-secondary: #7c5b52;    /* secondary text (AA on background) */
 
   /* ambient background washes */
-  --color-wash-1: #ffeee2;
-  --color-wash-2: #fff5e4;
-  --color-wash-3: #f9eef5;
+  --wash-1: #ffeee2;
+  --wash-2: #fff5e4;
+  --wash-3: #f9eef5;
 
   /* soft circular halo decoration — light orange in light mode */
-  --color-halo: color-mix(in srgb, #f4a460 44%, transparent);
+  --halo: color-mix(in srgb, #f4a460 44%, transparent);
 
   /* mascot pond tones */
-  --color-lily: #f9d2c1;
-  --color-lily-deep: #f4b3a1;
+  --pond: #f9d2c1;
+  --pond-deep: #f4b3a1;
 
   /* mascot fur + features — fixed so Lola reads in both themes */
-  --color-cat-fur: #fef4ee;
-  --color-cat-line: #6b4a3f;
+  --mascot-fur: #fef4ee;
+  --mascot-line: #6b4a3f;
+
+  /* physical objects keep their colour in both themes, like paper and metal */
+  --bezel: #17130f;             /* phone bezel around showcase screens */
+  --note-1: #fbe9c0;            /* sticky-note papers… */
+  --note-2: #f9dcd4;
+  --note-3: #ecdfec;
+  --note-4: #dcebd9;
+  --note-ink: #4a3a2b;          /* …and their fixed dark ink */
+
+  /* mascot drop-shadows (filter values, not box-shadows) */
+  --drop-shadow-mascot: drop-shadow(0 6px 10px rgba(30, 45, 35, 0.18));
+  --drop-shadow-mascot-sm: drop-shadow(0 3px 5px rgba(60, 35, 25, 0.14));
 
   /* — Warm-tinted elevation (soft) ————————————————————— */
   --shadow-soft: 0 1px 2px color-mix(in srgb, #d98a6a 14%, transparent),
@@ -88,7 +109,7 @@
   --shadow-glow: 0 4px 16px color-mix(in srgb, #f4b3a1 46%, transparent);
 
   /* ink used on the sunset gradient (buttons, active chips) — both themes */
-  --color-on-sunset: #402015;
+  --text-on-primary: #402015;
 }
 
 :root {
@@ -104,44 +125,48 @@
      near-white text glared, so the whole dark stack is lifted to a soft
      plum-charcoal and the ink is warmed down a touch — less contrast,
      easier to read. */
-  --color-cream: #191619;        /* near-neutral warm charcoal — the night sky */
-  --color-cream-soft: #232023;   /* raised card surface, a step above base */
-  --color-panel: #141114;        /* sidebar surface — dark: a step BELOW the
-                                    chat ground, so the panel recedes */
-  --color-blush: #2f2a2e;        /* hover fills */
-  --color-blush-deep: #413b3f;   /* borders, dividers */
-  --color-paw: #282328;          /* tag backgrounds */
+  --background: #191619;        /* near-neutral warm charcoal — the night sky */
+  --surface: #232023;           /* raised card surface, sidebar included —
+                                   everything raised sits one step above base */
+  --hover-fill: #2f2a2e;        /* hover fills */
+  --border: #413b3f;   /* borders, dividers */
+  --tag-fill: #282328;          /* tag backgrounds */
 
-  --color-rose: #f2916f;
-  --color-rose-deep: #f6a686;
-  --color-rose-dark: #f7bba2;
+  --primary: #f2916f;
+  --primary-hover: #f6a686;
+  --text-emphasis: #f7bba2;
 
   /* button flips in the dusk: muted brown fill, soft light-orange line+label */
-  --color-btn: #3f3226;
-  --color-btn-line: #d8a578;
+  --button-fill: #3f3226;
+  --button-line: #d8a578;
 
-  --color-gold: #f2c069;
-  --color-gold-soft: #3e3526;
+  --accent-secondary: #f2c069;
+  --accent-secondary-soft: #3e3526;
 
-  --color-dusk: #cb9ec0;
-  --color-dusk-soft: #262226;
+  --accent-tertiary: #cb9ec0;
+  --accent-tertiary-soft: #262226;
 
-  --color-ink: #f1e4db;
-  --color-ink-soft: #c9b1a5;
+  /* the sage lifts a touch like every accent, and the scrim leans heavier
+     where contrast is scarcer */
+  --success: #a6c99b;
+  --scrim: rgb(0 0 0 / 0.5);
 
-  --color-wash-1: #221e1f;
-  --color-wash-2: #22201a;
-  --color-wash-3: #1d1a1e;
+  --text: #f1e4db;
+  --text-secondary: #c9b1a5;
+
+  --wash-1: #221e1f;
+  --wash-2: #22201a;
+  --wash-3: #1d1a1e;
 
   /* keep the halo subtle against the night sky */
-  --color-halo: color-mix(in srgb, #f2c069 10%, transparent);
+  --halo: color-mix(in srgb, #f2c069 10%, transparent);
 
-  --color-lily: #f2916f;
-  --color-lily-deep: #f6a686;
+  --pond: #f2916f;
+  --pond-deep: #f6a686;
 
   /* fur stays light so Lola reads on the dark ground; line stays dark on the fur */
-  --color-cat-fur: #f0e2d7;
-  --color-cat-line: #5a3f36;
+  --mascot-fur: #f0e2d7;
+  --mascot-line: #5a3f36;
 
   --shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.4), 0 2px 6px rgba(0, 0, 0, 0.32);
   --shadow-card: 0 2px 4px rgba(0, 0, 0, 0.42), 0 8px 22px rgba(0, 0, 0, 0.38);
@@ -161,13 +186,13 @@ body {
   margin: 0;
   font-family: var(--font-body);
   background:
-    radial-gradient(1100px 620px at 50% 116%, var(--color-wash-1) 0%, transparent 58%),
-    radial-gradient(760px 560px at 100% 8%, var(--color-wash-2) 0%, transparent 60%),
-    radial-gradient(720px 540px at 0% -4%, var(--color-wash-3) 0%, transparent 58%),
-    radial-gradient(circle 440px at 80% 36%, var(--color-halo) 0%, transparent 66%),
-    var(--color-cream);
+    radial-gradient(1100px 620px at 50% 116%, var(--wash-1) 0%, transparent 58%),
+    radial-gradient(760px 560px at 100% 8%, var(--wash-2) 0%, transparent 60%),
+    radial-gradient(720px 540px at 0% -4%, var(--wash-3) 0%, transparent 58%),
+    radial-gradient(circle 440px at 80% 36%, var(--halo) 0%, transparent 66%),
+    var(--background);
   background-attachment: fixed;
-  color: var(--color-ink);
+  color: var(--text);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   transition: background-color 220ms ease, color 220ms ease;
@@ -196,14 +221,14 @@ body::before {
 }
 
 ::selection {
-  background: color-mix(in srgb, var(--color-rose) 30%, transparent);
-  color: var(--color-ink);
+  background: color-mix(in srgb, var(--primary) 30%, transparent);
+  color: var(--text);
 }
 
 /* — Scrollbar ————————————————————————————————————————— */
 .scroll-warm {
   scrollbar-width: thin;
-  scrollbar-color: var(--color-blush-deep) transparent;
+  scrollbar-color: var(--border) transparent;
 }
 .scroll-warm::-webkit-scrollbar {
   width: 8px;
@@ -213,11 +238,11 @@ body::before {
   background: transparent;
 }
 .scroll-warm::-webkit-scrollbar-thumb {
-  background: var(--color-blush-deep);
+  background: var(--border);
   border-radius: var(--radius-full);
 }
 .scroll-warm::-webkit-scrollbar-thumb:hover {
-  background: var(--color-rose);
+  background: var(--primary);
 }
 
 /* ============================================================
@@ -227,10 +252,10 @@ body::before {
 /* Primary action — flat pastel light orange, hairline outline, and the label
    in the same colour as the line so the button reads as one drawn shape. */
 .btn-pastel {
-  border: 1px solid var(--color-btn-line);
+  border: 1px solid var(--button-line);
   border-radius: var(--radius-md);
-  color: var(--color-btn-line);
-  background: var(--color-btn);
+  color: var(--button-line);
+  background: var(--button-fill);
   box-shadow: var(--shadow-soft);
   transition: filter 160ms ease, transform 120ms ease, box-shadow 200ms ease;
 }
@@ -255,16 +280,16 @@ body::before {
 
 /* Secondary action — soft, quiet, keeps hierarchy honest. */
 .btn-ghost {
-  border: 1.5px solid var(--color-blush-deep);
+  border: 1.5px solid var(--border);
   border-radius: var(--radius-md);
-  color: var(--color-ink);
-  background: color-mix(in srgb, var(--color-cream-soft) 80%, transparent);
+  color: var(--text);
+  background: color-mix(in srgb, var(--surface) 80%, transparent);
   transition: background-color 160ms ease, border-color 160ms ease, transform 120ms ease;
 }
 .btn-ghost:hover:not(:disabled) {
-  background: var(--color-blush);
-  border-color: color-mix(in srgb, var(--color-rose) 55%, var(--color-blush-deep));
-  color: var(--color-rose-dark);
+  background: var(--hover-fill);
+  border-color: color-mix(in srgb, var(--primary) 55%, var(--border));
+  color: var(--text-emphasis);
 }
 .btn-ghost:active:not(:disabled) {
   transform: translateY(1px);
@@ -276,9 +301,9 @@ body::before {
 
 /* Raised surface — card. Hairline + warm shadow, optional lift on hover. */
 .card-warm {
-  border: 1px solid color-mix(in srgb, var(--color-blush-deep) 70%, transparent);
+  border: 1px solid color-mix(in srgb, var(--border) 70%, transparent);
   border-radius: var(--radius-lg);
-  background: var(--color-cream-soft);
+  background: var(--surface);
   box-shadow: var(--shadow-card);
 }
 .card-lift {
@@ -287,15 +312,15 @@ body::before {
 .card-lift:hover {
   transform: translateY(-2px);
   box-shadow: var(--shadow-lift);
-  border-color: color-mix(in srgb, var(--color-rose) 40%, var(--color-blush-deep));
+  border-color: color-mix(in srgb, var(--primary) 40%, var(--border));
 }
 
 /* The user's message — identical surface to the assistant bubble; sender is
    read from alignment, not colour. The sunset gradient stays a button-only cue. */
 .bubble-sunset {
-  background: var(--color-cream-soft);
-  color: var(--color-ink);
-  border: 1px solid color-mix(in srgb, var(--color-blush-deep) 60%, transparent);
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid color-mix(in srgb, var(--border) 60%, transparent);
   border-radius: var(--radius-ui);
   box-shadow: var(--shadow-soft);
 }
@@ -303,13 +328,13 @@ body::before {
 /* Soft warm tag / pill. */
 .tag-warm {
   border-radius: var(--radius-full);
-  background: var(--color-paw);
-  color: var(--color-rose-dark);
+  background: var(--tag-fill);
+  color: var(--text-emphasis);
 }
 
 /* Shared focus ring — coral, offset. */
 .focus-ring:focus-visible {
-  outline: 2px solid var(--color-rose-dark);
+  outline: 2px solid var(--focus-ring);
   outline-offset: 2px;
 }
 
@@ -317,7 +342,7 @@ body::before {
 .sunset-rule {
   height: 3px;
   border-radius: var(--radius-full);
-  background: var(--color-rose);
+  background: var(--primary);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -533,7 +558,7 @@ body::before {
 /* expanding ring that draws the eye to the open-live-site link */
 @keyframes link-beacon {
   0% {
-    box-shadow: 0 0 0 0 color-mix(in srgb, var(--color-rose) 65%, transparent);
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--primary) 65%, transparent);
   }
   70%,
   100% {
@@ -720,7 +745,7 @@ body::before {
   }
   html,
   body {
-    background: var(--color-cream-soft);
+    background: var(--surface);
   }
   /* the film grain blends over the page and forces the PDF to rasterize
      the whole sheet into megabytes of bitmap; paper needs no grain */

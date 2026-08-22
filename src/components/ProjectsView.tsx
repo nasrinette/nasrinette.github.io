@@ -25,7 +25,7 @@ function IconChip({ project }: { project: Project }) {
       style={{ background: `linear-gradient(140deg, ${project.gradient[0]}, ${project.gradient[1]})` }}
       aria-hidden="true"
     >
-      <Icon size={22} strokeWidth={1.75} style={{ color: "var(--color-on-sunset)" }} className="opacity-80" />
+      <Icon size={22} strokeWidth={1.75} style={{ color: "var(--text-on-primary)" }} className="opacity-80" />
     </div>
   );
 }
@@ -42,21 +42,21 @@ function ProjectCard({ project, onOpen }: { project: Project; onOpen: (id: strin
       <ColorBlob gradient={project.gradient} className="-right-12 -top-14" />
       <div className="relative flex items-center justify-between">
         <IconChip project={project} />
-        <span className="font-[var(--font-mono)] text-[13px] text-[var(--color-ink-soft)]">{project.year}</span>
+        <span className="font-[var(--font-mono)] text-[13px] text-[var(--text-secondary)]">{project.year}</span>
       </div>
       {project.cover && (
-        <div className="relative mt-1 flex w-full flex-col overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-blush-deep)]/50">
+        <div className="relative mt-1 flex w-full flex-col overflow-hidden rounded-[var(--radius-lg)] border border-[var(--border)]/50">
           <WindowChrome />
           <GifCover
             src={project.cover}
-            className="aspect-[16/10] w-full bg-[var(--color-blush)] object-cover object-top"
+            className="aspect-[16/10] w-full bg-[var(--hover-fill)] object-cover object-top"
           />
         </div>
       )}
-      <h3 className="relative mt-1 font-[var(--font-display)] text-xl font-bold text-[var(--color-ink)]">
+      <h3 className="relative mt-1 font-[var(--font-display)] text-xl font-bold text-[var(--text)]">
         {project.title}
       </h3>
-      <p className="relative text-base leading-snug text-[var(--color-ink-soft)]">{project.summary}</p>
+      <p className="relative text-base leading-snug text-[var(--text-secondary)]">{project.summary}</p>
       <div className="relative mt-auto flex items-center justify-between gap-2 pt-2">
         <div className="flex flex-wrap gap-1.5">
           {project.tags.slice(0, 2).map((t) => (
@@ -66,7 +66,7 @@ function ProjectCard({ project, onOpen }: { project: Project; onOpen: (id: strin
         <ArrowRight
           size={16}
           strokeWidth={2}
-          className="shrink-0 -translate-x-1 text-[var(--color-rose-dark)] opacity-0 transition duration-200 group-hover:translate-x-0 group-hover:opacity-100"
+          className="shrink-0 -translate-x-1 text-[var(--text-emphasis)] opacity-0 transition duration-200 group-hover:translate-x-0 group-hover:opacity-100"
           aria-hidden="true"
         />
       </div>
@@ -86,19 +86,19 @@ function SideProjectRow({ project, onOpen }: { project: Project; onOpen: (id: st
       <IconChip project={project} />
       <div className="relative min-w-0 flex-1">
         <div className="flex items-baseline justify-between gap-2">
-          <h3 className="truncate font-[var(--font-display)] text-lg font-bold text-[var(--color-ink)]">
+          <h3 className="truncate font-[var(--font-display)] text-lg font-bold text-[var(--text)]">
             {project.title}
           </h3>
-          <span className="shrink-0 font-[var(--font-mono)] text-[13px] text-[var(--color-ink-soft)]">
+          <span className="shrink-0 font-[var(--font-mono)] text-[13px] text-[var(--text-secondary)]">
             {project.year}
           </span>
         </div>
-        <p className="truncate text-sm text-[var(--color-ink-soft)]">{project.summary}</p>
+        <p className="truncate text-sm text-[var(--text-secondary)]">{project.summary}</p>
       </div>
       <ArrowRight
         size={15}
         strokeWidth={2}
-        className="relative shrink-0 -translate-x-1 text-[var(--color-rose-dark)] opacity-0 transition duration-200 group-hover:translate-x-0 group-hover:opacity-100"
+        className="relative shrink-0 -translate-x-1 text-[var(--text-emphasis)] opacity-0 transition duration-200 group-hover:translate-x-0 group-hover:opacity-100"
         aria-hidden="true"
       />
     </button>
@@ -118,37 +118,37 @@ function ShelfCard({ items, open, onToggle }: { items: Project[]; open: boolean;
     >
       <div className="relative flex items-center justify-between">
         <div
-          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[var(--radius-lg)] bg-[var(--color-blush)] shadow-[var(--shadow-soft)]"
+          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[var(--radius-lg)] bg-[var(--hover-fill)] shadow-[var(--shadow-soft)]"
           aria-hidden="true"
         >
-          <FolderKanban size={22} strokeWidth={1.75} className="text-[var(--color-rose-dark)] opacity-80" />
+          <FolderKanban size={22} strokeWidth={1.75} className="text-[var(--text-emphasis)] opacity-80" />
         </div>
-        <span className="font-[var(--font-mono)] text-[13px] text-[var(--color-ink-soft)]">
+        <span className="font-[var(--font-mono)] text-[13px] text-[var(--text-secondary)]">
           {items.length} projects
         </span>
       </div>
-      <div className="relative mt-1 flex aspect-[16/10] w-full items-center justify-center rounded-[var(--radius-lg)] border border-[var(--color-blush-deep)]/50 bg-[var(--color-blush)]">
+      <div className="relative mt-1 flex aspect-[16/10] w-full items-center justify-center rounded-[var(--radius-lg)] border border-[var(--border)]/50 bg-[var(--hover-fill)]">
         <div className="grid grid-cols-2 gap-3">
           {items.map((project) => (
             <IconChip key={project.id} project={project} />
           ))}
         </div>
       </div>
-      <h3 className="relative mt-1 font-[var(--font-display)] text-xl font-bold text-[var(--color-ink)]">
+      <h3 className="relative mt-1 font-[var(--font-display)] text-xl font-bold text-[var(--text)]">
         Side projects
       </h3>
-      <p className="relative text-base leading-snug text-[var(--color-ink-soft)]">
+      <p className="relative text-base leading-snug text-[var(--text-secondary)]">
         I love building things, so I made more than the recommended number of case studies. Discover more if you have time.
       </p>
       <div className="relative mt-auto flex items-center justify-between gap-2 pt-2">
-        <span className="font-[var(--font-display)] text-sm font-semibold text-[var(--color-rose-dark)]">
+        <span className="font-[var(--font-display)] text-sm font-semibold text-[var(--text-emphasis)]">
           {open ? "Hide" : "Show all"}
         </span>
         <ChevronDown
           size={16}
           strokeWidth={2}
           aria-hidden="true"
-          className={`shrink-0 text-[var(--color-rose-dark)] transition-transform duration-200 ${open ? "rotate-180" : ""}`}
+          className={`shrink-0 text-[var(--text-emphasis)] transition-transform duration-200 ${open ? "rotate-180" : ""}`}
         />
       </div>
     </button>
@@ -166,17 +166,17 @@ export default function ProjectsView({ onOpen }: { onOpen: (projectId: string) =
     <div className="mx-auto max-w-5xl px-4 py-6 sm:px-8 sm:py-8">
       <header className="mb-6 space-y-2">
         <Eyebrow>Selected work</Eyebrow>
-        <h1 className="font-[var(--font-display)] text-[26px] font-bold text-[var(--color-ink)] sm:text-[32px]">
+        <h1 className="font-[var(--font-display)] text-[26px] font-bold text-[var(--text)] sm:text-[32px]">
           Case studies
         </h1>
-        <p className="max-w-xl text-base text-[var(--color-ink-soft)]">
+        <p className="max-w-xl text-base text-[var(--text-secondary)]">
           Full write-ups of shipped work: the problem, the process, and what actually changed. By {profile.name}.
         </p>
         <span className="sunset-rule w-16" aria-hidden="true" />
       </header>
 
       {caseStudies.length === 0 ? (
-        <p className="italic text-[var(--color-ink-soft)]">No case studies published yet, check back soon!</p>
+        <p className="italic text-[var(--text-secondary)]">No case studies published yet, check back soon!</p>
       ) : (
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {caseStudies.map((project) => (

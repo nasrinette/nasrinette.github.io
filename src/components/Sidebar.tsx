@@ -87,10 +87,10 @@ function SidebarContent({
       <div className="relative flex items-center gap-2 px-5 pb-5 pt-6">
         <CatAvatar size={48} variant="sitting" />
         <div className="min-w-0 flex-1">
-          <p className="truncate font-[var(--font-display)] text-base font-bold text-[var(--color-ink)]">
+          <p className="truncate font-[var(--font-display)] text-base font-bold text-[var(--text)]">
             {catName} <span aria-hidden="true">🐾</span>
           </p>
-          <p className="truncate text-[13px] leading-snug text-[var(--color-ink-soft)]">{catTagline}</p>
+          <p className="truncate text-[13px] leading-snug text-[var(--text-secondary)]">{catTagline}</p>
         </div>
         {onCollapse && (
           <button
@@ -98,7 +98,7 @@ function SidebarContent({
             onClick={onCollapse}
             aria-label="Collapse sidebar"
             title="Collapse sidebar"
-            className="focus-ring absolute right-2.5 top-5 hidden h-6 w-6 items-center justify-center rounded-[var(--radius-sm)] text-[var(--color-ink-soft)] transition hover:bg-[var(--color-blush)] hover:text-[var(--color-rose-dark)] md:flex"
+            className="focus-ring absolute right-2.5 top-5 hidden h-6 w-6 items-center justify-center rounded-[var(--radius-sm)] text-[var(--text-secondary)] transition hover:bg-[var(--hover-fill)] hover:text-[var(--text-emphasis)] md:flex"
           >
             <PanelLeftClose size={15} strokeWidth={1.75} aria-hidden="true" />
           </button>
@@ -117,8 +117,8 @@ function SidebarContent({
               aria-current={active ? "page" : undefined}
               className={`flex w-full items-center gap-2.5 px-3 py-2 text-left font-[var(--font-display)] text-base font-semibold transition ${
                 active
-                  ? "rounded-[var(--radius-md)] bg-[var(--color-blush)] text-[var(--color-rose-dark)]"
-                  : "rounded-[var(--radius-md)] text-[var(--color-ink-soft)] hover:bg-[var(--color-blush)] hover:text-[var(--color-rose-dark)]"
+                  ? "rounded-[var(--radius-md)] bg-[var(--selected)] text-[var(--text-emphasis)]"
+                  : "rounded-[var(--radius-md)] text-[var(--text-secondary)] hover:bg-[var(--hover-fill)] hover:text-[var(--text-emphasis)]"
               }`}
             >
               <Icon size={16} strokeWidth={1.75} aria-hidden="true" />
@@ -135,8 +135,8 @@ function SidebarContent({
             aria-expanded={caseStudiesOpen}
             className={`flex w-full items-center gap-2.5 px-3 py-2 text-left font-[var(--font-display)] text-base font-semibold transition ${
               caseStudiesActive
-                ? "rounded-[var(--radius-md)] bg-[var(--color-blush)] text-[var(--color-rose-dark)]"
-                : "rounded-[var(--radius-md)] text-[var(--color-ink-soft)] hover:bg-[var(--color-blush)] hover:text-[var(--color-rose-dark)]"
+                ? "rounded-[var(--radius-md)] bg-[var(--selected)] text-[var(--text-emphasis)]"
+                : "rounded-[var(--radius-md)] text-[var(--text-secondary)] hover:bg-[var(--hover-fill)] hover:text-[var(--text-emphasis)]"
             }`}
           >
             <FolderKanban size={16} strokeWidth={1.75} aria-hidden="true" />
@@ -150,7 +150,7 @@ function SidebarContent({
           </button>
 
           {caseStudiesOpen && (
-            <div className="animate-accordion-down mt-0.5 space-y-0.5 border-l border-[var(--color-blush-deep)]/70 pl-3.5">
+            <div className="animate-accordion-down mt-0.5 space-y-0.5 border-l border-[var(--border)]/70 pl-3.5">
               {caseStudies.map((project) => {
                 const active = caseStudiesActive && caseStudyId === project.id;
                 return (
@@ -161,8 +161,8 @@ function SidebarContent({
                     aria-current={active ? "page" : undefined}
                     className={`flex w-full items-center gap-2 rounded-[var(--radius-md)] px-2.5 py-1.5 text-left text-[15px] font-medium transition ${
                       active
-                        ? "bg-[var(--color-blush)] text-[var(--color-rose-dark)]"
-                        : "text-[var(--color-ink-soft)] hover:bg-[var(--color-blush)] hover:text-[var(--color-rose-dark)]"
+                        ? "bg-[var(--selected)] text-[var(--text-emphasis)]"
+                        : "text-[var(--text-secondary)] hover:bg-[var(--hover-fill)] hover:text-[var(--text-emphasis)]"
                     }`}
                   >
                     {/* each study's own mark — gradient + icon, a favicon-sized
@@ -172,7 +172,7 @@ function SidebarContent({
                       style={{ background: `linear-gradient(135deg, ${project.gradient[0]}, ${project.gradient[1]})` }}
                       aria-hidden="true"
                     >
-                      <project.icon size={12} strokeWidth={2} style={{ color: "var(--color-on-sunset)" }} />
+                      <project.icon size={12} strokeWidth={2} style={{ color: "var(--text-on-primary)" }} />
                     </span>
                     <span className="truncate">{project.title}</span>
                   </button>
@@ -188,8 +188,8 @@ function SidebarContent({
           aria-current={view === "design-system" ? "page" : undefined}
           className={`flex w-full items-center gap-2.5 px-3 py-2 text-left font-[var(--font-display)] text-base font-semibold transition ${
             view === "design-system"
-              ? "rounded-[var(--radius-md)] bg-[var(--color-blush)] text-[var(--color-rose-dark)]"
-              : "rounded-[var(--radius-md)] text-[var(--color-ink-soft)] hover:bg-[var(--color-blush)] hover:text-[var(--color-rose-dark)]"
+              ? "rounded-[var(--radius-md)] bg-[var(--selected)] text-[var(--text-emphasis)]"
+              : "rounded-[var(--radius-md)] text-[var(--text-secondary)] hover:bg-[var(--hover-fill)] hover:text-[var(--text-emphasis)]"
           }`}
         >
           <Component size={16} strokeWidth={1.75} aria-hidden="true" />
@@ -202,8 +202,8 @@ function SidebarContent({
           aria-current={profileActive ? "page" : undefined}
           className={`flex w-full items-center gap-2.5 px-3 py-2 text-left font-[var(--font-display)] text-base font-semibold transition ${
             profileActive
-              ? "rounded-[var(--radius-md)] bg-[var(--color-blush)] text-[var(--color-rose-dark)]"
-              : "rounded-[var(--radius-md)] text-[var(--color-ink-soft)] hover:bg-[var(--color-blush)] hover:text-[var(--color-rose-dark)]"
+              ? "rounded-[var(--radius-md)] bg-[var(--selected)] text-[var(--text-emphasis)]"
+              : "rounded-[var(--radius-md)] text-[var(--text-secondary)] hover:bg-[var(--hover-fill)] hover:text-[var(--text-emphasis)]"
           }`}
         >
           <User size={16} strokeWidth={1.75} aria-hidden="true" />
@@ -215,10 +215,10 @@ function SidebarContent({
           again would nest a container in a container. Availability sits above
           the theme switch, which closes the column. */}
       <div className="px-5 pb-4 pt-3">
-        <div className="mb-3 border-b border-[var(--color-blush-deep)]/60 pb-3">
-          <p className="flex items-center justify-center gap-2 text-base font-semibold text-[var(--color-rose-dark)]">
+        <div className="mb-3 border-b border-[var(--border)]/60 pb-3">
+          <p className="flex items-center justify-center gap-2 text-base font-semibold text-[var(--text-emphasis)]">
             <span
-              className="inline-block h-1.5 w-1.5 rounded-full bg-[#34c759] ring-2 ring-[#34c759]/25"
+              className="inline-block h-1.5 w-1.5 rounded-full bg-[var(--success)] ring-2 ring-[var(--success)]/25"
               aria-hidden="true"
             />
             Open to work
@@ -229,7 +229,7 @@ function SidebarContent({
           </div>
         </div>
         <div className="flex items-center justify-between gap-2">
-          <span className="text-[13px] font-medium uppercase tracking-wide text-[var(--color-ink-soft)]">
+          <span className="text-[13px] font-medium uppercase tracking-wide text-[var(--text-secondary)]">
             Theme
           </span>
           <ThemeToggle mode={themeMode} onChange={onThemeChange} />
@@ -256,13 +256,13 @@ export default function Sidebar({
       {collapsed ? (
         // the collapsed state is the same sidebar with the words removed:
         // every element keeps its place and its icon, tooltips carry the names
-        <div className="animate-sidebar-in hidden w-12 shrink-0 flex-col items-center border-r border-[var(--color-blush-deep)]/60 bg-[var(--color-panel)]/70 pb-3 pt-4 backdrop-blur-sm md:flex">
+        <div className="animate-sidebar-in hidden w-12 shrink-0 flex-col items-center border-r border-[var(--border)]/60 bg-[var(--surface)] pb-3 pt-4 md:flex">
           <button
             type="button"
             onClick={onToggleCollapse}
             aria-label="Open sidebar"
             title="Open sidebar"
-            className="focus-ring flex h-8 w-8 items-center justify-center rounded-[var(--radius-md)] text-[var(--color-ink-soft)] transition hover:bg-[var(--color-blush)] hover:text-[var(--color-rose-dark)]"
+            className="focus-ring flex h-8 w-8 items-center justify-center rounded-[var(--radius-md)] text-[var(--text-secondary)] transition hover:bg-[var(--hover-fill)] hover:text-[var(--text-emphasis)]"
           >
             <PanelLeftOpen size={16} strokeWidth={1.75} aria-hidden="true" />
           </button>
@@ -276,7 +276,7 @@ export default function Sidebar({
             <CatAvatar size={32} />
           </button>
 
-          <span className="my-3 h-px w-6 shrink-0 bg-[var(--color-blush-deep)]/70" aria-hidden="true" />
+          <span className="my-3 h-px w-6 shrink-0 bg-[var(--border)]/70" aria-hidden="true" />
 
           <nav
             aria-label="Main"
@@ -295,8 +295,8 @@ export default function Sidebar({
                 aria-current={active ? "page" : undefined}
                 className={`flex h-8 w-8 shrink-0 items-center justify-center transition ${
                   active
-                    ? "rounded-[var(--radius-md)] bg-[var(--color-blush)] text-[var(--color-rose-dark)]"
-                    : "rounded-[var(--radius-md)] text-[var(--color-ink-soft)] hover:bg-[var(--color-blush)] hover:text-[var(--color-rose-dark)]"
+                    ? "rounded-[var(--radius-md)] bg-[var(--selected)] text-[var(--text-emphasis)]"
+                    : "rounded-[var(--radius-md)] text-[var(--text-secondary)] hover:bg-[var(--hover-fill)] hover:text-[var(--text-emphasis)]"
                 }`}
               >
                 <Icon size={16} strokeWidth={1.75} aria-hidden="true" />
@@ -315,8 +315,8 @@ export default function Sidebar({
                   aria-current={active ? "page" : undefined}
                   // no chip behind the glyph: the icon itself carries the
                   // project's colour (the gradient's darker stop, for contrast)
-                  className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-[var(--radius-ui)] transition hover:scale-110 hover:bg-[var(--color-blush)] ${
-                    active ? "bg-[var(--color-blush)]" : "opacity-80 hover:opacity-100"
+                  className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-[var(--radius-ui)] transition hover:scale-110 hover:bg-[var(--hover-fill)] ${
+                    active ? "bg-[var(--selected)]" : "opacity-80 hover:opacity-100"
                   }`}
                 >
                   <project.icon size={16} strokeWidth={2} style={{ color: project.gradient[1] }} aria-hidden="true" />
@@ -337,8 +337,8 @@ export default function Sidebar({
                 aria-current={active ? "page" : undefined}
                 className={`flex h-8 w-8 shrink-0 items-center justify-center transition ${
                   active
-                    ? "rounded-[var(--radius-md)] bg-[var(--color-blush)] text-[var(--color-rose-dark)]"
-                    : "rounded-[var(--radius-md)] text-[var(--color-ink-soft)] hover:bg-[var(--color-blush)] hover:text-[var(--color-rose-dark)]"
+                    ? "rounded-[var(--radius-md)] bg-[var(--selected)] text-[var(--text-emphasis)]"
+                    : "rounded-[var(--radius-md)] text-[var(--text-secondary)] hover:bg-[var(--hover-fill)] hover:text-[var(--text-emphasis)]"
                 }`}
               >
                 <Icon size={16} strokeWidth={1.75} aria-hidden="true" />
@@ -346,11 +346,11 @@ export default function Sidebar({
             ))}
           </nav>
 
-          <span className="my-3 h-px w-6 shrink-0 bg-[var(--color-blush-deep)]/70" aria-hidden="true" />
+          <span className="my-3 h-px w-6 shrink-0 bg-[var(--border)]/70" aria-hidden="true" />
           <ThemeToggle vertical mode={themeMode} onChange={onThemeChange} />
         </div>
       ) : (
-        <aside className="animate-sidebar-in hidden w-60 shrink-0 flex-col border-r border-[var(--color-blush-deep)]/60 bg-[var(--color-panel)]/70 backdrop-blur-sm md:flex print:hidden">
+        <aside className="animate-sidebar-in hidden w-60 shrink-0 flex-col border-r border-[var(--border)]/60 bg-[var(--surface)] md:flex print:hidden">
           <SidebarContent
             view={view}
             caseStudyId={caseStudyId}
@@ -369,14 +369,14 @@ export default function Sidebar({
             type="button"
             aria-label="Close menu"
             onClick={onCloseMobile}
-            className="absolute inset-0 bg-black/30 backdrop-blur-[1px]"
+            className="absolute inset-0 bg-[var(--scrim)] backdrop-blur-[1px]"
           />
-          <aside className="relative z-10 flex w-72 max-w-[85vw] animate-pop-in flex-col bg-[var(--color-panel)] shadow-xl print:hidden">
+          <aside className="relative z-10 flex w-72 max-w-[85vw] animate-pop-in flex-col bg-[var(--surface)] shadow-xl print:hidden">
             <button
               type="button"
               onClick={onCloseMobile}
               aria-label="Close menu"
-              className="absolute right-3 top-4 flex h-8 w-8 items-center justify-center rounded-[var(--radius-ui)] text-[var(--color-ink-soft)] hover:bg-[var(--color-blush)]"
+              className="absolute right-3 top-4 flex h-8 w-8 items-center justify-center rounded-[var(--radius-ui)] text-[var(--text-secondary)] hover:bg-[var(--hover-fill)]"
             >
               <X size={18} strokeWidth={1.75} aria-hidden="true" />
             </button>

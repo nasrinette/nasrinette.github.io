@@ -71,7 +71,7 @@ export default function MessageBubble({ message, stream = false, opening = false
               ? "bubble-sunset min-w-0 px-4 py-2.5 text-base"
               : // Lola speaks straight onto the page, the way Claude does —
                 // only the user's turn keeps a bubble
-                "relative min-w-0 py-1 text-base text-[var(--color-ink)]"
+                "relative min-w-0 py-1 text-base text-[var(--text)]"
           }
         >
           {perch && <BubbleCat pose={perch} />}
@@ -91,7 +91,7 @@ export default function MessageBubble({ message, stream = false, opening = false
       {/* 45px + the span's own px-1 lands the timestamp exactly on the
           content edge (45px avatar column + 4px gap), perch or not */}
       <span
-        className={`px-1 font-[var(--font-mono)] text-[12px] text-[var(--color-ink-soft)]/70 ${isUser ? "mr-1" : "ml-[45px]"}`}
+        className={`px-1 font-[var(--font-mono)] text-[12px] text-[var(--text-secondary)]/70 ${isUser ? "mr-1" : "ml-[45px]"}`}
       >
         {formatTime(message.createdAt)}
       </span>

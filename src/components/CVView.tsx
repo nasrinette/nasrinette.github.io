@@ -17,7 +17,7 @@ import { profile } from "../data/profile";
 
 /** The project links' visible treatment, for links that should read as links. */
 const linkAccent =
-  "font-semibold text-[var(--color-rose-dark)] underline decoration-[var(--color-rose)]/50 underline-offset-2 transition hover:decoration-[var(--color-rose-dark)]";
+  "font-semibold text-[var(--text-emphasis)] underline decoration-[var(--primary)]/50 underline-offset-2 transition hover:decoration-[var(--text-emphasis)]";
 
 /** Inline [label](url) links inside the data's copy; the PDF print carries
     them through as clickable annotations, like every other link on the sheet.
@@ -33,7 +33,7 @@ function Links({ text, linkClassName }: { text: string; linkClassName?: string }
             href={m[2]}
             target="_blank"
             rel="noopener noreferrer"
-            className={linkClassName ?? "transition hover:text-[var(--color-rose-dark)]"}
+            className={linkClassName ?? "transition hover:text-[var(--text-emphasis)]"}
           >
             {m[1]}
           </a>
@@ -51,7 +51,7 @@ function Emphasis({ text, linkClassName }: { text: string; linkClassName?: strin
     <>
       {text.split(/(\*\*[^*]+\*\*)/g).map((part, i) =>
         part.startsWith("**") && part.endsWith("**") ? (
-          <strong key={i} className="font-semibold text-[var(--color-ink)]">
+          <strong key={i} className="font-semibold text-[var(--text)]">
             <Links text={part.slice(2, -2)} linkClassName={linkClassName} />
           </strong>
         ) : (
@@ -64,8 +64,8 @@ function Emphasis({ text, linkClassName }: { text: string; linkClassName?: strin
 
 function Section({ title, children }: { title: string; children: ReactNode }) {
   return (
-    <section className="border-t border-[var(--color-blush-deep)]/70 pt-2">
-      <h2 className="text-[10px] font-bold uppercase tracking-[0.28em] text-[var(--color-ink)]">{title}</h2>
+    <section className="border-t border-[var(--border)]/70 pt-2">
+      <h2 className="text-[10px] font-bold uppercase tracking-[0.28em] text-[var(--text)]">{title}</h2>
       <div className="pt-1.5">{children}</div>
     </section>
   );
@@ -75,8 +75,8 @@ function Section({ title, children }: { title: string; children: ReactNode }) {
 function EntryHead({ org, period }: { org: ReactNode; period: string }) {
   return (
     <div className="flex items-baseline justify-between gap-3">
-      <h3 className="text-[15px] font-bold leading-tight text-[var(--color-ink)]">{org}</h3>
-      <p className="shrink-0 text-[12px] text-[var(--color-ink-soft)]">{period}</p>
+      <h3 className="text-[15px] font-bold leading-tight text-[var(--text)]">{org}</h3>
+      <p className="shrink-0 text-[12px] text-[var(--text-secondary)]">{period}</p>
     </div>
   );
 }
@@ -134,8 +134,8 @@ export default function CVView() {
             {/* rounded-[50%], not rounded-full: the infinity radius Tailwind
                 emits for -full breaks in Chromium's print rendering */}
             <div
-              className="h-[72px] w-[72px] shrink-0 overflow-hidden rounded-[50%] border border-[var(--color-blush-deep)]/70"
-              style={{ background: "var(--color-blush)" }}
+              className="h-[72px] w-[72px] shrink-0 overflow-hidden rounded-[50%] border border-[var(--border)]/70"
+              style={{ background: "var(--hover-fill)" }}
             >
               {/* zoomed by oversizing rather than transform: print rendering
                   clips plain layout reliably, scaled layers not always */}
@@ -147,24 +147,24 @@ export default function CVView() {
               />
             </div>
             <div>
-              <h1 className="font-[var(--font-display)] text-2xl font-bold text-[var(--color-ink)]">{cv.name}</h1>
-              <p className="mt-0.5 text-[11px] font-semibold uppercase tracking-[0.22em] text-[var(--color-rose-dark)]">
+              <h1 className="font-[var(--font-display)] text-2xl font-bold text-[var(--text)]">{cv.name}</h1>
+              <p className="mt-0.5 text-[11px] font-semibold uppercase tracking-[0.22em] text-[var(--text-emphasis)]">
                 {cv.title}
               </p>
               {/* location and phone live under the title: three rows on the
                   left mirror the three contact rows on the right */}
-              <p className="mt-1 text-[12px] leading-snug text-[var(--color-ink-soft)]">
+              <p className="mt-1 text-[12px] leading-snug text-[var(--text-secondary)]">
                 {cv.location}
                 {dot}
-                <a href={`tel:${cv.phone.replace(/\s/g, "")}`} className="transition hover:text-[var(--color-rose-dark)]">
+                <a href={`tel:${cv.phone.replace(/\s/g, "")}`} className="transition hover:text-[var(--text-emphasis)]">
                   {cv.phone}
                 </a>
               </p>
             </div>
           </div>
-          <div className="space-y-0.5 text-right text-[12px] leading-snug text-[var(--color-ink-soft)]">
+          <div className="space-y-0.5 text-right text-[12px] leading-snug text-[var(--text-secondary)]">
             <p>
-              <a href={`mailto:${cv.email}`} className="transition hover:text-[var(--color-rose-dark)]">
+              <a href={`mailto:${cv.email}`} className="transition hover:text-[var(--text-emphasis)]">
                 {cv.email}
               </a>
             </p>
@@ -175,7 +175,7 @@ export default function CVView() {
                   href={link.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="transition hover:text-[var(--color-rose-dark)]"
+                  className="transition hover:text-[var(--text-emphasis)]"
                 >
                   {link.label}
                 </a>
@@ -184,10 +184,10 @@ export default function CVView() {
           </div>
         </header>
 
-        <div className="mb-3 mt-2 border-b-2 border-[var(--color-ink)]/70" aria-hidden="true" />
+        <div className="mb-3 mt-2 border-b-2 border-[var(--text)]/70" aria-hidden="true" />
 
         {/* the summary opens the sheet bare, no heading, like a spoken intro */}
-        <p className="text-[13px] leading-snug text-[var(--color-ink-soft)]">
+        <p className="text-[13px] leading-snug text-[var(--text-secondary)]">
           <Emphasis text={cv.profile} />
         </p>
 
@@ -198,15 +198,15 @@ export default function CVView() {
                   items keep the long skill rows to two lines at most */}
               {cv.skills.map((group) => (
                 <div key={group.label} className="grid grid-cols-[115px_1fr] gap-3">
-                  <dt className="text-[13px] font-bold text-[var(--color-ink)]">{group.label}</dt>
-                  <dd className="text-[12px] leading-snug text-[var(--color-ink-soft)]">{group.items.join(", ")}</dd>
+                  <dt className="text-[13px] font-bold text-[var(--text)]">{group.label}</dt>
+                  <dd className="text-[12px] leading-snug text-[var(--text-secondary)]">{group.items.join(", ")}</dd>
                 </div>
               ))}
               {/* languages close the skills grid; Emphasis keeps the IELTS
                   certificate link alive inside the row */}
               <div className="grid grid-cols-[115px_1fr] gap-3">
-                <dt className="text-[13px] font-bold text-[var(--color-ink)]">Languages</dt>
-                <dd className="text-[12px] leading-snug text-[var(--color-ink-soft)]">
+                <dt className="text-[13px] font-bold text-[var(--text)]">Languages</dt>
+                <dd className="text-[12px] leading-snug text-[var(--text-secondary)]">
                   <Emphasis text={cv.languages.join(", ")} linkClassName={linkAccent} />
                 </dd>
               </div>
@@ -224,7 +224,7 @@ export default function CVView() {
                           href={job.orgUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="transition hover:text-[var(--color-rose-dark)]"
+                          className="transition hover:text-[var(--text-emphasis)]"
                         >
                           {job.org}
                         </a>
@@ -234,16 +234,16 @@ export default function CVView() {
                     }
                     period={job.period}
                   />
-                  <p className="text-[10.5px] font-bold uppercase tracking-[0.15em] text-[var(--color-ink)]">
+                  <p className="text-[10.5px] font-bold uppercase tracking-[0.15em] text-[var(--text)]">
                     {job.role}
-                    <span className="ml-1 text-[11px] font-normal normal-case tracking-normal text-[var(--color-ink-soft)]">
+                    <span className="ml-1 text-[11px] font-normal normal-case tracking-normal text-[var(--text-secondary)]">
                       {dot}
                       {job.location}
                     </span>
                   </p>
-                  <ul className="mt-0.5 space-y-0.5 pl-4 text-[13px] leading-snug text-[var(--color-ink-soft)]">
+                  <ul className="mt-0.5 space-y-0.5 pl-4 text-[13px] leading-snug text-[var(--text-secondary)]">
                     {job.bullets.map((bullet) => (
-                      <li key={bullet} className="list-disc marker:text-[var(--color-rose)]">
+                      <li key={bullet} className="list-disc marker:text-[var(--primary)]">
                         <Emphasis text={bullet} />
                       </li>
                     ))}
@@ -263,18 +263,18 @@ export default function CVView() {
                         href={entry.schoolUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="transition hover:text-[var(--color-rose-dark)]"
+                        className="transition hover:text-[var(--text-emphasis)]"
                       >
                         {entry.school}
                       </a>
                     }
                     period={entry.period}
                   />
-                  <p className="text-[13px] leading-snug text-[var(--color-ink)]">
+                  <p className="text-[13px] leading-snug text-[var(--text)]">
                     {entry.degree}
                     {dot}
                     {entry.field}
-                    <span className="text-[12px] text-[var(--color-ink-soft)]">
+                    <span className="text-[12px] text-[var(--text-secondary)]">
                       {dot}
                       {entry.meta}
                     </span>
@@ -285,9 +285,9 @@ export default function CVView() {
           </Section>
 
           <Section title="Selected Projects">
-            <ul className="space-y-1 pl-4 text-[13px] leading-snug text-[var(--color-ink-soft)]">
+            <ul className="space-y-1 pl-4 text-[13px] leading-snug text-[var(--text-secondary)]">
               {cv.projects.map((project) => (
-                <li key={project.projectId} className="list-disc marker:text-[var(--color-rose)]">
+                <li key={project.projectId} className="list-disc marker:text-[var(--primary)]">
                   {/* each project on the CV is a case study in this very site,
                       so the name walks the reader straight into it */}
                   <a href={`#/case-studies/${project.projectId}`} className={linkAccent}>
@@ -303,26 +303,26 @@ export default function CVView() {
               instead of spending a full section apiece; keeps the sheet on A4.
               Items within a row separate on hairlines, not cramped dots, and
               wrap as whole units so no entry breaks mid-phrase. */}
-          <section className="border-t border-[var(--color-blush-deep)]/70 pt-2">
+          <section className="border-t border-[var(--border)]/70 pt-2">
             <dl className="space-y-1.5">
               {[
                 { label: "Achievements", items: cv.achievements },
                 { label: "Volunteering", items: cv.volunteering },
               ].map((row) => (
                 <div key={row.label} className="grid grid-cols-[115px_1fr] items-baseline gap-3">
-                  <dt className="text-[10px] font-bold uppercase tracking-[0.28em] text-[var(--color-ink)]">
+                  <dt className="text-[10px] font-bold uppercase tracking-[0.28em] text-[var(--text)]">
                     {row.label}
                   </dt>
                   {/* items run on as one text flow, split by short vertical
                       hairlines, so a row reads continuously like prose and
                       every line starts flush at the column edge */}
-                  <dd className="text-[13px] leading-snug text-[var(--color-ink-soft)]">
+                  <dd className="text-[13px] leading-snug text-[var(--text-secondary)]">
                     {row.items.map((item, i) => (
                       <span key={item}>
                         {i > 0 && (
                           <span
                             aria-hidden="true"
-                            className="mx-2.5 inline-block h-[11px] w-px translate-y-[1.5px] bg-[var(--color-blush-deep)]"
+                            className="mx-2.5 inline-block h-[11px] w-px translate-y-[1.5px] bg-[var(--border)]"
                           />
                         )}
                         <Emphasis text={item} />

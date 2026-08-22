@@ -153,7 +153,9 @@ export default function App() {
   }, [messages, isTyping]);
 
   return (
-    <div className="flex h-[100dvh] w-full overflow-hidden bg-[var(--color-cream-soft)]/40 print:h-auto print:overflow-visible">
+    // the veil softening the body's sunset washes is cut from the ground's
+    // own token, so no surface tone bleeds into the background
+    <div className="flex h-[100dvh] w-full overflow-hidden bg-[var(--background)]/40 print:h-auto print:overflow-visible">
       <Sidebar
         view={view}
         caseStudyId={caseStudyId}
@@ -221,7 +223,7 @@ export default function App() {
           <>
             <SectionTopBar title="Design System" onOpenMenu={openMobileNav} />
             <div className="scroll-warm min-h-0 flex-1 overflow-y-auto">
-              <DesignSystemView />
+              <DesignSystemView themeMode={themeMode} />
             </div>
           </>
         )}

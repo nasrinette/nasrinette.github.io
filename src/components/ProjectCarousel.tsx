@@ -8,7 +8,7 @@ export default function ProjectCarousel({ onLearnMore }: { onLearnMore: (project
   const caseStudies = projects.filter((p) => !p.sideProject);
   if (caseStudies.length === 0) {
     return (
-      <p className="text-base italic text-[var(--color-ink-soft)]">
+      <p className="text-base italic text-[var(--text-secondary)]">
         No projects to show yet, check back soon!
       </p>
     );

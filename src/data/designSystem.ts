@@ -77,27 +77,27 @@ import type { Comparison, FlowStep, GalleryBlock, Persona, Project } from "../ty
 
 // no gradient tokens: the system is flat fills only. Per-project identity
 // colors (the two-stop card art) live in each project's data, not here.
-// Names describe the token's role, not its light-mode look: a token called
-// "Cream" turning near-black in dark mode reads as a bug on this very page.
-// Hue-stable accents (Coral, Gold, Dusk) keep their color names; only the
-// tokens that flip between themes carry role names.
+// Every token is named by role, never by hue: components ask for a job
+// ("primary", "border"), and the theme decides which of the pair is live.
+// A token called "Cream" turning near-black in dark mode reads as a bug
+// on this very page.
 export const colorTokens = [
-  { name: "Background", varName: "--color-cream", light: "#FFF8F2", dark: "#191619", usage: "App background base" },
-  { name: "Surface", varName: "--color-cream-soft", light: "#FFFDFB", dark: "#232023", usage: "Card surfaces" },
-  { name: "Panel", varName: "--color-panel", light: "#FFFDFB", dark: "#141114", usage: "Sidebar surface" },
-  { name: "Hover Fill", varName: "--color-blush", light: "#FEF3ED", dark: "#2F2A2E", usage: "Hover states, subtle fills" },
-  { name: "Border", varName: "--color-blush-deep", light: "#F6E2D6", dark: "#413B3F", usage: "Borders, dividers" },
-  { name: "Coral", varName: "--color-rose", light: "#F4B3A1", dark: "#F2916F", usage: "Primary accent" },
-  { name: "Coral Deep", varName: "--color-rose-deep", light: "#EF9D84", dark: "#F6A686", usage: "Primary hover" },
-  { name: "Coral Text", varName: "--color-rose-dark", light: "#A54627", dark: "#F7BBA2", usage: "Emphasis text, links, focus" },
-  { name: "Button", varName: "--color-btn", light: "#FEF0E1", dark: "#3F3226", usage: "Primary button fill" },
-  { name: "Button Line", varName: "--color-btn-line", light: "#C96F35", dark: "#D8A578", usage: "Primary button outline & label" },
-  { name: "Gold", varName: "--color-gold", light: "#F6D29A", dark: "#F2C069", usage: "Secondary accent" },
-  { name: "Gold Fill", varName: "--color-gold-soft", light: "#FBEBD0", dark: "#3E3526", usage: "Soft fills behind gold accents" },
-  { name: "Dusk", varName: "--color-dusk", light: "#BD95AD", dark: "#CB9EC0", usage: "Cool plum accent" },
-  { name: "Text", varName: "--color-ink", light: "#3B2925", dark: "#F1E4DB", usage: "Primary text" },
-  { name: "Text Soft", varName: "--color-ink-soft", light: "#7C5B52", dark: "#C9B1A5", usage: "Secondary text" },
-  { name: "Paw", varName: "--color-paw", light: "#FDEFE5", dark: "#282328", usage: "Tag backgrounds" },
+  { name: "Background", varName: "--background", light: "#FFF8F2", dark: "#191619", usage: "App background base" },
+  { name: "Surface", varName: "--surface", light: "#FFFDFB", dark: "#232023", usage: "Cards, sheets, the sidebar" },
+  { name: "Hover Fill", varName: "--hover-fill", light: "#FEF3ED", dark: "#2F2A2E", usage: "Hover states, subtle fills" },
+  { name: "Border", varName: "--border", light: "#F6E2D6", dark: "#413B3F", usage: "Borders, dividers" },
+  { name: "Primary", varName: "--primary", light: "#F4B3A1", dark: "#F2916F", usage: "Primary accent, the coral" },
+  { name: "Primary Hover", varName: "--primary-hover", light: "#EF9D84", dark: "#F6A686", usage: "Hover step of primary" },
+  { name: "Text Emphasis", varName: "--text-emphasis", light: "#A54627", dark: "#F7BBA2", usage: "Emphasis text, links, focus" },
+  { name: "Button Fill", varName: "--button-fill", light: "#FEF0E1", dark: "#3F3226", usage: "Primary button fill" },
+  { name: "Button Line", varName: "--button-line", light: "#C96F35", dark: "#D8A578", usage: "Primary button outline & label" },
+  { name: "Accent Secondary", varName: "--accent-secondary", light: "#F6D29A", dark: "#F2C069", usage: "Second brand hue, the gold" },
+  { name: "Accent Secondary Soft", varName: "--accent-secondary-soft", light: "#FBEBD0", dark: "#3E3526", usage: "Soft fills behind the gold" },
+  { name: "Accent Tertiary", varName: "--accent-tertiary", light: "#BD95AD", dark: "#CB9EC0", usage: "Cool counterweight, the dusk plum" },
+  { name: "Text", varName: "--text", light: "#3B2925", dark: "#F1E4DB", usage: "Primary text" },
+  { name: "Text Secondary", varName: "--text-secondary", light: "#7C5B52", dark: "#C9B1A5", usage: "Secondary text" },
+  { name: "Tag Fill", varName: "--tag-fill", light: "#FDEFE5", dark: "#282328", usage: "Tag / pill backgrounds" },
+  { name: "Success", varName: "--success", light: "#82AB7A", dark: "#A6C99B", usage: "Status dots (online, open to work)" },
 ];
 
 export const typeScale = [

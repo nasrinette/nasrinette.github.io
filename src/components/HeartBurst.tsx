@@ -58,7 +58,7 @@ export function HeartBurst({ hearts }: { hearts: number[] }) {
           style={{
             left: `${18 + (id % 3) * 28}%`,
             animationDelay: `${(id % 3) * 110}ms`,
-            color: "var(--color-rose-deep)",
+            color: "var(--primary-hover)",
           }}
         >
           ♥

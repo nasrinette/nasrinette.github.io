@@ -1758,3 +1758,64 @@ open, and it pays off the empty-state line "Lola is paddling over…".
 **Changed:** The site's portrait on the Profile page was replaced with
 the new headshot, now a 79KB 512px JPEG instead of a 2.9MB PNG.
 **Why:** One current photo of the owner, light enough to load instantly.
+
+### 132. Swatches show only the live hex
+**Changed:** Each color card in the design system palette now shows one
+hex value, the one for the theme currently on screen, instead of the
+light and dark pair separated by a slash.
+**Why:** Two codes per swatch made readers work out which one they were
+actually looking at; the page already renders the live color, so the
+label now matches it.
+
+### 133. The palette speaks in roles
+**Changed:** Every color token is renamed by its job instead of its hue:
+cream is background, blush is hover fill, rose is primary, ink is text,
+gold is accent secondary, and so on through all sixteen. Five roles that
+were hard-coded in components got tokens of their own: the green status
+dot (success), the dim layer behind dialogs (scrim), the phone bezel,
+the sticky-note papers, and the keyboard focus ring. The active nav item
+now has a selected role separate from hover, sharing its value for now.
+The design system page documents the new names, plus the success pair.
+**Why:** Applying the portfolio's own color framework to itself: role
+names survive a rebrand, components never carry a raw hex, and a role
+that shares a value today can diverge in one line tomorrow.
+
+### 134. The status green joins the palette
+**Changed:** The success color behind the online and open-to-work dots
+swapped from the stock system green to a dusty sage pair, muted in
+light mode and lifted a step in dark, like every other accent.
+**Why:** The vivid green was the one color in the product that ignored
+the palette's muted warmth; it read as borrowed from another OS.
+
+### 135. The confirm dialog escapes its demo box
+**Changed:** Opening the confirm dialog from the design system page now
+dims the whole screen behind it, instead of a stray grey strip across
+just the demo row. The dialog itself was already centered; its backdrop
+was being trapped by the section's scroll-in animation.
+**Why:** A modal owns the whole screen wherever it is summoned from; a
+partial scrim read as a rendering glitch on the very page meant to show
+the component at its best.
+
+### 136. One surface, sidebar included
+**Changed:** The panel token is gone; the sidebar now paints with the
+same surface color as cards in both themes. Light mode looks identical,
+since the two values already matched. In dark mode the sidebar steps up
+above the chat ground (#232023 on #191619) instead of receding below it.
+**Supersedes:** #18 — the dark sidebar no longer sits below the ground.
+**Why:** Two names for one light value read as a redundant token, and
+raised-everywhere is a simpler elevation story: every lifted thing,
+sidebar included, sits one step above the base.
+
+### 137. The sidebar drops its frosted glass
+**Changed:** The sidebar (expanded and collapsed) paints the surface
+color at full strength instead of at 70% opacity with a backdrop blur.
+**Why:** The translucency let the sunset background washes bleed
+through, tinting the dark sidebar greenish so it never truly matched
+the cards. Solid surface is the point of sharing the token.
+
+### 138. The ground stops borrowing from cards
+**Changed:** The app-wide veil that softens the sunset washes is now
+cut from the background color instead of the surface color.
+**Why:** Surface tone was bleeding into every ground the app painted,
+a faint cast that muddied the two roles. Grounds are mixed only from
+ground colors now.

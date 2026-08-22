@@ -43,7 +43,7 @@ function PlayBadge({ size = 34 }: { size?: number }) {
   return (
     <span className="pointer-events-none absolute inset-0 flex items-center justify-center">
       <span
-        className="flex items-center justify-center rounded-full bg-[var(--color-cream-soft)]/85 text-[var(--color-rose-dark)] shadow-[var(--shadow-card)] backdrop-blur-sm"
+        className="flex items-center justify-center rounded-full bg-[var(--surface)]/85 text-[var(--text-emphasis)] shadow-[var(--shadow-card)] backdrop-blur-sm"
         style={{ width: size, height: size }}
       >
         {/* the glyph's own bearing sits left of centre — nudge it back */}
@@ -144,14 +144,14 @@ export function GifCover({
    windows. Sits as the first child of a flex-col, border-wrapped surface. — */
 export function WindowChrome({ caption }: { caption?: string }) {
   return (
-    <span className="flex items-center gap-1.5 border-b border-[var(--color-blush-deep)]/60 bg-[var(--color-blush)]/70 px-2.5 py-1.5">
+    <span className="flex items-center gap-1.5 border-b border-[var(--border)]/60 bg-[var(--hover-fill)]/70 px-2.5 py-1.5">
       <span className="flex shrink-0 gap-1" aria-hidden="true">
-        <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-rose)]" />
-        <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-gold)]" />
-        <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-dusk)]" />
+        <span className="h-1.5 w-1.5 rounded-full bg-[var(--primary)]" />
+        <span className="h-1.5 w-1.5 rounded-full bg-[var(--accent-secondary)]" />
+        <span className="h-1.5 w-1.5 rounded-full bg-[var(--accent-tertiary)]" />
       </span>
       {caption && (
-        <span className="min-w-0 truncate font-[var(--font-mono)] text-[12px] font-medium text-[var(--color-ink-soft)]">
+        <span className="min-w-0 truncate font-[var(--font-mono)] text-[12px] font-medium text-[var(--text-secondary)]">
           {caption}
         </span>
       )}
@@ -171,7 +171,7 @@ function DeviceMockup({ src, alt, device, url }: { src: string; alt: string; dev
         alt={alt}
         // both maxes on a replaced element fit it to the panel and keep its
         // ratio, so the bezel border traces the screen on every axis.
-        className="max-h-full max-w-full rounded-[1.75rem] border-[10px] border-[#17130f] object-contain shadow-[var(--shadow-lift)] ring-1 ring-[var(--color-blush-deep)]/60"
+        className="max-h-full max-w-full rounded-[1.75rem] border-[10px] border-[var(--bezel)] object-contain shadow-[var(--shadow-lift)] ring-1 ring-[var(--border)]/60"
       />
     );
   }
@@ -180,15 +180,15 @@ function DeviceMockup({ src, alt, device, url }: { src: string; alt: string; dev
   return (
     // desktop shots are wide and the panel is tall, so width is what binds:
     // lead with it and let height follow the shot's own ratio.
-    <div className="flex w-full max-w-[1440px] flex-col overflow-hidden rounded-[var(--radius-md)] border border-[var(--color-blush-deep)]/70 shadow-[var(--shadow-lift)]">
-      <div className="flex shrink-0 items-center gap-2 border-b border-[var(--color-blush-deep)]/60 bg-[var(--color-blush)] px-2.5 py-1.5">
+    <div className="flex w-full max-w-[1440px] flex-col overflow-hidden rounded-[var(--radius-md)] border border-[var(--border)]/70 shadow-[var(--shadow-lift)]">
+      <div className="flex shrink-0 items-center gap-2 border-b border-[var(--border)]/60 bg-[var(--hover-fill)] px-2.5 py-1.5">
         <span className="flex shrink-0 gap-1" aria-hidden="true">
-          <span className="h-2 w-2 rounded-full bg-[var(--color-rose)]" />
-          <span className="h-2 w-2 rounded-full bg-[var(--color-gold)]" />
-          <span className="h-2 w-2 rounded-full bg-[var(--color-dusk)]" />
+          <span className="h-2 w-2 rounded-full bg-[var(--primary)]" />
+          <span className="h-2 w-2 rounded-full bg-[var(--accent-secondary)]" />
+          <span className="h-2 w-2 rounded-full bg-[var(--accent-tertiary)]" />
         </span>
         {host && (
-          <span className="min-w-0 flex-1 truncate rounded-full bg-[var(--color-cream-soft)]/80 px-2 py-0.5 text-center font-[var(--font-mono)] text-[12px] text-[var(--color-ink-soft)]">
+          <span className="min-w-0 flex-1 truncate rounded-full bg-[var(--surface)]/80 px-2 py-0.5 text-center font-[var(--font-mono)] text-[12px] text-[var(--text-secondary)]">
             {host}
           </span>
         )}
@@ -251,8 +251,8 @@ export function ArtifactChip({
     // floating pill goes fullscreen.
     return (
       <div
-        className={`group relative flex w-full max-w-2xl flex-col overflow-hidden rounded-[var(--radius-lg)] border bg-[var(--color-cream-soft)] shadow-[var(--shadow-card)] transition hover:shadow-[var(--shadow-lift)] ${
-          active ? "border-[var(--color-rose)] ring-1 ring-[var(--color-rose)]" : "border-[var(--color-blush-deep)]/60 hover:border-[var(--color-rose)]"
+        className={`group relative flex w-full max-w-2xl flex-col overflow-hidden rounded-[var(--radius-lg)] border bg-[var(--surface)] shadow-[var(--shadow-card)] transition hover:shadow-[var(--shadow-lift)] ${
+          active ? "border-[var(--primary)] ring-1 ring-[var(--primary)]" : "border-[var(--border)]/60 hover:border-[var(--primary)]"
         }`}
       >
         <WindowChrome />
@@ -260,11 +260,11 @@ export function ArtifactChip({
           {fit === "contain" ? (
             // portrait phones and tall art show whole, centred over the blush,
             // instead of being cropped to the 16:10 cover box
-            <div className="flex items-center justify-center bg-[var(--color-blush)] py-3">
+            <div className="flex items-center justify-center bg-[var(--hover-fill)] py-3">
               <GifCover src={image} alt={title} eager className="max-h-[360px] w-auto max-w-full object-contain" />
             </div>
           ) : (
-            <GifCover src={image} alt={title} eager className="aspect-[16/10] w-full bg-[var(--color-blush)] object-cover" />
+            <GifCover src={image} alt={title} eager className="aspect-[16/10] w-full bg-[var(--hover-fill)] object-cover" />
           )}
           {video && <PlayBadge />}
           <button
@@ -279,7 +279,7 @@ export function ArtifactChip({
               target="_blank"
               rel="noreferrer"
               aria-label={`${openLabel}: ${title}`}
-              className="focus-ring absolute right-2.5 top-2.5 z-10 flex items-center gap-1.5 rounded-full bg-[var(--color-cream-soft)]/90 px-3 py-1.5 text-sm font-semibold text-[var(--color-rose-dark)] shadow-sm backdrop-blur transition hover:bg-[var(--color-blush)]"
+              className="focus-ring absolute right-2.5 top-2.5 z-10 flex items-center gap-1.5 rounded-full bg-[var(--surface)]/90 px-3 py-1.5 text-sm font-semibold text-[var(--text-emphasis)] shadow-sm backdrop-blur transition hover:bg-[var(--hover-fill)]"
             >
               <ExternalLink size={12} strokeWidth={2} aria-hidden="true" /> {openLabel}
             </a>
@@ -288,7 +288,7 @@ export function ArtifactChip({
               type="button"
               onClick={onOpenFull}
               aria-label={`${openLabel}: ${title}`}
-              className="focus-ring absolute right-2.5 top-2.5 z-10 flex items-center gap-1.5 rounded-full bg-[var(--color-cream-soft)]/90 px-3 py-1.5 text-sm font-semibold text-[var(--color-rose-dark)] shadow-sm backdrop-blur transition hover:bg-[var(--color-blush)]"
+              className="focus-ring absolute right-2.5 top-2.5 z-10 flex items-center gap-1.5 rounded-full bg-[var(--surface)]/90 px-3 py-1.5 text-sm font-semibold text-[var(--text-emphasis)] shadow-sm backdrop-blur transition hover:bg-[var(--hover-fill)]"
             >
               <Maximize2 size={12} strokeWidth={2} aria-hidden="true" /> {openLabel}
             </button>
@@ -301,11 +301,11 @@ export function ArtifactChip({
     // capped width: on a wide page a full-bleed bar strands the Open
     // affordance far from the label it belongs to
     <div
-      className={`group relative flex w-full max-w-xl items-center gap-3 rounded-[var(--radius-ui)] border bg-[var(--color-cream-soft)] px-3 py-2.5 text-left shadow-sm transition hover:border-[var(--color-rose)] hover:shadow-[var(--shadow-card)] ${
-        active ? "border-[var(--color-rose)] ring-1 ring-[var(--color-rose)]" : "border-[var(--color-blush-deep)]/60"
+      className={`group relative flex w-full max-w-xl items-center gap-3 rounded-[var(--radius-ui)] border bg-[var(--surface)] px-3 py-2.5 text-left shadow-sm transition hover:border-[var(--primary)] hover:shadow-[var(--shadow-card)] ${
+        active ? "border-[var(--primary)] ring-1 ring-[var(--primary)]" : "border-[var(--border)]/60"
       }`}
     >
-      <span className="relative h-11 w-11 shrink-0 overflow-hidden rounded-[var(--radius-md)] border border-[var(--color-blush-deep)]/50">
+      <span className="relative h-11 w-11 shrink-0 overflow-hidden rounded-[var(--radius-md)] border border-[var(--border)]/50">
         {image ? (
           <>
             <GifCover src={image} className="h-full w-full object-cover object-top" />
@@ -316,13 +316,13 @@ export function ArtifactChip({
             className="flex h-full w-full items-center justify-center"
             style={{ background: `linear-gradient(135deg, ${gradient[0]}, ${gradient[1]})` }}
           >
-            <Icon size={18} strokeWidth={1.75} style={{ color: "var(--color-on-sunset)" }} className="opacity-80" aria-hidden="true" />
+            <Icon size={18} strokeWidth={1.75} style={{ color: "var(--text-on-primary)" }} className="opacity-80" aria-hidden="true" />
           </span>
         )}
       </span>
       <span className="min-w-0 flex-1">
-        <span className="block truncate text-base font-semibold text-[var(--color-ink)]">{title}</span>
-        <span className="block truncate text-[13px] text-[var(--color-ink-soft)]">{subtitle}</span>
+        <span className="block truncate text-base font-semibold text-[var(--text)]">{title}</span>
+        <span className="block truncate text-[13px] text-[var(--text-secondary)]">{subtitle}</span>
       </span>
       {/* two targets, never nested: the body is one stretched button that
           docks the preview; the pill is its own button for fullscreen and
@@ -337,7 +337,7 @@ export function ArtifactChip({
         type="button"
         onClick={onOpenFull ?? onOpen}
         aria-label={`Open ${title} full screen`}
-        className="focus-ring relative z-10 flex shrink-0 items-center gap-1.5 rounded-full border border-[var(--color-blush-deep)]/70 px-3 py-1.5 text-sm font-semibold text-[var(--color-rose-dark)] transition group-hover:bg-[var(--color-blush)]"
+        className="focus-ring relative z-10 flex shrink-0 items-center gap-1.5 rounded-full border border-[var(--border)]/70 px-3 py-1.5 text-sm font-semibold text-[var(--text-emphasis)] transition group-hover:bg-[var(--hover-fill)]"
       >
         <Maximize2 size={12} strokeWidth={2} aria-hidden="true" /> Open
       </button>
@@ -362,13 +362,13 @@ export function ArtifactCollage({
 }) {
   const renderWindow = (block: GalleryBlock) => (
     <>
-      <span className="flex items-center gap-1.5 border-b border-[var(--color-blush-deep)]/60 bg-[var(--color-blush)]/70 px-2.5 py-1.5">
+      <span className="flex items-center gap-1.5 border-b border-[var(--border)]/60 bg-[var(--hover-fill)]/70 px-2.5 py-1.5">
         <span className="flex shrink-0 gap-1" aria-hidden="true">
-          <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-rose)]" />
-          <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-gold)]" />
-          <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-dusk)]" />
+          <span className="h-1.5 w-1.5 rounded-full bg-[var(--primary)]" />
+          <span className="h-1.5 w-1.5 rounded-full bg-[var(--accent-secondary)]" />
+          <span className="h-1.5 w-1.5 rounded-full bg-[var(--accent-tertiary)]" />
         </span>
-        <span className="min-w-0 truncate font-[var(--font-mono)] text-[12px] font-medium text-[var(--color-ink-soft)]">
+        <span className="min-w-0 truncate font-[var(--font-mono)] text-[12px] font-medium text-[var(--text-secondary)]">
           {block.caption}
         </span>
       </span>
@@ -380,7 +380,7 @@ export function ArtifactCollage({
             loading="lazy"
             // one object-fit only: cover + contain together resolves to cover
             // in Tailwind, so a `contain` shot would crop. Pick exactly one.
-            className={`w-full bg-[var(--color-blush)] ${
+            className={`w-full bg-[var(--hover-fill)] ${
               block.variant === "phone" ? "aspect-[9/16]" : "aspect-[16/10]"
             } ${block.fit === "contain" ? "object-contain p-2" : "object-cover object-top"}`}
           />
@@ -393,7 +393,7 @@ export function ArtifactCollage({
           }`}
           style={{ background: `linear-gradient(135deg, ${block.gradient[0]}, ${block.gradient[1]})` }}
         >
-          <block.icon size={28} strokeWidth={1.5} style={{ color: "var(--color-on-sunset)" }} className="opacity-80" aria-hidden="true" />
+          <block.icon size={28} strokeWidth={1.5} style={{ color: "var(--text-on-primary)" }} className="opacity-80" aria-hidden="true" />
         </span>
       )}
     </>
@@ -405,18 +405,18 @@ export function ArtifactCollage({
   if (blocks.length === 1) {
     const block = blocks[0];
     const open = block.image ? () => onOpen(block.image!) : onOpenFallback;
-    const windowClass = `flex w-full max-w-4xl flex-col overflow-hidden rounded-[var(--radius-md)] border border-[var(--color-blush-deep)]/70 bg-[var(--color-cream-soft)] shadow-[var(--shadow-card)] ${
-      activeSrc && activeSrc === block.image ? "border-[var(--color-rose)] ring-1 ring-[var(--color-rose)]" : ""
+    const windowClass = `flex w-full max-w-4xl flex-col overflow-hidden rounded-[var(--radius-md)] border border-[var(--border)]/70 bg-[var(--surface)] shadow-[var(--shadow-card)] ${
+      activeSrc && activeSrc === block.image ? "border-[var(--primary)] ring-1 ring-[var(--primary)]" : ""
     }`;
     const windowBody = block.image ? (
       <>
-        <span className="flex items-center gap-1.5 border-b border-[var(--color-blush-deep)]/60 bg-[var(--color-blush)]/70 px-2.5 py-1.5">
+        <span className="flex items-center gap-1.5 border-b border-[var(--border)]/60 bg-[var(--hover-fill)]/70 px-2.5 py-1.5">
           <span className="flex shrink-0 gap-1" aria-hidden="true">
-            <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-rose)]" />
-            <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-gold)]" />
-            <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-dusk)]" />
+            <span className="h-1.5 w-1.5 rounded-full bg-[var(--primary)]" />
+            <span className="h-1.5 w-1.5 rounded-full bg-[var(--accent-secondary)]" />
+            <span className="h-1.5 w-1.5 rounded-full bg-[var(--accent-tertiary)]" />
           </span>
-          <span className="min-w-0 truncate font-[var(--font-mono)] text-[12px] font-medium text-[var(--color-ink-soft)]">
+          <span className="min-w-0 truncate font-[var(--font-mono)] text-[12px] font-medium text-[var(--text-secondary)]">
             {block.caption}
           </span>
         </span>
@@ -453,7 +453,7 @@ export function ArtifactCollage({
             onClick={() => onOpen(block.image!)}
             aria-label={`View: ${block.caption}`}
             className={`focus-ring relative block w-36 shrink-0 rounded-[1.5rem] transition hover:-translate-y-0.5 ${
-              activeSrc === block.image ? "ring-2 ring-[var(--color-rose)] ring-offset-2 ring-offset-[var(--color-cream)]" : ""
+              activeSrc === block.image ? "ring-2 ring-[var(--primary)] ring-offset-2 ring-offset-[var(--background)]" : ""
             }`}
           >
             <img src={block.image} alt={block.caption} loading="lazy" className="w-full rounded-[1.5rem]" />
@@ -471,10 +471,10 @@ export function ArtifactCollage({
     <div className="grid max-w-5xl gap-5 sm:grid-cols-2">
       {blocks.map((block) => {
         const open = block.image ? () => onOpen(block.image!) : onOpenFallback;
-        const windowClass = `flex w-full flex-col overflow-hidden rounded-[var(--radius-md)] border bg-[var(--color-cream-soft)] shadow-[var(--shadow-card)] ${
+        const windowClass = `flex w-full flex-col overflow-hidden rounded-[var(--radius-md)] border bg-[var(--surface)] shadow-[var(--shadow-card)] ${
           activeSrc && activeSrc === block.image
-            ? "border-[var(--color-rose)] ring-1 ring-[var(--color-rose)]"
-            : "border-[var(--color-blush-deep)]/70"
+            ? "border-[var(--primary)] ring-1 ring-[var(--primary)]"
+            : "border-[var(--border)]/70"
         }`;
         return open ? (
           <button
@@ -533,7 +533,7 @@ export function Lightbox({
         type="button"
         aria-label="Close zoom"
         onClick={onClose}
-        className="absolute inset-0 bg-black/40 backdrop-blur-[2px]"
+        className="absolute inset-0 bg-[var(--scrim)] backdrop-blur-[2px]"
       />
       <div
         role="dialog"
@@ -561,16 +561,16 @@ export function Lightbox({
             style={{ maxHeight: "80vh" }}
           />
         ) : (
-          <div className="flex min-h-0 flex-col overflow-hidden rounded-[var(--radius-md)] border border-[var(--color-blush-deep)]/70 bg-[var(--color-cream-soft)] shadow-[var(--shadow-lift)]">
+          <div className="flex min-h-0 flex-col overflow-hidden rounded-[var(--radius-md)] border border-[var(--border)]/70 bg-[var(--surface)] shadow-[var(--shadow-lift)]">
             <WindowChrome caption={screen} />
             <img
               src={src}
               alt={title}
-              className="h-auto max-h-[78vh] w-auto max-w-full bg-[var(--color-blush)] object-contain"
+              className="h-auto max-h-[78vh] w-auto max-w-full bg-[var(--hover-fill)] object-contain"
             />
           </div>
         )}
-        <p className="rounded-[var(--radius-ui)] bg-[var(--color-cream-soft)]/90 px-3 py-1.5 text-center font-[var(--font-mono)] text-[13px] text-[var(--color-ink-soft)] shadow-sm backdrop-blur">
+        <p className="rounded-[var(--radius-ui)] bg-[var(--surface)]/90 px-3 py-1.5 text-center font-[var(--font-mono)] text-[13px] text-[var(--text-secondary)] shadow-sm backdrop-blur">
           {title}
         </p>
       </div>
@@ -579,7 +579,7 @@ export function Lightbox({
         type="button"
         onClick={onClose}
         aria-label="Close zoom"
-        className="focus-ring absolute right-4 top-4 rounded-full bg-[var(--color-cream-soft)]/90 p-2 text-[var(--color-ink-soft)] shadow-[var(--shadow-card)] backdrop-blur transition hover:text-[var(--color-rose-dark)]"
+        className="focus-ring absolute right-4 top-4 rounded-full bg-[var(--surface)]/90 p-2 text-[var(--text-secondary)] shadow-[var(--shadow-card)] backdrop-blur transition hover:text-[var(--text-emphasis)]"
       >
         <X size={16} strokeWidth={2} />
       </button>
@@ -630,15 +630,15 @@ export function ArtifactShowcase({ blocks }: { blocks: GalleryBlock[] }) {
                 type="button"
                 onClick={() => setZoom(screen.desktop!)}
                 aria-label={`Zoom: ${screen.desktop.caption}`}
-                className="focus-ring flex w-full cursor-zoom-in flex-col overflow-hidden rounded-[var(--radius-md)] border border-[var(--color-blush-deep)]/70 bg-[var(--color-cream-soft)] text-left shadow-[var(--shadow-card)] transition hover:shadow-[var(--shadow-lift)]"
+                className="focus-ring flex w-full cursor-zoom-in flex-col overflow-hidden rounded-[var(--radius-md)] border border-[var(--border)]/70 bg-[var(--surface)] text-left shadow-[var(--shadow-card)] transition hover:shadow-[var(--shadow-lift)]"
               >
-                <span className="flex items-center gap-1.5 border-b border-[var(--color-blush-deep)]/60 bg-[var(--color-blush)]/70 px-2.5 py-1.5">
+                <span className="flex items-center gap-1.5 border-b border-[var(--border)]/60 bg-[var(--hover-fill)]/70 px-2.5 py-1.5">
                   <span className="flex shrink-0 gap-1" aria-hidden="true">
-                    <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-rose)]" />
-                    <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-gold)]" />
-                    <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-dusk)]" />
+                    <span className="h-1.5 w-1.5 rounded-full bg-[var(--primary)]" />
+                    <span className="h-1.5 w-1.5 rounded-full bg-[var(--accent-secondary)]" />
+                    <span className="h-1.5 w-1.5 rounded-full bg-[var(--accent-tertiary)]" />
                   </span>
-                  <span className="min-w-0 truncate font-[var(--font-mono)] text-[12px] font-medium text-[var(--color-ink-soft)]">
+                  <span className="min-w-0 truncate font-[var(--font-mono)] text-[12px] font-medium text-[var(--text-secondary)]">
                     {screen.name}
                   </span>
                 </span>
@@ -646,20 +646,20 @@ export function ArtifactShowcase({ blocks }: { blocks: GalleryBlock[] }) {
                   src={screen.desktop.image}
                   alt=""
                   loading="lazy"
-                  className="aspect-[16/10] w-full bg-[var(--color-blush)] object-cover object-top"
+                  className="aspect-[16/10] w-full bg-[var(--hover-fill)] object-cover object-top"
                 />
               </button>
             )}
             {screen.desktop && !screen.desktop.image && (
               // no shot yet: the window frame holds the screen's place
-              <div className="flex w-full flex-col overflow-hidden rounded-[var(--radius-md)] border border-[var(--color-blush-deep)]/70 bg-[var(--color-cream-soft)] shadow-[var(--shadow-card)]">
-                <span className="flex items-center gap-1.5 border-b border-[var(--color-blush-deep)]/60 bg-[var(--color-blush)]/70 px-2.5 py-1.5">
+              <div className="flex w-full flex-col overflow-hidden rounded-[var(--radius-md)] border border-[var(--border)]/70 bg-[var(--surface)] shadow-[var(--shadow-card)]">
+                <span className="flex items-center gap-1.5 border-b border-[var(--border)]/60 bg-[var(--hover-fill)]/70 px-2.5 py-1.5">
                   <span className="flex shrink-0 gap-1" aria-hidden="true">
-                    <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-rose)]" />
-                    <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-gold)]" />
-                    <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-dusk)]" />
+                    <span className="h-1.5 w-1.5 rounded-full bg-[var(--primary)]" />
+                    <span className="h-1.5 w-1.5 rounded-full bg-[var(--accent-secondary)]" />
+                    <span className="h-1.5 w-1.5 rounded-full bg-[var(--accent-tertiary)]" />
                   </span>
-                  <span className="min-w-0 truncate font-[var(--font-mono)] text-[12px] font-medium text-[var(--color-ink-soft)]">
+                  <span className="min-w-0 truncate font-[var(--font-mono)] text-[12px] font-medium text-[var(--text-secondary)]">
                     {screen.name}
                   </span>
                 </span>
@@ -672,7 +672,7 @@ export function ArtifactShowcase({ blocks }: { blocks: GalleryBlock[] }) {
                   <screen.desktop.icon
                     size={28}
                     strokeWidth={1.5}
-                    style={{ color: "var(--color-on-sunset)" }}
+                    style={{ color: "var(--text-on-primary)" }}
                     className="opacity-80"
                     aria-hidden="true"
                   />
@@ -684,13 +684,13 @@ export function ArtifactShowcase({ blocks }: { blocks: GalleryBlock[] }) {
                 type="button"
                 onClick={() => setZoom(screen.phone!)}
                 aria-label={`Zoom: ${screen.phone.caption}`}
-                className="focus-ring absolute bottom-0 right-0 z-10 w-[24%] max-w-[104px] cursor-zoom-in overflow-hidden rounded-[0.9rem] border-4 border-[#17130f] shadow-[var(--shadow-lift)] ring-1 ring-[var(--color-blush-deep)]/60 transition hover:-translate-y-0.5"
+                className="focus-ring absolute bottom-0 right-0 z-10 w-[24%] max-w-[104px] cursor-zoom-in overflow-hidden rounded-[0.9rem] border-4 border-[var(--bezel)] shadow-[var(--shadow-lift)] ring-1 ring-[var(--border)]/60 transition hover:-translate-y-0.5"
               >
                 <img
                   src={screen.phone.image}
                   alt=""
                   loading="lazy"
-                  className="aspect-[9/19] w-full bg-[var(--color-blush)] object-cover object-top"
+                  className="aspect-[9/19] w-full bg-[var(--hover-fill)] object-cover object-top"
                 />
               </button>
             )}
@@ -702,9 +702,9 @@ export function ArtifactShowcase({ blocks }: { blocks: GalleryBlock[] }) {
                 type="button"
                 onClick={() => setZoom(screen.phone!)}
                 aria-label={`Zoom: ${screen.phone.caption}`}
-                className="focus-ring mx-auto block w-[52%] max-w-[210px] cursor-zoom-in overflow-hidden rounded-[1.1rem] border-4 border-[#17130f] shadow-[var(--shadow-lift)] ring-1 ring-[var(--color-blush-deep)]/60 transition hover:-translate-y-0.5"
+                className="focus-ring mx-auto block w-[52%] max-w-[210px] cursor-zoom-in overflow-hidden rounded-[1.1rem] border-4 border-[var(--bezel)] shadow-[var(--shadow-lift)] ring-1 ring-[var(--border)]/60 transition hover:-translate-y-0.5"
               >
-                <img src={screen.phone.image} alt="" loading="lazy" className="h-auto w-full bg-[var(--color-blush)]" />
+                <img src={screen.phone.image} alt="" loading="lazy" className="h-auto w-full bg-[var(--hover-fill)]" />
               </button>
             )}
           </div>
@@ -817,8 +817,8 @@ export function ArtifactPanel({
     <div
       className={
         layout === "overlay"
-          ? "fixed inset-0 z-50 flex flex-col bg-[var(--color-cream-soft)] animate-pop-in"
-          : "relative flex h-full shrink-0 flex-col overflow-hidden border-l border-[var(--color-blush-deep)]/60 bg-[var(--color-cream-soft)]"
+          ? "fixed inset-0 z-50 flex flex-col bg-[var(--surface)] animate-pop-in"
+          : "relative flex h-full shrink-0 flex-col overflow-hidden border-l border-[var(--border)]/60 bg-[var(--surface)]"
       }
       style={layout === "split" ? { width } : undefined}
       role="complementary"
@@ -831,19 +831,19 @@ export function ArtifactPanel({
           aria-orientation="vertical"
           aria-label="Resize artifact panel"
           className={`group absolute left-0 top-0 z-10 h-full w-2 -translate-x-1/2 cursor-col-resize touch-none ${
-            resizing ? "bg-[var(--color-rose)]/25" : ""
+            resizing ? "bg-[var(--primary)]/25" : ""
           }`}
         >
           <span
             className={`absolute left-1/2 top-1/2 h-10 w-[3px] -translate-x-1/2 -translate-y-1/2 rounded-full transition ${
-              resizing ? "bg-[var(--color-rose-dark)]" : "bg-[var(--color-blush-deep)] group-hover:bg-[var(--color-rose)]"
+              resizing ? "bg-[var(--text-emphasis)]" : "bg-[var(--border)] group-hover:bg-[var(--primary)]"
             }`}
             aria-hidden="true"
           />
         </div>
       )}
 
-      <div className="flex items-center gap-2 border-b border-[var(--color-blush-deep)]/60 bg-[var(--color-blush)]/60 px-3 py-2">
+      <div className="flex items-center gap-2 border-b border-[var(--border)]/60 bg-[var(--hover-fill)]/60 px-3 py-2">
         {hasLiveTab ? (
           <div className="flex min-w-0 flex-1 gap-1">
             {count > 0 && (
@@ -852,8 +852,8 @@ export function ArtifactPanel({
                 onClick={() => onTabChange("gallery")}
                 className={`flex items-center gap-1.5 rounded-[var(--radius-sm)] px-2 py-1 text-sm font-semibold transition ${
                   activeTab === "gallery"
-                    ? "bg-[var(--color-blush)] text-[var(--color-rose-dark)]"
-                    : "text-[var(--color-ink-soft)] hover:text-[var(--color-rose-dark)]"
+                    ? "bg-[var(--hover-fill)] text-[var(--text-emphasis)]"
+                    : "text-[var(--text-secondary)] hover:text-[var(--text-emphasis)]"
                 }`}
               >
                 <ImageIcon size={12} strokeWidth={2} aria-hidden="true" /> Gallery
@@ -865,8 +865,8 @@ export function ArtifactPanel({
                 onClick={() => onTabChange("live")}
                 className={`flex items-center gap-1.5 truncate rounded-[var(--radius-sm)] px-2 py-1 text-sm font-semibold transition ${
                   activeTab === "live"
-                    ? "bg-[var(--color-blush)] text-[var(--color-rose-dark)]"
-                    : "text-[var(--color-ink-soft)] hover:text-[var(--color-rose-dark)]"
+                    ? "bg-[var(--hover-fill)] text-[var(--text-emphasis)]"
+                    : "text-[var(--text-secondary)] hover:text-[var(--text-emphasis)]"
                 }`}
               >
                 <LiveTabIcon size={12} strokeWidth={2} className="shrink-0" aria-hidden="true" />
@@ -874,14 +874,14 @@ export function ArtifactPanel({
               </button>
             ) : (
               // lone label, nothing to toggle — plain text, not a pill
-              <span className="flex min-w-0 items-center gap-1.5 truncate px-2 py-1 text-sm font-semibold text-[var(--color-rose-dark)]">
+              <span className="flex min-w-0 items-center gap-1.5 truncate px-2 py-1 text-sm font-semibold text-[var(--text-emphasis)]">
                 <LiveTabIcon size={12} strokeWidth={2} className="shrink-0" aria-hidden="true" />
                 <span className="truncate">{liveTabLabel}</span>
               </span>
             )}
           </div>
         ) : (
-          <span className="min-w-0 flex-1 truncate font-[var(--font-mono)] text-[13px] font-medium text-[var(--color-ink-soft)]">
+          <span className="min-w-0 flex-1 truncate font-[var(--font-mono)] text-[13px] font-medium text-[var(--text-secondary)]">
             {subtitle}
           </span>
         )}
@@ -892,7 +892,7 @@ export function ArtifactPanel({
             rel="noreferrer"
             aria-label={`Open ${liveTabLabel} in a new tab`}
             title={`Open ${liveTabLabel} in a new tab`}
-            className="focus-ring animate-link-beacon shrink-0 rounded-full bg-[var(--color-paw)] p-1.5 text-[var(--color-rose-dark)] transition hover:scale-110 hover:bg-[var(--color-blush)]"
+            className="focus-ring animate-link-beacon shrink-0 rounded-full bg-[var(--tag-fill)] p-1.5 text-[var(--text-emphasis)] transition hover:scale-110 hover:bg-[var(--hover-fill)]"
           >
             <ExternalLink size={13} strokeWidth={2} />
           </a>
@@ -903,7 +903,7 @@ export function ArtifactPanel({
             onClick={onToggleFullscreen}
             aria-label={fullscreen ? "Exit full screen" : "View full screen"}
             title={fullscreen ? "Exit full screen" : "View full screen"}
-            className="focus-ring shrink-0 rounded-[var(--radius-sm)] p-1 text-[var(--color-ink-soft)] transition hover:bg-[var(--color-blush)] hover:text-[var(--color-rose-dark)]"
+            className="focus-ring shrink-0 rounded-[var(--radius-sm)] p-1 text-[var(--text-secondary)] transition hover:bg-[var(--hover-fill)] hover:text-[var(--text-emphasis)]"
           >
             {fullscreen ? <Minimize2 size={14} strokeWidth={2} /> : <Maximize2 size={14} strokeWidth={2} />}
           </button>
@@ -912,7 +912,7 @@ export function ArtifactPanel({
           type="button"
           onClick={onClose}
           aria-label="Close artifact panel"
-          className="focus-ring shrink-0 rounded-[var(--radius-sm)] p-1 text-[var(--color-ink-soft)] transition hover:bg-[var(--color-blush)] hover:text-[var(--color-rose-dark)]"
+          className="focus-ring shrink-0 rounded-[var(--radius-sm)] p-1 text-[var(--text-secondary)] transition hover:bg-[var(--hover-fill)] hover:text-[var(--text-emphasis)]"
         >
           <X size={15} strokeWidth={2} />
         </button>
@@ -922,22 +922,22 @@ export function ArtifactPanel({
           overlay: a full-width bar would block the view, so the title floats
           over the image as a small chip instead (see below). */}
       {hasLiveTab && activeTab === "gallery" && current && layout === "split" && (
-        <div className="border-b border-[var(--color-blush-deep)]/60 px-3 py-1.5">
-          <p className="truncate font-[var(--font-mono)] text-[13px] text-[var(--color-ink-soft)]">{current.title}</p>
+        <div className="border-b border-[var(--border)]/60 px-3 py-1.5">
+          <p className="truncate font-[var(--font-mono)] text-[13px] text-[var(--text-secondary)]">{current.title}</p>
         </div>
       )}
 
       {activeTab === "gallery" ? (
         <>
           <div
-            className={`scroll-warm relative flex min-h-0 flex-1 items-center justify-center overflow-auto bg-[var(--color-blush)] p-3 ${
+            className={`scroll-warm relative flex min-h-0 flex-1 items-center justify-center overflow-auto bg-[var(--hover-fill)] p-3 ${
               resizing ? "pointer-events-none select-none" : ""
             }`}
           >
             {hasLiveTab && layout === "overlay" && current?.title && (
               // top-left keeps it clear of video controls at the bottom
-              <div className="pointer-events-none absolute left-3 top-3 z-10 max-w-[70%] rounded-[var(--radius-ui)] bg-[var(--color-cream-soft)]/85 px-3 py-1.5 shadow-sm backdrop-blur">
-                <p className="truncate font-[var(--font-mono)] text-[13px] text-[var(--color-ink-soft)]">{current.title}</p>
+              <div className="pointer-events-none absolute left-3 top-3 z-10 max-w-[70%] rounded-[var(--radius-ui)] bg-[var(--surface)]/85 px-3 py-1.5 shadow-sm backdrop-blur">
+                <p className="truncate font-[var(--font-mono)] text-[13px] text-[var(--text-secondary)]">{current.title}</p>
               </div>
             )}
             {current &&
@@ -966,12 +966,12 @@ export function ArtifactPanel({
           {count > 1 && (
             // a counter says "2 exist"; thumbnails show them — the strip makes
             // the rest of the gallery visible before anyone reads anything
-            <div className="flex shrink-0 items-center gap-1.5 border-t border-[var(--color-blush-deep)]/60 px-2 py-2">
+            <div className="flex shrink-0 items-center gap-1.5 border-t border-[var(--border)]/60 px-2 py-2">
               <button
                 type="button"
                 aria-label="Previous screen"
                 onClick={() => onNavigate((index - 1 + count) % count)}
-                className="focus-ring shrink-0 rounded-[var(--radius-sm)] p-1 text-[var(--color-ink-soft)] transition hover:text-[var(--color-rose-dark)]"
+                className="focus-ring shrink-0 rounded-[var(--radius-sm)] p-1 text-[var(--text-secondary)] transition hover:text-[var(--text-emphasis)]"
               >
                 <ChevronLeft size={15} strokeWidth={2} aria-hidden="true" />
               </button>
@@ -994,11 +994,11 @@ export function ArtifactPanel({
                       i === 0 ? "ml-auto" : ""
                     } ${i === count - 1 ? "mr-auto" : ""} ${
                       i === index
-                        ? "border-[var(--color-rose)] ring-1 ring-[var(--color-rose)]"
-                        : "border-[var(--color-blush-deep)]/60 opacity-60 hover:opacity-100"
+                        ? "border-[var(--primary)] ring-1 ring-[var(--primary)]"
+                        : "border-[var(--border)]/60 opacity-60 hover:opacity-100"
                     }`}
                   >
-                    <img src={img.src} alt="" loading="lazy" className="h-full w-full bg-[var(--color-blush)] object-cover object-top" />
+                    <img src={img.src} alt="" loading="lazy" className="h-full w-full bg-[var(--hover-fill)] object-cover object-top" />
                     {img.video && <PlayBadge size={18} />}
                   </button>
                 ))}
@@ -1007,7 +1007,7 @@ export function ArtifactPanel({
                 type="button"
                 aria-label="Next screen"
                 onClick={() => onNavigate((index + 1) % count)}
-                className="focus-ring shrink-0 rounded-[var(--radius-sm)] p-1 text-[var(--color-ink-soft)] transition hover:text-[var(--color-rose-dark)]"
+                className="focus-ring shrink-0 rounded-[var(--radius-sm)] p-1 text-[var(--text-secondary)] transition hover:text-[var(--text-emphasis)]"
               >
                 <ChevronRight size={15} strokeWidth={2} aria-hidden="true" />
               </button>
@@ -1017,7 +1017,7 @@ export function ArtifactPanel({
       ) : (
         <div
           ref={liveBoxRef}
-          className={`relative min-h-0 flex-1 overflow-hidden bg-[var(--color-blush)] ${resizing ? "pointer-events-none" : ""}`}
+          className={`relative min-h-0 flex-1 overflow-hidden bg-[var(--hover-fill)] ${resizing ? "pointer-events-none" : ""}`}
         >
           <iframe
             src={liveUrl}

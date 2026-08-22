@@ -14,17 +14,17 @@ export default function ProfileView() {
           src="/assets/me.jpg"
           alt={profile.name}
           className="h-28 w-28 shrink-0 rounded-full object-cover shadow-[var(--shadow-glow)] sm:h-48 sm:w-48"
-          style={{ background: "var(--color-blush)" }}
+          style={{ background: "var(--hover-fill)" }}
         />
         <div>
-          <p className="font-[var(--font-mono)] text-[13px] font-medium uppercase tracking-[0.2em] text-[var(--color-rose-dark)]">
+          <p className="font-[var(--font-mono)] text-[13px] font-medium uppercase tracking-[0.2em] text-[var(--text-emphasis)]">
             {profile.role}
           </p>
-          <h1 className="mt-0.5 font-[var(--font-display)] text-[26px] font-bold text-[var(--color-ink)] sm:text-[32px]">
+          <h1 className="mt-0.5 font-[var(--font-display)] text-[26px] font-bold text-[var(--text)] sm:text-[32px]">
             {profile.name}
           </h1>
-          <p className="text-base text-[var(--color-ink-soft)]">{profile.location}</p>
-          <p className="mt-1 text-base italic text-[var(--color-rose-dark)]">{profile.tagline}</p>
+          <p className="text-base text-[var(--text-secondary)]">{profile.location}</p>
+          <p className="mt-1 text-base italic text-[var(--text-emphasis)]">{profile.tagline}</p>
           {/* contact leads the page — a recruiter shouldn't have to scroll to reach out */}
           <div className="mt-3 flex justify-center sm:justify-start">
             <ContactCard />
@@ -35,33 +35,33 @@ export default function ProfileView() {
       <section className="mb-10 grid grid-cols-2 gap-3 sm:grid-cols-4">
         {profile.stats.map((stat) => (
           <div key={stat.label} className="card-warm p-4 text-center">
-            <p className="font-[var(--font-display)] text-xl font-bold text-[var(--color-rose-dark)]">{stat.value}</p>
-            <p className="mt-1 text-[13px] leading-snug text-[var(--color-ink-soft)]">{stat.label}</p>
+            <p className="font-[var(--font-display)] text-xl font-bold text-[var(--text-emphasis)]">{stat.value}</p>
+            <p className="mt-1 text-[13px] leading-snug text-[var(--text-secondary)]">{stat.label}</p>
           </div>
         ))}
       </section>
 
       <section className="mb-10 space-y-3">
         {profile.bio.map((p) => (
-          <p key={p} className="text-base leading-relaxed text-[var(--color-ink)]">
+          <p key={p} className="text-base leading-relaxed text-[var(--text)]">
             {p}
           </p>
         ))}
       </section>
 
       <section className="mb-10">
-        <h2 className="mb-3 font-[var(--font-display)] text-xl font-bold text-[var(--color-ink)]">Experience</h2>
+        <h2 className="mb-3 font-[var(--font-display)] text-xl font-bold text-[var(--text)]">Experience</h2>
         <div className="space-y-4">
           {profile.experience.map((job) => (
             <div key={`${job.company}-${job.period}`} className="card-warm p-4">
               <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
-                <p className="text-base font-bold text-[var(--color-ink)]">
-                  {job.role} <span className="font-normal text-[var(--color-ink-soft)]">· {job.company}</span>
+                <p className="text-base font-bold text-[var(--text)]">
+                  {job.role} <span className="font-normal text-[var(--text-secondary)]">· {job.company}</span>
                 </p>
-                <p className="font-[var(--font-mono)] text-sm text-[var(--color-ink-soft)]">{job.period}</p>
+                <p className="font-[var(--font-mono)] text-sm text-[var(--text-secondary)]">{job.period}</p>
               </div>
-              <p className="mt-1 text-sm text-[var(--color-ink-soft)]">{job.summary}</p>
-              <ul className="mt-2 list-disc space-y-1 pl-5 text-sm leading-relaxed text-[var(--color-ink-soft)] marker:text-[var(--color-rose)]">
+              <p className="mt-1 text-sm text-[var(--text-secondary)]">{job.summary}</p>
+              <ul className="mt-2 list-disc space-y-1 pl-5 text-sm leading-relaxed text-[var(--text-secondary)] marker:text-[var(--primary)]">
                 {job.highlights.map((h) => (
                   <li key={h}>{h}</li>
                 ))}
@@ -73,12 +73,12 @@ export default function ProfileView() {
 
       <section className="mb-10 grid grid-cols-1 gap-8 sm:grid-cols-2">
         <div>
-          <h2 className="mb-3 font-[var(--font-display)] text-xl font-bold text-[var(--color-ink)]">Education</h2>
+          <h2 className="mb-3 font-[var(--font-display)] text-xl font-bold text-[var(--text)]">Education</h2>
           <div className="space-y-3">
             {profile.education.map((ed) => (
               <div key={ed.school} className="card-warm p-4">
-                <p className="text-base font-bold text-[var(--color-ink)]">{ed.credential}</p>
-                <p className="font-[var(--font-mono)] text-sm text-[var(--color-ink-soft)]">
+                <p className="text-base font-bold text-[var(--text)]">{ed.credential}</p>
+                <p className="font-[var(--font-mono)] text-sm text-[var(--text-secondary)]">
                   {ed.school} · {ed.period}
                 </p>
               </div>
@@ -86,18 +86,18 @@ export default function ProfileView() {
           </div>
         </div>
         <div>
-          <h2 className="mb-3 font-[var(--font-display)] text-xl font-bold text-[var(--color-ink)]">Skills</h2>
+          <h2 className="mb-3 font-[var(--font-display)] text-xl font-bold text-[var(--text)]">Skills</h2>
           <div className="space-y-3">
             {profile.skillGroups.map((group) => (
               <div key={group.category}>
-                <p className="text-sm font-bold text-[var(--color-rose-dark)]">{group.category}</p>
+                <p className="text-sm font-bold text-[var(--text-emphasis)]">{group.category}</p>
                 <div className="mt-1.5 flex flex-wrap gap-1.5">
                   {group.items.map((item) => (
                     <span
                       key={item}
-                      className="inline-flex items-center gap-1 rounded-full border border-[var(--color-blush-deep)]/70 bg-[var(--color-cream-soft)] px-2.5 py-0.5 text-[13px] font-medium text-[var(--color-ink)]"
+                      className="inline-flex items-center gap-1 rounded-full border border-[var(--border)]/70 bg-[var(--surface)] px-2.5 py-0.5 text-[13px] font-medium text-[var(--text)]"
                     >
-                      <ToolLogo name={item} size={11} className="text-[var(--color-rose-dark)]" />
+                      <ToolLogo name={item} size={11} className="text-[var(--text-emphasis)]" />
                       {item}
                     </span>
                   ))}
@@ -110,15 +110,15 @@ export default function ProfileView() {
 
       {profile.testimonials.length > 0 && (
         <section className="mb-10">
-          <h2 className="mb-3 font-[var(--font-display)] text-xl font-bold text-[var(--color-ink)]">
+          <h2 className="mb-3 font-[var(--font-display)] text-xl font-bold text-[var(--text)]">
             What people say
           </h2>
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
             {profile.testimonials.map((t) => (
-              <div key={t.author} className="card-warm bg-[var(--color-paw)]/50 p-4">
-                <p className="text-sm italic leading-relaxed text-[var(--color-ink)]">"{t.quote}"</p>
-                <p className="mt-2 text-sm font-semibold text-[var(--color-rose-dark)]">{t.author}</p>
-                <p className="text-[13px] text-[var(--color-ink-soft)]">{t.role}</p>
+              <div key={t.author} className="card-warm bg-[var(--tag-fill)]/50 p-4">
+                <p className="text-sm italic leading-relaxed text-[var(--text)]">"{t.quote}"</p>
+                <p className="mt-2 text-sm font-semibold text-[var(--text-emphasis)]">{t.author}</p>
+                <p className="text-[13px] text-[var(--text-secondary)]">{t.role}</p>
               </div>
             ))}
           </div>
@@ -126,12 +126,12 @@ export default function ProfileView() {
       )}
 
       <section className="mb-10">
-        <h2 className="mb-3 font-[var(--font-display)] text-xl font-bold text-[var(--color-ink)]">
+        <h2 className="mb-3 font-[var(--font-display)] text-xl font-bold text-[var(--text)]">
           A few fun facts
         </h2>
         <ul className="space-y-2">
           {profile.funFacts.map((fact) => (
-            <li key={fact} className="flex items-start gap-2 text-base text-[var(--color-ink-soft)]">
+            <li key={fact} className="flex items-start gap-2 text-base text-[var(--text-secondary)]">
               <CatAvatar size={24} />
               <span>{fact}</span>
             </li>

@@ -47,7 +47,7 @@ export default function LolaMascot({ className = "" }: LolaMascotProps) {
         <div
           className="animate-lola-bob pointer-events-auto relative w-28 cursor-pointer sm:w-36"
           style={{
-            filter: "drop-shadow(0 6px 10px rgba(30, 45, 35, 0.18))",
+            filter: "var(--drop-shadow-mascot)",
             animationPlayState: petted ? "paused" : "running",
           }}
           title="Pet me, I'm Lola, Nazrin's cat 🐾"
@@ -59,11 +59,11 @@ export default function LolaMascot({ className = "" }: LolaMascotProps) {
 
           {/* ripples spreading from the pad */}
           <span
-            className="animate-lola-ripple absolute left-1/2 top-[62%] h-6 w-16 -translate-x-1/2 rounded-full border border-[var(--color-rose)]/40"
+            className="animate-lola-ripple absolute left-1/2 top-[62%] h-6 w-16 -translate-x-1/2 rounded-full border border-[var(--primary)]/40"
             style={{ animationDelay: "0s" }}
           />
           <span
-            className="animate-lola-ripple absolute left-1/2 top-[62%] h-6 w-16 -translate-x-1/2 rounded-full border border-[var(--color-rose)]/30"
+            className="animate-lola-ripple absolute left-1/2 top-[62%] h-6 w-16 -translate-x-1/2 rounded-full border border-[var(--primary)]/30"
             style={{ animationDelay: "1.1s" }}
           />
 
@@ -72,21 +72,21 @@ export default function LolaMascot({ className = "" }: LolaMascotProps) {
               {/* lily pad, with the classic notch cut toward the middle */}
               <path
                 d="M50 46 L15 44 A36 10.5 0 1 1 18.5 50.8 Z"
-                fill="var(--color-blush-deep)"
+                fill="var(--border)"
                 opacity="0.9"
               />
               {/* pad veins */}
               <path
                 d="M50 46 L74 41.5 M50 46 L80 47.5 M50 46 L68 52.5"
-                stroke="var(--color-rose-deep)"
+                stroke="var(--primary-hover)"
                 strokeWidth="0.7"
                 opacity="0.35"
                 strokeLinecap="round"
               />
               {/* a little lotus at the pad's edge */}
               <g opacity="0.95">
-                <path d="M83 41.5 Q 84.5 37.5 86.5 41 Q 88.5 37.5 90 41.5 Q 91 44 86.5 44.5 Q 82 44 83 41.5 Z" fill="var(--color-lily)" />
-                <path d="M85 41.8 Q 86.5 39 88 41.8" fill="none" stroke="var(--color-rose-deep)" strokeWidth="0.6" opacity="0.5" strokeLinecap="round" />
+                <path d="M83 41.5 Q 84.5 37.5 86.5 41 Q 88.5 37.5 90 41.5 Q 91 44 86.5 44.5 Q 82 44 83 41.5 Z" fill="var(--pond)" />
+                <path d="M85 41.8 Q 86.5 39 88 41.8" fill="none" stroke="var(--primary-hover)" strokeWidth="0.6" opacity="0.5" strokeLinecap="round" />
               </g>
             </svg>
 
@@ -104,7 +104,7 @@ export default function LolaMascot({ className = "" }: LolaMascotProps) {
             {/* Zzz drifting up while she sleeps */}
             {!petted && (
               <svg viewBox="0 0 100 62" xmlns="http://www.w3.org/2000/svg" className="absolute inset-0 h-full w-full">
-                <g fill="var(--color-ink-soft)" fontFamily="var(--font-display)" fontWeight="600" opacity="0.8">
+                <g fill="var(--text-secondary)" fontFamily="var(--font-display)" fontWeight="600" opacity="0.8">
                   <text className="animate-lola-zzz" x="78" y="14" fontSize="7" style={{ animationDelay: "0s" }}>z</text>
                   <text className="animate-lola-zzz" x="83" y="10" fontSize="5.5" style={{ animationDelay: "1.2s" }}>z</text>
                   <text className="animate-lola-zzz" x="87" y="7" fontSize="4.5" style={{ animationDelay: "2.4s" }}>z</text>
